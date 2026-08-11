@@ -28,14 +28,19 @@ layout: layouts/base.njk
   <h2 class="rule-heading">Writing</h2>
   {%- set latest = collections.posts | first %}
   <a class="featured-item" href="{{ latest.url }}">
-    <span class="featured-title">{{ latest.data.title }}</span>
-    {%- if latest.data.description %}
-    <span class="featured-lede">{{ latest.data.description }}</span>
-    {%- endif %}
-    <span class="featured-meta">
-      {%- if latest.data.categories.length %}<span class="post-row-cat">{{ latest.data.categories[0] | categoryLabel }}</span> · {% endif -%}
-      {{ latest.date | readableDate }} · {{ latest.templateContent | readingTime }} min read
+    <span class="featured-body">
+      <span class="featured-title">{{ latest.data.title }}</span>
+      {%- if latest.data.description %}
+      <span class="featured-lede">{{ latest.data.description }}</span>
+      {%- endif %}
+      <span class="featured-meta">
+        {%- if latest.data.categories.length %}<span class="post-row-cat">{{ latest.data.categories[0] | categoryLabel }}</span> · {% endif -%}
+        {{ latest.date | readableDate }} · {{ latest.templateContent | readingTime }} min read
+      </span>
     </span>
+    {%- if latest.data.cover %}
+    <img class="featured-cover-img" src="{{ latest.data.cover }}" alt="" loading="lazy">
+    {%- endif %}
   </a>
   {%- set posts = collections.posts | limit(10) | skipFirst %}
   {% include "post-list.njk" %}

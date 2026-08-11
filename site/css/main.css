@@ -610,13 +610,31 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
 .intro-currently a:hover { color: var(--accent); }
 
 .featured-item {
-  display: block;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  align-items: center;
   padding: 0.9rem 0 1.1rem;
   border-bottom: 1px solid var(--hairline);
   text-decoration: none;
   color: var(--text);
 }
+.featured-item:has(.featured-cover-img) { grid-template-columns: 1fr minmax(10rem, 14rem); }
 .featured-item:hover .featured-title { color: var(--accent); }
+
+.featured-cover-img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--hairline);
+}
+
+@media (max-width: 560px) {
+  .featured-item:has(.featured-cover-img) { grid-template-columns: 1fr; }
+  .featured-cover-img { order: -1; }
+}
 
 .featured-title {
   display: block;
