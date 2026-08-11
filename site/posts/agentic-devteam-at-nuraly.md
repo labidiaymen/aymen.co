@@ -39,38 +39,6 @@ Here's the pipeline we use to develop and maintain both LumenJS and the Nuraly p
 
 4. Human validation Once the PR is green, a human steps in to validate what the agent has done before anything ships.
 
-## Recommended by LinkedIn
-
-[
-
-The Last Generation of Developers Who Had to Know…
-
-Archit Suthar
-
-5 months ago
-
-](https://www.linkedin.com/pulse/last-generation-developers-who-had-know-everything-archit-suthar-96wwc)
-
-[
-
-Make Agents Fight: Claude Code Curious 2
-
-Max Tatton-Brown
-
-5 months ago
-
-](https://www.linkedin.com/pulse/make-agents-fight-claude-code-curious-2-max-tatton-brown-eclve)
-
-[
-
-Transforming Bugs into Bulletproof Code: A…
-
-Dinis Cruz
-
-2 years ago
-
-](https://www.linkedin.com/pulse/transforming-bugs-bulletproof-code-step-by-step-guide-dinis-cruz-vpkfe)
-
 ---
 
 ## Missions are scoped by project.
@@ -100,7 +68,3 @@ We didn't need more developers or more sprints. We needed a different model smal
 What surprised us most wasn't what the agents could do. It was the clarity the mission model forced on us. When you define work precisely enough for an agent to execute it, vague tickets stop being acceptable.
 
 Small changes compound. Drift is the real risk. And the loop never fully closes without a human that's not a limitation, it's the point.
-
----
-
-*Originally published on [LinkedIn](https://www.linkedin.com/pulse/agentic-devteam-nuraly-aymen-labidi-3dggf/).*

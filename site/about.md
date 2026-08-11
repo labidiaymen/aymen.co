@@ -22,7 +22,7 @@ I believe the web in Tunisia (and everywhere) deserves more innovation, and I tr
 ## Elsewhere
 
 - GitHub: [github.com/labidiaymen](https://github.com/labidiaymen)
-- X / Twitter: [@lababoraym](https://twitter.com/lababoraym)
+- X: [@labidiaymen](https://x.com/labidiaymen)
 - Email: [labidi@aymen.co](mailto:labidi@aymen.co)
 
 If you want to talk architecture, agents, or anything on this blog, my inbox is open.

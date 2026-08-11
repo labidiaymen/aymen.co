@@ -1,10 +1,10 @@
 ---
 title: "LumenJS - A framework designed for coding agents"
 date: 2026-04-08
-categories: ["javascript"]
+categories: ["lumen"]
 cover: "/images/lumenjs-a-framework-designed-for-coding-agents-cover.jpg"
 description: "Most frameworks are designed for developers. LumenJS is designed for coding agents and the developers who work with them."
-permalink: "/javascript/lumenjs-a-framework-designed-for-coding-agents/"
+permalink: "/lumen/lumenjs-a-framework-designed-for-coding-agents/"
 ---
 
 Most frameworks are designed for developers. LumenJS is designed for coding agents and the developers who work with them.
@@ -46,38 +46,6 @@ The difference between a framework and a platform is whether you spend the first
 ## Proof of Concept? We Call It Production.
 
 We are rewriting Nuraly on top of LumenJS. Not a demo. Not a side project. The full platform - calls, shared workflows, collaborative session building, live execution. Everything we needed it to handle, it handles.
-
-## Recommended by LinkedIn
-
-[
-
-Tree Shaking in React: What Most Developers Miss About…
-
-Hamza Ali
-
-2 months ago
-
-](https://www.linkedin.com/pulse/tree-shaking-react-what-most-developers-miss-shipping-hamza-ali-2wsdf)
-
-[
-
-Microfrontends with Module Federation: What, Why, and…
-
-Rany ElHousieny, PhDᴬᴮᴰ
-
-4 years ago
-
-](https://www.linkedin.com/pulse/microfrontends-module-federation-what-why-how-elhousieny-phd%E1%B4%AC%E1%B4%AE%E1%B4%B0)
-
-[
-
-Node.js vs. Deno: Should Developers Make the Switch?
-
-AIS Technolabs Pvt Ltd
-
-7 months ago
-
-](https://www.linkedin.com/pulse/nodejs-vs-deno-should-developers-make-switch-ais-technolabs-meaof)
 
 When something breaks, we fix it. That is the only kind of reliability test that matters.
 
@@ -130,7 +98,3 @@ This is not a side project waiting for attention. It is a living framework, main
 [https://github.com/nuralyio/lumenjs](https://www.linkedin.com/redir/redirect?url=https%3A%2F%2Fgithub%2Ecom%2Fnuralyio%2Flumenjs&urlhash=Sq28&trk=article-ssr-frontend-pulse_little-text-block)
 
 [https://nuraly.io](https://www.linkedin.com/redir/redirect?url=https%3A%2F%2Fnuraly%2Eio%2F&urlhash=Dj1-&trk=article-ssr-frontend-pulse_little-text-block)
-
----
-
-*Originally published on [LinkedIn](https://www.linkedin.com/pulse/lumenjs-framework-designed-coding-agents-aymen-labidi-rgglf/).*

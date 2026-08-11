@@ -57,38 +57,6 @@ We tried a third path. One description. Multiple targets. Same source of truth, 
 
 This is not what Spec Kit or OpenSpec ship out of the box. Neither tool advertises multi-target generation as a feature. We took the principle they encode (intent as source, code as output) and pushed it past the canonical workflow. The tools gave us the discipline. The discipline gave us the architecture.
 
-## Recommended by LinkedIn
-
-[
-
-How Spec-Driven Development Keeps AI-Generated Code…
-
-Itexus
-
-1 month ago
-
-](https://www.linkedin.com/pulse/how-spec-driven-development-keeps-ai-generated-ldazf)
-
-[
-
-Spec-Driven Development is not the source of truth…
-
-Víctor García Cuenllas
-
-4 months ago
-
-](https://www.linkedin.com/pulse/spec-driven-development-source-truth-your-code-v%C3%ADctor-garc%C3%ADa-cuenllas-9ppbe)
-
-[
-
-Spec-Driven Development: Writing the Recipe Before…
-
-Thulasi Rajasekaran
-
-11 months ago
-
-](https://www.linkedin.com/pulse/spec-driven-development-writing-recipe-before-cooking-rajasekaran-wktkc)
-
 We applied it to Android, iOS, and eventually web. Same description, three outputs. The agent is the compiler. That arrangement was not realistic three years ago. It is now.
 
 ---
@@ -152,7 +120,3 @@ You stop owning three implementations of the same feature and start owning one d
 When something is wrong, you check both. If the spec is wrong, you fix it there and regenerate. If the spec is right and the code drifted, you regenerate. If the spec is right and the code is right but the behavior is wrong, the spec was incomplete. Fix the spec, regenerate. The fix almost always lands in the spec, but the code is what tells you it landed.
 
 If you are running a spec-driven loop and have hit different walls than these, I want to hear about it.
-
----
-
-*Originally published on [LinkedIn](https://www.linkedin.com/pulse/spec-driven-development-sdd-aymen-labidi-lfcpf/).*

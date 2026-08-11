@@ -1,3 +1,7 @@
 # Old Gatsby-era paths -> new locations
 /pages/about/ /about/ 301
 /pages/about /about/ 301
+
+# Lumen articles moved out of the javascript category
+/javascript/lumen-write-typescript-compile-to-a-native-binary/ /lumen/lumen-write-typescript-compile-to-a-native-binary/ 301
+/javascript/lumenjs-a-framework-designed-for-coding-agents/ /lumen/lumenjs-a-framework-designed-for-coding-agents/ 301

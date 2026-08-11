@@ -3,6 +3,7 @@ const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const CATEGORY_LABELS = {
   ai: "AI",
   javascript: "JavaScript",
+  lumen: "Lumen",
   angular: "Angular",
   rxjs: "RxJS",
   ionic: "Ionic",

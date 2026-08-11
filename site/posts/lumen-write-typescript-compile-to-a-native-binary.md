@@ -1,10 +1,10 @@
 ---
 title: "Lumen - Write TypeScript, Compile to a native binary"
 date: 2026-07-08
-categories: ["javascript"]
+categories: ["lumen"]
 cover: "/images/lumen-write-typescript-compile-to-a-native-binary-cover.jpg"
 description: "Recently I've been designing a programming language. Here's why."
-permalink: "/javascript/lumen-write-typescript-compile-to-a-native-binary/"
+permalink: "/lumen/lumen-write-typescript-compile-to-a-native-binary/"
 ---
 
 Recently I've been designing a programming language. Here's why.
@@ -57,38 +57,6 @@ And because there's no interpreter in the middle, some of this ends up faster th
 
 The standard library lives in the open, in std-contrib. Take the markdown package. Rendering a typical 3 KB document in a tight loop, it does about 6,775 renders/sec, against 2,020 for markdown-it and 1,064 for marked. That's roughly 3.4× faster than markdown-it and 6.4× faster than marked on the same document. Same reason every time: it compiles the parser instead of interpreting one.
 
-## Recommended by LinkedIn
-
-[
-
-Languages and frameworks: just my (correct) opinion
-
-Robert Harvey
-
-1 month ago
-
-](https://www.linkedin.com/pulse/languages-frameworks-just-my-correct-opinion-robert-harvey-39gaf)
-
-[
-
-Top 20 TypeScript Interview Questions and Answers Guide
-
-Shriyansh Tiwari
-
-1 year ago
-
-](https://www.linkedin.com/pulse/top-20-typescript-interview-questions-answers-guide-shhreyansh-tiwari-mwqoc)
-
-[
-
-JavaScript and C++
-
-Ayman Alheraki
-
-6 months ago
-
-](https://www.linkedin.com/pulse/javascript-c-ayman-alheraki-pwqpe)
-
 Standard library: [github.com/lumen-lang-org/std-contrib](https://www.linkedin.com/redir/redirect?url=https%3A%2F%2Fgithub%2Ecom%2Flumen-lang-org%2Fstd-contrib&urlhash=UtLG&trk=article-ssr-frontend-pulse_little-text-block)
 
 ### A package is just a URL
@@ -136,7 +104,3 @@ There's a playground. Write Lumen and watch it compile in the browser, no instal
 It's still early, and it's open. If that's a problem you've felt too, come look at the rest:
 
 I'd love to hear what you think.
-
----
-
-*Originally published on [LinkedIn](https://www.linkedin.com/pulse/lumen-write-typescript-compile-native-binary-aymen-labidi-v9b0f/).*

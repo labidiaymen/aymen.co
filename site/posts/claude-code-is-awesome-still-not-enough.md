@@ -45,38 +45,6 @@ Net progress: zero features shipped. Net learning: a lot. Net feeling: busy.
 
 Right now everyone feels busy and building. A small portion is shipping real production. Incremental shipping has never been easier, and yet the loop is so compelling it pulls you away from shipping.
 
-## Recommended by LinkedIn
-
-[
-
-The review bottleneck
-
-Guy Vago
-
-5 months ago
-
-](https://www.linkedin.com/pulse/review-bottleneck-guy-vago--nyqnf)
-
-[
-
-Why should we standardize our delivery?
-
-Juan Pablo Bosnjak
-
-10 years ago
-
-](https://www.linkedin.com/pulse/why-should-we-standardize-our-delivery-juan-pablo-bosnjak)
-
-[
-
-How to Conquer Go Codebase Complexity as a Junior…
-
-Stella Oiro
-
-1 year ago
-
-](https://www.linkedin.com/pulse/how-conquer-go-codebase-complexity-junior-developer-guide-stella-oiro-0oosf)
-
 ---
 
 ## When the loop works
@@ -118,7 +86,3 @@ If the answer is "none, just turn it on," walk away.
 The teams getting real leverage from coding agents right now are not the teams with the most agents. They're the teams with the cleanest contracts, the strictest quality gates, and the engineers who still read every diff before it merges.
 
 Code is cheap. Judgment is not. Infrastructure is not. Ownership is not.
-
----
-
-*Originally published on [LinkedIn](https://www.linkedin.com/pulse/claude-code-awesome-still-enough-aymen-labidi-silif/).*
