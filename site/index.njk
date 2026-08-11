@@ -21,7 +21,23 @@ layout: layouts/base.njk
 
 <section class="container home-section">
   <h2 class="rule-heading">Writing</h2>
-  {%- for group in collections.posts | limit(10) | groupByYear %}
+  {%- set latest = collections.posts | first %}
+  <a class="featured-item" href="{{ latest.data.external or latest.url }}"{% if latest.data.external %} rel="noopener" target="_blank"{% endif %}>
+    <span class="featured-body">
+      <span class="featured-title">{{ latest.data.title }}{% if latest.data.external %} <span class="ext" aria-hidden="true">↗</span>{% endif %}</span>
+      {%- if latest.data.description %}
+      <span class="featured-lede">{{ latest.data.description }}</span>
+      {%- endif %}
+      <span class="featured-meta">
+        {%- if latest.data.categories.length %}<span class="post-row-cat">{{ latest.data.categories[0] | categoryLabel }}</span> · {% endif -%}
+        {{ latest.date | readableDate }} · {{ latest.templateContent | readingTime }} min read
+      </span>
+    </span>
+    {%- if latest.data.cover %}
+    <img class="featured-cover-img" src="{{ latest.data.cover }}" alt="" loading="lazy">
+    {%- endif %}
+  </a>
+  {%- for group in collections.posts | limit(10) | skipFirst | groupByYear %}
   <div class="year-block">
     <span class="year-label">{{ group.year }}</span>
     <div class="year-posts">
