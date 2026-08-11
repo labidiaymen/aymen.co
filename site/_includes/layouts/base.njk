@@ -37,7 +37,7 @@
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="/">Labidi Aymen<span class="brand-dot">.</span></a>
+      <a class="brand" href="/" aria-label="Labidi Aymen — home">{% if page.url == "/" %}A{% else %}Labidi Aymen{% endif %}<span class="brand-dot">.</span></a>
       <nav class="site-nav" aria-label="Main">
         {%- for item in site.nav %}
         <a href="{{ item.url }}"{% if page.url == item.url %} aria-current="page"{% endif %}>{{ item.label }}</a>

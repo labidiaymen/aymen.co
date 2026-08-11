@@ -161,7 +161,7 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
 
 /* ---------- Home ---------- */
 
-.home-intro { padding: 5rem 1.25rem 1.5rem; }
+.home-intro { padding: 2.75rem 1.25rem 1rem; }
 
 .intro-name {
   margin: 0;
@@ -173,7 +173,7 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
 }
 
 .intro-role {
-  margin: 0.7rem 0 0;
+  margin: 0.55rem 0 0;
   font-family: var(--mono);
   font-size: 0.8rem;
   letter-spacing: 0.04em;
@@ -181,7 +181,7 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
 }
 
 .intro-prose {
-  margin-top: 2rem;
+  margin-top: 1.35rem;
   font-family: var(--serif);
   font-size: 1.28rem;
   line-height: 1.55;
@@ -191,7 +191,7 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
 .intro-prose p { margin: 0 0 1em; }
 .intro-prose a { text-decoration-thickness: 1px; }
 
-.home-section { padding: 2rem 1.25rem 1rem; }
+.home-section { padding: 1.5rem 1.25rem 0.75rem; }
 
 .rule-heading {
   display: flex;
@@ -261,7 +261,7 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
 
 /* ---------- Pages ---------- */
 
-.page { padding: 4rem 1.25rem 3rem; }
+.page { padding: 2.75rem 1.25rem 3rem; }
 
 .page-head { margin-bottom: 2.5rem; }
 .page-head h1 {
@@ -365,7 +365,7 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
 
 /* ---------- Post ---------- */
 
-.post { padding: 4rem 1.25rem 3rem; }
+.post { padding: 2.75rem 1.25rem 3rem; }
 
 .post-header { margin-bottom: 2rem; }
 
@@ -600,7 +600,7 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
 /* ---------- Enhancements ---------- */
 
 .intro-currently {
-  margin: 1.8rem 0 0;
+  margin: 1.3rem 0 0;
   font-family: var(--mono);
   font-size: 0.78rem;
   line-height: 1.7;
