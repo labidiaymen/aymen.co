@@ -4,25 +4,19 @@ title: "Writing"
 description: "All posts — AI agents, software architecture, JavaScript, and more."
 permalink: /blog/
 ---
-<section class="page-title">
-  <div class="container">
-    <h1>Writing<span class="title-index">/{{ collections.posts.length }}</span></h1>
-  </div>
-  <div class="spec-row">
-    <div class="container filter-cols">
-      <span>Filed under</span>
-      <span class="filter-links">
-        {%- for group in collections.categoryMap | limit(9) %}
-        <a href="/{{ group.slug }}/">{{ group.label }}&nbsp;({{ group.posts.length }})</a>
-        {%- endfor %}
-      </span>
+<section class="container page">
+  <header class="page-head">
+    <h1>Writing</h1>
+    <p class="page-lead">{{ collections.posts.length }} posts since 2015 — lately about AI agents and how software actually gets shipped.</p>
+    <div class="chip-row">
+      {%- for group in collections.categoryMap | limit(8) %}
+      <a class="chip" href="/{{ group.slug }}/">{{ group.label }} <span class="chip-count">{{ group.posts.length }}</span></a>
+      {%- endfor %}
     </div>
-  </div>
-</section>
+  </header>
 
-<section class="container">
   {%- for group in collections.posts | groupByYear %}
-  <h2 class="year-bar">{{ group.year }}</h2>
+  <h2 class="year-heading">{{ group.year }}</h2>
   {%- set posts = group.posts %}
   {% include "post-list.njk" %}
   {%- endfor %}

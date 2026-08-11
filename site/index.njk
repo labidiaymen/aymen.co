@@ -1,135 +1,41 @@
 ---
 layout: layouts/base.njk
 ---
-<section class="masthead">
-  <div class="container">
-    <h1 class="masthead-name">Labidi<br>Aymen</h1>
-  </div>
-  <div class="spec-row" role="presentation">
-    <div class="container spec-cols">
-      <span>Founder, Nuraly<br>Software architect</span>
-      <span>Tunisia<br>Since 2015</span>
-      <span>AI agents · Languages<br>Developer tools</span>
-      <span class="spec-count">{{ collections.posts.length }} posts<br>2015—{% year %}</span>
-    </div>
-  </div>
-</section>
-
-<section class="container intro-block">
-  <div class="intro-grid">
-    <div>
-      <p>
-        Self-taught engineer and founder of <strong>Nuraly</strong>, where we ship
-        production code with AI agents. I build programming languages, frameworks
-        and developer tools that favor speed, stability and minimal dependencies —
-        and I write here about <a href="/ai/">what it takes to run agents in
-        production</a>, beyond the demo.
-      </p>
-      <p class="intro-secondary">
-        Before that: a decade of JavaScript, Angular, and products for the Tunisian
-        market. The archive goes back to 2015 — I've kept all of it.
-      </p>
-    </div>
-    <img class="intro-photo" src="/images/profile-pic.png" alt="Labidi Aymen" width="200" height="200">
+<section class="container hero">
+  <p class="hero-kicker">{{ site.role }}</p>
+  <h1 class="hero-title">Building software that ships,<br class="br-desktop"> and writing about how.</h1>
+  <p class="hero-lead">
+    I'm <strong>Aymen</strong> — a self-taught engineer from Tunisia. These days I think mostly about
+    <a href="/ai/">AI agents in production</a>, software architecture, and the operational side of
+    shipping code. Before that, a decade of <a href="/javascript/">JavaScript</a>, Angular, and
+    everything in between.
+  </p>
+  <div class="hero-actions">
+    <a class="button" href="/blog/">Read the blog</a>
+    <a class="button button-ghost" href="/about/">About me</a>
   </div>
 </section>
 
-{%- set featured = collections.posts | first %}
-<section class="block">
-  <div class="container block-label">
-    <h2>Featured</h2>
-    <span class="block-label-side">Latest essay</span>
+<section class="container section">
+  <div class="section-head">
+    <h2>Latest writing</h2>
+    <a class="section-more" href="/blog/">All posts →</a>
   </div>
-  <div class="container">
-    <a class="featured-row" href="{{ featured.url }}">
-      <span class="featured-num">{{ featured.data.num }}</span>
-      <span class="featured-body">
-        <span class="featured-meta">{{ featured.data.categories[0] | categoryLabel }} · {{ featured.date | readableDate }} · {{ featured.templateContent | readingTime }} min</span>
-        <span class="featured-title">{{ featured.data.title }}</span>
-        {%- if featured.data.description %}
-        <span class="featured-desc">{{ featured.data.description }}</span>
-        {%- endif %}
-        <span class="featured-cta">Read →</span>
-      </span>
-      {%- if featured.data.cover %}
-      <img class="featured-cover" src="{{ featured.data.cover }}" alt="" loading="lazy">
-      {%- endif %}
+  {%- set posts = collections.posts | limit(6) %}
+  {% include "post-list.njk" %}
+</section>
+
+<section class="container section">
+  <div class="section-head">
+    <h2>Projects</h2>
+    <a class="section-more" href="/projects/">All projects →</a>
+  </div>
+  <div class="card-grid">
+    {%- for post in collections.categoryMap | categoryPosts("projects") | limit(4) %}
+    <a class="card" href="{{ post.url }}">
+      <h3>{{ post.data.title }}</h3>
+      <p>{{ post.templateContent | excerpt }}</p>
     </a>
-  </div>
-</section>
-
-<section class="block">
-  <div class="container block-label">
-    <h2>Writing</h2>
-    <a href="/blog/">Full index ↗</a>
-  </div>
-  <div class="container">
-    {%- set posts = collections.posts | limit(9) | skipFirst %}
-    {% include "post-list.njk" %}
-  </div>
-</section>
-
-<section class="block">
-  <div class="container block-label">
-    <h2>Building</h2>
-    <a href="{{ site.social.github }}" rel="noopener" target="_blank">GitHub ↗</a>
-  </div>
-  <div class="container">
-    <ul class="project-sheet">
-      {%- for item in building %}
-      <li class="project-cell">
-        <span class="index-num">{{ item.role | upper }}</span>
-        <h3><a href="{{ item.url }}"{% if item.external %} rel="noopener" target="_blank"{% endif %}>{{ item.name }}{% if item.external %} ↗{% endif %}</a></h3>
-        <p>{{ item.desc }}</p>
-      </li>
-      {%- endfor %}
-      <li class="project-cell project-cell-more">
-        <h3><a href="/projects/">Earlier products →</a></h3>
-        <p>Assisty, Docteury, Diwane, Kitchenet — the 2015–2016 product years.</p>
-      </li>
-    </ul>
-  </div>
-</section>
-
-<section class="block">
-  <div class="container block-label">
-    <h2>Community</h2>
-    <span class="block-label-side">Talks · Events · Trainings</span>
-  </div>
-  <div class="container">
-    <ul class="index-table">
-      {%- for post in collections.categoryMap | categoryPosts("events") %}
-      <li>
-        <a class="index-row" href="{{ post.url }}">
-          <span class="index-num">{{ post.data.num }}</span>
-          <span class="index-title">{{ post.data.title }}</span>
-          <span class="index-cat">Event</span>
-          <time class="index-date" datetime="{{ post.date | isoDate }}">{{ post.date | readableDate }}</time>
-        </a>
-      </li>
-      {%- endfor %}
-      {%- for post in collections.categoryMap | categoryPosts("inscription") %}
-      <li>
-        <a class="index-row" href="{{ post.url }}">
-          <span class="index-num">{{ post.data.num }}</span>
-          <span class="index-title">{{ post.data.title }}</span>
-          <span class="index-cat">Training</span>
-          <time class="index-date" datetime="{{ post.date | isoDate }}">{{ post.date | readableDate }}</time>
-        </a>
-      </li>
-      {%- endfor %}
-    </ul>
-  </div>
-</section>
-
-<section class="contact-block">
-  <div class="container">
-    <p class="contact-kicker">Architecture, agents, or anything on this blog</p>
-    <a class="contact-cta" href="mailto:{{ site.email }}">Let's talk&nbsp;↗</a>
-    <p class="contact-links">
-      <a href="{{ site.social.github }}" rel="me noopener" target="_blank">GitHub</a>
-      <a href="{{ site.social.twitter }}" rel="me noopener" target="_blank">X / Twitter</a>
-      <a href="mailto:{{ site.email }}">{{ site.email }}</a>
-    </p>
+    {%- endfor %}
   </div>
 </section>

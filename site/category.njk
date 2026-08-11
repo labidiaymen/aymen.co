@@ -9,19 +9,12 @@ eleventyComputed:
   title: "{{ category.label }}"
   description: "Posts about {{ category.label }} by Labidi Aymen."
 ---
-<section class="page-title">
-  <div class="container">
-    <h1>{{ category.label }}<span class="title-index">/{{ category.posts.length }}</span></h1>
-  </div>
-  <div class="spec-row">
-    <div class="container filter-cols">
-      <span><a href="/blog/">← Full index</a></span>
-      <span>{{ category.posts.length }} post{% if category.posts.length != 1 %}s{% endif %}</span>
-    </div>
-  </div>
-</section>
-
-<section class="container">
+<section class="container page">
+  <header class="page-head">
+    <p class="hero-kicker"><a href="/blog/">Writing</a> /</p>
+    <h1>{{ category.label }}</h1>
+    <p class="page-lead">{{ category.posts.length }} post{% if category.posts.length != 1 %}s{% endif %}</p>
+  </header>
   {%- set posts = category.posts %}
   {% include "post-list.njk" %}
 </section>

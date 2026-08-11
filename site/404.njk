@@ -3,17 +3,12 @@ layout: layouts/base.njk
 title: "Page not found"
 permalink: /404.html
 ---
-<section class="page-title">
-  <div class="container">
-    <h1>404</h1>
-  </div>
-  <div class="spec-row">
-    <div class="container filter-cols">
-      <span>Page not found</span>
-      <span><a href="/">Home</a> · <a href="/blog/">Index</a></span>
-    </div>
-  </div>
-</section>
-<section class="container post-body">
+<section class="container page page-404">
+  <p class="hero-kicker">404</p>
+  <h1>Page not found</h1>
   <p class="page-lead">This page doesn't exist — or moved when the site was rebuilt.</p>
+  <div class="hero-actions">
+    <a class="button" href="/">Go home</a>
+    <a class="button button-ghost" href="/blog/">Browse the writing</a>
+  </div>
 </section>
