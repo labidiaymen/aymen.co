@@ -1,12 +1,14 @@
 {
   "name": "aymen.co",
   "version": "2.0.0",
-  "description": "Personal website and blog of Labidi Aymen — static site built with Eleventy, hosted on Cloudflare Pages",
+  "description": "Personal website and blog of Labidi Aymen — static site built with Eleventy, deployed to Cloudflare",
   "private": true,
   "scripts": {
     "build": "eleventy",
     "dev": "eleventy --serve",
-    "clean": "rm -rf _site"
+    "clean": "rm -rf _site",
+    "deploy": "eleventy && npx wrangler deploy",
+    "preview": "npx wrangler dev"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.2",

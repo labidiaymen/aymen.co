@@ -1,0 +1,11 @@
+{
+  "name": "aymen-co",
+  "compatibility_date": "2026-08-01",
+  "assets": {
+    // Eleventy's build output. `_headers` and `_redirects` inside it are
+    // applied by Workers static assets automatically.
+    "directory": "./_site",
+    // Serve _site/404.html for unknown paths instead of a bare 404.
+    "not_found_handling": "404-page"
+  }
+}
