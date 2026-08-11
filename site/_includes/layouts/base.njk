@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% if title and title != site.title %}{{ title }} · {{ site.title }}{% else %}{{ site.title }} — {{ site.role }}{% endif %}</title>
+  <title>{% if title and title != site.title %}{{ title }} · {{ site.title }}{% else %}{{ site.title }} · {{ site.role }}{% endif %}</title>
   <meta name="description" content="{{ description or site.description }}">
   <meta name="author" content="{{ site.author }}">
   <link rel="canonical" href="{{ page.url | absoluteUrl(site.url) }}">
@@ -37,7 +37,7 @@
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="/" aria-label="Labidi Aymen — home">
+      <a class="brand" href="/" aria-label="Labidi Aymen, home">
         {%- if avatar %}<span class="brand-photo"><img class="brand-avatar" src="{{ avatar }}" alt="" width="30" height="30"><span class="brand-pop" aria-hidden="true"><img src="{{ avatar }}" alt="" width="168" height="168" loading="lazy"></span></span>{% endif -%}
         {%- if page.url != "/" %}<span class="brand-name">Labidi Aymen<span class="brand-dot">.</span></span>
         {%- elif not avatar %}<span class="brand-name">A<span class="brand-dot">.</span></span>{% endif -%}

@@ -3,22 +3,22 @@ layout: layouts/base.njk
 ---
 <section class="container home-intro">
   <h1 class="intro-name">Labidi Aymen</h1>
-  <p class="intro-role">Founder of Nuraly · Solution architect — Tunisia</p>
+  <p class="intro-role">Founder of Nuraly · Solution architect · Tunisia</p>
   <div class="intro-prose">
     <p>
-      I'm a self-taught engineer who has been building for the web since 2015 —
+      I'm a self-taught engineer who has been building for the web since 2015,
       through the Angular years, the JavaScript fatigue era, and a string of
       products for the Tunisian market. These days most of my time goes to
       running <a href="/ai/">AI&nbsp;agents in production</a> and writing here
       about what that actually takes, beyond the demo.
     </p>
     <p>
-      The archive below goes back a decade. I've kept all of it — the old
-      posts are a record of how we got here.
+      The archive below goes back a decade. I've kept all of it, because the
+      old posts are a record of how we got here.
     </p>
   </div>
   <p class="intro-currently">
-    Currently — shipping code with AI agents at <a href="/ai/nuraly-how-we-ship-code-with-ai-agents/">Nuraly</a>
+    Currently: shipping code with AI agents at <a href="/ai/nuraly-how-we-ship-code-with-ai-agents/">Nuraly</a>
     · building <a href="https://github.com/lumen-lang-org/lumen" rel="noopener" target="_blank">Lumen</a>,
     a TypeScript-syntax language written in Zig
   </p>
@@ -44,7 +44,7 @@ layout: layouts/base.njk
   </a>
   {%- set posts = collections.posts | limit(10) | skipFirst %}
   {% include "post-list.njk" %}
-  <p class="index-more"><a href="/blog/">Full index — {{ collections.posts.length }} posts →</a></p>
+  <p class="index-more"><a href="/blog/">Full index, {{ collections.posts.length }} posts →</a></p>
 </section>
 
 <section class="container home-section">
