@@ -1,0 +1,18 @@
+{
+  "title": "Labidi Aymen",
+  "url": "https://aymen.co",
+  "description": "Founder of Nuraly, solution architect. Writing about AI agents in production, software architecture, and the web.",
+  "author": "Labidi Aymen",
+  "role": "Founder of Nuraly · Solution Architect",
+  "email": "labidi@aymen.co",
+  "social": {
+    "github": "https://github.com/labidiaymen",
+    "twitter": "https://twitter.com/lababoraym"
+  },
+  "nav": [
+    { "label": "Writing", "url": "/blog/" },
+    { "label": "Notes", "url": "/notes/" },
+    { "label": "Projects", "url": "/projects/" },
+    { "label": "About", "url": "/about/" }
+  ]
+}

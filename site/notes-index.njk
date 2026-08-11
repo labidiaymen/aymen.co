@@ -1,0 +1,24 @@
+---
+layout: layouts/base.njk
+title: "Notes"
+description: "Short notes between the essays — releases, findings, opinions."
+permalink: /notes/
+---
+<section class="container page">
+  <header class="page-head">
+    <h1>Notes</h1>
+    <p class="page-lead">Short posts between the essays — releases, findings, opinions. The longer thinking lives in the <a href="/blog/">writing</a>.</p>
+  </header>
+  <div class="note-stream">
+    {%- for note in collections.notes %}
+    <article class="note-entry">
+      <a class="note-date" href="{{ note.url }}">
+        <time datetime="{{ note.date | isoDate }}">{{ note.date | readableDate }}</time>
+      </a>
+      <div class="note-body prose">
+        {{ note.templateContent | safe }}
+      </div>
+    </article>
+    {%- endfor %}
+  </div>
+</section>

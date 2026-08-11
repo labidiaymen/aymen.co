@@ -1,0 +1,617 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Labidi Aymen</title>
+    <link>https://aymen.co/</link>
+    <description>Founder of Nuraly, solution architect. Writing about AI agents in production, software architecture, and the web.</description>
+    <language>en</language>
+    <atom:link href="https://aymen.co/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>Why Building Agents Is an Operations Problem, Not a Technology One</title>
+      <link>https://aymen.co/ai/why-building-agents-is-an-operations-problem-not-a-technology-one/</link>
+      <guid>https://aymen.co/ai/why-building-agents-is-an-operations-problem-not-a-technology-one/</guid>
+      <pubDate>Tue, 03 Mar 2026 00:00:00 GMT</pubDate>
+      <description>Adding a chatbot UI to an LLM is not enough anymore. Agents are distributed systems with nondeterministic planners — and the real challenge is operations, not technology.</description>
+      <content:encoded><![CDATA[<p>Adding a chatbot UI to an LLM is not enough anymore. And if we're being honest with ourselves, it was never enough.</p>
+<h2>The Demo Trap</h2>
+<p>Most agent projects start the same way. A simple UI. A simple API interface with an LLM. It works beautifully in the demo.</p>
+<p>Then comes the real use case.</p>
+<p>Suddenly, the team expects great results from the same setup they prototyped in a weekend. They start gluing UI to API, connecting endpoints, building wrappers, and wondering why the results are mediocre at best.</p>
+<p>Here's the problem: there's not much value in that layer. The chatbot interface, the API wrapper, the prompt template: these are commodity components now. Everyone has them. They're table stakes, not differentiators.</p>
+<p>Before you touch any of that, you need to deeply understand how to interface with the LLM, what components relate to it, and how they all connect with each other.</p>
+<p>When you do that, when you truly understand the system, something shifts. You stop treating the LLM like a piece of code and start thinking about it as a system. You stop solving technical problems and start solving real ones.</p>
+<h2>Agents Are Simple in Tech, Brutal in Operations</h2>
+<p>The building blocks of an agent are simple. An LLM, tool calling, a feedback loop: the concepts are well-documented and the primitives are accessible.</p>
+<p>But the system behavior is not. Tool calling is not reliable tool execution. A feedback loop is not correct state handling. Multi-step agents break in subtle, hard-to-reproduce ways. Here's the framing that makes it click for anyone who's run production infrastructure: agents are distributed systems with nondeterministic planners. If you've ever dealt with eventual consistency, partial failures, or observability gaps in microservices, multiply that by a component that makes different decisions every time you run it.</p>
+<p>Building agents encompasses many technical and non-technical areas that most demos conveniently skip. Before your agent can do anything meaningful in production, you need to consider:</p>
+<p><strong>Access management.</strong> Who can the agent act on behalf of? What permissions does it inherit? If your client has a cloud environment, how do you connect to it securely?</p>
+<p><strong>Data governance.</strong> What data can the agent access? What can it store? What are the compliance requirements? This gets especially complex with European clients under GDPR.</p>
+<p><strong>Security.</strong> An agent that can take actions is an agent that can take wrong actions. An agent with cloud credentials that rotates a resource instead of tagging it can take down a staging environment. An agent with database access that misinterprets &quot;clean up old records&quot; can wipe production data. The attack surface is fundamentally different from a read-only chatbot, and the blast radius is real.</p>
+<p><strong>Monitoring.</strong> How do you know what your agent is doing? An agent that silently retries a failed API call 40 times before your alerting catches it is not a hypothetical; it's a Tuesday. How do you catch failures before your client does? How do you audit decisions the agent made autonomously?</p>
+<p><strong>Infrastructure.</strong> Local or remote providers? Self-hosted or cloud? How do you handle latency, failover, and scaling for long-running agent tasks?</p>
+<p><strong>User experience.</strong> How do you surface what the agent is doing in a way that builds trust rather than anxiety? How do you handle the cases where the agent needs to ask for clarification?</p>
+<p><strong>Integration.</strong> The agent doesn't live in a vacuum. It needs to connect to existing systems, APIs, databases, and workflows that were never designed for autonomous actors.</p>
+<p>You need all of these pieces in place before you can design and distribute a working agent. Not after. Before. That's what makes this an operations problem, not a technology problem.</p>
+<h2>The Delegation Problem</h2>
+<p>Are the clients, are we as developers, actually ready for delegation?</p>
+<p>We used to do everything ourselves. As developers, it's not easy to delegate code writing. We built our careers on it. We had fun doing it. We got deep satisfaction from shipping something we wrote with our own hands.</p>
+<p>Then you start delegating to AI. And the results are mixed.</p>
+<p>Sometimes the model isn't good enough for the task. Sometimes your prompting isn't precise enough. Sometimes both. And when you hit those walls, something interesting happens.</p>
+<p>You start shifting your focus. From writing to planning. From coding to architecture. From execution to design.</p>
+<p>You start a new kind of race: you think more and type less.</p>
+<p>This is the real transformation that agents bring. Not replacing developers, but changing what it means to be one. The role evolves from writing code to orchestrating systems, from executing tasks to leading missions.</p>
+<h2>The Generation Trap</h2>
+<p>We now know that almost any piece of software can be generated relatively easily. AI can write code, scaffold applications, generate entire features from a description. This creates an enormous, and misleading, promise around delivery.</p>
+<p>&quot;If code can be generated in minutes, surely delivery is easy now.&quot;</p>
+<p>It's not. And believing this is a trap.</p>
+<p>Because it was never about writing code. It was always about understanding what the client actually means. Then executing on that understanding. Then iterating based on what you learn.</p>
+<p>It's about infrastructure. It's about security. It's about integration. It's about all the things that code generation doesn't touch.</p>
+<p>We absolutely need expertise. More than ever, in fact. But the expertise we need is not for executing tasks. It's for planning, reviewing, managing, and leading.</p>
+<p>Not to type. To think.</p>
+<p>Not to execute. To lead the mission.</p>
+<h2>Stop Chasing Frameworks</h2>
+<p>The market is crowded. Every week brings a new framework, a new wrapper, a new &quot;agent builder&quot; that promises to make everything easy.</p>
+<p>None of them solve the actual problems.</p>
+<p>Frameworks don't solve trust. Frameworks don't solve accountability. Frameworks don't solve blast radius. They solve wiring, and wiring was never the hard part.</p>
+<p>The teams that will fail are the ones chasing the next wrapper, shipping demo-driven agents, and confusing &quot;it works on my laptop&quot; with production readiness. The teams that will fail are startups optimizing for speed of generation while ignoring speed of recovery.</p>
+<p>The teams that will succeed, especially in the enterprise, are the ones treating agents like what they are: production systems that happen to include a nondeterministic component. They invest in governance, security, monitoring, and integration before they write a single line of agent code. They build operational maturity first.</p>
+<p>The real value was never in the chatbot UI. It was never in the framework. It was in the ability to design, deploy, and operate a system that earns trust.</p>
+<p>That's the mission. Lead it.</p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>Nuraly | How We Ship Code with AI Agents</title>
+      <link>https://aymen.co/ai/nuraly-how-we-ship-code-with-ai-agents/</link>
+      <guid>https://aymen.co/ai/nuraly-how-we-ship-code-with-ai-agents/</guid>
+      <pubDate>Mon, 23 Feb 2026 00:00:00 GMT</pubDate>
+      <description>How we use Claude Code and AI agents in our development cycle at Nuraly — from GitHub tickets to deployment, with quality gates, human review, and dedicated QA VMs.</description>
+      <content:encoded><![CDATA[<p>We've been heavily using code agents especially Claude Code in our development cycle at Nuraly. But not alone. The agent is equipped with other tools, and the real value comes from how they work together.</p>
+<h2>The Workflow</h2>
+<p>It starts with a GitHub ticket, created by a PM or QA. Claude Code with the Ralph Wiggum plugin activated spins up a fresh environment, initializes it with the latest codebase, and analyzes the ticket. It loads the relevant Claude Code skills and gets to work.</p>
+<p>It creates a branch. It starts coding. When needed, it commits progressively and updates the checklist in GitHub to keep the status visible especially if other agents are working on related issues at the same time.</p>
+<p>Once the work is ready, the agent creates a pull request and starts collaborating with other agents. GitHub Copilot steps in for a diff model review a second pair of AI eyes on the code.</p>
+<p><img src="/images/nuraly-workflow.jpg" alt="Nuraly Workflow" loading="lazy" decoding="async"></p>
+<p>At the end of each execution, a summarized version of the conversation is saved. So when work continues on the ticket through a PR comment or a follow-up task the agent picks up the compact context from the previous run. This way, we keep working on the ticket without losing context.</p>
+<h2>Quality Gates</h2>
+<p>This is where SonarQube enters. It analyzes the PR and flags the pipeline status. If it fails, Claude Code reads the issues and quality gate results, creates a separate branch to fix them, validates the fixes, then merges them back into the ticket branch.</p>
+<p>If the pipeline passes, a Telegram message is sent to the collaborators who worked on the ticket this also doubles as a way to test our own workflow engine in a real scenario.</p>
+<p>Why Telegram? Because we've made a deliberate choice about where our developers spend their time. The old model has engineers glued to screens, refreshing CI dashboards, waiting for pipelines, context-switching between Slack threads and terminal windows. We don't want that. We want our team talking to clients, understanding problems firsthand, sitting in the room where decisions are made. The agents handle the waiting. The notifications come to you not the other way around. Build the feedback loop around people, not around screens.</p>
+<p>Then comes the human review. We still keep this step. We value the human eye.</p>
+<p><img src="/images/nuraly-quality-gates.jpg" alt="Quality Gates" loading="lazy" decoding="async"></p>
+<h2>After the Merge</h2>
+<p>Once the ticket is merged, Claude Code spins up a dedicated QA VM for that specific ticket launched from a pre-built image, which makes it extremely fast. After validation, the VM is carefully destroyed. Clean in, clean out.</p>
+<p>We chose this over resetting environments because resets are fragile. You can miss something a stale config, a leftover dependency or add a feature and forget to update the reinit script. Starting from a fresh image for QA removes that risk entirely. It was one of our best decisions.</p>
+<p><img src="/images/nuraly-qa-vm.jpg" alt="QA VM" loading="lazy" decoding="async"></p>
+<p>The deployment itself is triggered from the GitHub issue. When the issue is flagged as ready for test, an agent worker detects it, prepares the environment, and comments back on the issue with the VM details. Everything stays in the ticket no separate workflows, no context switching.</p>
+<p>With this cycle, a QA engineer can test a ticket before the code review is even done — and continue working on it by adding comments directly on the issue. No need to wait on an engineer, no getting blocked. The feedback loop between QA and the agent stays continuous.</p>
+<h2>Why We Still Read Every Line</h2>
+<p>This is how we ship working code at Nuraly while keeping quality and ownership intact. Every agent code is reviewed. SonarQube's pipeline needs to be green. But after all, we still read the new and modified code line by line.</p>
+<p>Not because we don't trust the tools but because the code is ours. Agents accelerate the work. The ownership stays with us.</p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>I Waited. Here&#39;s What I Think About OpenClaw.</title>
+      <link>https://aymen.co/ai/i-waited-heres-what-i-think-about-openclaw/</link>
+      <guid>https://aymen.co/ai/i-waited-heres-what-i-think-about-openclaw/</guid>
+      <pubDate>Tue, 17 Feb 2026 00:00:00 GMT</pubDate>
+      <description>A grounded take on OpenClaw — what it actually is, why the real value isn&#39;t in the agent loop, and what&#39;s blocking broad adoption of autonomous AI agents.</description>
+      <content:encoded><![CDATA[<p>I deliberately waited before saying anything about OpenClaw. When something gets this much hype, I've learned to let the dust settle before forming an opinion. Now that I've looked at it closely, I can share what I see.</p>
+<h2>What It Actually Is</h2>
+<p>OpenClaw is an LLM running in a loop with tools. A workflow that calls an LLM node, gives it access to your file system, browser, shell, and messaging apps, then loops until the task is done. It can also accept commands from long-running nodes like Telegram or WhatsApp, which makes it feel interactive and always-on.</p>
+<p>That's it.</p>
+<p>I'm not saying it's bad. The engineering is solid. But let's call it what it is: a well-packaged agent loop. An LLM node connected to tools, running over iterations, with persistent memory and messaging integrations. This pattern has existed for a while. Workflow engine, LLM nodes, tool access, long-running connections. The architecture is not new.</p>
+<h2>What Actually Matters</h2>
+<p>What actually matters right now and what OpenClaw confirms is everything around the LLM. The tools you give it. How you manage context. How you handle memory between sessions. How you set guardrails so the agent doesn't go rogue. That's where the real engineering challenge lives.</p>
+<p>We already know this. The LLM is the brain. But the tools, the context management, the memory persistence — that's the body. And without a good body, the brain just hallucinates in the dark.</p>
+<h2>The Access Paradox</h2>
+<p>There's something worth sitting with here. The more data and control you hand to an AI agent, the more it can do for you. But that same access is exactly what lets it hurt you. It's the same lever, pulled in two directions. Give it your email, your calendar, your file system, your shell — and yes, it becomes powerful. But now the cost of a bad decision scales with the access you gave it.</p>
+<h2>Fragile and Expensive</h2>
+<p>Here's my honest concern with investing in this pattern right now: autonomous agents are still either fragile or expensive to run. One user mentioned hitting their entire Claude Max daily limit within hours just by letting the agent loop autonomously (before Anthropic blocked users from routing their subscription through third-party tools like this). Another had their agent accidentally start a fight with an insurance company. These aren't edge cases — they're the current state of autonomous AI.</p>
+<h2>The Real Blocker</h2>
+<p>And this is where it gets interesting. I think the real blocker for broad adoption isn't the models, isn't the tooling, isn't even the cost. It's security. Until we solve the agent security problem — how to give an AI meaningful access without exposing everything to a single bad reasoning step — autonomous agents will stay in the hands of early adopters willing to absorb the risk. Enterprises won't touch this. They can't afford an agent that emails a client the wrong thing, deletes the wrong file, or leaks sensitive data because it misunderstood a prompt.</p>
+<h2>Where This Leaves Us</h2>
+<p>In the absence of a genuine research breakthrough — something on the level of what we saw with Claude's leap in reasoning — we're essentially optimizing the loop. Making the tools better. Managing context smarter. But the fundamental limitation remains: the model reasons well enough for short, bounded tasks, and starts breaking down on anything truly complex or long-running.</p>
+<p>Would I invest in building on OpenClaw right now? No. Not because it's bad, but because the value isn't in the loop itself. The value is in the platform layer underneath — the workflow engine that sets boundaries, the persistence layer that maintains state, the permission system that controls access. That's what enterprises actually need, and that's what doesn't come for free with an open-source agent loop.</p>
+<p>Build the infrastructure. The agent patterns will keep evolving. But the foundation? That compounds.</p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>How Key-Value service can enhance platform UX</title>
+      <link>https://aymen.co/ai/how-key-value-service-can-enhance-platform-ux/</link>
+      <guid>https://aymen.co/ai/how-key-value-service-can-enhance-platform-ux/</guid>
+      <pubDate>Tue, 03 Feb 2026 00:00:00 GMT</pubDate>
+      <description>Why building a dedicated key-value service early can simplify persistence, speed up onboarding, and even power AI agent state across your platform.</description>
+      <content:encoded><![CDATA[<p>When you're building a platform, you're not just developing for customers. You're developing for yourself first. This changes everything about how you prioritize.</p>
+<p>Persistence management is one of those features that quietly sinks to the bottom of the backlog. We all want it. We all know we need it. But the priority stays low, pushed aside by urgent customer requests and deadlines. &quot;One day, when we have time, we'll implement it properly.&quot; There's a good chance that day never comes.</p>
+<p>So we decided to stop waiting.</p>
+<h2>The Solution: A Dedicated KV Service</h2>
+<p>At Nuraly, we built a separate service, a simple key-value store that serves our other microservices. It can hold encrypted values when needed, and it runs independently from everything else.</p>
+<p>What can you store? More than you'd expect:</p>
+<ul>
+<li>API keys and secrets</li>
+<li>Database connection strings</li>
+<li>User-specific settings per service</li>
+<li>Feature flags and configuration overrides</li>
+<li>Agent state</li>
+</ul>
+<p>That last one surprised us too. We now use the KV service to hold the state of our AI agents, their context, progress, and memory between sessions. What started as a configuration store became the backbone of our agent persistence.</p>
+<p>All of this sits behind a dedicated permission service, so access stays controlled and auditable.</p>
+<p><img src="/images/kv-service-architecture.jpg" alt="KV Service Architecture" loading="lazy" decoding="async"></p>
+<h2>Why This Works</h2>
+<p>The beauty of a standalone KV service is isolation and simplicity. You don't need to manage persistence inside each microservice anymore. No more duplicating the same storage logic across services. No more spinning up separate databases just to hold configuration for each one.</p>
+<p>Instead, the feature is one HTTP request away.</p>
+<p>Each microservice pulls only what it needs, nothing more. No hardcoded values buried in deployment scripts. No redundant persistence layers bloating every service. Just a clean API call.</p>
+<p>It's a small architectural decision, but it compounds. Onboarding new microservices becomes faster. Rotating credentials becomes trivial. Debugging configuration issues becomes possible. And every new service you spin up inherits the same persistence capability without implementing storage logic from scratch.</p>
+<h2>Where This Leads</h2>
+<p>I've started thinking of persistence not as a feature to implement later, but as infrastructure to build early. The cost of doing it right upfront is low. The cost of doing it wrong, or not at all, accumulates invisibly until it doesn't.</p>
+<p>If you're building a platform, don't let persistence sink in your backlog. Build the KV layer now. Your future self will thank you.</p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>Angular 14: Standalone components</title>
+      <link>https://aymen.co/javascript/angular-standalone-components/</link>
+      <guid>https://aymen.co/javascript/angular-standalone-components/</guid>
+      <pubDate>Mon, 13 Jun 2022 00:00:00 GMT</pubDate>
+      <description>At ReactConfg 2018 Event, Dan Abramov explained the Logo of React, he said that the user interface can be splitted into small independent units called components - similar to an…</description>
+      <content:encoded><![CDATA[<h2></h2>
+<p>At ReactConfg 2018 Event, Dan Abramov explained the Logo of React, he said that the user interface can be splitted into small independent units called components - similar to an Atom - and they will focus, in the next few years, on Hooks: “Electrons” as he named them.</p>
+<p>On the other side of the Javascript world, Angular started focusing on smaller units as Component, Directive and Pipes rather than modules.</p>
+<p>Starting from Angular 14, Components can be standalone and imported into modules or other components without the need for a dedicated module.</p>
+<h2>Standalone Component in Action.</h2>
+<p>To test this feature, I created a blank project and activated the routing option.</p>
+<p>Then, I created a basic component <code>UserDetailComponent </code> , the metadata looks like the following.</p>
+<script src="https://gist.github.com/labidiaymen/2dd68d910b2d68e230ee15d2b66964ea.js"></script>
+<h2></h2>
+<p>Then, created a service for the User.
+For the sake of the demo, this service is not provided in the root <code>providedIn: 'root'</code></p>
+<script src="https://gist.github.com/labidiaymen/5706440fbf88bf979b264b6413d90b36.js"></script>
+<p>So now, all we have to do is to use the service in the component. Before Angular 14, we had to create a module that defines all providers components and other dependencies or import everything in the <code>AppModule</code>.</p>
+<p>Now, we can declare Components as standalone and provide the service directly into the Component</p>
+<script src="https://gist.github.com/labidiaymen/20ceddab8dbf00204621cd5c3e12f146.js"></script>
+<h2></h2>
+<p>In the Route Module, we can directly import the component rather than the Module.</p>
+<script src="https://gist.github.com/labidiaymen/35fd2acb26b0577ddfaa4f1d1cf42ae1.js"></script>
+<h2></h2>
+<p><a href="https://github.com/labidiaymen/angular-standalone-components">Github Srouce</a></p>
+<!-- [Demo on Stackblitz](https://stackblitz.com/github/labidiaymen/angular-standalone-components) -->
+<p>You can play with the demo directly on Stackblitz</p>
+<iframe style="width: 100%;height: 313px;" src="https://stackblitz.com/edit/github-vpsfla?embed=1&file=src/app/user-detail/user-detail.component.ts"></iframe>
+<h2>Motivation</h2>
+<p>Have you ever thought: why a framework like Angular started to review their vision about modularity?</p>
+<p>In most Angular applications we are used to find some CoreModule, SharedModule and others that contain the common unit which is used in more than one module.</p>
+<p>Everytime the application grows, there's a chance that these modules will grow too.</p>
+<p>That's fine until we start thinking about performance.</p>
+<p>In the chart below, we will demonstrate the use of a common NgModule and how to import a component directly inside another module without the middle man, Thanks to Angular 14 of course.</p>
+<h3>Sharing standard component</h3>
+<p><img src="/images/Angular-14-Standalone-components-1.drawio.png" alt="aa" loading="lazy" decoding="async"></p>
+<h2></h2>
+<p>In this case we have three components, two services and more than two modules.</p>
+<p>These units are used in more than one place, so we created a <code>SharedModule</code> to package them.
+This ShareModule has been imported in the two modules.</p>
+<p>When lazyloading the module with LazLoading routes, the SharedModule alongs with the components and services and every unit exported, will be loaded in each module.</p>
+<h3>Sharing standalone component</h3>
+<p><img src="/images/Angular-14-Standalone-components-2.drawio.png" alt="aa" loading="lazy" decoding="async"></p>
+<h2></h2>
+<p>In this case we have the same unit (components, pipes, services and modules) but we ditched the SharedModule.</p>
+<p>We transformed the component in Standalone mode, which means that every component will load the needed providers.</p>
+<p>The <code>FormatDatePipe</code> load the <code>DateTimeService</code> and <code>DocumentViwerComponent</code> load <code>DocumentService</code>.</p>
+<p>Now When lazyloading a Component, only the component that is directly linked to it will be loaded.</p>
+<h3>Conclusion</h3>
+<p>Angular started approaching ReactJS with the small independent unit approach by introducing Standalone Component, which seems a big step toward enhancing web application performance and building a better and more maintainable web.</p>
+<p>Personally, I'm not fan of the idea of working with only one Framework, since we can explore multiple paths at the same time then adopt what was a success in each Framework.</p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>Angular 14: CLI Auto completion</title>
+      <link>https://aymen.co/javascript/angular-cli-auto-completion/</link>
+      <guid>https://aymen.co/javascript/angular-cli-auto-completion/</guid>
+      <pubDate>Sun, 12 Jun 2022 00:00:00 GMT</pubDate>
+      <description>Introduction As Front-end Architect, choosing the right Framework can impact the whole company even the group, that’s why we choose carefully the technologies that we adopt. For…</description>
+      <content:encoded><![CDATA[<h2>Introduction</h2>
+<p>As Front-end Architect, choosing the right Framework can impact the whole company even the group, that’s why we choose carefully the technologies that we adopt.</p>
+<p>For many years Angular prove how stable, it is, and when braking change happens, it will be accompanied by a great documentation.</p>
+<p>Even there a tool to assist you when updating project. <a href="https://angular.io/cli/update"><code>ng update</code></a></p>
+<h2>Angular CLI auto completion</h2>
+<p>Bootstraping Component, Pipe and Service is a daily task when starting a new feature with Angular projet.
+So we use <code>ng</code> command to generate our static files.</p>
+<p>If you use VS Code or Intellij or any IDE there's extentions that execute ng generate command for you.
+But if you want use the command line in your Terminal you will have hard time to remember the arguments to pass.</p>
+<p>That's why Angular has introduce <strong>CLI auto completion</strong></p>
+<p>To use this feature on Winsows you need to activate WSL(Windows Subsystem for Linux) or Use GIT Bash.</p>
+<p><img src="/images/ng-completion-1.PNG" alt="adding profile for windows" loading="lazy" decoding="async"></p>
+<p>Double check if the command has added the command to the <code>.bashrc</code></p>
+<p><img src="/images/ng-completion-2.PNG" alt="bashrc example" loading="lazy" decoding="async"></p>
+<p>And than we can use TAB key to autocomplete, it's a bit slow on windows but it works.
+<img src="/images/ng-completion-3.PNG" alt="ng completion demo" loading="lazy" decoding="async"></p>
+<p>We can go even further with the list of available flags.</p>
+<p><img src="/images/ng-completion-4.PNG" alt="ng completion flags" loading="lazy" decoding="async"></p>
+<h2>Conclusion</h2>
+<p>Tools make the life of developers easier, every improvement can affect their productivity. This makes us sometimes choose a framework among others in order to get a richer toolkit.</p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>(C++) isASCII(string) : Check if the string has a special characters</title>
+      <link>https://aymen.co/c-plus-plus/isascii-check-if-the-string-has-a-special-characters/</link>
+      <guid>https://aymen.co/c-plus-plus/isascii-check-if-the-string-has-a-special-characters/</guid>
+      <pubDate>Mon, 02 Mar 2020 00:00:00 GMT</pubDate>
+      <description>When using C++ to serve multi-languages users, we need to validate the caractères in the string to find out what to do. In our case, we need to find out if there&#39;s a special cha…</description>
+      <content:encoded><![CDATA[<p>When using C++ to serve <strong>multi-languages</strong> users, we need to validate the caractères in the string to find out what to do.</p>
+<p>In our case, we need to find out if there's a special character in the string to convert them,  and this was made by checking the decimal code of each character and check if it is above 127 or not,</p>
+<p>why <strong>127</strong>?</p>
+<p>Because the <strong>ASCII</strong> table told us that the characters code starts from 0 (NULL) and ends at 127(DEL)</p>
+<p><img src="https://aymen.co/wp-content/uploads/2020/03/asciifull.gif" alt="" loading="lazy" decoding="async"></p>
+<p>So we made this function.</p>
+<p>bool isASCII(const std::string&amp; s)
+{
+return !std::any_of(s.begin(), s.end(), [](char c) {
+return static_cast<unsigned char>(c) &gt; 127;
+});
+}</p>
+<p>And this how we used it</p>
+<p> </p>
+<p>#include <iostream>
+#include <string>
+#include <algorithm></p>
+<p>bool isASCII(const std::string&amp; s)
+{
+return !std::any_of(s.begin(), s.end(), [](char c) {
+return static_cast<unsigned char>(c) &gt; 127;
+});
+}</p>
+<p>int main(){
+std::string testString = &quot;not a valid Ãscii&quot;;
+std::cout &lt;&lt; &quot;Is valid ASCII &quot; &lt;&lt; isASCII(testString.c_str()) &lt;&lt; std::endl;
+}</p>
+<p>And the output will be:</p>
+<p>Is valid ASCII 0</p>
+<p>0 as NULL is C++</p>
+<p> </p>
+<p>PS: Will share snippets as I'm learning C++</p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>A Stable JavaScript (fatigue)</title>
+      <link>https://aymen.co/javascript/a-stable-javascript-fatigue/</link>
+      <guid>https://aymen.co/javascript/a-stable-javascript-fatigue/</guid>
+      <pubDate>Wed, 30 Oct 2019 00:00:00 GMT</pubDate>
+      <description>Have you felt the JavaScript fatigue before? I have . Being a web developer using JavaScript frameworks consumes a lot of energy. The JavaScript meant to be for the front-end de…</description>
+      <content:encoded><![CDATA[<p>Have you felt the <a href="https://goo.gl/Hgnph7">JavaScript fatigue</a> before? <strong>I have</strong>.</p>
+<p>Being a web developer using JavaScript <strong>frameworks</strong> consumes a lot of energy.</p>
+<p>The JavaScript meant to be for the <strong>front-end</strong> development and to add some interaction to static pages, like display images on click, validate forms and load <strong>async</strong> portion of data.</p>
+<p>Look around you now, JavaScript <strong>is everywhere</strong>. every month or a week there a new framework or library that want to change the world appears.</p>
+<p>Let's look at some history:</p>
+<p>At first, there's plain <strong>JavaScript</strong>, at that age, you need to write more for less, then it comes the libraries like <a href="https://jquery.com/">jQuery</a>, <a href="https://mootools.net/">MooTools</a>, and YUI( <a href="https://yuilibrary.com/">Yahoo! UI Library</a> )</p>
+<p>Then <strong>Angular.js</strong> has appeared at 2009, followed by <a href="https://knockoutjs.com/">Knockout</a>, <a href="http://backbonejs.org/">Backbone.js</a>, <a href="https://www.emberjs.com/">Ember.js</a>, and others.</p>
+<p>After a while <a href="https://reactjs.org/">React</a> has been <strong>introduced</strong> by <a href="https://developers.facebook.com/">Facebook</a> at 2013, a <strong>component-based</strong> frontend framework</p>
+<p>Then in 2016, it comes <a href="https://angular.io/">Angular 2+</a> a complete Javascript framework for the front-end.</p>
+<p>But <strong>Ryan Dahl</strong> let the front-end developer be a full-stack developer by making <a href="https://goo.gl/1Y1wmg">Node.js</a></p>
+<p>After 2009 developers start making <strong>web application and services</strong> with Javascript and new JavaScript frameworks start popups.</p>
+<p>Starting from 2017-2018 people start choosing a path to follow, like Angular developer, React Developer and so on.</p>
+<p>Also <strong>me</strong>, I'm known as Angular developer,  That's the main framework that I work with but you need also to <strong>master</strong> other Frameworks if you want to be laways <strong>fresh</strong>.</p>
+<p>Following everything is the perfect option to lose <strong>focus</strong>. for me, I'm really aware of what I should <strong>consume</strong> to prevent the <strong>distraction</strong>, and also I create a routine to keep up with what should I know.</p>
+<p>Again have you felt the <a href="https://goo.gl/Hgnph7">JavaScript fatigue</a> before? Share your <strong>experience</strong> with us ?.</p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>Cypress as Frontend developer</title>
+      <link>https://aymen.co/javascript/cypress-as-frontend-developer/</link>
+      <guid>https://aymen.co/javascript/cypress-as-frontend-developer/</guid>
+      <pubDate>Sun, 09 Sep 2018 00:00:00 GMT</pubDate>
+      <description>As a frontend developer you will interact with backend developers more than you will interact with your family members, so keeping the good relationship is the main thing you ne…</description>
+      <content:encoded><![CDATA[<p>As a <strong>frontend</strong> developer you will interact with <strong>backend</strong> developers more than you will interact with your family members, so keeping the good <strong>relationship</strong> is the main thing you need to <strong>focus</strong> on.</p>
+<p>When everything goes right, everybody is happy, but when one thing goes wrong, not nesserely everybody should feel sad.</p>
+<p>To keep the good relationship we need to remove all the <strong>confusing</strong> things from the workflow and <strong>everybody should speak the same language</strong>.</p>
+<p>Let's pick a case that everybody will pass on :</p>
+<p>You create a view with <strong>Angular</strong>, Vue or React, you consumed mock services and everything looks OK,</p>
+<p>Then it comes the moment of truth when you will connect the frontend view with the backend service/<strong>API</strong>, you implemented it and it didn't work you will contact the backend developer and he will tell you that his service work like a charm.</p>
+<p>You invite him to look at the result and he admitted that there's a <strong>bug need to fix</strong>.</p>
+<p>After he fixes his code, two things can happen :</p>
+<p>The bug fixed and everything goes right.</p>
+<p>The bug persists and you show him the <strong>scenario</strong> again and we loop through this until we get everything OK, if we did not break other parts of the <strong>App</strong>.</p>
+<p>That's Ok but, this takes time and energy.</p>
+<p>Here's I start a searching for <strong>automation</strong>, then to end to end <strong>testing</strong>, to simulate everything, and here's my experience :</p>
+<p>I found <strong><a href="https://www.cypress.io/">Cypress</a></strong> and start writing my tests for my views and after each view or service <strong>implementation</strong>, then the worrying start decreasing.</p>
+<p>With the (<strong>e2e</strong>) end to end testing, you stop worrying about <strong>regression</strong> and focusing on the new <strong>functionalities</strong> that need to implement.</p>
+<p>With that, the relation between the front and back Team <strong>start recovering</strong>.</p>
+<p>If the <strong>test fails</strong> I made a video of the issue and send it the concerned person, <strong>otherwise</strong> I invite him to watch the scenario fails ?</p>
+<p>I start being less exhausted as a Front-end developer.</p>
+<p><strong>Next step</strong>, is to add the e2e test, to the <strong>DevOps</strong> pipeline.</p>
+<p>And you, how are you dealing with the <strong>regressions?</strong></p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>Docker, where have you been ?</title>
+      <link>https://aymen.co/javascript/docker-where-have-you-been/</link>
+      <guid>https://aymen.co/javascript/docker-where-have-you-been/</guid>
+      <pubDate>Sun, 29 Jul 2018 00:00:00 GMT</pubDate>
+      <description>Euuh Docker , I know you&#39;re here for a while, but this is the right time I took the courage and make the hole things work with you. First of all, I&#39;m a consultant and I have a s…</description>
+      <content:encoded><![CDATA[<p>Euuh <a href="https://www.docker.com/"><strong>Docker</strong></a>, I know you're here for a while, but this is the right time I took the courage and make the hole things work with you.</p>
+<p>First of all, I'm a <strong>consultant</strong> and I have a <strong>startup</strong> which means I work on lots of things with a lot of <strong>things</strong>.</p>
+<p>And to keep it up without loses I need to isolate each thing from the other things. and here's where I start using Docker.</p>
+<p>I hear people talking about Docker on the <a href="https://en.wikipedia.org/wiki/DevOps"><strong>DevOps</strong></a> field but this is not the case for me, I start using Docker in the development environment, and here's how.</p>
+<p>In the last mission, I was working on a frontend application using the <a href="https://angular.io/"><strong>Angular</strong></a> framework, and it's not just me, we were a team working on the same project trying the make things happen, really fast.</p>
+<p>But this is not the case when we have a different version of Node.js and <a href="https://cli.angular.io/"><strong>@angular/</strong></a>cli.</p>
+<p>This start occurring when building success in some machine and fail in other, and here we start using Docker in the development <strong>environment</strong>, we choose a Node.js version that matches with the production server and we create an image for the environment, then we all start using the same image.</p>
+<p>Besides all of that, any <strong>new member</strong> can use the same image without installing any of other <strong>tools</strong> than Docker, and it makes the integration of new members easy and smooth.</p>
+<p>Then I start controlling the <strong>CPU</strong> and the Memory of the container to keep the host machine cool and prevent battery drain when I'm walking around with my MacBook Pro</p>
+<p>That does not <strong>end</strong> here.</p>
+<p>I start exploring new applications that were hard to install especially when I was using <strong>Windows</strong>, but with Docker, I just need to <strong>pull an image</strong> and run it.</p>
+<p>I use <strong>Docker</strong>, how about <strong>you</strong>?</p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>[My experience] The marriage of Angular and NativeScript</title>
+      <link>https://aymen.co/angular/my-experience-the-marriage-of-angular-and-nativescript/</link>
+      <guid>https://aymen.co/angular/my-experience-the-marriage-of-angular-and-nativescript/</guid>
+      <pubDate>Fri, 25 May 2018 00:00:00 GMT</pubDate>
+      <description>Building apps can cost you Time and Money if you don&#39;t know which technologies you need to use, which is maintainable and which is scalable. We all agreed that hybrid apps do no…</description>
+      <content:encoded><![CDATA[<p><strong>Building</strong> apps can cost you Time and Money if you don't know which technologies you need to use, which is maintainable and which is scalable.</p>
+<p>We all agreed that <strong>hybrid apps</strong> do not cost much, but when it comes to <strong>performance</strong> you need to be <strong>careful</strong>.</p>
+<p><a href="https://phonegap.com/"><strong>PhoneGap</strong></a> open's the door for <strong>JavaScript</strong> and HTML/CSS to enter the <strong>mobile</strong> world, then Apache Cordova (which is a fork from PhoneGap) Then it's comes the famous <a href="https://ionicframework.com/">Ionic</a> which is <a href="https://angular.io/"><strong>Angular</strong></a> Framework build for <a href="https://cordova.apache.org/">Cordova</a> platform.</p>
+<p>But the performance was <strong>not quite good</strong>, and sometimes not acceptable at all.</p>
+<p>So as Always I start for <strong>Alternatives</strong>, there's <strong>Xamarain</strong> with C# (I'm Sorry I'm not a C# developer). I moved on and I found <a href="https://facebook.github.io/react-native/"><strong>ReactNative</strong></a> And <a href="https://www.nativescript.org/">NativeScript</a>, I choose the second because I'm an <strong>Angular</strong> developer.</p>
+<p><strong>Initially</strong>, NativeScript lets developer create Native <strong>mobile views</strong> and using Javascript as <strong>Code behind</strong>, then They introduced building apps with Angular, which helps the Angular developer to give a try the mobile development.</p>
+<p><strong>Personally</strong>, I didn't try NativeScript with Angular.js, the first app I've Made is with <strong>Angular2+</strong>.</p>
+<p>As I mention the <strong>layout rendering</strong> is Good and fluid, but I've got some complication when using Nativescript:</p>
+<p> </p>
+<p><strong>Garbage Collector (Android Only)</strong></p>
+<p>We all know that <strong>Angular output</strong> is quite big than a plain Javascript app. when exploring the app that I've made, I experience a random UI freeze, and it's remarkable and it affected the user experience.</p>
+<p>After an Investigation, I found that the JavaScript GC(Garbage Collector) triggered when no more RAM is available and that causes the freeze ( from 0.5s to 2ssecondsd on Angular). After many issues opened on Github <a href="https://github.com/PanayotCankov">Panayot Cankov</a> wrote a blog (<a href="https://www.nativescript.org/blog/deep-dive-into-nativescript-3.1-performance-improvements">Deep Dive into NativeScript 3.1 Performance Improvements</a> ) about performance and <strong>explained</strong> why and when this issue happens.</p>
+<p>Then in the <strong>announcement</strong> of NativeScript 3.2 (<a href="https://www.nativescript.org/blog/announcing-the-release-of-nativescript-3.2">Announcing the Release of NativeScript 3.2</a>) they introduce an experimental flag <code>&quot;markingMode&quot;: &quot;none&quot;</code> for Android, I Tired and the freezes are gone.</p>
+<p><strong>Launch Time</strong></p>
+<p>Using Angular with NativeScript will affect the launch time <strong>especially on Android</strong>, and it will take longer than <strong><a href="http://vanilla-js.com/">Vanilla Javascript</a></strong> .</p>
+<p>Using <a href="https://webpack.js.org/"><strong>Webpack</strong></a> to <strong>minify and uglify</strong> speed up the App, but when I tried the <strong>Snapshot</strong> flag(Just for Android) I felt the difference.</p>
+<p>So what's <a href="https://v8project.blogspot.bg/2015/09/custom-startup-snapshots.html"><strong>Snapshot</strong></a>?</p>
+<p>It's a <strong>previously prepared</strong> JavaScript <strong>context</strong>. Instead of fetching, parsing, and executing scripts on every startup, the NativeScript <em><strong>Android runtime</strong></em> looks for a previously prepared binary file that is the result of those tasks, to reduce the amount of time it takes for your app <strong>to get up and running</strong>.</p>
+<p> </p>
+<p><em><strong>Angular 2+</strong></em> is very structured and it <em>has <strong>clean Architecture patterns</strong></em> and it helps you build a <em><strong>scalable application</strong></em> without <strong>struggling.</strong></p>
+<p> </p>
+<p><strong>Conclusion</strong></p>
+<p>I found that <strong>NativeScript and Angular is a successful marriage</strong> and I hope it continues.</p>
+<p>Other <strong>opinions</strong>? leave a comment.</p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>Node.js v10 What you need to know</title>
+      <link>https://aymen.co/javascript/node-js-v10-what-you-need-to-know/</link>
+      <guid>https://aymen.co/javascript/node-js-v10-what-you-need-to-know/</guid>
+      <pubDate>Wed, 23 May 2018 00:00:00 GMT</pubDate>
+      <description>Node.js 10 IS here, and here&#39;s what you need to know: HTTP/2 Node.js has stabilized the Http2 protocol and there are already frameworks that support it, right now, like Koa (Mad…</description>
+      <content:encoded><![CDATA[<p><strong>Node.js</strong> 10 IS here, and here's what you need to know:</p>
+<p><strong>HTTP/2</strong></p>
+<p>Node.js has stabilized the Http2 <strong>protocol</strong> and there are already <strong>frameworks</strong> that support it, right now, like <a href="https://koajs.com/"><strong>Koa</strong></a> (Made by TJ Holowaychuk who's also made Express.js), <a href="https://hapijs.com/"><strong>Hapi.js</strong></a> and also <a href="http://expressjs.com/fr/"><strong>Express.js</strong></a> using <a href="https://www.npmjs.com/package/express-http2-workaround"><strong>express-http2-workaround</strong></a> middleware.</p>
+<p><strong>Enhanced support for ESM modules</strong></p>
+<p>As we know Node.js has it's own module system (<strong><a href="http://requirejs.org/docs/commonjs.html">CommonJS</a></strong>), but it's not quite common as it only supports Node <strong>environment</strong> so you can't run CommonJS file in the <strong>browser</strong>.</p>
+<p><a href="https://en.wikipedia.org/wiki/ECMAScript"><strong>ECMAScript</strong></a> 6 brought us a <strong>module system</strong> to JavaScript and Node.js 10 support it.</p>
+<p><strong>N-API</strong></p>
+<p>Node.js has introduced N-API in the Node v8 release AND now it's <strong>Stable</strong>. And if you don't already know what N-API is :</p>
+<p>It is intended to insulate Add-ons from changes in the underlying JavaScript engine and allow modules compiled for one version to run on later versions of Node.js without recompilation.</p>
+<p><strong>NPM ? Node.js</strong></p>
+<p>How come Node get updated and <strong>NPM</strong> not?  NPMJS has realized also a new version and <em><strong>I personally like it</strong></em>, and it comes with:</p>
+<ul>
+<li><strong>Security</strong>, security, and security.</li>
+<li>A new <strong>command</strong> to find security <strong>vulnerabilities</strong> <code>npm audit</code></li>
+<li>Optimizations for <strong>continuous integration</strong> (CI)</li>
+<li>...</li>
+</ul>
+<p><strong>New methods (will cover some)</strong></p>
+<ul>
+<li><a href="https://nodejs.org/api/console.html#console_console_table_tabulardata_properties"><strong>Console.table</strong></a> and it displays tabular data as a table and I LOVE it</li>
+<li>The Argument<code>(e)</code> in <code>try {} catch(e)</code> {} is now optional</li>
+<li>...</li>
+</ul>
+<p> </p>
+<p><strong>Finally the Deprecations</strong></p>
+<ul>
+<li>Using <code>require()</code> to access several of Node.js' own internal dependencies will emit a runtime deprecation.</li>
+<li>Use of non-string values for <code>process.env</code> has been deprecated in the documentation.</li>
+<li>The <code>enroll()</code> and <code>unenroll()</code> methods have been deprecated.</li>
+</ul>
+<p> </p>
+<p>For further <strong>details</strong>, you can check Node.js <strong>announcement</strong> <a href="https://nodejs.org/en/blog/release/v10.0.0/">Node v10.0.0</a></p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>[DevOps] Build and Test  Nativescript Project with Gitlab-CI</title>
+      <link>https://aymen.co/devops/devops-build-and-test-nativescript-project-with-gitlab-ci/</link>
+      <guid>https://aymen.co/devops/devops-build-and-test-nativescript-project-with-gitlab-ci/</guid>
+      <pubDate>Sat, 19 May 2018 00:00:00 GMT</pubDate>
+      <description>To get more things Done we need more time , and to get more time there are things you must do, one of them is the automation . Did you hear about DevOps ? Yeah, me too, here&#39;s w…</description>
+      <content:encoded><![CDATA[<p>To get more things <em><strong>Done</strong></em> we need more <em><strong>time</strong></em>, and to get more time there are things you <strong>must</strong> do, one of them is the <strong>automation</strong>.</p>
+<p>Did you hear about <em><strong>DevOps</strong></em>? Yeah, me too, here's what <strong>Amazon</strong> says about :</p>
+<p><strong><em>DevOps is the combination of cultural philosophies, practices, and tools that increase an organization’s ability to deliver applications and services at high velocity</em></strong></p>
+<p>When I start coding in a new project the first thing I do is to prepare the git <strong>repository</strong>, there are many services allow you to host your repositories int they servers, the Famous one is <strong><a href="https://github.com/">Github</a></strong> but you need a membership to host <strong>private</strong> repositories, like all developers I start looking for an Alternatives until I found <a href="https://about.gitlab.com/">Gitlab</a> , There's an open source version (Community) and  I installed on my oven server but It took all of the <strong>memory</strong> that I have, so I stick with the hosting they provide.</p>
+<p>Everything seems Ok until start working with <strong>NativeScript</strong> and <strong>Angular</strong> to build <strong>mobile</strong> Apps, in the <strong>DEV</strong> world there's always more than environment, at least we have a development environment and production environment when you are in dev environment, you can't know how your code or the plugin that you've just installed <strong>gonna behave</strong> or will it work in prod environment.</p>
+<p>Here there are two main <strong>roads</strong>, build the application each time I add a NativeScript plugin or code for days then build the App and I found out if everything seems Ok, If not,  you maybe need to change some plugins and rewrite a <strong>bunch of lines</strong> of code.</p>
+<p><em><strong>The solution?</strong></em></p>
+<p>While browsing the web I found some services contain a CI into they names, like <a href="https://circleci.com/">CircleCI</a> , <a href="https://travis-ci.org/">Travis CI</a> , and others, I got curious until I got deep into the subject, And found out that these are tools for <em><strong>Continuous Integration</strong></em> and delivery.</p>
+<p><strong><em>How does it work?</em></strong></p>
+<p>To Deliver a good product you need to do your <strong>test</strong> the app, by writing the unit tests or/and real humans <strong>interaction</strong>, you need to run your unit tests each time you add code to find out if you or somebody else broke the app.</p>
+<p>Ok, but running tests and building each time in <strong>your machine</strong> will reduce the <strong>performance</strong> of your development environment, and for sure will make your nervous, How about building in somebody else machine? that's when I start looking for alternatives solutions, in the meanwhile <strong>Gitlab</strong> introduce the Continuous Integration <strong>feature</strong>, and it's for <strong>FREE</strong>.</p>
+<p>Now when I (or anyone else in the same repository ) push a commit, Gitlab will run the test, build and generate an APK file (for Android) for me and show me If there are issues white building.</p>
+<p>I will share with you how I've Done it.</p>
+<p>You can achieve this <strong>workflow</strong> by adding .gitlab-ci.yml</p>
+<script src="https://gist.github.com/labidiaymen/27f0e2dd6f2de278ca68c550d89c78fb.js"></script>
+<p>Let's break this file down.</p>
+<p>First, we created a <strong>Job</strong>, then we pull a <a href="https://www.docker.com/">Docker</a> image that contains a fresh Installed version of <strong>Android</strong>.</p>
+<p>Then we installed the <strong>Node.js</strong>, after that, we installed NativeScript, updating the Android SDK and installing Node modules with <strong>NPM</strong>.</p>
+<p>When everything is done, we build the App with NativeScript CLI (command line tools).</p>
+<p>In the build process of NativeScript we pass by the unit tests, if there's an error it will be thrown with an Exception.</p>
+<p>If there's no error and everything is fine we will get our APK available to download, This all happens while you're writing your code in peace, you didn't stress your machine but you got visibilities about what's gonna happen when you build for production.</p>
+<p><strong>Isn't a big deal? how do you think?</strong></p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>[Redux, NGRX, VUEX] The one State ideology</title>
+      <link>https://aymen.co/javascript/redux-ngrx-vuex-the-one-state-ideology/</link>
+      <guid>https://aymen.co/javascript/redux-ngrx-vuex-the-one-state-ideology/</guid>
+      <pubDate>Thu, 17 May 2018 00:00:00 GMT</pubDate>
+      <description>Ahh, Managing states , how it was awful before the one State ideology. Back in the days, we used to create a state for every block or area that get updated from the same place a…</description>
+      <content:encoded><![CDATA[<p>Ahh, <strong>Managing states</strong>, how it was <strong>awful</strong> before the one State ideology.</p>
+<p>Back in the days, we used to create a state for every <strong>block</strong> or area that get updated from the same place and does not know <strong>anything</strong> about the others blocks, or manually update the view and here we need also to update the state of the same block, what a mess. It's hard when you start <strong>growing</strong> your app using these techniques.</p>
+<p>Then I discovered (forced myself to use) Redux or the one state manager, at the beginning I found myself writing more code than I usually do, creating the <strong>actions</strong>, the <strong>reducers</strong>, and the <strong>effects</strong> and so on.</p>
+<p>And to create an action I need to pass by <strong>many files</strong> to do a single <strong>interaction</strong>, it was like another hell, but when the app starts growing I didn't feel <em><strong>exhausted</strong></em> like before, when I wanna get some <strong>data</strong> I know <strong>exactly how and where to find it</strong>,  and also I can easily plug any other blocks into the apps I just need to connect it to the State manager and I get the access to all what I need, Isn't That cool?</p>
+<p>But wait I'm an <strong>Angular</strong> Developer and Redux made for the <strong>React</strong> Community, well there's an implementation of <strong>Redux</strong> philosophy for Angular folks and it calls <a href="https://github.com/ngrx">NGRX</a> and I used it in production and everything seems <strong>alright</strong>.</p>
+<p>How about <strong>Vue.js</strong> developers? <a href="https://vuex.vuejs.org/en/">Vuex</a> is the implementation of Redux for the Vue.js framework, I tried it and it does what I need.</p>
+<blockquote>
+<p><strong>Using a state Manager really helped me a lot and boost my skills and it reduced the development time.</strong></p>
+</blockquote>
+<p>Forced your self to use it and feel the difference.</p>
+<p>Did you try a State Manager <strong>before</strong>?</p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>The Modern UI frameworks</title>
+      <link>https://aymen.co/javascript/the-modern-ui-frameworks/</link>
+      <guid>https://aymen.co/javascript/the-modern-ui-frameworks/</guid>
+      <pubDate>Tue, 15 May 2018 00:00:00 GMT</pubDate>
+      <description>Nowadays, finding a UI element is HARD and I will tell you why, How many times you start working with cool UI framework and after a while, you found some limits? did you try to…</description>
+      <content:encoded><![CDATA[<p>Nowadays, finding a UI element is <strong>HARD</strong> and I will tell you why,</p>
+<p>How many times you start working with cool UI framework and after a while, you found some limits? did you try to add some features and you lost hours and hours and if you start from the ground it will take you so much less time? it also happens to me.</p>
+<p>90% of the <strong>UI frameworks</strong> looks cool at the beginning, but when the app start growing and we need some extra UI elements we will start looking for a new one to complete the missing elements, OK we found a one, how about using them both? huh, and the size of the App start growing, besides the conflict and the tricks that we do to keep all the UI frameworks works together, THEN our app starts growing with <strong>built-in issues</strong> (what a cool features).</p>
+<p><strong>But How I deal with that?</strong></p>
+<p>The last project I start I chose Vue.js as front-end framework, as the majorities of developer I usually kickstart the project with a UI framework, to get more done with less pain, the top elements I usually  use are, the Form and they built-in validation, buttons, modals and they confirmations,  grid and data table.</p>
+<p>After exploring some UI frameworks I chose <a href="https://element.eleme.io/#/en-US/component/installation">Element-UI</a> , and there's will be always missing <strong>components</strong> or elements, and when I found something missing what I really did?</p>
+<p>I made the missing feature or components, but how?</p>
+<p>Before start using any framework, I open the source code and look how they built it, and I read the documentation many times to understand <strong>the philosophy behind it</strong> and find out if I can <strong>easily</strong> add features to its core, if not I continue the looking for the other frameworks.</p>
+<p><strong><em>Choosing a UI framework means knowing how to add stuff to it and how to manipulate it.</em></strong></p>
+<p>Why I choose to add to its core rather than create independent components:</p>
+<ul>
+<li>First, we will use they <strong>built-in architecture</strong> and <strong>helpers</strong></li>
+<li>Second, <strong>THINK</strong> about <strong>the community</strong>, sharing your features or components with the community <em><strong>will be one of the things that make you happy</strong></em>, <strong>helping others is the best thing I ever did.</strong></li>
+</ul>
+<p>That's how <strong>I deal with UI frameworks,</strong> how about <strong>you</strong>?  <a href="https://emojipedia.org/grinning-face-with-smiling-eyes/">?</a></p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>VueJS,  I can’t ignore you no more</title>
+      <link>https://aymen.co/javascript/vuejs-i-cant-ignore-you-no-more/</link>
+      <guid>https://aymen.co/javascript/vuejs-i-cant-ignore-you-no-more/</guid>
+      <pubDate>Fri, 11 May 2018 00:00:00 GMT</pubDate>
+      <description>Did sometimes you want to make an interactive web page without using jQuery or a fully framework like Angular (2-&gt;5) did that happened to you also? Well I discovered Vue/VueJS a…</description>
+      <content:encoded><![CDATA[<p>Did sometimes you want to make an interactive web page without using jQuery or a fully framework like Angular (2-&gt;5) did that happened to you also?</p>
+<p>Well I discovered Vue/VueJS along time ago but I didn't want to learn any other JavaScript Framework at this time, but any time I want to make a single interactive page (not a complete project), I found my self in this loop again and ask my self what I will use and if I will use this what if it will disappear in one or two years, and so ON.</p>
+<p>Let's talk about why I start learning Vue/VueJS, after two years working with Angular(2-5) on a mobile(NativeScript, Ionic ... ) and web apps (Dashboards),  I felt like I want to discover something else, I found VueJS in the trending JavaScript frameworks but before I decide to choose witch Framework I will use, I make the tour by making real word app but with VueJS, for now, I just need it for simple to complex salable web pages so it didn't take me so much time to test and to found how much fun working with it.</p>
+<p>In the meantime, we (<a href="https://vaulab.com/">Vaulab.com</a>) start making a new service for hunting jobs (here in <a href="https://en.wikipedia.org/wiki/Tunisia">Tunisia</a>), and we needed front-end UI elements to kickstart the project, we tested a lot but we choose <a href="https://element.eleme.io/#/en-US/component/installation">Element-</a>ui, you can have other opinions about UI frameworks, that's OK, put them in comments :D</p>
+<p>I still investigation the Vue framework and I will post about the progress on the fly.</p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>A NativeScript plugin that works - Making a NativeScript plugin</title>
+      <link>https://aymen.co/javascript/a-nativescript-plugin-that-works-make-a-nativescript-plugin/</link>
+      <guid>https://aymen.co/javascript/a-nativescript-plugin-that-works-make-a-nativescript-plugin/</guid>
+      <pubDate>Wed, 17 Jan 2018 00:00:00 GMT</pubDate>
+      <description>Before that this pass through my mind I lost a half day searching for plugin to JUST works without any additional tricks to continue my journey, but I didn&#39;t, so that&#39;s why I cr…</description>
+      <content:encoded><![CDATA[<p>Before that this pass through my mind I lost a half day searching for plugin to JUST works without any additional tricks to continue my journey, but I didn't, so that's why I created this plugin and I call it &quot;A NativeScript plugin that works&quot;, just kidding I call it &quot;nativescript-google-places-autocomplete&quot;.</p>
+<p>In the current app that I'm working on with a Client, we just want to display autocomplete a search input, with list of place predictions so I tried some plugins and some vanilla Javascript code (not good for code maintainability) but no, I choose to create my own plugin and share it with the community.</p>
+<p>To start off I need a kickstart project or file structures, I never start a project with plain files, it took times to implement the essential need, so I found a seed project (That I contributed to it<a href="https://www.google.tn/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=8&amp;ved=0ahUKEwjJjriVmd_YAhWEOxQKHV7WAC4QFgg8MAc&amp;url=https%3A%2F%2Femojipedia.org%2Fsmiling-face-with-open-mouth-and-smiling-eyes%2F&amp;usg=AOvVaw3FsYUcJ_jXLdva7w3mRdau">????</a>) on the Nativescript GitHub account: <a href="https://github.com/NativeScript/nativescript-plugin-seed">https://github.com/NativeScript/nativescript-plugin-seed</a></p>
+<p>Then I created my own API key and I start implementing my own things.</p>
+<p><img src="https://aymen.co/wp-content/uploads/2018/01/Capture-d%E2%80%99e%CC%81cran-2018-01-17-a%CC%80-15.31.37.png" alt="" loading="lazy" decoding="async"></p>
+<p>So we will work on some of these files, all files are generated from the seed except this one</p>
+<blockquote>
+<p>google-places-autocomplete.static.ts</p>
+</blockquote>
+<p>This file holds static variable to keep the structure and the code clean.</p>
+<p>Ok,</p>
+<blockquote>
+<p>google-places-autocomplete.android.ts</p>
+<p>google-places-autocomplete.common.ts</p>
+<p>google-places-autocomplete.ios.ts</p>
+</blockquote>
+<p>when we have a common functionality between iOS &amp; Android, we put in: _google-places-autocomplete.common.ts, _otherwise we implement each file with the platform needs.</p>
+<blockquote>
+<p>google-places-autocomplete.android.ts</p>
+<p>google-places-autocomplete.common.d.ts</p>
+<p>google-places-autocomplete.ios.d.ts</p>
+</blockquote>
+<p>These files are auto-generated with Typescript and hold the types &amp; definition of the TS files.</p>
+<p>So all work will be on the <em>google-places-autocomplete.common.ts</em> file because we will use the Nativescript modules that support both of the platforms and here's our file.</p>
+<p>First, let's <em>import</em> the module that we will use</p>
+<p><img src="https://aymen.co/wp-content/uploads/2018/01/Capture-d%E2%80%99e%CC%81cran-2018-01-17-a%CC%80-17.13.45.png" alt="" loading="lazy" decoding="async"></p>
+<p>The plugin does two things, search places from a query, and display place detail from place id.</p>
+<p><img src="https://aymen.co/wp-content/uploads/2018/01/Capture-d%E2%80%99e%CC%81cran-2018-01-17-a%CC%80-17.13.55.png" alt="" loading="lazy" decoding="async"></p>
+<p><img src="https://aymen.co/wp-content/uploads/2018/01/Capture-d%E2%80%99e%CC%81cran-2018-01-17-a%CC%80-17.14.04.png" alt="" loading="lazy" decoding="async"></p>
+<p>In this two functions, we did two simple requests (using HTTP module from nativescript) to the google places API</p>
+<p>Here's the final product and to know more about the module or to check to demo go to this link: <a href="https://github.com/labidiaymen/nativescript-google-places-autocomplete">https://github.com/labidiaymen/nativescript-google-places-autocomplete</a></p>
+<p> </p>
+<p><img src="https://user-images.githubusercontent.com/3775924/35034560-e0519724-fb6e-11e7-857c-0caaa6499d6a.gif" alt="" loading="lazy" decoding="async"></p>
+<p>This package is hosted on npmjs.com</p>
+<p><img src="https://badge.fury.io/js/nativescript-google-places-autocomplete.svg" alt="" loading="lazy" decoding="async"></p>
+<p><a href="https://www.npmjs.com/package/nativescript-google-places-autocomplete">https://www.npmjs.com/package/nativescript-google-places-autocomplete</a></p>
+<p>**Hope it helps, **<strong>thanks</strong></p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>Hybrid mobile framework - NativeScript, Ionic, ReactNative</title>
+      <link>https://aymen.co/angular/hybrid-mobile-framework-nativescript-ionic-reactnative/</link>
+      <guid>https://aymen.co/angular/hybrid-mobile-framework-nativescript-ionic-reactnative/</guid>
+      <pubDate>Mon, 15 Jan 2018 00:00:00 GMT</pubDate>
+      <description>Nowadays if you wanna make a low budget mobile App, definitely you will pass by one of the hybrid mobile application frameworks, let&#39;s cite some : Ionic , any web developer want…</description>
+      <content:encoded><![CDATA[<p>Nowadays if you wanna make a low budget mobile App, definitely you will pass by one of the hybrid mobile application frameworks, let's cite some :</p>
+<p><strong>Ionic</strong>, any web developer wants to make a mobile app he will occur this framework, why?, because Ionic is built on top of <a href="https://cordova.apache.org/">Apache Cordova</a> using <a href="https://angular.io/">Angular</a> and WebView, the Ionic team made Ionic1 with Angularjs 1.* and the Ionic 2&amp;3 with Angular 2+, to know more: <a href="https://ionicframework.com">ionicframework.com  </a></p>
+<p><strong>Nativescript</strong> (my favorite one, keep reading to know why): <em>is how you build cross-platform, native iOS and Android apps without web views.</em> (<a href="https://www.nativescript.org/about">https://www.nativescript.org/about</a>), with Nativescript you get access to native APIs via JavaScript, also you can use <a href="https://www.npmjs.com/">npmjs.com</a> packages, CocoaPods(iOS) and Gradle (Android) <em>I will explain how (next article)</em>.</p>
+<p><strong>Xamarin</strong> I didn't use it until now but here's what they said about it: <em>Xamarin's</em> mobile application development platform with native user interfaces enables sharing of code across all platforms with a single C# codebase (<a href="https://www.xamarin.com/platform">www.xamarin.com/platform</a>)</p>
+<p><strong>ReactNative</strong> made by Facebook based on React.js philosophies same like Nativescript but it required some Objective-C or Swift for iOS and/or Java for Androids skills to write Bridge, (ReactNative Bridge) and that's the main difference between Nativescript and ReactNative, the first does not require to write bridges the second does.</p>
+<blockquote>
+<p><em>If you know other mobile frameworks put them in comments ...</em></p>
+</blockquote>
+<p>There are two main sides, the first side has <strong>Nativescript &amp; Reactnative &amp; Xamarin</strong> and the other side has only <strong>Ionic,</strong> the first use Native UI like UILabel(iOS) TextView(Android) with single XML tag <a href="https://docs.nativescript.org/cookbook/ui/text-view"><em>text-view</em></a> the other side use WebView (HTML input &amp; tags) which make the first side much better and smoother for complex UI even hot performance for simple UI.</p>
+<p>And of course, I definitely choose native UI  over Web UI.</p>
+<p> </p>
+<p>Let's talk about why I choose <strong>Nativescript</strong> and talk about my <strong>experience</strong>.</p>
+<p>Android &amp; iOS, each mobile platform has its own ecosystem and offers completely different development tools and languages, in order to translate JavaScript code to the corresponding native APIs so they made a runtime for each platform, let's call it <strong>the Bridge</strong></p>
+<p>Let's take an example, if we want to use <a href="https://sentry.io/">sentry.io</a> (Open-source error tracking) to track bugs on mobile devices in real-time, we can use this plugin <a href="https://www.npmjs.com/package/nativescript-sentry.io">npmjs.com/package/nativescript-sentry.io</a> which is hosted on <a href="https://www.npmjs.com/">npmjs</a> and immediately we can start using it in Javascript or Typescript.</p>
+<p>So how this plugin made?</p>
+<p>This plugin adds some <strong>dependencies</strong> with Gradle in Android And CocoaPods in iOS, and with <strong>The bridge,</strong> we can immediately start using them in plain Javascript code without any tweaks,(<em><strong>that's the main part</strong></em> why I love Nativescript over all other platforms/frameworks) then we have the implementations parts wich done with javascript, no other languages or skills required .</p>
+<h3><strong>My Experience</strong></h3>
+<p><strong>The Garbage collector</strong>: I wrote two application with NativeScript one of them is in production right now, with iOS always works like charm but the Android version with google machine V8 I've got some lags, and that because the synchronisation between garbage collector of the JavaScript and the garbage collector of Java (GC), they announce a fix for that on the version 3.2 of Nativescript (<a href="https://www.nativescript.org/blog/announcing-the-release-of-nativescript-3.2">Announcing the Release of NativeScript 3.2 &amp; New Experimental GC Mode for Android</a>), they add an experimental flag and it solves the lags for now.</p>
+<p><strong>Google maps:</strong> Also when I used Google maps plugin I had some issues, one of them is (Of course it works like a charm on iOS, I got the issue on Android) when you create a page that contains a Google map card and you enter to a child route (i'm using Angular with Nativescript) and you press back button the app crash, so I switch to MapBox.</p>
+<p>I started making plugins for Nativescript, you can follow them at <a href="https://github.com/labidiaymen">Github.com/labidiaymen</a></p>
+<p>If you wanna contribute to this articles or to one of my plugins you can make a comment or you can reach me: labidi{at}aymen.co</p>
+<p><strong>Thanks</strong></p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>Why NativeScript ?</title>
+      <link>https://aymen.co/javascript/why-nativescript/</link>
+      <guid>https://aymen.co/javascript/why-nativescript/</guid>
+      <pubDate>Sat, 02 Dec 2017 00:00:00 GMT</pubDate>
+      <description>First of all i&#39;m an Angular developer, and i Like how Angular structure the project, especially the style guide by Team Angular, So why NativeScript ? With NativeScript You can…</description>
+      <content:encoded><![CDATA[<p>First of all i'm an Angular  developer, and i Like how Angular structure the project, especially the style guide by Team Angular,  So why NativeScript ?</p>
+<p>With NativeScript</p>
+<ul>
+<li>You can take your Angular knowledge with you when you want to make a Mobile App</li>
+<li>The NativeScript community is growing each day (11,828 Star on github).</li>
+<li>You can use any JavaScript package from NPM ( <a href="https://www.npmjs.com">www.npmjs.com</a>), like <a href="https://momentjs.com">MomentJS</a>.</li>
+<li>XML is much close to Angular HTML and you will get use to it.</li>
+</ul>
+<p>Managing state in Angular become easy with <a href="https://github.com/ngrx/platform">@ngrx</a> (RxJS powered state management for Angular applications, inspired by Redux) and you can take it with you to NativeScript.</p>
+<p>Also, when you try to make a dashboard, webapp and mobile app, you can use the Same technology (Angular) and share 70% of your code between these platforms, and you reduce time and move our focus to the functionalities and the tests.</p>
+<p>Start with NativeScript <a href="https://www.nativescript.org">https://www.nativescript.org</a></p>
+<p>The stack i use is , Angular, NativeScript, Node.js and MongoDB, wich Stack do you use ?</p>
+<p> </p>
+<h2>Did you know D-DAY ? I will talk about NativeScript in this Meetup</h2>
+<p><a href="https://aymen.co/events/d-day-developers-day-1/"><img src="https://aymen.co/wp-content/uploads/2017/12/d-day2.png" alt="" loading="lazy" decoding="async"></a></p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>D-Day #1 (Developers Day)</title>
+      <link>https://aymen.co/events/d-day-developers-day-1/</link>
+      <guid>https://aymen.co/events/d-day-developers-day-1/</guid>
+      <pubDate>Fri, 01 Dec 2017 00:00:00 GMT</pubDate>
+      <description>What is D-Day or Developers Days? D-Day is a Meetup hosted by Labidi Aymen (Founder of Vaulab, Architect, and JavaScript Developer Advocate) and guests, take place every 15Days…</description>
+      <content:encoded><![CDATA[<h2><img src="https://aymen.co/cn/uploads/2017/12/d-day-clean.png" alt="" loading="lazy" decoding="async"></h2>
+<h2>What is D-Day or Developers Days?</h2>
+<p>D-Day is a Meetup hosted by Labidi Aymen (Founder of Vaulab, Architect, and JavaScript Developer Advocate) and guests, take place every 15Days (twice in a month) to discuss and share Technologies especially Javascript language and frameworks</p>
+<h2>Day #1 : Why Angular for WebApps ?</h2>
+<p>D-Day is a meetup and it's limited to <strong>10 persons</strong></p>
+<h2>Tickets prices</h2>
+<p>It's <strong>Free.</strong></p>
+<p>[vfb id=5]</p>
+<h2>Where?</h2>
+<p>@vaulab : Elgazala Technopark, Raoued, Gouvernorat de l'Ariana, Tunisie</p>
+<iframe src="https://www.google.com/maps/d/embed?mid=1PtWMhZX3S3HqXB6z2CBDEb1nwnARQRhR" width="100%" height="480"></iframe>
+]]></content:encoded>
+    </item>
+  </channel>
+</rss>

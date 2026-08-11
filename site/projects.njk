@@ -1,0 +1,20 @@
+---
+layout: layouts/base.njk
+title: "Projects"
+description: "Products and projects built by Labidi Aymen."
+permalink: /projects/
+---
+<section class="container page">
+  <header class="page-head">
+    <h1>Projects</h1>
+    <p class="page-lead">Products I've built or helped build — plus plenty of open source on <a href="{{ site.social.github }}" rel="noopener" target="_blank">GitHub</a>.</p>
+  </header>
+  <ul class="project-entries">
+    {%- for post in collections.categoryMap | categoryPosts("projects") %}
+    <li class="project-entry">
+      <h2><a href="{{ post.url }}">{{ post.data.title }}</a></h2>
+      <p>{{ post.templateContent | excerpt }}</p>
+    </li>
+    {%- endfor %}
+  </ul>
+</section>

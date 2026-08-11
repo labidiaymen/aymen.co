@@ -1,0 +1,67 @@
+---
+layout: layouts/base.njk
+---
+<article class="container post">
+  <header class="post-header">
+    <div class="post-meta">
+      {%- for cat in categories %}
+      <a class="chip" href="/{{ cat }}/">{{ cat | categoryLabel }}</a>
+      {%- endfor %}
+      <time datetime="{{ page.date | isoDate }}">{{ page.date | readableDate }}</time>
+      <span class="meta-sep">·</span>
+      <span>{{ content | readingTime }} min read</span>
+    </div>
+    <h1 class="post-title">{{ title }}</h1>
+    {%- if description %}
+    <p class="post-description">{{ description }}</p>
+    {%- endif %}
+  </header>
+  {%- if cover %}
+  <img class="post-cover" src="{{ cover }}" alt="" loading="eager">
+  {%- endif %}
+  <div class="prose">
+    {{ content | safe }}
+  </div>
+
+  {%- set neighbours = collections.posts | adjacent(page.url) %}
+  <nav class="post-pagination" aria-label="Adjacent posts">
+    {%- if neighbours.older %}
+    <a class="pag-older" href="{{ neighbours.older.url }}">
+      <span class="pag-label">← Older</span>
+      <span class="pag-title">{{ neighbours.older.data.title }}</span>
+    </a>
+    {%- else %}<span></span>{%- endif %}
+    {%- if neighbours.newer %}
+    <a class="pag-newer" href="{{ neighbours.newer.url }}">
+      <span class="pag-label">Newer →</span>
+      <span class="pag-title">{{ neighbours.newer.data.title }}</span>
+    </a>
+    {%- endif %}
+  </nav>
+
+  {%- set relatedPosts = collections.posts | related(page.url, categories) %}
+  {%- if relatedPosts.length %}
+  <aside class="post-related">
+    <h2 class="rule-heading">More in {{ categories[0] | categoryLabel }}</h2>
+    {%- set posts = relatedPosts %}
+    {% include "post-list.njk" %}
+  </aside>
+  {%- endif %}
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": {{ title | dump | safe }},
+    "datePublished": "{{ page.date | isoDate }}",
+    "url": "{{ page.url | absoluteUrl(site.url) }}",
+    {%- if description %}
+    "description": {{ description | dump | safe }},
+    {%- endif %}
+    {%- if cover %}
+    "image": "{{ cover | absoluteUrl(site.url) }}",
+    {%- endif %}
+    "author": { "@type": "Person", "name": "{{ site.author }}", "url": "{{ site.url }}/about/" }
+  }
+  </script>
+</article>
