@@ -27,9 +27,9 @@ layout: layouts/base.njk
 <section class="container home-section">
   <h2 class="rule-heading">Writing</h2>
   {%- set latest = collections.posts | first %}
-  <a class="featured-item" href="{{ latest.url }}">
+  <a class="featured-item" href="{{ latest.data.external or latest.url }}"{% if latest.data.external %} rel="noopener" target="_blank"{% endif %}>
     <span class="featured-body">
-      <span class="featured-title">{{ latest.data.title }}</span>
+      <span class="featured-title">{{ latest.data.title }}{% if latest.data.external %} <span class="ext" aria-hidden="true">↗</span>{% endif %}</span>
       {%- if latest.data.description %}
       <span class="featured-lede">{{ latest.data.description }}</span>
       {%- endif %}
@@ -67,6 +67,12 @@ layout: layouts/base.njk
 <section class="container home-section">
   <h2 class="rule-heading">Projects</h2>
   <ul class="project-index">
+    {%- for item in building %}
+    <li>
+      <a href="{{ item.url }}" rel="noopener" target="_blank">{{ item.name }} <span class="ext" aria-hidden="true">↗</span></a>
+      <span class="project-desc">{{ item.desc | truncate(90) }}</span>
+    </li>
+    {%- endfor %}
     {%- for post in collections.categoryMap | categoryPosts("projects") %}
     <li>
       <a href="{{ post.url }}">{{ post.data.title }}</a>

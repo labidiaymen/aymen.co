@@ -11,10 +11,11 @@ eleventyExcludeFromCollections: true
     <language>en</language>
     <atom:link href="{{ site.url }}/feed.xml" rel="self" type="application/rss+xml"/>
     {%- for post in collections.posts | limit(20) %}
+    {%- set link = post.data.external or (post.url | absoluteUrl(site.url)) %}
     <item>
       <title>{{ post.data.title }}</title>
-      <link>{{ post.url | absoluteUrl(site.url) }}</link>
-      <guid>{{ post.url | absoluteUrl(site.url) }}</guid>
+      <link>{{ link }}</link>
+      <guid isPermaLink="{% if post.data.external %}false{% else %}true{% endif %}">{{ link }}</guid>
       <pubDate>{{ post.date | rssDate }}</pubDate>
       {%- if post.data.description %}
       <description>{{ post.data.description }}</description>

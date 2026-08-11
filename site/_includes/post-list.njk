@@ -1,8 +1,9 @@
 <ul class="post-list">
   {%- for post in posts %}
+  {%- set href = post.data.external or post.url %}
   <li class="post-row">
-    <a class="post-row-link" href="{{ post.url }}">
-      <span class="post-row-title">{{ post.data.title }}</span>
+    <a class="post-row-link" href="{{ href }}"{% if post.data.external %} rel="noopener" target="_blank"{% endif %}>
+      <span class="post-row-title">{{ post.data.title }}{% if post.data.external %} <span class="ext" aria-hidden="true">↗</span>{% endif %}</span>
       <span class="post-row-leader" aria-hidden="true"></span>
       <span class="post-row-meta">
         {%- if post.data.categories.length %}<span class="post-row-cat">{{ post.data.categories[0] | categoryLabel }}</span> · {% endif %}{{ post.date | readableDate }}

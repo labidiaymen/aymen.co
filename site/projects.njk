@@ -1,18 +1,30 @@
 ---
 layout: layouts/base.njk
 title: "Projects"
-description: "Products and projects built by Labidi Aymen."
+description: "What Labidi Aymen is building now, and the products that came before."
 permalink: /projects/
 ---
 <section class="container page">
   <header class="page-head">
     <h1>Projects</h1>
-    <p class="page-lead">Products I've built or helped build, plus plenty of open source on <a href="{{ site.social.github }}" rel="noopener" target="_blank">GitHub</a>.</p>
+    <p class="page-lead">What I'm building now, and the products that came before. More open source on <a href="{{ site.social.github }}" rel="noopener" target="_blank">GitHub</a>.</p>
   </header>
+
+  <h2 class="rule-heading">Now building</h2>
+  <ul class="project-entries">
+    {%- for item in building %}
+    <li class="project-entry">
+      <h3><a href="{{ item.url }}" rel="noopener" target="_blank">{{ item.name }} <span class="ext" aria-hidden="true">↗</span></a></h3>
+      <p>{{ item.desc }}</p>
+    </li>
+    {%- endfor %}
+  </ul>
+
+  <h2 class="rule-heading section-gap">Earlier products</h2>
   <ul class="project-entries">
     {%- for post in collections.categoryMap | categoryPosts("projects") %}
     <li class="project-entry">
-      <h2><a href="{{ post.url }}">{{ post.data.title }}</a></h2>
+      <h3><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
       <p>{{ post.templateContent | excerpt }}</p>
     </li>
     {%- endfor %}

@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Lumen",
+    "url": "https://lumen-lang.org/",
+    "desc": "A statically typed, compiled language with TypeScript syntax that builds straight to a small, dependency-free native binary. No VM, no garbage collector, no runtime."
+  },
+  {
+    "name": "LumenJS",
+    "url": "https://lumenjs.dev/",
+    "desc": "A full-stack web component platform built on Lit."
+  },
+  {
+    "name": "Joule",
+    "url": "https://joule.sh/",
+    "desc": "An agent console. Ask, search, and make documents."
+  }
+]
