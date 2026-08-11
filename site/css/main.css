@@ -130,16 +130,46 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
   text-decoration: none;
 }
 .brand:hover { color: var(--text); }
-.brand:hover .brand-avatar { filter: grayscale(0); }
 .brand-dot { color: var(--accent); font-weight: 700; }
 
 .brand-avatar {
+  display: block;
   width: 1.875rem;
   height: 1.875rem;
   border-radius: 50%;
   object-fit: cover;
-  filter: grayscale(1);
-  transition: filter 0.2s ease;
+}
+
+/* Enlarged photo revealed on hover/focus of the header avatar */
+.brand-photo { position: relative; display: inline-flex; }
+
+.brand-pop {
+  position: absolute;
+  top: calc(100% + 0.65rem);
+  left: -0.25rem;
+  width: 10.5rem;
+  padding: 0.3rem;
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  background: var(--bg-elevated);
+  box-shadow: var(--shadow);
+  opacity: 0;
+  transform: translateY(-6px) scale(0.94);
+  transform-origin: top left;
+  pointer-events: none;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  z-index: 60;
+}
+.brand-pop img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 9px;
+}
+.brand:hover .brand-pop,
+.brand:focus-visible .brand-pop {
+  opacity: 1;
+  transform: translateY(0) scale(1);
 }
 
 .site-nav {

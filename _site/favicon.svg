@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <style>
-    .ink { fill: #191817; }
-    @media (prefers-color-scheme: dark) { .ink { fill: #e9e7e3; } }
-  </style>
-  <text x="6" y="50" class="ink" font-family="Iowan Old Style, Georgia, 'Times New Roman', serif" font-size="52" font-weight="500">A</text>
-  <text x="44" y="50" fill="#0d7377" font-family="Iowan Old Style, Georgia, 'Times New Roman', serif" font-size="52" font-weight="700">.</text>
-</svg>
