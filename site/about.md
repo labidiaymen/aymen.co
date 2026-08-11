@@ -11,8 +11,6 @@ permalink: /about/
 </header>
 <div class="prose about-prose">
 
-<img class="about-photo" src="/images/profile-pic.png" alt="Labidi Aymen" width="112" height="112">
-
 I'm **Labidi Aymen** — founder of **Nuraly**, solution architect and engineering manager. A self-educated Tunisian developer who has been building for the web and starting things for over a decade.
 
 My work sits at the intersection of engineering and shipping: designing systems, leading teams, and figuring out what it actually takes to run **AI agents in production** — beyond the demo. On the side I build languages and frameworks that favor speed and minimal dependencies: [Lumen](https://github.com/lumen-lang-org/lumen), a statically typed language with TypeScript syntax that compiles to native binaries and WebAssembly, and [Sustain](https://github.com/sustainland/sustain), a framework that barely uses dependencies.

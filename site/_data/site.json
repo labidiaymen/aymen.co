@@ -11,6 +11,7 @@
   },
   "nav": [
     { "label": "Writing", "url": "/blog/" },
+    { "label": "Notes", "url": "/notes/" },
     { "label": "Projects", "url": "/projects/" },
     { "label": "About", "url": "/about/" }
   ]

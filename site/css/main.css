@@ -119,14 +119,15 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
 }
 
 .brand {
-  font-weight: 650;
-  font-size: 1rem;
+  font-family: var(--serif);
+  font-weight: 550;
+  font-size: 1.15rem;
   letter-spacing: -0.01em;
   color: var(--text);
   text-decoration: none;
 }
 .brand:hover { color: var(--text); }
-.brand-dot { color: var(--accent); }
+.brand-dot { color: var(--accent); font-weight: 700; }
 
 .site-nav {
   display: flex;
@@ -697,6 +698,37 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
 
 .post-related { margin-top: 3rem; }
 .post-related .rule-heading { margin-bottom: 0.2rem; }
+
+/* ---------- Notes ---------- */
+
+.note-stream { margin-top: 0.3rem; }
+
+.note-entry {
+  padding: 1.1rem 0;
+  border-bottom: 1px solid var(--hairline);
+}
+.note-entry:last-child { border-bottom: none; }
+
+.note-date {
+  display: inline-block;
+  margin-bottom: 0.35rem;
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.03em;
+  color: var(--text-muted);
+  text-decoration: none;
+}
+.note-date:hover { color: var(--accent); }
+
+.note-body {
+  font-size: 1.05rem;
+  line-height: 1.65;
+  max-width: 38rem;
+}
+.note-body p { margin: 0 0 0.7em; }
+.note-body p:last-child { margin-bottom: 0; }
+
+.note-single .prose { font-size: 1.14rem; }
 
 @view-transition { navigation: auto; }
 

@@ -1,0 +1,17 @@
+---
+layout: layouts/base.njk
+---
+<article class="container post note-single">
+  <header class="post-header">
+    <div class="post-meta">
+      <a class="chip" href="/notes/">Note</a>
+      <time datetime="{{ page.date | isoDate }}">{{ page.date | readableDate }}</time>
+    </div>
+  </header>
+  <div class="prose">
+    {{ content | safe }}
+  </div>
+  <nav class="post-nav" aria-label="All notes">
+    <a href="/notes/">← All notes</a>
+  </nav>
+</article>

@@ -36,6 +36,11 @@ module.exports = function (eleventyConfig) {
       .sort((a, b) => b.date - a.date)
   );
 
+  // Short notes, newest first
+  eleventyConfig.addCollection("notes", (api) =>
+    api.getFilteredByGlob("site/notes/*.md").sort((a, b) => b.date - a.date)
+  );
+
   // Map of category -> posts (newest first), used to paginate category pages
   eleventyConfig.addCollection("categoryMap", (api) => {
     const map = {};

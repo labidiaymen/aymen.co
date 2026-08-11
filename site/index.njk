@@ -48,6 +48,23 @@ layout: layouts/base.njk
 </section>
 
 <section class="container home-section">
+  <h2 class="rule-heading">Notes</h2>
+  <div class="note-stream">
+    {%- for note in collections.notes | limit(3) %}
+    <article class="note-entry">
+      <a class="note-date" href="{{ note.url }}">
+        <time datetime="{{ note.date | isoDate }}">{{ note.date | readableDate }}</time>
+      </a>
+      <div class="note-body prose">
+        {{ note.templateContent | safe }}
+      </div>
+    </article>
+    {%- endfor %}
+  </div>
+  <p class="index-more"><a href="/notes/">All notes →</a></p>
+</section>
+
+<section class="container home-section">
   <h2 class="rule-heading">Projects</h2>
   <ul class="project-index">
     {%- for post in collections.categoryMap | categoryPosts("projects") %}
