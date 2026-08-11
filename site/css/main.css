@@ -630,14 +630,33 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
 
 /* ---------- Responsive ---------- */
 
+@media (max-width: 700px) {
+  /* The avatar carries the identity; the wordmark would wrap and collide
+     with the nav at this width. */
+  .brand-name { display: none; }
+  .site-nav { gap: 0.95rem; }
+  .site-nav a { font-size: 0.85rem; }
+  .theme-toggle { width: 1.75rem; height: 1.75rem; }
+}
+
 @media (max-width: 560px) {
-  .home-intro { padding-top: 3.5rem; }
-  .intro-prose { font-size: 1.16rem; }
-  .post-row-link { flex-wrap: wrap; row-gap: 0.05rem; }
+  .home-intro { padding-top: 2rem; }
+  .intro-name { font-size: clamp(2rem, 9vw, 2.6rem); }
+  .intro-prose { font-size: 1.12rem; }
+  .intro-currently { font-size: 0.74rem; }
+  .post-row-link { flex-wrap: wrap; row-gap: 0.05rem; padding: 0.55rem 0; }
   .post-row-leader { display: none; }
   .post-row-title { width: 100%; }
-  .site-nav { gap: 1rem; }
-  .footer-inner { flex-direction: column; gap: 1rem; }
+  .post-row-meta { font-size: 0.72rem; }
+  .site-nav { gap: 0.8rem; }
+  .site-nav a { font-size: 0.8rem; }
+  .page, .post { padding-top: 2rem; }
+  .footer-inner { flex-direction: column; align-items: flex-start; gap: 1rem; }
+}
+
+/* Tap-driven :hover would leave the enlarged photo stuck open on touch. */
+@media (hover: none) {
+  .brand-pop { display: none; }
 }
 
 /* ---------- Enhancements ---------- */
