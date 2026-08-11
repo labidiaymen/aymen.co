@@ -1,0 +1,28 @@
+---
+layout: layouts/base.njk
+---
+<article class="container post">
+  <header class="post-header">
+    <div class="post-meta">
+      {%- for cat in categories %}
+      <a class="chip" href="/{{ cat }}/">{{ cat | categoryLabel }}</a>
+      {%- endfor %}
+      <time datetime="{{ page.date | isoDate }}">{{ page.date | readableDate }}</time>
+      <span class="meta-sep">·</span>
+      <span>{{ content | readingTime }} min read</span>
+    </div>
+    <h1 class="post-title">{{ title }}</h1>
+    {%- if description %}
+    <p class="post-description">{{ description }}</p>
+    {%- endif %}
+  </header>
+  {%- if cover %}
+  <img class="post-cover" src="{{ cover }}" alt="" loading="eager">
+  {%- endif %}
+  <div class="prose">
+    {{ content | safe }}
+  </div>
+  <nav class="post-nav" aria-label="More writing">
+    <a href="/blog/">← All writing</a>
+  </nav>
+</article>

@@ -1,0 +1,17 @@
+{
+  "title": "Labidi Aymen",
+  "url": "https://aymen.co",
+  "description": "Solution Architect & Dev Manager. Writing about AI agents, software architecture, and the web.",
+  "author": "Labidi Aymen",
+  "role": "Solution Architect & Dev Manager",
+  "email": "labidi@aymen.co",
+  "social": {
+    "github": "https://github.com/labidiaymen",
+    "twitter": "https://twitter.com/lababoraym"
+  },
+  "nav": [
+    { "label": "Writing", "url": "/blog/" },
+    { "label": "Projects", "url": "/projects/" },
+    { "label": "About", "url": "/about/" }
+  ]
+}

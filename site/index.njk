@@ -1,0 +1,41 @@
+---
+layout: layouts/base.njk
+---
+<section class="container hero">
+  <p class="hero-kicker">{{ site.role }}</p>
+  <h1 class="hero-title">Building software that ships,<br class="br-desktop"> and writing about how.</h1>
+  <p class="hero-lead">
+    I'm <strong>Aymen</strong> — a self-taught engineer from Tunisia. These days I think mostly about
+    <a href="/ai/">AI agents in production</a>, software architecture, and the operational side of
+    shipping code. Before that, a decade of <a href="/javascript/">JavaScript</a>, Angular, and
+    everything in between.
+  </p>
+  <div class="hero-actions">
+    <a class="button" href="/blog/">Read the blog</a>
+    <a class="button button-ghost" href="/about/">About me</a>
+  </div>
+</section>
+
+<section class="container section">
+  <div class="section-head">
+    <h2>Latest writing</h2>
+    <a class="section-more" href="/blog/">All posts →</a>
+  </div>
+  {%- set posts = collections.posts | limit(6) %}
+  {% include "post-list.njk" %}
+</section>
+
+<section class="container section">
+  <div class="section-head">
+    <h2>Projects</h2>
+    <a class="section-more" href="/projects/">All projects →</a>
+  </div>
+  <div class="card-grid">
+    {%- for post in collections.categoryMap | categoryPosts("projects") | limit(4) %}
+    <a class="card" href="{{ post.url }}">
+      <h3>{{ post.data.title }}</h3>
+      <p>{{ post.templateContent | excerpt }}</p>
+    </a>
+    {%- endfor %}
+  </div>
+</section>

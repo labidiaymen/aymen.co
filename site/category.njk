@@ -1,0 +1,20 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: collections.categoryPages
+  size: 1
+  alias: category
+permalink: "/{{ category.slug }}/"
+eleventyComputed:
+  title: "{{ category.label }}"
+  description: "Posts about {{ category.label }} by Labidi Aymen."
+---
+<section class="container page">
+  <header class="page-head">
+    <p class="hero-kicker"><a href="/blog/">Writing</a> /</p>
+    <h1>{{ category.label }}</h1>
+    <p class="page-lead">{{ category.posts.length }} post{% if category.posts.length != 1 %}s{% endif %}</p>
+  </header>
+  {%- set posts = category.posts %}
+  {% include "post-list.njk" %}
+</section>

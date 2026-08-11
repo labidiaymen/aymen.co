@@ -1,0 +1,13 @@
+<ul class="post-list">
+  {%- for post in posts %}
+  <li class="post-row">
+    <a class="post-row-link" href="{{ post.url }}">
+      <span class="post-row-title">{{ post.data.title }}</span>
+      <span class="post-row-meta">
+        {%- if post.data.categories.length %}<span class="post-row-cat">{{ post.data.categories[0] | categoryLabel }}</span>{%- endif %}
+        <time datetime="{{ post.date | isoDate }}">{{ post.date | readableDate }}</time>
+      </span>
+    </a>
+  </li>
+  {%- endfor %}
+</ul>

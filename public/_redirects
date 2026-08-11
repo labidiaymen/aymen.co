@@ -1,0 +1,3 @@
+# Old Gatsby-era paths -> new locations
+/pages/about/ /about/ 301
+/pages/about /about/ 301

@@ -1,0 +1,23 @@
+---
+layout: layouts/base.njk
+title: "Writing"
+description: "All posts — AI agents, software architecture, JavaScript, and more."
+permalink: /blog/
+---
+<section class="container page">
+  <header class="page-head">
+    <h1>Writing</h1>
+    <p class="page-lead">{{ collections.posts.length }} posts since 2015 — lately about AI agents and how software actually gets shipped.</p>
+    <div class="chip-row">
+      {%- for group in collections.categoryMap | limit(8) %}
+      <a class="chip" href="/{{ group.slug }}/">{{ group.label }} <span class="chip-count">{{ group.posts.length }}</span></a>
+      {%- endfor %}
+    </div>
+  </header>
+
+  {%- for group in collections.posts | groupByYear %}
+  <h2 class="year-heading">{{ group.year }}</h2>
+  {%- set posts = group.posts %}
+  {% include "post-list.njk" %}
+  {%- endfor %}
+</section>
