@@ -8,16 +8,20 @@ permalink: /blog/
   <header class="page-head">
     <h1>Writing</h1>
     <p class="page-lead">{{ collections.posts.length }} posts since 2015 — lately about AI agents and how software actually gets shipped.</p>
-    <div class="chip-row">
+    <p class="filter-line">Filed under
       {%- for group in collections.categoryMap | limit(8) %}
-      <a class="chip" href="/{{ group.slug }}/">{{ group.label }} <span class="chip-count">{{ group.posts.length }}</span></a>
+      <a href="/{{ group.slug }}/">{{ group.label }}</a>{% if not loop.last %} · {% endif %}
       {%- endfor %}
-    </div>
+    </p>
   </header>
 
   {%- for group in collections.posts | groupByYear %}
-  <h2 class="year-heading">{{ group.year }}</h2>
-  {%- set posts = group.posts %}
-  {% include "post-list.njk" %}
+  <div class="year-block">
+    <span class="year-label">{{ group.year }}</span>
+    <div class="year-posts">
+      {%- set posts = group.posts %}
+      {% include "post-list.njk" %}
+    </div>
+  </div>
   {%- endfor %}
 </section>

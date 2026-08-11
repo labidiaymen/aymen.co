@@ -1,41 +1,39 @@
 ---
 layout: layouts/base.njk
 ---
-<section class="container hero">
-  <p class="hero-kicker">{{ site.role }}</p>
-  <h1 class="hero-title">Building software that ships,<br class="br-desktop"> and writing about how.</h1>
-  <p class="hero-lead">
-    I'm <strong>Aymen</strong> — a self-taught engineer from Tunisia. These days I think mostly about
-    <a href="/ai/">AI agents in production</a>, software architecture, and the operational side of
-    shipping code. Before that, a decade of <a href="/javascript/">JavaScript</a>, Angular, and
-    everything in between.
-  </p>
-  <div class="hero-actions">
-    <a class="button" href="/blog/">Read the blog</a>
-    <a class="button button-ghost" href="/about/">About me</a>
+<section class="container home-intro">
+  <h1 class="intro-name">Labidi Aymen</h1>
+  <p class="intro-role">Solution architect &amp; dev manager — Tunisia</p>
+  <div class="intro-prose">
+    <p>
+      I'm a self-taught engineer who has been building for the web since 2015 —
+      through the Angular years, the JavaScript fatigue era, and a string of
+      products for the Tunisian market. These days most of my time goes to
+      running <a href="/ai/">AI&nbsp;agents in production</a> and writing here
+      about what that actually takes, beyond the demo.
+    </p>
+    <p>
+      The archive below goes back a decade. I've kept all of it — the old
+      posts are a record of how we got here.
+    </p>
   </div>
 </section>
 
-<section class="container section">
-  <div class="section-head">
-    <h2>Latest writing</h2>
-    <a class="section-more" href="/blog/">All posts →</a>
-  </div>
-  {%- set posts = collections.posts | limit(6) %}
+<section class="container home-section">
+  <h2 class="rule-heading">Writing</h2>
+  {%- set posts = collections.posts | limit(10) %}
   {% include "post-list.njk" %}
+  <p class="index-more"><a href="/blog/">Full index — {{ collections.posts.length }} posts →</a></p>
 </section>
 
-<section class="container section">
-  <div class="section-head">
-    <h2>Projects</h2>
-    <a class="section-more" href="/projects/">All projects →</a>
-  </div>
-  <div class="card-grid">
-    {%- for post in collections.categoryMap | categoryPosts("projects") | limit(4) %}
-    <a class="card" href="{{ post.url }}">
-      <h3>{{ post.data.title }}</h3>
-      <p>{{ post.templateContent | excerpt }}</p>
-    </a>
+<section class="container home-section">
+  <h2 class="rule-heading">Projects</h2>
+  <ul class="project-index">
+    {%- for post in collections.categoryMap | categoryPosts("projects") %}
+    <li>
+      <a href="{{ post.url }}">{{ post.data.title }}</a>
+      <span class="project-desc">{{ post.templateContent | excerpt | truncate(90) }}</span>
+    </li>
     {%- endfor %}
-  </div>
+  </ul>
 </section>

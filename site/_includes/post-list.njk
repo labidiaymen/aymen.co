@@ -3,9 +3,9 @@
   <li class="post-row">
     <a class="post-row-link" href="{{ post.url }}">
       <span class="post-row-title">{{ post.data.title }}</span>
+      <span class="post-row-leader" aria-hidden="true"></span>
       <span class="post-row-meta">
-        {%- if post.data.categories.length %}<span class="post-row-cat">{{ post.data.categories[0] | categoryLabel }}</span>{%- endif %}
-        <time datetime="{{ post.date | isoDate }}">{{ post.date | readableDate }}</time>
+        {%- if post.data.categories.length %}<span class="post-row-cat">{{ post.data.categories[0] | categoryLabel }}</span> · {% endif %}{{ post.date | readableDate }}
       </span>
     </a>
   </li>
