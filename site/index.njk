@@ -45,6 +45,7 @@ layout: layouts/base.njk
   <p class="index-more"><a href="/blog/">Full index, {{ collections.posts.length }} posts →</a></p>
 </section>
 
+{%- if collections.notes.length %}
 <section class="container home-section">
   <h2 class="rule-heading">Notes</h2>
   <div class="note-stream">
@@ -61,6 +62,7 @@ layout: layouts/base.njk
   </div>
   <p class="index-more"><a href="/notes/">All notes →</a></p>
 </section>
+{%- endif %}
 
 <section class="container home-section">
   <h2 class="rule-heading">Projects</h2>

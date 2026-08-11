@@ -9,6 +9,9 @@ permalink: /notes/
     <h1>Notes</h1>
     <p class="page-lead">Short posts between the essays: releases, findings, opinions. The longer thinking lives in the <a href="/blog/">writing</a>.</p>
   </header>
+  {%- if not collections.notes.length %}
+  <p class="page-lead">Nothing here yet.</p>
+  {%- endif %}
   <div class="note-stream">
     {%- for note in collections.notes %}
     <article class="note-entry">
