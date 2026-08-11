@@ -1,5 +1,7 @@
 {
-  "name": "aymen-co",
+  // Must match the Worker name in the Cloudflare dashboard, otherwise a
+  // deploy creates a second Worker instead of updating the existing one.
+  "name": "aymen-blog",
   "compatibility_date": "2026-08-01",
   "assets": {
     // Eleventy's build output. `_headers` and `_redirects` inside it are
