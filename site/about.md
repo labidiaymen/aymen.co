@@ -1,7 +1,7 @@
 ---
 layout: layouts/base.njk
 title: "About"
-description: "About Labidi Aymen, founder of Nuraly and solution architect."
+description: "About Labidi Aymen, founder of Nuraly and Architect & Engineering Manager at Inetum."
 permalink: /about/
 ---
 
@@ -13,9 +13,9 @@ permalink: /about/
 
 <img class="about-photo" src="/images/avatar.jpg" alt="Labidi Aymen" width="128" height="128">
 
-I'm **Labidi Aymen**, founder of **Nuraly**, solution architect and engineering manager. A self-educated Tunisian developer who has been building for the web and starting things for over a decade.
+I'm **Labidi Aymen**, founder of **Nuraly** and Architect & Engineering Manager at **Inetum**, where I lead a team of 20. A self-educated Tunisian developer who has been building for the web and starting things for over a decade.
 
-My work sits at the intersection of engineering and shipping: designing systems, leading teams, and figuring out what it actually takes to run **AI agents in production**, beyond the demo. On the side I build languages and frameworks that favor speed and minimal dependencies: [Lumen](https://github.com/lumen-lang-org/lumen), a statically typed language with TypeScript syntax that compiles to native binaries and WebAssembly, and [Sustain](https://github.com/sustainland/sustain), a framework that barely uses dependencies.
+My work sits at the intersection of engineering and shipping: designing systems, leading a team of 20 engineers, and figuring out what it actually takes to run **AI agents in production**, beyond the demo. On the side I build languages and frameworks that favor speed and minimal dependencies: [Lumen](https://github.com/lumen-lang-org/lumen), a statically typed language with TypeScript syntax that compiles to native binaries and WebAssembly, and [Sustain](https://github.com/sustainland/sustain), a framework that barely uses dependencies.
 
 I believe the web in Tunisia (and everywhere) deserves more innovation, and I try to contribute to that through the products I build, the [writing I publish](/blog/), and the events and trainings I've run for the local developer community.
 
