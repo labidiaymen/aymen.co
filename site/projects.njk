@@ -1,7 +1,7 @@
 ---
 layout: layouts/base.njk
 title: "Projects"
-description: "Products and projects built by Labidi Aymen."
+description: "What Labidi Aymen is building now, and the products that came before."
 permalink: /projects/
 ---
 <section class="page-title">
@@ -10,20 +10,46 @@ permalink: /projects/
   </div>
   <div class="spec-row">
     <div class="container filter-cols">
-      <span>Shipped products</span>
+      <span>Now building · Earlier products</span>
       <span>More on <a href="{{ site.social.github }}" rel="noopener" target="_blank">GitHub ↗</a></span>
     </div>
   </div>
 </section>
 
-<section class="container">
-  <ul class="project-sheet">
-    {%- for post in collections.categoryMap | categoryPosts("projects") %}
-    <li class="project-cell">
-      <span class="index-num">P{{ loop.index }}</span>
-      <h2><a href="{{ post.url }}">{{ post.data.title }}</a></h2>
-      <p>{{ post.templateContent | excerpt }}</p>
-    </li>
-    {%- endfor %}
-  </ul>
+<section class="block">
+  <div class="container block-label">
+    <h2>Now building</h2>
+    <span class="block-label-side">Languages · Frameworks · Agents</span>
+  </div>
+  <div class="container">
+    <ul class="project-sheet">
+      {%- for item in building %}
+      <li class="project-cell">
+        <span class="index-num">{{ item.role | upper }}</span>
+        <h2><a href="{{ item.url }}"{% if item.external %} rel="noopener" target="_blank"{% endif %}>{{ item.name }}{% if item.external %} ↗{% endif %}</a></h2>
+        <p>{{ item.desc }}</p>
+      </li>
+      {%- endfor %}
+    </ul>
+  </div>
+</section>
+
+<section class="block">
+  <div class="container block-label">
+    <h2>Earlier products</h2>
+    <span class="block-label-side">2015—2016</span>
+  </div>
+  <div class="container">
+    <ul class="project-sheet">
+      {%- for post in collections.categoryMap | categoryPosts("projects") %}
+      <li class="project-cell">
+        {%- if post.data.cover %}
+        <a href="{{ post.url }}"><img class="project-cover" src="{{ post.data.cover }}" alt="" loading="lazy"></a>
+        {%- endif %}
+        <h2><a href="{{ post.url }}">{{ post.data.title }}</a></h2>
+        <p>{{ post.templateContent | excerpt }}</p>
+      </li>
+      {%- endfor %}
+    </ul>
+  </div>
 </section>

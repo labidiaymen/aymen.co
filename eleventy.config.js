@@ -106,6 +106,10 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addFilter("limit", (arr, n) => (arr || []).slice(0, n));
 
+  eleventyConfig.addFilter("skipFirst", (arr) => (arr || []).slice(1));
+
+  eleventyConfig.addFilter("first", (arr) => (arr || [])[0]);
+
   eleventyConfig.addFilter("groupByYear", (posts) => {
     const groups = [];
     for (const post of posts || []) {
@@ -126,6 +130,8 @@ module.exports = function (eleventyConfig) {
       .replace(/&lt;/g, "<")
       .replace(/&gt;/g, ">")
       .replace(/&nbsp;/g, " ")
+      .replace(/\[[^\]]*\]/g, " ")
+      .replace(/https?:\/\/\S+/g, " ")
       .replace(/\s+/g, " ")
       .trim();
     return text.length > 180 ? text.slice(0, 177).trimEnd() + "…" : text;
