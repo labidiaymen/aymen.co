@@ -101,6 +101,8 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addFilter("limit", (arr, n) => (arr || []).slice(0, n));
 
+  eleventyConfig.addFilter("skipFirst", (arr) => (arr || []).slice(1));
+
   eleventyConfig.addFilter("groupByYear", (posts) => {
     const groups = [];
     for (const post of posts || []) {
@@ -133,6 +135,32 @@ module.exports = function (eleventyConfig) {
   );
 
   eleventyConfig.addFilter("rssDate", (date) => new Date(date).toUTCString());
+
+  // Older/newer neighbours of a post within the newest-first posts collection
+  eleventyConfig.addFilter("adjacent", (posts, url) => {
+    const i = (posts || []).findIndex((p) => p.url === url);
+    if (i === -1) return { older: null, newer: null };
+    return { older: posts[i + 1] || null, newer: posts[i - 1] || null };
+  });
+
+  // Up to n other posts sharing the primary category
+  eleventyConfig.addFilter("related", (posts, url, categories, n = 3) => {
+    const primary = (categories || [])[0];
+    if (!primary) return [];
+    return (posts || [])
+      .filter((p) => p.url !== url && (p.data.categories || []).includes(primary))
+      .slice(0, n);
+  });
+
+  // Markdown-syntax images load lazily (raw HTML in old posts is untouched)
+  eleventyConfig.amendLibrary("md", (md) => {
+    const orig = md.renderer.rules.image;
+    md.renderer.rules.image = (tokens, idx, options, env, self) => {
+      tokens[idx].attrSet("loading", "lazy");
+      tokens[idx].attrSet("decoding", "async");
+      return orig(tokens, idx, options, env, self);
+    };
+  });
 
   eleventyConfig.addShortcode("year", () => String(new Date().getFullYear()));
 

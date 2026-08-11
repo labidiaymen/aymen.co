@@ -22,7 +22,46 @@ layout: layouts/base.njk
   <div class="prose">
     {{ content | safe }}
   </div>
-  <nav class="post-nav" aria-label="More writing">
-    <a href="/blog/">← All writing</a>
+
+  {%- set neighbours = collections.posts | adjacent(page.url) %}
+  <nav class="post-pagination" aria-label="Adjacent posts">
+    {%- if neighbours.older %}
+    <a class="pag-older" href="{{ neighbours.older.url }}">
+      <span class="pag-label">← Older</span>
+      <span class="pag-title">{{ neighbours.older.data.title }}</span>
+    </a>
+    {%- else %}<span></span>{%- endif %}
+    {%- if neighbours.newer %}
+    <a class="pag-newer" href="{{ neighbours.newer.url }}">
+      <span class="pag-label">Newer →</span>
+      <span class="pag-title">{{ neighbours.newer.data.title }}</span>
+    </a>
+    {%- endif %}
   </nav>
+
+  {%- set relatedPosts = collections.posts | related(page.url, categories) %}
+  {%- if relatedPosts.length %}
+  <aside class="post-related">
+    <h2 class="rule-heading">More in {{ categories[0] | categoryLabel }}</h2>
+    {%- set posts = relatedPosts %}
+    {% include "post-list.njk" %}
+  </aside>
+  {%- endif %}
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": {{ title | dump | safe }},
+    "datePublished": "{{ page.date | isoDate }}",
+    "url": "{{ page.url | absoluteUrl(site.url) }}",
+    {%- if description %}
+    "description": {{ description | dump | safe }},
+    {%- endif %}
+    {%- if cover %}
+    "image": "{{ cover | absoluteUrl(site.url) }}",
+    {%- endif %}
+    "author": { "@type": "Person", "name": "{{ site.author }}", "url": "{{ site.url }}/about/" }
+  }
+  </script>
 </article>
