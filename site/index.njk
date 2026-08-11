@@ -1,39 +1,56 @@
 ---
 layout: layouts/base.njk
 ---
-<section class="container home-intro">
-  <h1 class="intro-name">Labidi Aymen</h1>
-  <p class="intro-role">Solution architect &amp; dev manager — Tunisia</p>
-  <div class="intro-prose">
-    <p>
-      I'm a self-taught engineer who has been building for the web since 2015 —
-      through the Angular years, the JavaScript fatigue era, and a string of
-      products for the Tunisian market. These days most of my time goes to
-      running <a href="/ai/">AI&nbsp;agents in production</a> and writing here
-      about what that actually takes, beyond the demo.
-    </p>
-    <p>
-      The archive below goes back a decade. I've kept all of it — the old
-      posts are a record of how we got here.
-    </p>
+<section class="masthead">
+  <div class="container">
+    <h1 class="masthead-name">Labidi<br>Aymen</h1>
+  </div>
+  <div class="spec-row" role="presentation">
+    <div class="container spec-cols">
+      <span>Solution architect<br>&amp; dev manager</span>
+      <span>Tunisia<br>Since 2015</span>
+      <span>AI agents · Web<br>Operations</span>
+      <span class="spec-count">{{ collections.posts.length }} posts<br>2015—{% year %}</span>
+    </div>
   </div>
 </section>
 
-<section class="container home-section">
-  <h2 class="rule-heading">Writing</h2>
-  {%- set posts = collections.posts | limit(10) %}
-  {% include "post-list.njk" %}
-  <p class="index-more"><a href="/blog/">Full index — {{ collections.posts.length }} posts →</a></p>
+<section class="container intro-block">
+  <p>
+    Self-taught engineer. A decade of JavaScript, Angular and products for the
+    Tunisian market — now mostly occupied with running
+    <a href="/ai/">AI&nbsp;agents in production</a> and writing down what that
+    actually takes, beyond the demo.
+  </p>
 </section>
 
-<section class="container home-section">
-  <h2 class="rule-heading">Projects</h2>
-  <ul class="project-index">
-    {%- for post in collections.categoryMap | categoryPosts("projects") %}
-    <li>
-      <a href="{{ post.url }}">{{ post.data.title }}</a>
-      <span class="project-desc">{{ post.templateContent | excerpt | truncate(90) }}</span>
-    </li>
-    {%- endfor %}
-  </ul>
+<section class="block">
+  <div class="container block-label">
+    <h2>Writing</h2>
+    <a href="/blog/">Full index ↗</a>
+  </div>
+  <div class="container">
+    {%- set posts = collections.posts | limit(8) %}
+    {% include "post-list.njk" %}
+  </div>
+</section>
+
+<section class="block">
+  <div class="container block-label">
+    <h2>Projects</h2>
+    <a href="/projects/">All ↗</a>
+  </div>
+  <div class="container">
+    <ul class="index-table">
+      {%- for post in collections.categoryMap | categoryPosts("projects") %}
+      <li>
+        <a class="index-row" href="{{ post.url }}">
+          <span class="index-num">P{{ loop.index }}</span>
+          <span class="index-title">{{ post.data.title }}</span>
+          <span class="index-desc">{{ post.templateContent | excerpt | truncate(70) }}</span>
+        </a>
+      </li>
+      {%- endfor %}
+    </ul>
+  </div>
 </section>

@@ -4,14 +4,23 @@ title: "Projects"
 description: "Products and projects built by Labidi Aymen."
 permalink: /projects/
 ---
-<section class="container page">
-  <header class="page-head">
+<section class="page-title">
+  <div class="container">
     <h1>Projects</h1>
-    <p class="page-lead">Products I've built or helped build — plus plenty of open source on <a href="{{ site.social.github }}" rel="noopener" target="_blank">GitHub</a>.</p>
-  </header>
-  <ul class="project-entries">
+  </div>
+  <div class="spec-row">
+    <div class="container filter-cols">
+      <span>Shipped products</span>
+      <span>More on <a href="{{ site.social.github }}" rel="noopener" target="_blank">GitHub ↗</a></span>
+    </div>
+  </div>
+</section>
+
+<section class="container">
+  <ul class="project-sheet">
     {%- for post in collections.categoryMap | categoryPosts("projects") %}
-    <li class="project-entry">
+    <li class="project-cell">
+      <span class="index-num">P{{ loop.index }}</span>
       <h2><a href="{{ post.url }}">{{ post.data.title }}</a></h2>
       <p>{{ post.templateContent | excerpt }}</p>
     </li>

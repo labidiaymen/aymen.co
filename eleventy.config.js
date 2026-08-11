@@ -29,12 +29,17 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ public: "/" });
   eleventyConfig.addPassthroughCopy({ "site/css": "css" });
 
-  // All posts, newest first
-  eleventyConfig.addCollection("posts", (api) =>
-    api
+  // All posts, newest first. Each post gets an archive number: 001 is the
+  // oldest post, so the newest carries the highest number.
+  eleventyConfig.addCollection("posts", (api) => {
+    const posts = api
       .getFilteredByGlob("site/posts/*.md")
-      .sort((a, b) => b.date - a.date)
-  );
+      .sort((a, b) => a.date - b.date);
+    posts.forEach((post, i) => {
+      post.data.num = String(i + 1).padStart(3, "0");
+    });
+    return posts.reverse();
+  });
 
   // Map of category -> posts (newest first), used to paginate category pages
   eleventyConfig.addCollection("categoryMap", (api) => {

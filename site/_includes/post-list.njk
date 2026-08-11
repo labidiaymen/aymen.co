@@ -1,12 +1,11 @@
-<ul class="post-list">
+<ul class="index-table">
   {%- for post in posts %}
-  <li class="post-row">
-    <a class="post-row-link" href="{{ post.url }}">
-      <span class="post-row-title">{{ post.data.title }}</span>
-      <span class="post-row-leader" aria-hidden="true"></span>
-      <span class="post-row-meta">
-        {%- if post.data.categories.length %}<span class="post-row-cat">{{ post.data.categories[0] | categoryLabel }}</span> · {% endif %}{{ post.date | readableDate }}
-      </span>
+  <li>
+    <a class="index-row" href="{{ post.url }}">
+      <span class="index-num">{{ post.data.num }}</span>
+      <span class="index-title">{{ post.data.title }}</span>
+      <span class="index-cat">{% if post.data.categories.length %}{{ post.data.categories[0] | categoryLabel }}{% endif %}</span>
+      <time class="index-date" datetime="{{ post.date | isoDate }}">{{ post.date | readableDate }}</time>
     </a>
   </li>
   {%- endfor %}

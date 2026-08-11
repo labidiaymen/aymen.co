@@ -5,10 +5,19 @@ description: "About Labidi Aymen — Solution Architect & Dev Manager."
 permalink: /about/
 ---
 
-<section class="container page">
-<header class="page-head">
+<section class="page-title">
+<div class="container">
 <h1>About</h1>
-</header>
+</div>
+<div class="spec-row">
+<div class="container filter-cols">
+<span>Labidi Aymen</span>
+<span>Tunisia</span>
+</div>
+</div>
+</section>
+
+<section class="container post-body">
 <div class="prose about-prose">
 
 <img class="about-photo" src="/images/profile-pic.png" alt="Labidi Aymen" width="112" height="112">
