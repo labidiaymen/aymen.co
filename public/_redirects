@@ -5,3 +5,6 @@
 # Lumen articles moved out of the javascript category
 /javascript/lumen-write-typescript-compile-to-a-native-binary/ /lumen/lumen-write-typescript-compile-to-a-native-binary/ 301
 /javascript/lumenjs-a-framework-designed-for-coding-agents/ /lumen/lumenjs-a-framework-designed-for-coding-agents/ 301
+
+# Retired 2015 "Hire me" page
+/general/get-in-touch/ /about/ 301
