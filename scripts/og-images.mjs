@@ -1,5 +1,5 @@
-// Renders a share card per note and per post that has no cover image, so a
-// link pasted into LinkedIn or X shows its own text rather than a generic card.
+// Renders a share card per note, so a note pasted into LinkedIn or X shows its
+// own text. Posts use their own cover image instead.
 // Runs after Eleventy; the templates point at /og/<slug>.png.
 import { readFileSync, readdirSync, mkdirSync, existsSync, writeFileSync } from "node:fs";
 import { join, basename } from "node:path";
@@ -142,21 +142,6 @@ for (const file of readDir("site/notes")) {
       kicker: title ? `Note · ${title}` : "Note",
       headline: truncate(plain(rest), 240),
       footnote: monthYear(data.date),
-    },
-    join(OUT_DIR, `${slug}.png`)
-  );
-  made++;
-}
-
-for (const file of readDir("site/posts")) {
-  const slug = basename(file, ".md");
-  const { data, body } = frontmatter(readFileSync(join("site/posts", file), "utf8"));
-  if (data.cover) continue; // the post already has its own image
-  await render(
-    {
-      kicker: (data.categories || "").replace(/[[\]"]/g, "").split(",")[0].trim() || "Writing",
-      headline: data.title || slug,
-      footnote: data.description ? truncate(plain(data.description), 70) : monthYear(data.date),
     },
     join(OUT_DIR, `${slug}.png`)
   );
