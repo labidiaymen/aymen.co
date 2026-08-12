@@ -45,22 +45,17 @@ layout: layouts/base.njk
 {%- if collections.notes.length %}
 <section class="container home-section">
   <h2 class="rule-heading">Notes</h2>
-  <div class="note-stream">
-    {%- for note in collections.notes | limit(3) %}
-    <article class="note-entry">
-      <a class="note-date" href="{{ note.url }}">
-        <time datetime="{{ note.date | isoDate }}">{{ note.date | readableDate }}</time>
+  <ul class="post-list">
+    {%- for note in collections.notes | limit(4) %}
+    <li class="post-row">
+      <a class="post-row-link" href="{{ note.url }}">
+        <span class="post-row-title">{{ note.data.title }}</span>
+        <span class="post-row-leader" aria-hidden="true"></span>
+        <span class="post-row-meta">{{ note.date | readableDate }}</span>
       </a>
-      <h3 class="note-heading"><a href="{{ note.url }}">{{ note.data.title }}</a></h3>
-      <div class="note-body prose">
-        {{ note.templateContent | noteTeaser | safe }}
-        {%- if note.templateContent | isLongNote %}
-        <p class="note-more"><a href="{{ note.url }}">Read the note →</a></p>
-        {%- endif %}
-      </div>
-    </article>
+    </li>
     {%- endfor %}
-  </div>
+  </ul>
   <p class="index-more"><a href="/notes/">All notes →</a></p>
 </section>
 {%- endif %}
