@@ -1,11 +1,9 @@
 ---
-title: "Quit social networks"
 date: 2015-08-05
-categories: ["thoughts"]
-cover: "/images/social-networking.jpg"
-permalink: "/thoughts/quit-social-networks/"
+permalink: "/notes/quit-social-networks/"
 ---
 
+**Quit social networks**
 The social network is a wealth for those who know how to exploit it. I used to collect information and follow the news about technologies. I had fun sharing some of them. But lastly, what did I get?
 
 Certainly, a mind full of information but a mind that can’t focus on one thing.

@@ -868,3 +868,21 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
 }
 
 .prose h2, .prose h3 { scroll-margin-top: 5rem; }
+
+.post-toc a.is-current {
+  color: var(--text);
+  text-decoration: none;
+}
+.post-toc li { position: relative; }
+.post-toc a.is-current::after {
+  content: "";
+  position: absolute;
+  top: 0.45em;
+  right: -1.2rem;
+  width: 3px;
+  height: 0.85em;
+  background: var(--accent);
+}
+@media (max-width: 1179px) {
+  .post-toc a.is-current::after { right: auto; left: -1.25rem; }
+}

@@ -29,6 +29,43 @@ layout: layouts/base.njk
       {%- endfor %}
     </ol>
   </nav>
+  <script>
+    // Marks the section you are currently reading in the contents list.
+    // Deferred: the headings this looks up are parsed after this script.
+    document.addEventListener("DOMContentLoaded", function () {
+      var pairs = [];
+      document.querySelectorAll(".post-toc a").forEach(function (link) {
+        var target = document.getElementById(decodeURIComponent(link.hash.slice(1)));
+        if (target) pairs.push({ link: link, target: target });
+      });
+      if (!pairs.length) return;
+
+      var pending = false;
+      function update() {
+        pending = false;
+        var line = window.scrollY + 140;
+        var current = 0;
+        for (var i = 0; i < pairs.length; i++) {
+          if (pairs[i].target.getBoundingClientRect().top + window.scrollY <= line) current = i;
+        }
+        // At the very bottom the last section is the one being read.
+        if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 60) {
+          current = pairs.length - 1;
+        }
+        pairs.forEach(function (pair, i) {
+          pair.link.classList.toggle("is-current", i === current);
+          if (i === current) pair.link.setAttribute("aria-current", "true");
+          else pair.link.removeAttribute("aria-current");
+        });
+      }
+
+      addEventListener("scroll", function () {
+        if (!pending) { pending = true; requestAnimationFrame(update); }
+      }, { passive: true });
+      addEventListener("resize", update);
+      update();
+    });
+  </script>
   {%- endif %}
   <div class="prose" data-pagefind-body>
     {{ content | safe }}

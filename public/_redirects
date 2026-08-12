@@ -8,3 +8,13 @@
 
 # Retired 2015 "Hire me" page
 /general/get-in-touch/ /about/ 301
+
+# Retired pages and thoughts moved to notes
+/inscription/formation-mean-stack/ /blog/ 301
+/inscription/formation-react-native/ /blog/ 301
+/general/formation-complete-javascript/ /blog/ 301
+/general/jobs/ /about/ 301
+/general/aymen-intro/ /about/ 301
+/thoughts/be-patient/ /notes/be-patient/ 301
+/thoughts/changing-the-world/ /notes/changing-the-world/ 301
+/thoughts/quit-social-networks/ /notes/quit-social-networks/ 301
