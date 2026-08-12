@@ -131,6 +131,7 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
   letter-spacing: -0.01em;
   color: var(--text);
   text-decoration: none;
+  cursor: pointer;
 }
 .brand:hover { color: var(--text); }
 .brand-dot { color: var(--accent); font-weight: 700; }
@@ -153,7 +154,7 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
   width: 10.5rem;
   padding: 0.3rem;
   border: 1px solid var(--hairline);
-  border-radius: 12px;
+  border-radius: 50%;
   background: var(--bg-elevated);
   box-shadow: var(--shadow);
   opacity: 0;
@@ -167,12 +168,16 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
   display: block;
   width: 100%;
   height: auto;
-  border-radius: 9px;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 50%;
 }
 .brand:hover .brand-pop,
 .brand:focus-visible .brand-pop {
   opacity: 1;
   transform: translateY(0) scale(1);
+  /* Part of the same link once visible, so it takes the pointer cursor too. */
+  pointer-events: auto;
 }
 
 .site-nav {
