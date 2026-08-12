@@ -27,4 +27,4 @@ The stack i use is , Angular, NativeScript, Node.js and MongoDB, wich Stack do y
 
 ## Did you know D-DAY ? I will talk about NativeScript in this Meetup
 
-[![](/images/d-day2.png)](https://aymen.co/events/d-day-developers-day-1/)
+[![D-Day event announcement](/images/d-day2.png)](https://aymen.co/events/d-day-developers-day-1/)

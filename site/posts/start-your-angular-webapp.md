@@ -35,6 +35,7 @@ Find more about TypeScript : [What is Typescript ? it’s worth learning ?](ht
 
 First let's create our **index.html** to host the App:
 
+```html
 <!doctype html>
 <html>
 <head>
@@ -43,15 +44,18 @@ First let's create our **index.html** to host the App:
 <body>
 </body>
 </html>
+```
 
  
 
 Then we need to include the libraries, add the following inside your:
 
-<script src="node\_modules/core-js/client/shim.min.js"></script>
-<script src="node\_modules/zone.js/dist/zone.js"></script>
-<script src="node\_modules/reflect-metadata/Reflect.js"></script>
-<script src="node\_modules/systemjs/dist/system.src.js"></script>
+```html
+<script src="node_modules/core-js/client/shim.min.js"></script>
+<script src="node_modules/zone.js/dist/zone.js"></script>
+<script src="node_modules/reflect-metadata/Reflect.js"></script>
+<script src="node_modules/systemjs/dist/system.src.js"></script>
+```
 
 we’re loading these .js files directly from node\_modules directory (where Node.js install packages), so we need to install them.
 
@@ -59,42 +63,46 @@ npm install core-js zone.js reflect-metadata systemjs
 
 Our index.html should look like :
 
+```html
 <!doctype html>
 <html>
 <head>
 	<title>Our first Angular App</title>
-	<script src="node\_modules/core-js/client/shim.min.js"></script>
-	<script src="node\_modules/zone.js/dist/zone.js"></script>
-	<script src="node\_modules/reflect-metadata/Reflect.js"></script>
-	<script src="node\_modules/systemjs/dist/system.src.js"></script>
+	<script src="node_modules/core-js/client/shim.min.js"></script>
+	<script src="node_modules/zone.js/dist/zone.js"></script>
+	<script src="node_modules/reflect-metadata/Reflect.js"></script>
+	<script src="node_modules/systemjs/dist/system.src.js"></script>
 </head>
 <body>
 </body>
 </html>
+```
 
 Now we need to define our Angular app, so let's create a file called app.ts ( .ts for TypeScript files)
 
+```ts
 import { NgModule, Component} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
 
  @Component({
  selector: 'hello-angular',
- template: \`
+ template: `
  <div> Hello Angular developers</div>
- \`
+ `
  })
  class HelloAngular {
  }
 
  @NgModule({
- declarations: \[ HelloAngular \],
- imports: \[ BrowserModule \],
- bootstrap: \[ HelloAngular \],
+ declarations: [ HelloAngular ],
+ imports: [ BrowserModule ],
+ bootstrap: [ HelloAngular ],
  })
  class HelloAngularAppModule {}
 
  platformBrowserDynamic().bootstrapModule(HelloAngularAppModule);
+```
 
 Wow what was that ?
 
@@ -127,9 +135,11 @@ A Component annotation ? What is going on here?
 
 If you’ve been programming in JavaScript for a while then this next statement might seem a little weird:
 
+```ts
 @Component({
  ...
 })
+```
 
 If you have a Java background it may look familiar to you: they are **annotations**.
 
@@ -137,20 +147,26 @@ Think of **annotations** as metadata added to your code. When we use **@Componen
 
 To do that we configure the **@Component** and specify the selector as hello-angular.
 
+```ts
 @Component({
  selector: 'hello-angular'
 })
+```
 
 Each component has a template, and we can add a template to our @Component by passing the _template_ option like :
 
+```ts
 @Component({
 	selector: 'hello-angular',
-	template: \`
+	template: `
 	<div>
+```
 	Hello Angular developers
+```html
 	</div>
-	\`
+	`
 })
+```
 
 > Notice that we’re defining our template string between backticks (\` … \`). This is a new  feature of ES6 that allows us to do multiline strings.
 
@@ -161,14 +177,15 @@ To run our application, we need to do two things:
 - we need to tell our HTML document to import our app file
 -  we need to use our <hello-angular> component
 
+```html
 <!doctype html>
 <html>
 <head>
 <title>Our first Angular App</title>
-<script src="node\_modules/core-js/client/shim.min.js"></script>
-<script src="node\_modules/zone.js/dist/zone.js"></script>
-<script src="node\_modules/reflect-metadata/Reflect.js"></script>
-<script src="node\_modules/systemjs/dist/system.src.js"></script>
+<script src="node_modules/core-js/client/shim.min.js"></script>
+<script src="node_modules/zone.js/dist/zone.js"></script>
+<script src="node_modules/reflect-metadata/Reflect.js"></script>
+<script src="node_modules/systemjs/dist/system.src.js"></script>
  </head>
  <body>
  <script>
@@ -180,6 +197,7 @@ To run our application, we need to do two things:
 
  </body>
  </html>
+```
 
 Since our application is written in TypeScript, we used a file called **app.ts**. The next step is to **compile** it to JavaScript, so that the browser can understand it.
 
@@ -211,10 +229,11 @@ tsc app.ts
 
 Also we need to add SystemJS config file (don't worry about this file)
 
+```ts
 System.config({
         paths: {
             // paths serve as alias
-            'npm:': 'node\_modules/'
+            'npm:': 'node_modules/'
         },
         // map tells the System loader where to look for things
         map: {
@@ -228,7 +247,7 @@ System.config({
             '@angular/router': 'npm:@angular/router/bundles/router.umd.js',
             '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js',
             // other libraries
-            rxjs: 'node\_modules/rxjs'
+            rxjs: 'node_modules/rxjs'
         },
         packages: { 
              rxjs: { defaultExtension: 'js' },       
@@ -238,17 +257,19 @@ System.config({
           }
         }
       });
+```
 
 Now add the systemjsconfig.js file to our index.html
 
+```html
 <!doctype html>
 <html>
 <head>
 <title>Our first Angular App</title>
-<script src="node\_modules/core-js/client/shim.min.js"></script>
-<script src="node\_modules/zone.js/dist/zone.js"></script>
-<script src="node\_modules/reflect-metadata/Reflect.js"></script>
-<script src="node\_modules/systemjs/dist/system.src.js"></script>
+<script src="node_modules/core-js/client/shim.min.js"></script>
+<script src="node_modules/zone.js/dist/zone.js"></script>
+<script src="node_modules/reflect-metadata/Reflect.js"></script>
+<script src="node_modules/systemjs/dist/system.src.js"></script>
  </head>
  <body>
 <script src="resources/systemjsconfig.js" > </script>
@@ -262,6 +283,7 @@ Now add the systemjsconfig.js file to our index.html
 
  </body>
  </html>
+```
 
 Last things we need to install angular modules and a webserver
 

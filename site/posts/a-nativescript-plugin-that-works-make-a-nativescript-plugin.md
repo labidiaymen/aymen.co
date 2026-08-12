@@ -49,11 +49,11 @@ Here's the final product and to know more about the module or to check to demo g
 
  
 
-![](https://user-images.githubusercontent.com/3775924/35034560-e0519724-fb6e-11e7-857c-0caaa6499d6a.gif)
+![The plugin running in a NativeScript app](https://user-images.githubusercontent.com/3775924/35034560-e0519724-fb6e-11e7-857c-0caaa6499d6a.gif)
 
 This package is hosted on npmjs.com
 
-![](https://badge.fury.io/js/nativescript-google-places-autocomplete.svg)
+![npm version badge](https://badge.fury.io/js/nativescript-google-places-autocomplete.svg)
 
 [https://www.npmjs.com/package/nativescript-google-places-autocomplete](https://www.npmjs.com/package/nativescript-google-places-autocomplete)
 

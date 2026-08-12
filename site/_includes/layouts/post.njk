@@ -17,9 +17,20 @@ layout: layouts/base.njk
     {%- endif %}
   </header>
   {%- if cover %}
-  <img class="post-cover" src="{{ cover }}" alt="" loading="eager">
+  <img class="post-cover" src="{{ cover }}" alt="{{ title }}" loading="eager">
   {%- endif %}
-  <div class="prose">
+  {%- set toc = content | headings %}
+  {%- if toc.length >= 4 %}
+  <nav class="post-toc" aria-label="On this page">
+    <p class="toc-label">On this page</p>
+    <ol>
+      {%- for h in toc %}
+      <li class="toc-h{{ h.level }}"><a href="#{{ h.id }}">{{ h.text }}</a></li>
+      {%- endfor %}
+    </ol>
+  </nav>
+  {%- endif %}
+  <div class="prose" data-pagefind-body>
     {{ content | safe }}
   </div>
 

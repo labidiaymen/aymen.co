@@ -68,6 +68,16 @@ async function optimizeImages(content) {
   return out;
 }
 
+function slugifyHeading(text) {
+  return text
+    .toLowerCase()
+    .replace(/&[a-z]+;/g, "")
+    .replace(/[^\w\s-]/g, "")
+    .trim()
+    .replace(/\s+/g, "-")
+    .slice(0, 60);
+}
+
 const CATEGORY_LABELS = {
   ai: "AI",
   javascript: "JavaScript",
@@ -178,6 +188,27 @@ module.exports = function (eleventyConfig) {
     return Math.max(1, Math.round(words / 220));
   });
 
+  // Headings for the in-article table of contents. Also gives each heading an
+  // id so the links have somewhere to land.
+  eleventyConfig.addFilter("headings", (content) => {
+    const out = [];
+    for (const m of String(content || "").matchAll(/<h([23])[^>]*>([\s\S]*?)<\/h\1>/g)) {
+      const text = m[2].replace(/<[^>]+>/g, "").trim();
+      if (!text) continue;
+      out.push({ level: Number(m[1]), text, id: slugifyHeading(text) });
+    }
+    return out;
+  });
+
+  // Adds ids to h2/h3 in rendered post bodies so the contents can link to them.
+  eleventyConfig.addTransform("headingIds", function (content) {
+    if (!(this.page?.outputPath || "").endsWith(".html")) return content;
+    return content.replace(/<h([23])>([\s\S]*?)<\/h\1>/g, (all, level, inner) => {
+      const text = inner.replace(/<[^>]+>/g, "").trim();
+      return text ? `<h${level} id="${slugifyHeading(text)}">${inner}</h${level}>` : all;
+    });
+  });
+
   eleventyConfig.addFilter("limit", (arr, n) => (arr || []).slice(0, n));
 
   eleventyConfig.addFilter("skipFirst", (arr) => (arr || []).slice(1));
@@ -240,6 +271,14 @@ module.exports = function (eleventyConfig) {
       return orig(tokens, idx, options, env, self);
     };
   });
+
+  // Content hash on the stylesheet URL: cache it for a year, update instantly.
+  const cssHash = require("crypto")
+    .createHash("sha256")
+    .update(fs.readFileSync(path.join(__dirname, "site", "css", "main.css")))
+    .digest("hex")
+    .slice(0, 8);
+  eleventyConfig.addGlobalData("cssHash", cssHash);
 
   eleventyConfig.addShortcode("year", () => String(new Date().getFullYear()));
 

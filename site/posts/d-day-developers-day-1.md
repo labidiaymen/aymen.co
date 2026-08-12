@@ -6,7 +6,7 @@ cover: "/images/dd-d-thmp.png"
 permalink: "/events/d-day-developers-day-1/"
 ---
 
-## ![](/images/d-day-clean.png)
+## ![D-Day developer event poster](/images/d-day-clean.png)
 
 ## What is D-Day or Developers Days?
 
@@ -26,4 +26,4 @@ It's **Free.**
 
 @vaulab : Elgazala Technopark, Raoued, Gouvernorat de l'Ariana, Tunisie
 
-<iframe src="https://www.google.com/maps/d/embed?mid=1PtWMhZX3S3HqXB6z2CBDEb1nwnARQRhR" width="100%" height="480"></iframe>
+<iframe loading="lazy" src="https://www.google.com/maps/d/embed?mid=1PtWMhZX3S3HqXB6z2CBDEb1nwnARQRhR" width="100%" height="480"></iframe>

@@ -15,12 +15,8 @@
   <meta property="og:description" content="{{ description or site.description }}">
   <meta property="og:type" content="{% if layout == 'layouts/post.njk' or isPost %}article{% else %}website{% endif %}">
   <meta property="og:url" content="{{ page.url | absoluteUrl(site.url) }}">
-  {%- if cover %}
-  <meta property="og:image" content="{{ cover | absoluteUrl(site.url) }}">
+  <meta property="og:image" content="{{ (cover or '/images/social-card.jpg') | absoluteUrl(site.url) }}">
   <meta name="twitter:card" content="summary_large_image">
-  {%- else %}
-  <meta name="twitter:card" content="summary">
-  {%- endif %}
   <script>
     (function () {
       var t = localStorage.getItem("theme");
@@ -31,7 +27,7 @@
   </script>
   <link rel="preload" href="/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/newsreader-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/main.css?v={{ cssHash }}">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -94,5 +90,9 @@
       }
     });
   </script>
+  {%- if site.analyticsToken %}
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon='{"token": "{{ site.analyticsToken }}"}'></script>
+  {%- endif %}
 </body>
 </html>

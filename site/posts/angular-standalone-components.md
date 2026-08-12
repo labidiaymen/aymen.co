@@ -48,7 +48,7 @@ In the Route Module, we can directly import the component rather than the Module
 
 You can play with the demo directly on Stackblitz
 
-<iframe style="width: 100%;height: 313px;" src="https://stackblitz.com/edit/github-vpsfla?embed=1&file=src/app/user-detail/user-detail.component.ts"></iframe>
+<iframe loading="lazy" style="width: 100%;height: 313px;" src="https://stackblitz.com/edit/github-vpsfla?embed=1&file=src/app/user-detail/user-detail.component.ts"></iframe>
 
 ## Motivation
 

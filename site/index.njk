@@ -34,7 +34,7 @@ layout: layouts/base.njk
       </span>
     </span>
     {%- if latest.data.cover %}
-    <img class="featured-cover-img" src="{{ latest.data.cover }}" alt="" loading="lazy">
+    <img class="featured-cover-img" src="{{ latest.data.cover }}" alt="{{ latest.data.title }}" loading="lazy">
     {%- endif %}
   </a>
   {%- set posts = collections.posts | limit(16) | skipFirst %}
