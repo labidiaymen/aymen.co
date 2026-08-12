@@ -4,23 +4,19 @@ permalink: "/notes/quit-social-networks/"
 ---
 
 **Quit social networks**
-The social network is a wealth for those who know how to exploit it. I used to collect information and follow the news about technologies. I had fun sharing some of them. But lastly, what did I get?
+Social networks are a goldmine for those who know how to use them. I used to collect information and follow the news about technology. I had fun sharing some of it. But in the end, what did I get?
 
-Certainly, a mind full of information but a mind that can’t focus on one thing.
+Certainly a mind full of information, but a mind that can't focus on one thing.
 
-After a short time reflecting upon these facts, I decided to undertake these steps:
+After a short time reflecting on this, I decided to take these steps:
 
-- Get off from all social networks for a long while.
-- Get off from the internet for a while.
-- Look around you, look at what you miss in real life.
+- Get off all social networks for a long while.
+- Get off the internet for a while.
+- Look around you, and look at what you are missing in real life.
 - Clean up the mess in your mind.
 - Focus on one thing, only one thing.
 - Share your experience.
 
- 
-
-Few days later, things have already started to change for the better.
-
- 
+A few days later, things had already started to change for the better.
 
 **Give it a try!**

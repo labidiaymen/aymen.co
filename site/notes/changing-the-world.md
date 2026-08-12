@@ -4,12 +4,12 @@ permalink: "/notes/changing-the-world/"
 ---
 
 **Changing the world**
-Changing the world, that what each of us say, but how? do we need to start from all over or start from the begin?
+Changing the world: that's what each of us says. But how? Do we need to start all over, or start from the beginning?
 
-All these questions come to us when we think to start a project we want that is changing the world.
+All these questions come to us when we think about starting a project meant to change the world.
 
-But how about start solving the problems that we have in our real life?, or improving an existent one.
+But how about solving the problems we already have in real life, or improving something that exists?
 
-Responding to this question may clear something and start doing than living inside the loop of thinking.
+Answering that question clears things up, and gets you doing instead of living inside the loop of thinking.
 
 **Start doing today**

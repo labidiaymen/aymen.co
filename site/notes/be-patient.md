@@ -4,6 +4,6 @@ permalink: "/notes/be-patient/"
 ---
 
 **Be patient**
-Have you been thinking to blow the world from the first days when you are trying to start a new project? Ok, let's get to the point, that's totally wrong. Normally, if you launch a new project and it has a good support you can make a good pitch at the first days, but after that is you that decide to make it greater or not, your project can't guide himself, you do that.
+Have you been thinking about taking the world by storm in the first days of a new project? Let's get to the point: that's totally wrong. Normally, if you launch a new project and it gets good support, you can make a good pitch in those first days. But after that, it's you who decides whether it becomes something greater. Your project can't guide itself. You do that.
 
-So **Be patient**
+So **be patient**.
