@@ -14,12 +14,15 @@
   font-display: swap;
   src: url("/fonts/newsreader-latin-wght-normal.woff2") format("woff2-variations");
 }
+/* Italic serif is only ever set at one weight, so this face is the variable
+   Newsreader italic pinned to wght 400 (64.5kB -> 24.6kB). Regenerate with:
+   fonttools varLib.instancer newsreader-latin-wght-italic.ttf wght=400 */
 @font-face {
   font-family: "Newsreader Variable";
   font-style: italic;
-  font-weight: 200 800;
+  font-weight: 400;
   font-display: swap;
-  src: url("/fonts/newsreader-latin-wght-italic.woff2") format("woff2-variations");
+  src: url("/fonts/newsreader-latin-italic.woff2") format("woff2");
 }
 
 :root {
@@ -448,7 +451,7 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
   font-family: var(--serif);
   font-style: italic;
   font-size: 1.18rem;
-  font-weight: 380;
+  font-weight: 400;
   color: var(--text-muted);
   text-wrap: pretty;
 }
@@ -735,7 +738,7 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
   max-width: 36rem;
   font-family: var(--serif);
   font-style: italic;
-  font-weight: 380;
+  font-weight: 400;
   font-size: 1.02rem;
   color: var(--text-muted);
   text-wrap: pretty;

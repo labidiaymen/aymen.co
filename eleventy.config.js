@@ -55,6 +55,8 @@ async function optimizeImages(content) {
         class: attrs.class,
         loading: attrs.loading || "lazy",
         decoding: attrs.decoding || "async",
+        // An LCP candidate marks itself up front; the rest stay lazy.
+        ...(attrs.fetchpriority ? { fetchpriority: attrs.fetchpriority } : {}),
         sizes: small ? `${declaredWidth}px` : "(max-width: 44rem) 100vw, 44rem",
       });
       replacements.push([tag, html]);

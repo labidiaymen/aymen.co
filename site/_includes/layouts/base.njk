@@ -31,6 +31,10 @@
   </script>
   <link rel="preload" href="/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/newsreader-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  {#- Italic serif renders above the fold only where there is a lede to set in it. #}
+  {%- if page.url == "/" or layout == "layouts/post.njk" or isPost %}
+  <link rel="preload" href="/fonts/newsreader-latin-italic.woff2" as="font" type="font/woff2" crossorigin>
+  {%- endif %}
   <link rel="stylesheet" href="/css/main.css?v={{ cssHash }}">
 </head>
 <body>

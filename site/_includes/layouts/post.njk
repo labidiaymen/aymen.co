@@ -17,7 +17,7 @@ layout: layouts/base.njk
     {%- endif %}
   </header>
   {%- if cover %}
-  <img class="post-cover" src="{{ cover }}" alt="{{ title }}" loading="eager">
+  <img class="post-cover" src="{{ cover }}" alt="{{ title }}" loading="eager" decoding="sync" fetchpriority="high">
   {%- endif %}
   {%- set toc = content | headings %}
   {%- if toc.length >= 4 %}
