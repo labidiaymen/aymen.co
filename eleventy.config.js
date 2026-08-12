@@ -209,6 +209,25 @@ module.exports = function (eleventyConfig) {
     });
   });
 
+  // Notes on the home page show a teaser: whole paragraphs up to a limit,
+  // then a link. Short notes are shown in full.
+  const plainText = (html) =>
+    String(html || "").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+
+  eleventyConfig.addFilter("isLongNote", (html, limit = 260) => plainText(html).length > limit);
+
+  eleventyConfig.addFilter("noteTeaser", (html, limit = 260) => {
+    const source = String(html || "");
+    if (plainText(source).length <= limit) return source;
+    const paragraphs = source.match(/<p>[\s\S]*?<\/p>/g) || [];
+    let out = "";
+    for (const paragraph of paragraphs) {
+      out += paragraph;
+      if (plainText(out).length >= limit) break;
+    }
+    return out || paragraphs[0] || source;
+  });
+
   eleventyConfig.addFilter("limit", (arr, n) => (arr || []).slice(0, n));
 
   eleventyConfig.addFilter("skipFirst", (arr) => (arr || []).slice(1));

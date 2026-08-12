@@ -52,7 +52,10 @@ layout: layouts/base.njk
         <time datetime="{{ note.date | isoDate }}">{{ note.date | readableDate }}</time>
       </a>
       <div class="note-body prose">
-        {{ note.templateContent | safe }}
+        {{ note.templateContent | noteTeaser | safe }}
+        {%- if note.templateContent | isLongNote %}
+        <p class="note-more"><a href="{{ note.url }}">Read the note →</a></p>
+        {%- endif %}
       </div>
     </article>
     {%- endfor %}
