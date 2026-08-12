@@ -13,7 +13,7 @@
   <meta property="og:site_name" content="{{ site.title }}">
   <meta property="og:title" content="{{ title or site.title }}">
   <meta property="og:description" content="{{ description or site.description }}">
-  <meta property="og:type" content="{% if layout == 'layouts/post.njk' or isPost %}article{% else %}website{% endif %}">
+  <meta property="og:type" content="{% if layout == 'layouts/post.njk' or layout == 'layouts/note.njk' or isPost %}article{% else %}website{% endif %}">
   <meta property="og:url" content="{{ page.url | absoluteUrl(site.url) }}">
   {#- A post or note without a cover gets a generated card; other pages fall back. #}
   {%- set ogImage = cover or ogCard or '/images/social-card.jpg' %}

@@ -5,6 +5,7 @@ import { readFileSync, readdirSync, mkdirSync, existsSync, writeFileSync } from 
 import { join, basename } from "node:path";
 import satori from "satori";
 import sharp from "sharp";
+import { plain, truncate } from "../lib/markdown-text.cjs";
 
 const OUT_DIR = "_site/og";
 const WIDTH = 1200;
@@ -29,24 +30,6 @@ function frontmatter(raw) {
   return { data, body: raw.slice(match[0].length) };
 }
 
-// Markdown to something readable on a card.
-function plain(markdown) {
-  return markdown
-    .replace(/```[\s\S]*?```/g, " ")
-    .replace(/!\[[^\]]*\]\([^)]*\)/g, " ")
-    .replace(/\[([^\]]*)\]\([^)]*\)/g, "$1")
-    .replace(/<[^>]+>/g, " ")
-    .replace(/[*_`>#-]/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
-}
-
-function truncate(text, limit) {
-  if (text.length <= limit) return text;
-  const cut = text.slice(0, limit);
-  const stop = Math.max(cut.lastIndexOf(". "), cut.lastIndexOf(" "));
-  return cut.slice(0, stop > 60 ? stop : limit).replace(/[\s.,;:]+$/, "") + "…";
-}
 
 // Notes open with their title in bold; the card shows it as its own line.
 function splitNote(markdown) {
