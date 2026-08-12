@@ -37,7 +37,7 @@ layout: layouts/base.njk
     <img class="featured-cover-img" src="{{ latest.data.cover }}" alt="" loading="lazy">
     {%- endif %}
   </a>
-  {%- set posts = collections.posts | limit(10) | skipFirst %}
+  {%- set posts = collections.posts | limit(16) | skipFirst %}
   {% include "post-list.njk" %}
   <p class="index-more"><a href="/blog/">Full index, {{ collections.posts.length }} posts →</a></p>
 </section>
