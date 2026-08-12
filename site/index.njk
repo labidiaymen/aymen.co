@@ -48,10 +48,13 @@ layout: layouts/base.njk
   <ul class="post-list">
     {%- for note in collections.notes | limit(4) %}
     <li class="post-row">
-      <a class="post-row-link" href="{{ note.url }}">
-        <span class="post-row-title">{{ note.data.title }}</span>
-        <span class="post-row-leader" aria-hidden="true"></span>
-        <span class="post-row-meta">{{ note.date | readableDate }}</span>
+      <a class="note-compact" href="{{ note.url }}">
+        <span class="note-compact-row">
+          <span class="post-row-title">{{ note.data.title }}</span>
+          <span class="post-row-leader" aria-hidden="true"></span>
+          <span class="post-row-meta">{{ note.date | readableDate }}</span>
+        </span>
+        <span class="note-snippet">{{ note.templateContent | excerpt | truncate(130) }}</span>
       </a>
     </li>
     {%- endfor %}

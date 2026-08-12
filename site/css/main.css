@@ -985,3 +985,33 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
 }
 .note-heading a { text-decoration: none; }
 .note-heading a:hover { color: var(--accent); }
+
+/* Home notes: a ledger row with one muted line of the note under it. */
+.note-compact {
+  display: block;
+  padding: 0.5rem 0 0.6rem;
+  text-decoration: none;
+  color: var(--text);
+}
+.note-compact-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.7rem;
+}
+.note-compact:hover .post-row-title { color: var(--accent); }
+.note-snippet {
+  display: block;
+  margin-top: 0.15rem;
+  max-width: 40rem;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+@media (max-width: 560px) {
+  .note-compact-row { flex-wrap: wrap; row-gap: 0.05rem; }
+  .note-compact-row .post-row-leader { display: none; }
+  .note-snippet { white-space: normal; }
+}
