@@ -455,6 +455,7 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
 
 .post-cover {
   width: 100%;
+  height: auto;
   border-radius: 6px;
   margin-bottom: 2rem;
   border: 1px solid var(--hairline);
@@ -854,7 +855,10 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
   .post-toc {
     position: fixed;
     top: 6rem;
-    left: calc(50% - 34rem);
+    right: calc(50% - 34rem);
+    border-left: none;
+    border-right: 2px solid var(--hairline);
+    text-align: right;
     width: 15rem;
     margin: 0;
     max-height: 70vh;
