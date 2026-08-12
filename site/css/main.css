@@ -164,6 +164,18 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
   transition: opacity 0.18s ease, transform 0.18s ease;
   z-index: 60;
 }
+/* A circle only takes pointer events inside its curve, so a straight path down
+   from the avatar would leave the link twice: once in the gap, then again past
+   the frame's top-left. This invisible band spans both, keeping the portrait
+   reachable and the pointer steady. */
+.brand-pop::before {
+  content: "";
+  position: absolute;
+  top: -0.9rem;
+  left: 0;
+  right: 0;
+  height: 3.4rem;
+}
 .brand-pop img {
   display: block;
   width: 100%;
