@@ -787,22 +787,57 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
 
 .note-stream { margin-top: 0.3rem; }
 
+/* Dated rail on the left, note on the right — the same column grammar the
+   writing archive uses for its years. */
 .note-entry {
-  padding: 1.1rem 0;
-  border-bottom: 1px solid var(--hairline);
+  display: grid;
+  grid-template-columns: 4.5rem 1fr;
+  gap: 0 1rem;
+  padding: 1.5rem 0 1.7rem;
 }
-.note-entry:last-child { border-bottom: none; }
 
 .note-date {
-  display: inline-block;
-  margin-bottom: 0.35rem;
+  padding-top: 0.42rem;
   font-family: var(--mono);
-  font-size: 0.74rem;
+  font-size: 0.72rem;
+  line-height: 1.45;
   letter-spacing: 0.03em;
   color: var(--text-muted);
   text-decoration: none;
 }
-.note-date:hover { color: var(--accent); }
+.note-day { display: block; }
+.note-year { display: block; opacity: 0.62; }
+.note-entry:hover .note-date { color: var(--accent); }
+
+/* The rule starts under the text, leaving the date rail clean. */
+.note-entry-body { position: relative; }
+.note-entry + .note-entry .note-entry-body::before {
+  content: "";
+  position: absolute;
+  top: -1.6rem;
+  left: 0;
+  right: 0;
+  border-top: 1px solid var(--hairline);
+}
+
+.note-more {
+  margin: 0.75rem 0 0;
+  font-family: var(--mono);
+  font-size: 0.76rem;
+  letter-spacing: 0.02em;
+}
+.note-more a { color: var(--text-muted); text-decoration: none; }
+.note-more a::after { content: " →"; }
+.note-more a:hover { color: var(--accent); }
+
+@media (max-width: 560px) {
+  .note-entry { grid-template-columns: 1fr; gap: 0; padding: 1.2rem 0 1.4rem; }
+  .note-date { padding-top: 0; margin-bottom: 0.4rem; }
+  .note-day, .note-year { display: inline; }
+  .note-year::before { content: ", "; }
+  .note-entry + .note-entry .note-entry-body::before { display: none; }
+  .note-entry + .note-entry { border-top: 1px solid var(--hairline); }
+}
 
 .note-body {
   font-size: 1.05rem;
@@ -980,11 +1015,13 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
 }
 
 .note-heading {
-  margin: 0.15rem 0 0.4rem;
+  margin: 0 0 0.45rem;
   font-family: var(--serif);
-  font-size: 1.22rem;
+  font-size: 1.3rem;
   font-weight: 500;
+  line-height: 1.25;
   letter-spacing: -0.01em;
+  text-wrap: balance;
 }
 .note-heading a { text-decoration: none; }
 .note-heading a:hover { color: var(--accent); }

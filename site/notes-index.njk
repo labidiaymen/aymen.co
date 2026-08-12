@@ -15,12 +15,20 @@ permalink: /notes/
   <div class="note-stream">
     {%- for note in collections.notes %}
     <article class="note-entry">
-      <a class="note-date" href="{{ note.url }}">
-        <time datetime="{{ note.date | isoDate }}">{{ note.date | readableDate }}</time>
+      <a class="note-date" href="{{ note.url }}" tabindex="-1" aria-hidden="true">
+        <time datetime="{{ note.date | isoDate }}">
+          <span class="note-day">{{ note.date | dayStamp }}</span>
+          <span class="note-year">{{ note.date | year }}</span>
+        </time>
       </a>
-      <h3 class="note-heading"><a href="{{ note.url }}">{{ note.data.title }}</a></h3>
-      <div class="note-body prose">
-        {{ note.templateContent | safe }}
+      <div class="note-entry-body">
+        <h2 class="note-heading"><a href="{{ note.url }}">{{ note.data.title }}</a></h2>
+        <div class="note-body prose">
+          {{ note.templateContent | noteTeaser | safe }}
+        </div>
+        {%- if note.templateContent | isLongNote %}
+        <p class="note-more"><a href="{{ note.url }}">Read the rest</a></p>
+        {%- endif %}
       </div>
     </article>
     {%- endfor %}

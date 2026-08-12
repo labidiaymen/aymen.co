@@ -182,6 +182,15 @@ module.exports = function (eleventyConfig) {
     new Date(date).getUTCFullYear()
   );
 
+  // "Oct 28" — the year sits under it in the notes rail, so it is left off here.
+  eleventyConfig.addFilter("dayStamp", (date) =>
+    new Date(date).toLocaleDateString("en-US", {
+      month: "short",
+      day: "2-digit",
+      timeZone: "UTC",
+    })
+  );
+
   eleventyConfig.addFilter("readingTime", (content) => {
     const words = String(content || "")
       .replace(/<[^>]+>/g, " ")
@@ -211,23 +220,53 @@ module.exports = function (eleventyConfig) {
     });
   });
 
-  // Notes on the home page show a teaser: whole paragraphs up to a limit,
-  // then a link. Short notes are shown in full.
+  // A long note is shown as a teaser: whole blocks up to a limit, then a link.
+  // Most notes are short enough to appear in full.
+  const NOTE_LIMIT = 900;
+
   const plainText = (html) =>
     String(html || "").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
 
-  eleventyConfig.addFilter("isLongNote", (html, limit = 260) => plainText(html).length > limit);
+  const VOID_TAGS = new Set(["br", "hr", "img", "input", "source", "col", "wbr"]);
 
-  eleventyConfig.addFilter("noteTeaser", (html, limit = 260) => {
+  // Whole top-level blocks in document order. Depth tracking keeps a nested
+  // list from ending its parent early, and taking blocks in order means a
+  // teaser never silently skips over one.
+  const topLevelBlocks = (html) => {
+    const blocks = [];
+    const tag = /<(\/?)([a-z][a-z0-9]*)\b[^>]*?(\/?)>/gi;
+    let depth = 0;
+    let start = null;
+    let match;
+    while ((match = tag.exec(html))) {
+      const [full, closing, name, selfClosing] = match;
+      const isVoid = Boolean(selfClosing) || VOID_TAGS.has(name.toLowerCase());
+      if (closing) {
+        if (depth > 0) depth -= 1;
+        if (depth === 0 && start !== null) {
+          blocks.push(html.slice(start, match.index + full.length));
+          start = null;
+        }
+      } else if (!isVoid) {
+        if (depth === 0) start = match.index;
+        depth += 1;
+      }
+    }
+    return blocks;
+  };
+
+  eleventyConfig.addFilter("isLongNote", (html, limit = NOTE_LIMIT) => plainText(html).length > limit);
+
+  eleventyConfig.addFilter("noteTeaser", (html, limit = NOTE_LIMIT) => {
     const source = String(html || "");
     if (plainText(source).length <= limit) return source;
-    const paragraphs = source.match(/<p>[\s\S]*?<\/p>/g) || [];
+    const blocks = topLevelBlocks(source);
     let out = "";
-    for (const paragraph of paragraphs) {
-      out += paragraph;
+    for (const block of blocks) {
+      out += block;
       if (plainText(out).length >= limit) break;
     }
-    return out || paragraphs[0] || source;
+    return out || blocks[0] || source;
   });
 
   eleventyConfig.addFilter("limit", (arr, n) => (arr || []).slice(0, n));
