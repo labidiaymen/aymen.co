@@ -18,6 +18,7 @@ permalink: /notes/
       <a class="note-date" href="{{ note.url }}">
         <time datetime="{{ note.date | isoDate }}">{{ note.date | readableDate }}</time>
       </a>
+      <h3 class="note-heading"><a href="{{ note.url }}">{{ note.data.title }}</a></h3>
       <div class="note-body prose">
         {{ note.templateContent | safe }}
       </div>

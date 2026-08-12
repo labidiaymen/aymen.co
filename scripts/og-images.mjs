@@ -136,11 +136,10 @@ let made = 0;
 for (const file of readDir("site/notes")) {
   const slug = basename(file, ".md");
   const { data, body } = frontmatter(readFileSync(join("site/notes", file), "utf8"));
-  const { title, rest } = splitNote(body);
   await render(
     {
-      kicker: title ? `Note · ${title}` : "Note",
-      headline: truncate(plain(rest), 240),
+      kicker: data.title ? `Note · ${data.title}` : "Note",
+      headline: truncate(plain(body), 240),
       footnote: monthYear(data.date),
     },
     join(OUT_DIR, `${slug}.png`)

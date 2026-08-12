@@ -1,9 +1,9 @@
 ---
 date: 2015-08-05
 permalink: "/notes/quit-social-networks/"
+title: "Quit social networks"
 ---
 
-**Quit social networks**
 Social networks are a goldmine for those who know how to use them. I used to collect information and follow the news about technology. I had fun sharing some of it. But in the end, what did I get?
 
 Certainly a mind full of information, but a mind that can't focus on one thing.

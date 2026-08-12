@@ -1,17 +1,34 @@
 ---
 layout: layouts/base.njk
 ---
-<article class="container post note-single">
-  <header class="post-header">
-    <div class="post-meta">
-      <a class="chip" href="/notes/">Note</a>
-      <time datetime="{{ page.date | isoDate }}">{{ page.date | readableDate }}</time>
-    </div>
+<article class="container note-single">
+  <header class="note-header">
+    <p class="note-kicker"><a href="/notes/">Note</a></p>
+    <h1 class="note-title">{{ title }}</h1>
+    <time class="note-stamp" datetime="{{ page.date | isoDate }}">{{ page.date | readableDate }}</time>
   </header>
-  <div class="prose">
+
+  <div class="prose note-prose">
     {{ content | safe }}
   </div>
-  <nav class="post-nav" aria-label="All notes">
-    <a href="/notes/">← All notes</a>
+
+  {%- set around = collections.notes | adjacent(page.url) %}
+  {%- if around.older or around.newer %}
+  <nav class="note-around" aria-label="Other notes">
+    {%- if around.older %}
+    <a class="note-prev" href="{{ around.older.url }}">
+      <span class="pag-label">← Older note</span>
+      <span class="pag-title">{{ around.older.data.title }}</span>
+    </a>
+    {%- else %}<span></span>{%- endif %}
+    {%- if around.newer %}
+    <a class="note-next" href="{{ around.newer.url }}">
+      <span class="pag-label">Newer note →</span>
+      <span class="pag-title">{{ around.newer.data.title }}</span>
+    </a>
+    {%- endif %}
   </nav>
+  {%- endif %}
+
+  <p class="note-back"><a href="/notes/">All notes</a></p>
 </article>
