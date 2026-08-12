@@ -275,11 +275,11 @@ Finnaly run then App
 
 live-server
 
-![hello-angular](https://aymen.co/wp-content/uploads/2017/01/Hello-Angular.png)
+![hello-angular](/images/Hello-Angular.png)
 
 ### Source on
 
-###  [![github](https://aymen.co/wp-content/uploads/2017/01/github.jpg)](http://aymen.co/l/wwSpWa)
+###  [![github](/images/github.jpg)](http://aymen.co/l/wwSpWa)
 
  
 

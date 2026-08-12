@@ -33,13 +33,24 @@ npm run dev     # local server with live reload
 npm run build   # outputs the static site to _site/
 ```
 
-## Deploying to Cloudflare Pages
+## Deploying to Cloudflare
 
-1. In the [Cloudflare dashboard](https://dash.cloudflare.com/), go to **Workers & Pages → Create → Pages → Connect to Git** and select this repository.
-2. Use these build settings:
+The site deploys as a Cloudflare **Worker** serving static assets (`wrangler.jsonc`
+points at `_site`), not as a Pages project.
+
+1. In the [Cloudflare dashboard](https://dash.cloudflare.com/), open the Worker and
+   connect this repository under **Settings → Build**.
+2. Use these settings:
+   - **Path:** `/`
    - **Build command:** `npm run build`
-   - **Build output directory:** `_site`
-3. Add the custom domain `aymen.co` under the project's **Custom domains** tab (Cloudflare will configure DNS automatically if the zone is already on Cloudflare).
+   - **Deploy command:** `npx wrangler deploy`
+3. Add `aymen.co` as a **custom domain** on the Worker. The site's canonical URLs,
+   sitemap and feed all declare `https://aymen.co`, so this step is what makes those
+   correct — until the domain points here, search engines are told the canonical copy
+   lives somewhere else.
+
+The Worker name in `wrangler.jsonc` must match the Worker in the dashboard, otherwise
+a deploy creates a second Worker instead of updating the existing one.
 
 Every push to the production branch triggers a rebuild and deploy. Preview deployments are created for other branches automatically.
 

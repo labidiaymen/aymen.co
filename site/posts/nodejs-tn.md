@@ -10,4 +10,4 @@ The "**Nodejs Tunisian Community"** is a Tunisian community that has been found
 
 [www.nodejs.tn](http://www.nodejs.tn/)
 
-![node-js](https://aymen.co/wp-content/uploads/2016/12/node-js.jpg)
+![node-js](/images/node-js.jpg)

@@ -11,7 +11,7 @@ permalink: "/javascript/what-is-typescript-its-worth-learning/"
 
 **TypeScript** isn’t a completely new language, it’s a superset of ES6. If we write ES6 code, it’s perfectly valid and compilable TypeScript code. Here’s a diagram that shows the relationship between the languages:
 
-![es5-es6-typescript-circle-diagram](https://aymen.co/wp-content/uploads/2016/12/es5-es6-typescript-circle-diagram-300x300.png)
+![es5-es6-typescript-circle-diagram](/images/es5-es6-typescript-circle-diagram.png)
 
 What is **ES5**? What is **ES6**? ES5 is short for **“[ECMAScript 5](https://www.ecma-international.org/ecma-262/5.1/)”**, otherwise known as “regular **Javascript**”. ES5 is the **normal Javascript**. It runs in more-or-less every browser. **ES6** is the **next** version of Javascript.
 

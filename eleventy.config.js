@@ -1,4 +1,72 @@
+const path = require("path");
+const fs = require("fs");
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
+const eleventyImage = require("@11ty/eleventy-img");
+const generateImage = eleventyImage.default; // v7 exports the queue function as default
+const { generateHTML } = eleventyImage;
+
+const IMAGE_SOURCE_DIR = path.join(__dirname, "public", "images");
+// Animated GIFs lose their frames through sharp, and SVGs are already small.
+const SKIP_EXTENSIONS = new Set([".gif", ".svg", ".ico"]);
+
+function parseAttributes(tag) {
+  const attrs = {};
+  for (const m of tag.matchAll(/([\w-]+)(?:=("([^"]*)"|'([^']*)'))?/g)) {
+    if (m.index === 0) continue; // the tag name itself
+    attrs[m[1]] = m[3] ?? m[4] ?? "";
+  }
+  return attrs;
+}
+
+// Turns <img src="/images/x.jpg"> into a responsive <picture>; leaves remote
+// images, unknown files and animated formats untouched.
+async function optimizeImages(content) {
+  if (!(this.page?.outputPath || "").endsWith(".html")) return content;
+  if (!content.includes("<img")) return content;
+
+  const replacements = [];
+  for (const match of content.matchAll(/<img\b[^>]*>/gi)) {
+    const tag = match[0];
+    const attrs = parseAttributes(tag);
+    const src = attrs.src || "";
+    if (!src.startsWith("/images/")) continue;
+
+    const file = path.join(IMAGE_SOURCE_DIR, decodeURIComponent(src.slice("/images/".length)));
+    if (SKIP_EXTENSIONS.has(path.extname(file).toLowerCase()) || !fs.existsSync(file)) continue;
+
+    // A sized thumbnail (the avatar) only ever needs its own width.
+    const declaredWidth = Number(attrs.width) || null;
+    const small = declaredWidth && declaredWidth <= 320;
+
+    // A single unreadable file must never fail the whole build: fall back to
+    // the original tag and carry on.
+    try {
+      const metadata = await generateImage(file, {
+        // Text column is 44rem, so 1440 covers a 2x retina display; anything
+        // larger would ship pixels no layout can use.
+        widths: small ? [declaredWidth, declaredWidth * 2] : [480, 960, 1440],
+        formats: ["avif", "webp", "auto"],
+        outputDir: path.join(__dirname, "_site", "img"),
+        urlPath: "/img/",
+      });
+
+      const html = generateHTML(metadata, {
+        alt: attrs.alt || "",
+        class: attrs.class,
+        loading: attrs.loading || "lazy",
+        decoding: attrs.decoding || "async",
+        sizes: small ? `${declaredWidth}px` : "(max-width: 44rem) 100vw, 44rem",
+      });
+      replacements.push([tag, html]);
+    } catch (error) {
+      console.warn(`[images] skipped ${src}: ${error.message}`);
+    }
+  }
+
+  let out = content;
+  for (const [tag, html] of replacements) out = out.replace(tag, html);
+  return out;
+}
 
 const CATEGORY_LABELS = {
   ai: "AI",
@@ -26,6 +94,11 @@ const CATEGORY_LABELS = {
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(syntaxHighlight);
+
+  // Every local <img> in the built HTML becomes a <picture> with AVIF and WebP
+  // sources at several widths. Sources are read straight from public/images so
+  // resolution never depends on passthrough-copy ordering.
+  eleventyConfig.addTransform("optimizeImages", optimizeImages);
 
   eleventyConfig.addPassthroughCopy({ public: "/" });
   eleventyConfig.addPassthroughCopy({ "site/css": "css" });

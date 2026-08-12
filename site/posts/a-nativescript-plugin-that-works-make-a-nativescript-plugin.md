@@ -13,8 +13,6 @@ To start off I need a kickstart project or file structures, I never start a proj
 
 Then I created my own API key and I start implementing my own things.
 
-![](https://aymen.co/wp-content/uploads/2018/01/Capture-d’écran-2018-01-17-à-15.31.37.png)
-
 So we will work on some of these files, all files are generated from the seed except this one
 
 > google-places-autocomplete.static.ts
@@ -43,13 +41,7 @@ So all work will be on the _google-places-autocomplete.common.ts_ file because�
 
 First, let's _import_ the module that we will use
 
-![](https://aymen.co/wp-content/uploads/2018/01/Capture-d’écran-2018-01-17-à-17.13.45.png)
-
 The plugin does two things, search places from a query, and display place detail from place id.
-
-![](https://aymen.co/wp-content/uploads/2018/01/Capture-d’écran-2018-01-17-à-17.13.55.png)
-
-![](https://aymen.co/wp-content/uploads/2018/01/Capture-d’écran-2018-01-17-à-17.14.04.png)
 
 In this two functions, we did two simple requests (using HTTP module from nativescript) to the google places API
 

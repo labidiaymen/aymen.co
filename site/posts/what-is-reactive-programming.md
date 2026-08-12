@@ -22,7 +22,7 @@ The **Combine Latest** doesn’t using queue, as it name suggest it only remembe
 
  
 
-![reactive-programming](https://aymen.co/wp-content/uploads/2017/01/reactive-programming-1.jpg) We can see that when the **y stream** observed the **b** value, the **result stream ****combine** it with the **latest** value observed on **x stream** (3) and latter the same value will be **combine** into the result stream when the **x stream** will **observed** the **4** value.
+![reactive-programming](/images/reactive-programming-1.jpg) We can see that when the **y stream** observed the **b** value, the **result stream ****combine** it with the **latest** value observed on **x stream** (3) and latter the same value will be **combine** into the result stream when the **x stream** will **observed** the **4** value.
 
 The **Combine Latest** processing will come to end either when one of the stream
 

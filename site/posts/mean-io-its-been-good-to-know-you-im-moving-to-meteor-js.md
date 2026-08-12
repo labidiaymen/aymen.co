@@ -42,4 +42,4 @@ these module are hosted on [atmospherejs.com](http://atmospherejs.com)
 
 **Conclusion**
 
-Meteor is much more richer than you think and you can build and maintain scalable web and mobile applications with it.![meteor](http://aymen.co/wp-content/uploads/2016/03/meteor-300x187.png)
+Meteor is much more richer than you think and you can build and maintain scalable web and mobile applications with it.![meteor](/images/meteor.png)

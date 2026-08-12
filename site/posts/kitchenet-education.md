@@ -14,7 +14,7 @@ Kitchenet Education is an education platform that host updated courses of hotte
 
  
 
-![eduaction-kitchenet-tn](https://aymen.co/wp-content/uploads/2016/12/Eduaction-Kitchenet.tn_.png)
+![eduaction-kitchenet-tn](/images/Eduaction-Kitchenet.tn_.png)
 
  
 
@@ -22,7 +22,7 @@ Kitchenet Education is an education platform that host updated courses of hotte
 
  
 
-![courses-kitchenet-education](https://aymen.co/wp-content/uploads/2016/12/Courses-Kitchenet-Education.png)
+![courses-kitchenet-education](/images/Courses-Kitchenet-Education.png)
 
  
 
@@ -30,7 +30,7 @@ Kitchenet Education is an education platform that host updated courses of hotte
 
  
 
-![angular2-education-kitchenet-tn](https://aymen.co/wp-content/uploads/2016/12/Angular2-Education-Kitchenet.tn_.png)
+![angular2-education-kitchenet-tn](/images/Angular2-Education-Kitchenet.tn_.png)
 
  
 

@@ -74,10 +74,10 @@ You should see you app working :
 
  
 
-![ng-app](https://aymen.co/wp-content/uploads/2017/01/ng-app.png)
+![ng-app](/images/ng-app.png)
 
 ### Source on
 
-###  [![github](https://aymen.co/wp-content/uploads/2017/01/github.jpg)](http://aymen.co/l/4GRQcB)
+###  [![github](/images/github.jpg)](http://aymen.co/l/4GRQcB)
 
 **Wanna know more details, check : [Start your Angular WebApp](http://aymen.co/l/sbd431)**

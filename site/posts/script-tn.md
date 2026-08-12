@@ -10,4 +10,4 @@ Script.tn is an online code editor let you run node.js or javascript snippet in
 
 [http://script.tn](http://script.tn)
 
-![script.tn_](https://aymen.co/wp-content/uploads/2016/12/script-tn.jpg)
+![script.tn_](/images/script-tn.jpg)

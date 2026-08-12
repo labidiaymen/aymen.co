@@ -14,7 +14,7 @@ why **127**?
 
 Because the **ASCII** table told us that the characters code starts from 0 (NULL) and ends at 127(DEL)
 
-![](https://aymen.co/wp-content/uploads/2020/03/asciifull.gif)
+![](/images/asciifull.gif)
 
 So we made this function.
 
