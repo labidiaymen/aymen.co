@@ -43,6 +43,16 @@ for (const url of referenced) {
   problems.push(`missing: ${url}`);
 }
 
+// Share cards are generated after Eleventy, so a missing one only shows up here.
+for (const page of pages) {
+  const html = readFileSync(page, "utf8");
+  for (const m of html.matchAll(/property="og:image" content="https:\/\/aymen\.co([^"]+)"/g)) {
+    if (!existsSync(join(SITE, decodeURIComponent(m[1])))) {
+      problems.push(`missing share card: ${m[1]} (on ${page})`);
+    }
+  }
+}
+
 const feed = join(SITE, "feed.xml");
 if (existsSync(feed) && !readFileSync(feed, "utf8").includes("<item>")) {
   problems.push("feed.xml has no items");
