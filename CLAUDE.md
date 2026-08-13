@@ -27,6 +27,13 @@ Rules for this task:
   the file.
 - Don't invent notes. Never commit placeholder or example notes to `site/notes/`.
 
+## No emoji
+
+Never use emoji — not in site content, commit messages, code comments, PR text, or
+replies. He has asked for this explicitly. The typographic arrows already in the
+templates (`→` on "All notes", `↗` on external links) are design elements, not
+emoji, and stay.
+
 ## Git
 
 - Commit as `Labidi Aymen <labidipc@aymen.co>`.
