@@ -22,9 +22,9 @@ Rules for this task:
   polish, or add a closing line. This is published under his name.
 - **Leave it untitled unless he gave a title.** A status is its own headline;
   untitled is the normal case and the layouts are built for it.
-- Untitled notes are filed by date (`site/notes/2026-08-14.md` → `/notes/2026-08-14/`).
-  A second note the same day gets `-2`. The script handles this — don't hand-write
-  the file.
+- A titled note is filed under its title slug (`/notes/on-small-teams/`); an untitled
+  one is filed by date (`/notes/2026-08-14/`). A name already taken gets `-2`. The
+  script handles all of this — don't hand-write the file.
 - Don't invent notes. Never commit placeholder or example notes to `site/notes/`.
 
 ## No emoji
