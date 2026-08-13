@@ -1104,3 +1104,79 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
   .note-compact-row .post-row-leader { display: none; }
   .note-snippet { white-space: normal; }
 }
+
+/* ---------- Search (Pagefind) ---------- */
+
+/* Pagefind ships a light-only stylesheet with no dark handling of its own, so
+   its variables are mapped onto the site tokens and follow the theme toggle. */
+#search {
+  --pagefind-ui-scale: 0.8;
+  --pagefind-ui-font: var(--sans);
+  --pagefind-ui-text: var(--text);
+  --pagefind-ui-background: var(--bg);
+  --pagefind-ui-primary: var(--text);
+  --pagefind-ui-border: var(--hairline);
+  --pagefind-ui-tag: var(--code-bg);
+  --pagefind-ui-border-width: 1px;
+  --pagefind-ui-border-radius: 8px;
+}#search .pagefind-ui__search-input {
+  background: var(--bg-elevated);
+  color: var(--text);
+  font-size: 1rem;
+}#search .pagefind-ui__search-input::placeholder { color: var(--text-muted); }#search .pagefind-ui__search-input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}#search .pagefind-ui__search-clear {
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  padding-right: 0.9rem;
+}#search .pagefind-ui__search-clear:hover { color: var(--accent); }#search .pagefind-ui__message {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}#search .pagefind-ui__result {
+  border-top: 1px solid var(--hairline);
+  padding: 1.1rem 0;
+}#search .pagefind-ui__result-title { margin-bottom: 0.15rem; }#search .pagefind-ui__result-link {
+  font-family: var(--serif);
+  font-size: 1.22rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  text-decoration: none;
+}#search .pagefind-ui__result-link:hover { color: var(--accent); text-decoration: none; }#search .pagefind-ui__result-excerpt {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+}/* Pagefind resets mark to the browser default,
+which is a hard yellow that
+   belongs to neither theme. */
+.pagefind-ui__result-excerpt mark,
+#search .pagefind-ui__result-link mark {
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  color: var(--text);
+  padding: 0.05em 0.15em;
+  border-radius: 3px;
+  font-weight: 500;
+}#search .pagefind-ui__button {
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}#search .pagefind-ui__button:hover { color: var(--accent); border-color: var(--accent); }
+
+/* Sub-results are headings inside a hit; they should read as children of the
+   result title, not compete with it. */
+#search .pagefind-ui__result-nested { padding-left: 1rem; }
+#search .pagefind-ui__result-nested .pagefind-ui__result-link {
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+#search .pagefind-ui__result-nested .pagefind-ui__result-link:hover { color: var(--accent); }

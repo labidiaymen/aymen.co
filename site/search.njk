@@ -1,14 +1,14 @@
 ---
 layout: layouts/base.njk
 title: "Search"
-description: "Search every post on aymen.co."
+description: "Search every post and note on aymen.co."
 permalink: /search/
 eleventyExcludeFromCollections: true
 ---
 <section class="container page">
   <header class="page-head">
     <h1>Search</h1>
-    <p class="page-lead">Across all {{ collections.posts.length }} posts.</p>
+    <p class="page-lead">Across all {{ collections.posts.length }} posts and {{ collections.notes.length }} notes.</p>
   </header>
   <div id="search" data-pagefind-ignore></div>
 </section>
@@ -22,7 +22,7 @@ eleventyExcludeFromCollections: true
       showImages: false,
       showSubResults: true,
       resetStyles: false,
-      translations: { placeholder: "Search posts", zero_results: "Nothing found for [SEARCH_TERM]" },
+      translations: { placeholder: "Search posts and notes", zero_results: "Nothing found for [SEARCH_TERM]" },
     });
   });
 </script>
