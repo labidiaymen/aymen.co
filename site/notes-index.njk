@@ -14,16 +14,22 @@ permalink: /notes/
   {%- endif %}
   <div class="note-stream">
     {%- for note in collections.notes %}
+    {#- With a title the heading is the link; without one the date has to be,
+        otherwise an untitled note has no way to reach its own page. #}
+    {%- set titled = note.data.title %}
     <article class="note-entry">
-      <a class="note-date" href="{{ note.url }}" tabindex="-1" aria-hidden="true">
+      <a class="note-date" href="{{ note.url }}"{% if titled %} tabindex="-1" aria-hidden="true"{% endif %}>
         <time datetime="{{ note.date | isoDate }}">
           <span class="note-day">{{ note.date | dayStamp }}</span>
           <span class="note-year">{{ note.date | year }}</span>
         </time>
+        {%- if not titled %}<span class="visually-hidden">Permalink to this note</span>{% endif %}
       </a>
       <div class="note-entry-body">
+        {%- if titled %}
         <h2 class="note-heading"><a href="{{ note.url }}">{{ note.data.title }}</a></h2>
-        <div class="note-body prose">
+        {%- endif %}
+        <div class="note-body prose{% if not titled %} note-body-lead{% endif %}">
           {{ note.templateContent | noteTeaser | safe }}
         </div>
         {%- if note.templateContent | isLongNote %}

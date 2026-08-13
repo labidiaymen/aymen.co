@@ -3,7 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% if title and title != site.title %}{{ title }} · {{ site.title }}{% else %}{{ site.title }} · {{ site.role }}{% endif %}</title>
+  {#- A titleless note names itself from its own text. #}
+  {%- set headTitle = seoTitle or title %}
+  <title>{% if headTitle and headTitle != site.title %}{{ headTitle }} · {{ site.title }}{% else %}{{ site.title }} · {{ site.role }}{% endif %}</title>
   <meta name="description" content="{{ description or site.description }}">
   <meta name="author" content="{{ site.author }}">
   <link rel="canonical" href="{{ page.url | absoluteUrl(site.url) }}">
@@ -11,7 +13,7 @@
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="/feed.xml">
   <meta property="og:site_name" content="{{ site.title }}">
-  <meta property="og:title" content="{{ title or site.title }}">
+  <meta property="og:title" content="{{ headTitle or site.title }}">
   <meta property="og:description" content="{{ description or site.description }}">
   <meta property="og:type" content="{% if layout == 'layouts/post.njk' or layout == 'layouts/note.njk' or isPost %}article{% else %}website{% endif %}">
   <meta property="og:url" content="{{ page.url | absoluteUrl(site.url) }}">

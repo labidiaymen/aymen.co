@@ -8,7 +8,8 @@
     "dev": "eleventy --serve",
     "clean": "rm -rf _site",
     "deploy": "npm run build && npx wrangler deploy",
-    "preview": "npx wrangler dev"
+    "preview": "npx wrangler dev",
+    "note": "node scripts/new-note.mjs"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.2",

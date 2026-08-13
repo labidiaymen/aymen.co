@@ -50,11 +50,14 @@ layout: layouts/base.njk
     <li class="post-row">
       <a class="note-compact" href="{{ note.url }}">
         <span class="note-compact-row">
-          <span class="post-row-title">{{ note.data.title }}</span>
+          {#- An untitled note is its own headline, so it fills the row alone. #}
+          <span class="post-row-title">{{ note.data.title or (note.templateContent | excerpt | truncate(90)) }}</span>
           <span class="post-row-leader" aria-hidden="true"></span>
           <span class="post-row-meta">{{ note.date | readableDate }}</span>
         </span>
+        {%- if note.data.title %}
         <span class="note-snippet">{{ note.templateContent | excerpt | truncate(130) }}</span>
+        {%- endif %}
       </a>
     </li>
     {%- endfor %}

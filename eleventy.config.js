@@ -127,6 +127,15 @@ module.exports = function (eleventyConfig) {
     api.getFilteredByGlob("site/notes/*.md").sort((a, b) => b.date - a.date)
   );
 
+  // Everything published, newest first — what the feed carries. Notes are the
+  // most frequent thing here, so a posts-only feed would show subscribers least
+  // of what actually gets written.
+  eleventyConfig.addCollection("published", (api) =>
+    api
+      .getFilteredByGlob(["site/posts/*.md", "site/notes/*.md"])
+      .sort((a, b) => b.date - a.date)
+  );
+
   // Map of category -> posts (newest first), used to paginate category pages
   eleventyConfig.addCollection("categoryMap", (api) => {
     const map = {};

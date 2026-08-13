@@ -2,13 +2,20 @@
 layout: layouts/base.njk
 ---
 <article class="container note-single">
-  <header class="note-header">
+  <header class="note-header{% if not title %} note-header-bare{% endif %}">
     <p class="note-kicker"><a href="/notes/">Note</a></p>
+    {%- if title %}
     <h1 class="note-title">{{ title }}</h1>
     <time class="note-stamp" datetime="{{ page.date | isoDate }}">{{ page.date | readableDate }}</time>
+    {%- else %}
+    {#- Untitled: the date is the only name the page has, so it carries the heading. #}
+    <h1 class="note-stamp note-stamp-heading">
+      <time datetime="{{ page.date | isoDate }}">{{ page.date | readableDate }}</time>
+    </h1>
+    {%- endif %}
   </header>
 
-  <div class="prose note-prose">
+  <div class="prose note-prose" data-pagefind-body>
     {{ content | safe }}
   </div>
 
@@ -18,13 +25,13 @@ layout: layouts/base.njk
     {%- if around.older %}
     <a class="note-prev" href="{{ around.older.url }}">
       <span class="pag-label">← Older note</span>
-      <span class="pag-title">{{ around.older.data.title }}</span>
+      <span class="pag-title">{{ around.older.data.seoTitle }}</span>
     </a>
     {%- else %}<span></span>{%- endif %}
     {%- if around.newer %}
     <a class="note-next" href="{{ around.newer.url }}">
       <span class="pag-label">Newer note →</span>
-      <span class="pag-title">{{ around.newer.data.title }}</span>
+      <span class="pag-title">{{ around.newer.data.seoTitle }}</span>
     </a>
     {%- endif %}
   </nav>
