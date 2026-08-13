@@ -1,8 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <style>
-    .ink { fill: #191817; }
-    @media (prefers-color-scheme: dark) { .ink { fill: #e9e7e3; } }
-  </style>
-  <text x="6" y="50" class="ink" font-family="Iowan Old Style, Georgia, 'Times New Roman', serif" font-size="52" font-weight="500">A</text>
-  <text x="44" y="50" fill="#0d7377" font-family="Iowan Old Style, Georgia, 'Times New Roman', serif" font-size="52" font-weight="700">.</text>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="#fbfaf8"/><path fill="#1b1a18" d="M18.499 34.753V32.315H33.977999999999994V34.753ZM39.912 43.585 43.454 44.827V46.0H31.241V44.827L35.242999999999995 43.653999999999996L24.732 18.216H26.134999999999998L16.314 43.631L20.131999999999998 44.827V46.0H9.896999999999998V44.827L13.485 43.653999999999996L25.261 14.490000000000002H27.653Z"/><path fill="#0d7377" d="M48.537 40.319Q49.894 40.319 50.745 41.1815Q51.596 42.044 51.596 43.332Q51.596 44.62 50.745 45.4825Q49.894 46.345 48.537 46.345Q47.226 46.345 46.352 45.4825Q45.477999999999994 44.62 45.477999999999994 43.332Q45.477999999999994 42.044 46.352 41.1815Q47.226 40.319 48.537 40.319Z"/></svg>
