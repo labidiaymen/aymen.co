@@ -219,8 +219,14 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
   transition: color 0.15s ease;
 }
 .theme-toggle:hover { color: var(--text); }
-:root[data-theme="dark"] .icon-moon { display: none; }
-:root:not([data-theme="dark"]) .icon-sun { display: none; }
+/* The icon shows the choice, not the result: on system it stays the auto glyph
+   whichever way the OS resolves it. The auto icon is also the pre-JS default. */
+.theme-toggle svg { display: none; }
+.theme-toggle .icon-auto { display: block; }
+:root[data-theme-mode="light"] .theme-toggle .icon-sun,
+:root[data-theme-mode="dark"] .theme-toggle .icon-moon { display: block; }
+:root[data-theme-mode="light"] .theme-toggle .icon-auto,
+:root[data-theme-mode="dark"] .theme-toggle .icon-auto { display: none; }
 
 /* ---------- Home ---------- */
 
