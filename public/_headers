@@ -18,3 +18,9 @@
 
 /pagefind/*
   Cache-Control: public, max-age=604800
+
+# Share cards sit at a stable URL but are regenerated on every build, so an
+# edited note would keep serving the old card from the edge. Short TTL, always
+# revalidated.
+/og/*
+  Cache-Control: public, max-age=300, must-revalidate
