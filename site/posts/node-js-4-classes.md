@@ -1,7 +1,6 @@
 ---
 title: "NODE.JS 4 CLASSES"
 date: 2015-10-18
-series: "Node.js 4"
 categories: ["log"]
 permalink: "/log/node-js-4-classes/"
 ---
