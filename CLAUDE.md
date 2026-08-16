@@ -27,6 +27,16 @@ Rules for this task:
   script handles all of this — don't hand-write the file.
 - Don't invent notes. Never commit placeholder or example notes to `site/notes/`.
 
+## Series
+
+A post that belongs to a multi-part run carries `series: "Angular 14"` in its front
+matter. Parts are ordered by date (oldest first); add `seriesOrder: n` only if a post
+needs to sit out of chronological order. The box and the "next in series" link appear
+automatically once two or more posts share a name — nothing else to wire up.
+
+Only group posts the writing already treats as parts. Sharing a topic is what the
+category is for.
+
 ## No emoji
 
 Never use emoji — not in site content, commit messages, code comments, PR text, or

@@ -1,6 +1,7 @@
 ---
 title: "Angular 14: Standalone components"
 date: 2022-06-13
+series: "Angular 14"
 categories: ["javascript", "angular"]
 cover: "/images/angular-standalone-component.PNG"
 permalink: "/javascript/angular-standalone-components/"

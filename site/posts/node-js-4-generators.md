@@ -1,6 +1,7 @@
 ---
 title: "Node.js 4 generators"
 date: 2015-10-16
+series: "Node.js 4"
 categories: ["log"]
 permalink: "/log/node-js-4-generators/"
 ---

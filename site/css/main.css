@@ -1203,3 +1203,58 @@ which is a hard yellow that
   color: var(--text-muted);
 }
 #search .pagefind-ui__result-nested .pagefind-ui__result-link:hover { color: var(--accent); }
+
+/* ---------- Series ---------- */
+
+.post-series {
+  margin: 0 0 2.5rem;
+  padding: 1rem 1.2rem 1.1rem;
+  border-left: 2px solid var(--accent);
+  background: var(--code-bg);
+  border-radius: 0 6px 6px 0;
+}
+
+.series-kicker {
+  margin: 0 0 0.6rem;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.series-parts {
+  margin: 0;
+  padding-left: 1.15rem;
+  font-size: 0.97rem;
+  line-height: 1.5;
+}
+.series-parts li { margin: 0.22rem 0; }
+.series-parts li::marker { color: var(--text-muted); font-family: var(--mono); font-size: 0.85em; }
+.series-parts a { color: var(--text); text-decoration-color: var(--dots); }
+.series-parts a:hover { color: var(--accent); }
+.series-current > span { color: var(--text-muted); }
+
+/* Forward link at the end of a part — the thing that carries a reader on. */
+.series-next {
+  margin: 2.5rem 0 0;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--hairline);
+}
+.series-next-label {
+  display: block;
+  margin-bottom: 0.15rem;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.series-next a {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+.series-next a::after { content: " →"; color: var(--text-muted); }
+.series-next a:hover::after { color: var(--accent); }

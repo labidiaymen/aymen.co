@@ -122,6 +122,26 @@ module.exports = function (eleventyConfig) {
       .sort((a, b) => b.date - a.date)
   );
 
+  // Map of series name -> its posts, oldest first. A series reads forwards:
+  // part one was written first, so date order is part order unless a post says
+  // otherwise with seriesOrder.
+  eleventyConfig.addCollection("series", (api) => {
+    const groups = new Map();
+    for (const post of api.getFilteredByGlob("site/posts/*.md")) {
+      const name = post.data.series;
+      if (!name) continue;
+      if (!groups.has(name)) groups.set(name, []);
+      groups.get(name).push(post);
+    }
+    for (const posts of groups.values()) {
+      posts.sort((a, b) => {
+        const byOrder = (a.data.seriesOrder ?? Infinity) - (b.data.seriesOrder ?? Infinity);
+        return byOrder || a.date - b.date;
+      });
+    }
+    return groups;
+  });
+
   // Short notes, newest first
   eleventyConfig.addCollection("notes", (api) =>
     api.getFilteredByGlob("site/notes/*.md").sort((a, b) => b.date - a.date)
@@ -276,6 +296,19 @@ module.exports = function (eleventyConfig) {
       if (plainText(out).length >= limit) break;
     }
     return out || blocks[0] || source;
+  });
+
+  // Everything the template needs in one object: a Map is awkward to read from
+  // Nunjucks, and `set` inside a loop would not escape the loop's scope.
+  eleventyConfig.addFilter("seriesInfo", (seriesMap, name, url) => {
+    const parts = (seriesMap && seriesMap.get(name)) || [];
+    const index = parts.findIndex((p) => p.url === url);
+    return {
+      parts,
+      total: parts.length,
+      number: index + 1,
+      next: index >= 0 ? parts[index + 1] : undefined,
+    };
   });
 
   eleventyConfig.addFilter("limit", (arr, n) => (arr || []).slice(0, n));

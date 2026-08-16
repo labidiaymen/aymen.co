@@ -19,6 +19,22 @@ layout: layouts/base.njk
   {%- if cover %}
   <img class="post-cover" src="{{ cover }}" alt="{{ title }}" loading="eager" decoding="sync" fetchpriority="high">
   {%- endif %}
+  {%- set thisSeries = collections.series | seriesInfo(series, page.url) %}
+  {%- if thisSeries.total > 1 %}
+  <aside class="post-series" aria-label="Posts in this series">
+    <p class="series-kicker">{{ series }} · Part {{ thisSeries.number }} of {{ thisSeries.total }}</p>
+    <ol class="series-parts">
+      {%- for part in thisSeries.parts %}
+      {%- if part.url == page.url %}
+      <li class="series-current" aria-current="true"><span>{{ part.data.title }}</span></li>
+      {%- else %}
+      <li><a href="{{ part.url }}">{{ part.data.title }}</a></li>
+      {%- endif %}
+      {%- endfor %}
+    </ol>
+  </aside>
+  {%- endif %}
+
   {%- set toc = content | headings %}
   {%- if toc.length >= 4 %}
   <nav class="post-toc" aria-label="On this page">
@@ -70,6 +86,13 @@ layout: layouts/base.njk
   <div class="prose" data-pagefind-body>
     {{ content | safe }}
   </div>
+
+  {%- if thisSeries.next %}
+  <p class="series-next">
+    <span class="series-next-label">Next in {{ series }}</span>
+    <a href="{{ thisSeries.next.url }}">{{ thisSeries.next.data.title }}</a>
+  </p>
+  {%- endif %}
 
   {%- set neighbours = collections.posts | adjacent(page.url) %}
   <nav class="post-pagination" aria-label="Adjacent posts">

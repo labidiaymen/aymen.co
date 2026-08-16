@@ -1,6 +1,7 @@
 ---
 title: "Angular 14: CLI Auto completion"
 date: 2022-06-12
+series: "Angular 14"
 categories: ["javascript", "angular"]
 cover: "/images/angular-cli-auto-complete.PNG"
 permalink: "/javascript/angular-cli-auto-completion/"
