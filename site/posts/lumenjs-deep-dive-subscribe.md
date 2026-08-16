@@ -3,6 +3,7 @@ title: "LumenJS deep dive \u2014 Subscribe"
 date: 2026-04-19
 categories: ["lumen"]
 series: "LumenJS deep dive"
+cover: "/images/lumenjs-deep-dive-subscribe-cover.png"
 permalink: "/lumen/lumenjs-deep-dive-subscribe/"
 ---
 One of the decisions you make early when building a framework is how to handle real-time data. Most solutions reach for WebSockets, third-party libraries, or client-side polling. We went a different direction.

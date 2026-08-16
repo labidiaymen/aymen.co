@@ -3,6 +3,7 @@ title: "LumenJS deep dive \u2014 Socket"
 date: 2026-04-26
 categories: ["lumen"]
 series: "LumenJS deep dive"
+cover: "/images/lumenjs-deep-dive-socket-cover.png"
 permalink: "/lumen/lumenjs-deep-dive-socket/"
 ---
 This article is part of the LumenJS deep dive series a series about the architectural decisions behind LumenJS, an open-source full-stack web framework designed for agent-driven development.
