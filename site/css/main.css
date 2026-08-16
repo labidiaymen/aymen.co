@@ -1279,27 +1279,54 @@ which is a hard yellow that
   color: var(--text-muted);
 }
 
-/* The cover sits in the rail like a spine on a shelf; the writing keeps the
-   column. Entries without artwork fall back to the plain dated rail. */
-.book-cover {
-  display: block;
-  margin-bottom: 0.5rem;
+/* Reading: a shelf. Every cover visible at once, one line of verdict under
+   each; the note page holds the rest. */
+.book-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr));
+  gap: 1.8rem 1.4rem;
 }
-.book-cover img {
+.book-card { display: block; text-decoration: none; color: var(--text); }
+.book-card-cover {
   display: block;
-  width: 4.5rem;
+  width: 100%;
   height: auto;
   aspect-ratio: 2 / 3;
   object-fit: cover;
   border-radius: 3px;
   border: 1px solid var(--hairline);
-  box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.12);
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.13);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
-.book-entry:hover .book-cover img { box-shadow: 2px 3px 12px rgba(0, 0, 0, 0.2); }
-
-@media (max-width: 560px) {
-  /* One column on phones: cover and date sit side by side above the text. */
-  .book-rail { display: flex; align-items: flex-end; gap: 0.7rem; margin-bottom: 0.6rem; }
-  .book-cover { margin-bottom: 0; }
-  .book-cover img { width: 3.4rem; }
+.book-card:hover .book-card-cover {
+  transform: translateY(-3px);
+  box-shadow: 3px 7px 16px rgba(0, 0, 0, 0.2);
+}
+/* No artwork: a plain spine with the title set on it. */
+.book-card-blank {
+  display: flex;
+  align-items: flex-end;
+  padding: 0.8rem;
+  background: var(--code-bg);
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  line-height: 1.25;
+  color: var(--text-muted);
+}
+.book-card-name {
+  display: block;
+  margin-top: 0.65rem;
+  font-family: var(--serif);
+  font-size: 1.02rem;
+  font-weight: 500;
+  line-height: 1.3;
+}
+.book-card:hover .book-card-name { color: var(--accent); }
+.book-card-line {
+  display: block;
+  margin-top: 0.2rem;
+  font-size: 0.84rem;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
 }

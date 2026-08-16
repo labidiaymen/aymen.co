@@ -14,32 +14,17 @@ permalink: /reading/
   <p class="page-lead">Nothing here yet.</p>
   {%- endif %}
 
-  <div class="note-stream">
+  <div class="book-grid">
     {%- for note in collections.books %}
-    <article class="note-entry book-entry">
-      <div class="book-rail">
-        {%- if note.data.coverImage %}
-        <a class="book-cover" href="{{ note.url }}" tabindex="-1" aria-hidden="true">
-          <img src="{{ note.data.coverImage }}" alt="" width="72" height="108" loading="lazy">
-        </a>
-        {%- endif %}
-        <a class="note-date" href="{{ note.url }}" tabindex="-1" aria-hidden="true">
-          <time datetime="{{ note.date | isoDate }}">
-            <span class="note-day">{{ note.date | dayStamp }}</span>
-            <span class="note-year">{{ note.date | year }}</span>
-          </time>
-        </a>
-      </div>
-      <div class="note-entry-body">
-        <h2 class="book-title"><a href="{{ note.url }}">{{ note.data.book }}</a></h2>
-        {%- if note.data.author %}
-        <p class="book-author">{{ note.data.author }}</p>
-        {%- endif %}
-        <div class="note-body prose">
-          {{ note.templateContent | safe }}
-        </div>
-      </div>
-    </article>
+    <a class="book-card" href="{{ note.url }}">
+      {%- if note.data.coverImage %}
+      <img class="book-card-cover" src="{{ note.data.coverImage }}" alt="" width="160" height="240" loading="lazy">
+      {%- else %}
+      <span class="book-card-cover book-card-blank" aria-hidden="true">{{ note.data.book }}</span>
+      {%- endif %}
+      <span class="book-card-name">{{ note.data.book }}</span>
+      <span class="book-card-line">{{ note.templateContent | excerpt | truncate(90) }}</span>
+    </a>
     {%- endfor %}
   </div>
 </section>
