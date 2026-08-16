@@ -15,6 +15,25 @@ permalink: /blog/
     </p>
   </header>
 
+  {#- Parts of a series sit scattered by date below, so they get a way in here. #}
+  {%- set allSeries = collections.series | seriesList %}
+  {%- if allSeries.length %}
+  <section class="writing-series">
+    <h2 class="rule-heading">Series</h2>
+    <ul class="post-list">
+      {%- for item in allSeries %}
+      <li class="post-row">
+        <a class="post-row-link" href="{{ item.first.url }}">
+          <span class="post-row-title">{{ item.name }}</span>
+          <span class="post-row-leader" aria-hidden="true"></span>
+          <span class="post-row-meta">{{ item.total }} parts</span>
+        </a>
+      </li>
+      {%- endfor %}
+    </ul>
+  </section>
+  {%- endif %}
+
   {%- for group in collections.posts | groupByYear %}
   <div class="year-block">
     <span class="year-label">{{ group.year }}</span>

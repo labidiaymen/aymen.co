@@ -1258,3 +1258,6 @@ which is a hard yellow that
 }
 .series-next a::after { content: " →"; color: var(--text-muted); }
 .series-next a:hover::after { color: var(--accent); }
+
+/* Series index on the writing page — same ledger rows as the archive below it. */
+.writing-series { margin: 0 0 2.4rem; }

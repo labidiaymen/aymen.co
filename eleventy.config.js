@@ -298,6 +298,19 @@ module.exports = function (eleventyConfig) {
     return out || blocks[0] || source;
   });
 
+  // Every series as a list, the one with the newest part first — so the block on
+  // the writing page leads with whatever is being written now.
+  eleventyConfig.addFilter("seriesList", (seriesMap) =>
+    [...(seriesMap || new Map()).entries()]
+      .map(([name, parts]) => ({
+        name,
+        total: parts.length,
+        first: parts[0],
+        latest: parts[parts.length - 1],
+      }))
+      .sort((a, b) => b.latest.date - a.latest.date)
+  );
+
   // Everything the template needs in one object: a Map is awkward to read from
   // Nunjucks, and `set` inside a loop would not escape the loop's scope.
   eleventyConfig.addFilter("seriesInfo", (seriesMap, name, url) => {
