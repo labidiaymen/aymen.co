@@ -1,9 +1,8 @@
 ---
-title: "LumenJS deep dive \u2014 llms.txt"
+title: "LumenJS deep dive — llms.txt"
 date: 2026-05-02
 categories: ["lumen"]
 series: "LumenJS deep dive"
-cover: "/images/lumenjs-deep-dive-llms-txt-cover.png"
 permalink: "/lumen/lumenjs-deep-dive-llms-txt/"
 ---
 This article is part of the LumenJS deep dive series — a series about the architectural decisions behind LumenJS, an open-source full-stack web framework designed for agent-driven development.
