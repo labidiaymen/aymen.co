@@ -142,6 +142,15 @@ module.exports = function (eleventyConfig) {
     return groups;
   });
 
+  // Book notes, newest first. A note joins the reading page by naming the book
+  // it is about; nothing else marks it.
+  eleventyConfig.addCollection("books", (api) =>
+    api
+      .getFilteredByGlob("site/notes/*.md")
+      .filter((note) => note.data.book)
+      .sort((a, b) => b.date - a.date)
+  );
+
   // Short notes, newest first
   eleventyConfig.addCollection("notes", (api) =>
     api.getFilteredByGlob("site/notes/*.md").sort((a, b) => b.date - a.date)

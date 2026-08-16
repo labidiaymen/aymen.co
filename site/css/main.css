@@ -1261,3 +1261,20 @@ which is a hard yellow that
 
 /* Series index on the writing page — same ledger rows as the archive below it. */
 .writing-series { margin: 0 0 2.4rem; }
+
+/* Reading page: the book is the heading, the author a quiet second line. */
+.book-title {
+  margin: 0 0 0.1rem;
+  font-family: var(--serif);
+  font-size: 1.32rem;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+.book-title a { text-decoration: none; }
+.book-title a:hover { color: var(--accent); }
+.book-author {
+  margin: 0 0 0.55rem;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}

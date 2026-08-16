@@ -1,0 +1,38 @@
+---
+layout: layouts/base.njk
+title: "Reading"
+description: "Books that changed how I work, and where the change shows up."
+permalink: /reading/
+---
+<section class="container page">
+  <header class="page-head">
+    <h1>Reading</h1>
+    <p class="page-lead">Not a list. Books that changed something about how I work, and where the change shows up.</p>
+  </header>
+
+  {%- if not collections.books.length %}
+  <p class="page-lead">Nothing here yet.</p>
+  {%- endif %}
+
+  <div class="note-stream">
+    {%- for note in collections.books %}
+    <article class="note-entry">
+      <a class="note-date" href="{{ note.url }}">
+        <time datetime="{{ note.date | isoDate }}">
+          <span class="note-day">{{ note.date | dayStamp }}</span>
+          <span class="note-year">{{ note.date | year }}</span>
+        </time>
+      </a>
+      <div class="note-entry-body">
+        <h2 class="book-title"><a href="{{ note.url }}">{{ note.data.book }}</a></h2>
+        {%- if note.data.author %}
+        <p class="book-author">{{ note.data.author }}</p>
+        {%- endif %}
+        <div class="note-body prose">
+          {{ note.templateContent | safe }}
+        </div>
+      </div>
+    </article>
+    {%- endfor %}
+  </div>
+</section>
