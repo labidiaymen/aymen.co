@@ -37,6 +37,18 @@ automatically once two or more posts share a name — nothing else to wire up.
 Only group posts the writing already treats as parts. Sharing a topic is what the
 category is for.
 
+## Cover and share images
+
+Two separate front matter keys, because they answer different questions:
+
+- `cover:` puts the image at the top of the post **and** uses it when the link is
+  shared.
+- `og:` sets the share image only — nothing is added to the page.
+
+Resolution order is `og` → `cover` → a note's generated card → `/images/social-card.jpg`.
+So a post that should look clean but still share well takes `og:` alone; that is what
+the LumenJS deep dives do.
+
 ## No emoji
 
 Never use emoji — not in site content, commit messages, code comments, PR text, or

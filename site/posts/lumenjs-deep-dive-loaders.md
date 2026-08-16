@@ -3,6 +3,7 @@ title: "LumenJS deep dive — Loaders"
 date: 2026-04-12
 categories: ["lumen"]
 series: "LumenJS deep dive"
+og: "/images/lumenjs-deep-dive-loaders-og.png"
 permalink: "/lumen/lumenjs-deep-dive-loaders/"
 ---
 One of the best things about building a framework is that you get to fix what bothers you in others, and simplify what was never meant to be complex. Everything has tradeoffs. This is about one feature that made LumenJS work for us.
