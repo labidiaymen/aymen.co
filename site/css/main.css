@@ -1261,3 +1261,20 @@ which is a hard yellow that
 
 /* Series index on the writing page — same ledger rows as the archive below it. */
 .writing-series { margin: 0 0 2.4rem; }
+
+/* Keycap hint beside the search link; the shortcut works without it. */
+.nav-kbd {
+  margin-left: 0.35rem;
+  padding: 0.05rem 0.34rem;
+  border: 1px solid var(--hairline);
+  border-radius: 4px;
+  background: var(--code-bg);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+@media (max-width: 700px) {
+  /* No physical keyboard to hint at, and the header has no room for it. */
+  .nav-kbd { display: none; }
+}

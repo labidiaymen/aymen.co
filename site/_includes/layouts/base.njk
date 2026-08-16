@@ -59,7 +59,7 @@
         {%- for item in site.nav %}
         {#- Notes only appears once at least one note exists #}
         {%- if item.url != "/notes/" or collections.notes.length %}
-        <a href="{{ item.url }}"{% if page.url == item.url %} aria-current="page"{% endif %}>{{ item.label }}</a>
+        <a href="{{ item.url }}"{% if page.url == item.url %} aria-current="page"{% endif %}>{{ item.label }}{% if item.url == "/search/" %}<kbd class="nav-kbd" aria-hidden="true">/</kbd>{% endif %}</a>
         {%- endif %}
         {%- endfor %}
         <button class="theme-toggle" type="button" aria-label="Theme: following your system. Switch to light.">
@@ -130,6 +130,47 @@
       media.addEventListener("change", function () {
         if (root.dataset.themeMode === "system") apply("system");
       });
+    })();
+  </script>
+  <script>
+    // "/" or Cmd/Ctrl+K opens search from anywhere. The search page itself does
+    // the focusing, so this stays a navigation rather than a second search UI.
+    (function () {
+      var SEARCH = "/search/";
+      var field = ".pagefind-ui__search-input";
+
+      function typing(el) {
+        if (!el) return false;
+        var tag = el.tagName;
+        return tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT" || el.isContentEditable;
+      }
+
+      addEventListener("keydown", function (event) {
+        var combo = (event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k";
+        var slash = event.key === "/" && !event.metaKey && !event.ctrlKey && !event.altKey;
+        if (!combo && !slash) return;
+        // A slash typed into a field is a slash, not a shortcut. Cmd+K still works.
+        if (slash && typing(event.target)) return;
+
+        var here = document.querySelector(field);
+        if (here) {
+          event.preventDefault();
+          here.focus();
+          here.select();
+          return;
+        }
+        event.preventDefault();
+        location.href = SEARCH;
+      });
+
+      // Landing on the search page should put the cursor in the field, but not
+      // on touch, where it would throw up the keyboard before anyone asked.
+      if (location.pathname === SEARCH && matchMedia("(pointer: fine)").matches) {
+        addEventListener("load", function () {
+          var input = document.querySelector(field);
+          if (input) input.focus();
+        });
+      }
     })();
   </script>
   {%- if site.analyticsToken %}
