@@ -14,17 +14,80 @@ permalink: /reading/
   <p class="page-lead">Nothing here yet.</p>
   {%- endif %}
 
-  <div class="book-grid">
+  <div class="book-grid" id="book-grid">
     {%- for note in collections.books %}
-    <a class="book-card" href="{{ note.url }}">
+    <a class="book-card" href="{{ note.url }}" aria-expanded="false">
       {%- if note.data.coverImage %}
       <img class="book-card-cover" src="{{ note.data.coverImage }}" alt="" width="160" height="240" loading="lazy">
       {%- else %}
       <span class="book-card-cover book-card-blank" aria-hidden="true">{{ note.data.book }}</span>
       {%- endif %}
       <span class="book-card-name">{{ note.data.book }}</span>
-      <span class="book-card-line">{{ note.templateContent | excerpt | truncate(90) }}</span>
+      <span class="book-card-line">{{ note.data.author }}</span>
+      {#- The note travels with its card so opening it costs no request. #}
+      <template class="book-note">
+        <div class="book-panel-head">
+          <p class="book-panel-title">{{ note.data.book }}</p>
+          <p class="book-panel-author">{{ note.data.author }} · <time datetime="{{ note.date | isoDate }}">{{ note.date | readableDate }}</time></p>
+        </div>
+        <div class="prose">{{ note.templateContent | safe }}</div>
+      </template>
     </a>
     {%- endfor %}
   </div>
+
+  <script>
+    // Clicking a cover unfolds the note in a full-width row under that shelf
+    // row. The card stays a real link to the note page, so without JavaScript
+    // (and for search engines and shares) navigation still works.
+    (function () {
+      var grid = document.getElementById("book-grid");
+      if (!grid) return;
+      var panel = null;
+      var openCard = null;
+
+      function close() {
+        if (panel) panel.remove();
+        if (openCard) openCard.setAttribute("aria-expanded", "false");
+        panel = null;
+        openCard = null;
+      }
+
+      grid.addEventListener("click", function (event) {
+        var card = event.target.closest(".book-card");
+        if (!card) return;
+        event.preventDefault();
+        if (card === openCard) { close(); return; }
+        close();
+
+        // The panel must land after the last card sharing this card's row,
+        // otherwise a full-width element mid-row would reflow the shelf.
+        var cards = [].slice.call(grid.querySelectorAll(".book-card"));
+        var row = cards.filter(function (c) { return c.offsetTop === card.offsetTop; });
+        var anchor = row[row.length - 1];
+
+        panel = document.createElement("div");
+        panel.className = "book-panel";
+        panel.appendChild(card.querySelector(".book-note").content.cloneNode(true));
+        var back = document.createElement("p");
+        back.className = "book-panel-link";
+        back.innerHTML = '<a href="' + card.getAttribute("href") + '">Open as a page</a>';
+        panel.appendChild(back);
+        anchor.after(panel);
+        card.setAttribute("aria-expanded", "true");
+        openCard = card;
+        panel.scrollIntoView({ block: "nearest", behavior: "smooth" });
+      });
+
+      // Rows re-wrap when the column count changes; only then is the panel
+      // under the wrong row. Anything else (scrollbars, screenshots, phone
+      // rotation that keeps one column) leaves it open.
+      var columns = getComputedStyle(grid).gridTemplateColumns.split(" ").length;
+      addEventListener("resize", function () {
+        var now = getComputedStyle(grid).gridTemplateColumns.split(" ").length;
+        if (now !== columns) { columns = now; close(); }
+      });
+      addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
+    })();
+  </script>
 </section>

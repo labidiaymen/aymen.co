@@ -1329,4 +1329,31 @@ which is a hard yellow that
   line-height: 1.45;
   color: var(--text-muted);
 }
+
+/* The unfolded note: a full-width row beneath the shelf row it came from. */
+.book-panel {
+  grid-column: 1 / -1;
+  padding: 1.4rem 1.6rem 1.5rem;
+  border-left: 2px solid var(--accent);
+  background: var(--code-bg);
+  border-radius: 0 6px 6px 0;
+}
+.book-panel-title {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  font-weight: 500;
+}
+.book-panel-author {
+  margin: 0.15rem 0 0.9rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+.book-panel .prose { font-size: 1.02rem; }
+.book-panel-link { margin: 1rem 0 0; font-size: 0.85rem; }
+.book-panel-link a { color: var(--text-muted); }
+.book-panel-link a:hover { color: var(--accent); }
+.book-card[aria-expanded="true"] .book-card-cover {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
