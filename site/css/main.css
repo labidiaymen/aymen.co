@@ -1278,3 +1278,28 @@ which is a hard yellow that
   font-size: 0.88rem;
   color: var(--text-muted);
 }
+
+/* The cover sits in the rail like a spine on a shelf; the writing keeps the
+   column. Entries without artwork fall back to the plain dated rail. */
+.book-cover {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+.book-cover img {
+  display: block;
+  width: 4.5rem;
+  height: auto;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border-radius: 3px;
+  border: 1px solid var(--hairline);
+  box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.12);
+}
+.book-entry:hover .book-cover img { box-shadow: 2px 3px 12px rgba(0, 0, 0, 0.2); }
+
+@media (max-width: 560px) {
+  /* One column on phones: cover and date sit side by side above the text. */
+  .book-rail { display: flex; align-items: flex-end; gap: 0.7rem; margin-bottom: 0.6rem; }
+  .book-cover { margin-bottom: 0; }
+  .book-cover img { width: 3.4rem; }
+}
