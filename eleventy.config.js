@@ -142,15 +142,6 @@ module.exports = function (eleventyConfig) {
     return groups;
   });
 
-  // Book notes, newest first. A note joins the reading page by naming the book
-  // it is about; nothing else marks it.
-  eleventyConfig.addCollection("books", (api) =>
-    api
-      .getFilteredByGlob("site/notes/*.md")
-      .filter((note) => note.data.book)
-      .sort((a, b) => b.date - a.date)
-  );
-
   // Short notes, newest first
   eleventyConfig.addCollection("notes", (api) =>
     api.getFilteredByGlob("site/notes/*.md").sort((a, b) => b.date - a.date)
@@ -332,6 +323,12 @@ module.exports = function (eleventyConfig) {
       next: index >= 0 ? parts[index + 1] : undefined,
     };
   });
+
+  // The shelf lives in site/_data/books.json; a book links to a note only once
+  // one has been written about it.
+  eleventyConfig.addFilter("noteAt", (notes, url) =>
+    url ? (notes || []).find((note) => note.url === url) : undefined
+  );
 
   eleventyConfig.addFilter("limit", (arr, n) => (arr || []).slice(0, n));
 

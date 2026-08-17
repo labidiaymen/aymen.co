@@ -1357,3 +1357,7 @@ which is a hard yellow that
   outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
+
+/* A book with nothing written about it yet is a tile, not a link. */
+.book-card-quiet { cursor: default; }
+.book-card-quiet .book-card-cover { transition: none; }

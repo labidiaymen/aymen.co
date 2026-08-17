@@ -1,69 +1,68 @@
 ---
 layout: layouts/base.njk
 title: "Reading"
-description: "Books that changed how I work, and where the change shows up."
+description: "Books on the shelf."
 permalink: /reading/
 ---
 <section class="container page">
   <header class="page-head">
     <h1>Reading</h1>
-    <p class="page-lead">Not a list. Books that changed something about how I work, and where the change shows up.</p>
+    <p class="page-lead">Books on the shelf, mostly leadership.</p>
   </header>
 
-  {%- if not collections.books.length %}
-  <p class="page-lead">Nothing here yet.</p>
-  {%- endif %}
-
   <div class="book-grid" id="book-grid">
-    {%- for note in collections.books %}
+    {%- for item in books %}
+    {#- A book with a note is clickable and unfolds it; without one it is a
+        plain tile, so the shelf works before anything is written about it. #}
+    {%- set note = collections.notes | noteAt(item.note) %}
+    {%- if note %}
     <a class="book-card" href="{{ note.url }}" aria-expanded="false">
-      {%- if note.data.coverImage %}
-      <img class="book-card-cover" src="{{ note.data.coverImage }}" alt="" width="160" height="240" loading="lazy">
-      {%- else %}
-      <span class="book-card-cover book-card-blank" aria-hidden="true">{{ note.data.book }}</span>
-      {%- endif %}
-      <span class="book-card-name">{{ note.data.book }}</span>
-      <span class="book-card-line">{{ note.data.author }}</span>
-      {#- The note travels with its card so opening it costs no request. #}
+      <img class="book-card-cover" src="{{ item.cover }}" alt="{{ item.title }}" width="200" height="300" loading="lazy">
+      <span class="book-card-name">{{ item.title }}</span>
+      <span class="book-card-line">{{ item.author }}</span>
       <template class="book-note">
         <div class="book-panel-head">
-          <p class="book-panel-title">{{ note.data.book }}</p>
-          <p class="book-panel-author">{{ note.data.author }} · <time datetime="{{ note.date | isoDate }}">{{ note.date | readableDate }}</time></p>
+          <p class="book-panel-title">{{ item.title }}</p>
+          <p class="book-panel-author">{{ item.author }}</p>
         </div>
         <div class="prose">{{ note.templateContent | safe }}</div>
       </template>
     </a>
+    {%- else %}
+    <div class="book-card book-card-quiet">
+      <img class="book-card-cover" src="{{ item.cover }}" alt="{{ item.title }}" width="200" height="300" loading="lazy">
+      <span class="book-card-name">{{ item.title }}</span>
+      <span class="book-card-line">{{ item.author }}</span>
+    </div>
+    {%- endif %}
     {%- endfor %}
   </div>
 
   <script>
-    // Clicking a cover unfolds the note in a full-width row under that shelf
-    // row. The card stays a real link to the note page, so without JavaScript
-    // (and for search engines and shares) navigation still works.
+    // Clicking a cover unfolds its note in a full-width row under that shelf
+    // row. Only books that have a note are cards; the rest are inert tiles.
     (function () {
       var grid = document.getElementById("book-grid");
       if (!grid) return;
-      var panel = null;
-      var openCard = null;
+      var panel = null, openCard = null;
 
       function close() {
         if (panel) panel.remove();
         if (openCard) openCard.setAttribute("aria-expanded", "false");
-        panel = null;
-        openCard = null;
+        panel = null; openCard = null;
       }
 
       grid.addEventListener("click", function (event) {
-        var card = event.target.closest(".book-card");
+        var card = event.target.closest("a.book-card");
         if (!card) return;
         event.preventDefault();
         if (card === openCard) { close(); return; }
         close();
 
-        // The panel must land after the last card sharing this card's row,
-        // otherwise a full-width element mid-row would reflow the shelf.
-        var cards = [].slice.call(grid.querySelectorAll(".book-card"));
-        var row = cards.filter(function (c) { return c.offsetTop === card.offsetTop; });
+        // Land the panel after the last tile on this card's row, so a
+        // full-width element never reflows the shelf mid-row.
+        var tiles = [].slice.call(grid.children);
+        var row = tiles.filter(function (t) { return t.offsetTop === card.offsetTop; });
         var anchor = row[row.length - 1];
 
         panel = document.createElement("div");
@@ -76,12 +75,8 @@ permalink: /reading/
         anchor.after(panel);
         card.setAttribute("aria-expanded", "true");
         openCard = card;
-        panel.scrollIntoView({ block: "nearest", behavior: "smooth" });
       });
 
-      // Rows re-wrap when the column count changes; only then is the panel
-      // under the wrong row. Anything else (scrollbars, screenshots, phone
-      // rotation that keeps one column) leaves it open.
       var columns = getComputedStyle(grid).gridTemplateColumns.split(" ").length;
       addEventListener("resize", function () {
         var now = getComputedStyle(grid).gridTemplateColumns.split(" ").length;

@@ -1,0 +1,52 @@
+[
+  {
+    "title": "Leaders Eat Last",
+    "author": "Simon Sinek",
+    "cover": "/images/book-leaders-eat-last.jpg"
+  },
+  {
+    "title": "Zero to One",
+    "author": "Peter Thiel with Blake Masters",
+    "cover": "/images/book-zero-to-one.jpg"
+  },
+  {
+    "title": "Emotional",
+    "author": "Leonard Mlodinow",
+    "cover": "/images/book-emotional.jpg"
+  },
+  {
+    "title": "The Visual MBA",
+    "author": "Jason Barron",
+    "cover": "/images/book-the-visual-mba.jpg"
+  },
+  {
+    "title": "Rework",
+    "author": "Jason Fried and David Heinemeier Hansson",
+    "cover": "/images/book-rework.jpg"
+  },
+  {
+    "title": "Manifest: Dive Deeper",
+    "author": "Roxie Nafousi",
+    "cover": "/images/book-manifest-dive-deeper.jpg"
+  },
+  {
+    "title": "The 7 Secrets of Leadership Success",
+    "author": "Deborah Tom and Richard Barrons",
+    "cover": "/images/book-7-secrets-of-leadership-success.jpg"
+  },
+  {
+    "title": "Designing Your New Work Life",
+    "author": "Bill Burnett and Dave Evans",
+    "cover": "/images/book-designing-your-new-work-life.jpg"
+  },
+  {
+    "title": "The Communication Book",
+    "author": "Mikael Krogerus and Roman Tschäppeler",
+    "cover": "/images/book-the-communication-book.jpg"
+  },
+  {
+    "title": "ALIEN Thinking",
+    "author": "Cyril Bouquet, Jean-Louis Barsoux and Michael Wade",
+    "cover": "/images/book-alien-thinking.jpg"
+  }
+]
