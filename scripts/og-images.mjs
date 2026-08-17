@@ -94,8 +94,78 @@ function card({ kicker, headline, footnote }) {
   };
 }
 
-async function render(spec, file) {
-  const svg = await satori(card(spec), {
+// The reading page is a shelf, so its card is the shelf: the covers carry it
+// and the row runs off the right edge rather than stopping short.
+const SHELF_W = 190;
+const SHELF_H = 285;
+
+async function coverImage(path) {
+  const buffer = await sharp(path)
+    .resize(SHELF_W * 2, SHELF_H * 2, { fit: "cover" })
+    .jpeg({ quality: 82 })
+    .toBuffer();
+  return `data:image/jpeg;base64,${buffer.toString("base64")}`;
+}
+
+function shelfCard({ headline, covers }) {
+  return {
+    type: "div",
+    props: {
+      style: {
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+        backgroundColor: PAPER,
+        paddingTop: 66,
+        borderTop: `12px solid ${ACCENT}`,
+        fontFamily: "Inter",
+        overflow: "hidden",
+      },
+      children: [
+        row(
+          [
+            text("Reading", {
+              fontSize: 26,
+              letterSpacing: 3,
+              textTransform: "uppercase",
+              color: ACCENT,
+            }),
+            text("aymen.co", { fontSize: 26, color: MUTED }),
+          ],
+          { padding: "0 84px", justifyContent: "space-between" }
+        ),
+        row(
+          [
+            text(headline, {
+              fontFamily: "Newsreader",
+              fontSize: 52,
+              lineHeight: 1.22,
+              color: INK,
+              maxWidth: 900,
+            }),
+          ],
+          { padding: "34px 84px 0" }
+        ),
+        row(
+          covers.map((src) => ({
+            type: "img",
+            props: {
+              src,
+              width: SHELF_W,
+              height: SHELF_H,
+              style: { borderRadius: 3, border: "1px solid rgba(27,26,24,0.1)" },
+            },
+          })),
+          { marginTop: "auto", paddingLeft: 84, gap: 16, flexShrink: 0 }
+        ),
+      ],
+    },
+  };
+}
+
+async function render(tree, file) {
+  const svg = await satori(tree, {
     width: WIDTH,
     height: HEIGHT,
     fonts: [
@@ -120,14 +190,27 @@ for (const file of readDir("site/notes")) {
   const slug = basename(file, ".md");
   const { data, body } = frontmatter(readFileSync(join("site/notes", file), "utf8"));
   await render(
-    {
+    card({
       kicker: data.title ? `Note · ${data.title}` : "Note",
       headline: truncate(plain(body), 240),
       footnote: monthYear(data.date),
-    },
+    }),
     join(OUT_DIR, `${slug}.png`)
   );
   made++;
 }
+
+// One card for the reading page, built from the same books.json the page reads.
+const books = JSON.parse(readFileSync("site/_data/books.json", "utf8"));
+const { data: readingData } = frontmatter(readFileSync("site/reading.njk", "utf8"));
+await render(
+  shelfCard({
+    headline: readingData.lead || "Not a recommendation list. Just what is on the shelf.",
+    // Seven fills the frame; the rest would be cut off anyway.
+    covers: await Promise.all(books.slice(0, 7).map((b) => coverImage(join("public", b.cover)))),
+  }),
+  join(OUT_DIR, "reading.png")
+);
+made++;
 
 console.log(`✓ ${made} share cards written to ${OUT_DIR}`);

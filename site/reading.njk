@@ -2,12 +2,15 @@
 layout: layouts/base.njk
 title: "Reading"
 description: "Books on Labidi Aymen's shelf."
+lead: "Not a recommendation list. Just what is on the shelf."
+og: /og/reading.png
 permalink: /reading/
 ---
 <section class="container page">
   <header class="page-head">
     <h1>Reading</h1>
-    <p class="page-lead">Not a recommendation list. Just what is on the shelf.</p>
+    {#- The lead lives in front matter so the share card can set the same line. #}
+    <p class="page-lead">{{ lead }}</p>
   </header>
 
   <div class="book-grid" id="book-grid">
