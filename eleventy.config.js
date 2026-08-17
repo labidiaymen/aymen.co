@@ -324,6 +324,12 @@ module.exports = function (eleventyConfig) {
     };
   });
 
+  // The shelf lives in site/_data/books.json; a book links to a note only once
+  // one has been written about it.
+  eleventyConfig.addFilter("noteAt", (notes, url) =>
+    url ? (notes || []).find((note) => note.url === url) : undefined
+  );
+
   eleventyConfig.addFilter("limit", (arr, n) => (arr || []).slice(0, n));
 
   eleventyConfig.addFilter("skipFirst", (arr) => (arr || []).slice(1));

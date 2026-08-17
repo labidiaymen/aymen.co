@@ -1278,3 +1278,74 @@ which is a hard yellow that
   /* No physical keyboard to hint at, and the header has no room for it. */
   .nav-kbd { display: none; }
 }
+/* Reading: a shelf. Every cover visible at once, one line of verdict under
+   each; the note page holds the rest. */
+.book-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr));
+  gap: 1.8rem 1.4rem;
+}
+.book-card { display: block; text-decoration: none; color: var(--text); }
+.book-card-cover {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border-radius: 3px;
+  border: 1px solid var(--hairline);
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.13);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.book-card:hover .book-card-cover {
+  transform: translateY(-3px);
+  box-shadow: 3px 7px 16px rgba(0, 0, 0, 0.2);
+}
+.book-card-name {
+  display: block;
+  margin-top: 0.65rem;
+  font-family: var(--serif);
+  font-size: 1.02rem;
+  font-weight: 500;
+  line-height: 1.3;
+}
+.book-card:hover .book-card-name { color: var(--accent); }
+.book-card-line {
+  display: block;
+  margin-top: 0.2rem;
+  font-size: 0.84rem;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+
+/* The unfolded note: a full-width row beneath the shelf row it came from. */
+.book-panel {
+  grid-column: 1 / -1;
+  padding: 1.4rem 1.6rem 1.5rem;
+  border-left: 2px solid var(--accent);
+  background: var(--code-bg);
+  border-radius: 0 6px 6px 0;
+}
+.book-panel-title {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  font-weight: 500;
+}
+.book-panel-author {
+  margin: 0.15rem 0 0.9rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+.book-panel .prose { font-size: 1.02rem; }
+.book-panel-link { margin: 1rem 0 0; font-size: 0.85rem; }
+.book-panel-link a { color: var(--text-muted); }
+.book-panel-link a:hover { color: var(--accent); }
+.book-card[aria-expanded="true"] .book-card-cover {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* A book with nothing written about it yet is a tile, not a link. */
+.book-card-quiet { cursor: default; }
+.book-card-quiet .book-card-cover { transition: none; }

@@ -1,0 +1,88 @@
+---
+layout: layouts/base.njk
+title: "Reading"
+description: "Books on the shelf."
+permalink: /reading/
+---
+<section class="container page">
+  <header class="page-head">
+    <h1>Reading</h1>
+    <p class="page-lead">Books on the shelf, mostly leadership.</p>
+  </header>
+
+  <div class="book-grid" id="book-grid">
+    {%- for item in books %}
+    {#- A book with a note is clickable and unfolds it; without one it is a
+        plain tile, so the shelf works before anything is written about it. #}
+    {%- set note = collections.notes | noteAt(item.note) %}
+    {%- if note %}
+    <a class="book-card" href="{{ note.url }}" aria-expanded="false">
+      <img class="book-card-cover" src="{{ item.cover }}" alt="{{ item.title }}" width="200" height="300" loading="lazy">
+      <span class="book-card-name">{{ item.title }}</span>
+      <span class="book-card-line">{{ item.author }}</span>
+      <template class="book-note">
+        <div class="book-panel-head">
+          <p class="book-panel-title">{{ item.title }}</p>
+          <p class="book-panel-author">{{ item.author }}</p>
+        </div>
+        <div class="prose">{{ note.templateContent | safe }}</div>
+      </template>
+    </a>
+    {%- else %}
+    <div class="book-card book-card-quiet">
+      <img class="book-card-cover" src="{{ item.cover }}" alt="{{ item.title }}" width="200" height="300" loading="lazy">
+      <span class="book-card-name">{{ item.title }}</span>
+      <span class="book-card-line">{{ item.author }}</span>
+    </div>
+    {%- endif %}
+    {%- endfor %}
+  </div>
+
+  <script>
+    // Clicking a cover unfolds its note in a full-width row under that shelf
+    // row. Only books that have a note are cards; the rest are inert tiles.
+    (function () {
+      var grid = document.getElementById("book-grid");
+      if (!grid) return;
+      var panel = null, openCard = null;
+
+      function close() {
+        if (panel) panel.remove();
+        if (openCard) openCard.setAttribute("aria-expanded", "false");
+        panel = null; openCard = null;
+      }
+
+      grid.addEventListener("click", function (event) {
+        var card = event.target.closest("a.book-card");
+        if (!card) return;
+        event.preventDefault();
+        if (card === openCard) { close(); return; }
+        close();
+
+        // Land the panel after the last tile on this card's row, so a
+        // full-width element never reflows the shelf mid-row.
+        var tiles = [].slice.call(grid.children);
+        var row = tiles.filter(function (t) { return t.offsetTop === card.offsetTop; });
+        var anchor = row[row.length - 1];
+
+        panel = document.createElement("div");
+        panel.className = "book-panel";
+        panel.appendChild(card.querySelector(".book-note").content.cloneNode(true));
+        var back = document.createElement("p");
+        back.className = "book-panel-link";
+        back.innerHTML = '<a href="' + card.getAttribute("href") + '">Open as a page</a>';
+        panel.appendChild(back);
+        anchor.after(panel);
+        card.setAttribute("aria-expanded", "true");
+        openCard = card;
+      });
+
+      var columns = getComputedStyle(grid).gridTemplateColumns.split(" ").length;
+      addEventListener("resize", function () {
+        var now = getComputedStyle(grid).gridTemplateColumns.split(" ").length;
+        if (now !== columns) { columns = now; close(); }
+      });
+      addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
+    })();
+  </script>
+</section>
