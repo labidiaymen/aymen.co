@@ -19,16 +19,16 @@
       "url": "/notes/"
     },
     {
+      "label": "Reading",
+      "url": "/reading/"
+    },
+    {
       "label": "Projects",
       "url": "/projects/"
     },
     {
       "label": "About",
       "url": "/about/"
-    },
-    {
-      "label": "Search",
-      "url": "/search/"
     }
   ],
   "analyticsToken": ""

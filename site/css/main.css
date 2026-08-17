@@ -1349,3 +1349,17 @@ which is a hard yellow that
 /* A book with nothing written about it yet is a tile, not a link. */
 .book-card-quiet { cursor: default; }
 .book-card-quiet .book-card-cover { transition: none; }
+
+/* Search hint on the writing archive, standing in for the old nav slot. */
+.search-hint {
+  margin: 1.2rem 0 0;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+.search-hint a { color: var(--text-muted); }
+.search-hint a:hover { color: var(--accent); }
+@media (max-width: 700px) {
+  /* No keyboard to press, but the link is the only route to search on a
+     phone now that the nav slot is gone, so only the keystroke drops away. */
+  .hint-key { display: none; }
+}

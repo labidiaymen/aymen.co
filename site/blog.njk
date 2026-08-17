@@ -8,6 +8,9 @@ permalink: /blog/
   <header class="page-head">
     <h1>Writing</h1>
     <p class="page-lead">{{ collections.posts.length }} posts since 2015, lately about AI agents and how software actually gets shipped.</p>
+    {#- Search has no nav slot; the hint belongs where someone is scanning 54
+        posts and might want it. #}
+    <p class="search-hint"><span class="hint-key">Press <kbd class="nav-kbd">/</kbd>, or </span><a href="/search/">search all {{ collections.posts.length }} posts</a>.</p>
     <p class="filter-line">Filed under
       {%- for group in collections.categoryMap | limit(8) %}
       <a href="/{{ group.slug }}/">{{ group.label }}</a>{% if not loop.last %} · {% endif %}

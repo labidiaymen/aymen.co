@@ -59,7 +59,7 @@
         {%- for item in site.nav %}
         {#- Notes only appears once at least one note exists #}
         {%- if item.url != "/notes/" or collections.notes.length %}
-        <a href="{{ item.url }}"{% if page.url == item.url %} aria-current="page"{% endif %}>{{ item.label }}{% if item.url == "/search/" %}<kbd class="nav-kbd" aria-hidden="true">/</kbd>{% endif %}</a>
+        <a href="{{ item.url }}"{% if page.url == item.url %} aria-current="page"{% endif %}>{{ item.label }}</a>
         {%- endif %}
         {%- endfor %}
         <button class="theme-toggle" type="button" aria-label="Theme: following your system. Switch to light.">
