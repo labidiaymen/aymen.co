@@ -1372,3 +1372,84 @@ which is a hard yellow that
      phone now that the nav slot is gone, so only the keystroke drops away. */
   .hint-key { display: none; }
 }
+
+/* ---------- Video ---------- */
+/* A facade: the poster and the button are ours, and nothing is requested from
+   YouTube until someone presses play. */
+.video {
+  margin: 2.2rem 0;
+}
+.video-play {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+  overflow: hidden;
+  background: none;
+  line-height: 0;
+  cursor: pointer;
+}
+.video-play img,
+.video-play picture {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 0;
+  border-radius: 0;
+}
+.video-play::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(transparent 45%, rgba(12, 12, 14, 0.28));
+  opacity: 0;
+  transition: opacity 0.18s ease;
+}
+/* Light disc, accent triangle: legible over any frame without sitting on the
+   poster like a badge. */
+.video-play-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 3.5rem;
+  height: 3.5rem;
+  margin: -1.75rem 0 0 -1.75rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 3px 14px rgba(12, 12, 14, 0.2);
+  transition: transform 0.18s ease, background-color 0.18s ease;
+}
+/* The triangle, nudged right of centre so it reads as centred. */
+.video-play-icon::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -0.5rem 0 0 -0.32rem;
+  border-style: solid;
+  border-width: 0.5rem 0 0.5rem 0.82rem;
+  border-color: transparent transparent transparent var(--accent);
+}
+.video-play:hover::before { opacity: 1; }
+.video-play:hover .video-play-icon {
+  background: #fff;
+  transform: scale(1.06);
+}
+.video-play:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+.video-frame {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .video-play::before,
+  .video-play-icon { transition: none; }
+  .video-play:hover .video-play-icon { transform: none; }
+}

@@ -173,6 +173,33 @@
       }
     })();
   </script>
+  <script>
+    // Video facade. The poster and the button are ours and nothing is fetched
+    // from YouTube until someone presses play, so a page with a video on it
+    // still loads with no third-party request and no cookie.
+    (function () {
+      var figures = document.querySelectorAll(".video[data-youtube]");
+      if (!figures.length) return;
+
+      figures.forEach(function (figure) {
+        var button = figure.querySelector(".video-play");
+        if (!button) return;
+
+        button.addEventListener("click", function () {
+          var frame = document.createElement("iframe");
+          frame.className = "video-frame";
+          frame.src =
+            "https://www.youtube-nocookie.com/embed/" + figure.dataset.youtube +
+            "?autoplay=1&rel=0&modestbranding=1&playsinline=1";
+          frame.title = button.getAttribute("aria-label") || "Video";
+          frame.allow = "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture";
+          frame.allowFullscreen = true;
+          frame.referrerPolicy = "strict-origin-when-cross-origin";
+          button.replaceWith(frame);
+        });
+      });
+    })();
+  </script>
   {%- if site.analyticsToken %}
   <script defer src="https://static.cloudflareinsights.com/beacon.min.js"
           data-cf-beacon='{"token": "{{ site.analyticsToken }}"}'></script>

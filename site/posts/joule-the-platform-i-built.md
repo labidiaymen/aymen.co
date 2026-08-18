@@ -9,6 +9,13 @@ Every AI project I built started the same way: week two, and I am writing the sa
 
 If you keep rebuilding the same thing, at some point it should become a product.
 
+<figure class="video" data-youtube="R8HEWlsWraE">
+  <button class="video-play" type="button" aria-label="Play the video: Joule.sh - The AI Workspace">
+    <img src="/images/joule-video-poster.jpg" alt="The Joule workspace, running a research task" width="1280" height="720" loading="lazy" decoding="async">
+    <span class="video-play-icon" aria-hidden="true"></span>
+  </button>
+</figure>
+
 ## What Joule is
 
 Joule is an AI platform and workspace for individuals and enterprises to build, maintain and deploy AI workflows and agents.
