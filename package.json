@@ -1,7 +1,7 @@
 {
   "name": "aymen.co",
   "version": "2.0.0",
-  "description": "Personal website and blog of Labidi Aymen \u2014 static site built with Eleventy, deployed to Cloudflare",
+  "description": "Personal website and blog of Labidi Aymen — static site built with Eleventy, deployed to Cloudflare",
   "private": true,
   "scripts": {
     "build": "eleventy && node scripts/og-images.mjs && pagefind --site _site",
@@ -18,6 +18,7 @@
     "@fontsource-variable/inter": "^5.3.0",
     "@fontsource-variable/newsreader": "^5.3.0",
     "pagefind": "^1.5.2",
-    "satori": "^0.29.0"
+    "satori": "^0.29.0",
+    "sharp": "^0.35.3"
   }
 }
