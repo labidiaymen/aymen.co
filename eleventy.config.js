@@ -334,6 +334,8 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addFilter("skipFirst", (arr) => (arr || []).slice(1));
 
+  eleventyConfig.addFilter("skip", (arr, n) => (arr || []).slice(n));
+
   eleventyConfig.addFilter("groupByYear", (posts) => {
     const groups = [];
     for (const post of posts || []) {

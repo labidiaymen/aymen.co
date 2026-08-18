@@ -21,26 +21,30 @@ layout: layouts/base.njk
 
 <section class="container home-section">
   <h2 class="rule-heading">Writing</h2>
-  {%- set latest = collections.posts | first %}
-  <a class="featured-item" href="{{ latest.data.external or latest.url }}"{% if latest.data.external %} rel="noopener" target="_blank"{% endif %}>
+  {#- The two most recent posts lead with their picture; the rest are ledger rows. #}
+  {%- for item in collections.posts | limit(2) %}
+  <a class="featured-item" href="{{ item.data.external or item.url }}"{% if item.data.external %} rel="noopener" target="_blank"{% endif %}>
     <span class="featured-body">
-      <span class="featured-title">{{ latest.data.title }}{% if latest.data.external %} <span class="ext" aria-hidden="true">↗</span>{% endif %}</span>
-      {%- if latest.data.description %}
-      <span class="featured-lede">{{ latest.data.description }}</span>
+      <span class="featured-title">{{ item.data.title }}{% if item.data.external %} <span class="ext" aria-hidden="true">↗</span>{% endif %}</span>
+      {%- if item.data.description %}
+      <span class="featured-lede">{{ item.data.description }}</span>
       {%- endif %}
       <span class="featured-meta">
-        {%- if latest.data.categories.length %}<span class="post-row-cat">{{ latest.data.categories[0] | categoryLabel }}</span> · {% endif -%}
-        {{ latest.date | readableDate }} · {{ latest.templateContent | readingTime }} min read
+        {%- if item.data.categories.length %}<span class="post-row-cat">{{ item.data.categories[0] | categoryLabel }}</span> · {% endif -%}
+        {{ item.date | readableDate }} · {{ item.templateContent | readingTime }} min read
       </span>
     </span>
     {#- `thumb` fills this slot for a post that carries its own visual in the
         body and would only repeat it at the top of the article. #}
-    {%- set featuredImage = latest.data.cover or latest.data.thumb %}
+    {%- set featuredImage = item.data.cover or item.data.thumb %}
     {%- if featuredImage %}
-    <img class="featured-cover-img" src="{{ featuredImage }}" alt="{{ latest.data.title }}" loading="eager" decoding="sync" fetchpriority="high">
+    {#- Only the first is an LCP candidate; the second waits its turn. #}
+    <img class="featured-cover-img" src="{{ featuredImage }}" alt="{{ item.data.title }}"
+         {% if loop.first %}loading="eager" decoding="sync" fetchpriority="high"{% else %}loading="lazy" decoding="async"{% endif %}>
     {%- endif %}
   </a>
-  {%- set posts = collections.posts | limit(16) | skipFirst %}
+  {%- endfor %}
+  {%- set posts = collections.posts | limit(16) | skip(2) %}
   {% include "post-list.njk" %}
   <p class="index-more"><a href="/blog/">Full index, {{ collections.posts.length }} posts →</a></p>
 </section>
