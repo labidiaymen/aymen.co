@@ -24,8 +24,21 @@ permalink: /projects/
   <ul class="project-entries">
     {%- for post in collections.categoryMap | categoryPosts("projects") %}
     <li class="project-entry">
-      <h3><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
+      <h3><a href="{{ post.url }}">{{ post.data.title }}</a> <span class="project-year">{{ post.date | year }}</span></h3>
       <p>{{ post.templateContent | excerpt }}</p>
+    </li>
+    {%- endfor %}
+    {#- Products that never got a post of their own live in earlier.json, so an
+        archive entry does not require writing an article about it first. They
+        sit last because they are older than everything with a write-up. #}
+    {%- for item in earlier %}
+    <li class="project-entry">
+      <h3>
+        {%- if item.url %}<a href="{{ item.url }}" rel="noopener" target="_blank">{{ item.name }} <span class="ext" aria-hidden="true">↗</span></a>
+        {%- else %}{{ item.name }}{% endif %}
+        {%- if item.year %} <span class="project-year">{{ item.year }}</span>{% endif %}
+      </h3>
+      {%- if item.desc %}<p>{{ item.desc }}</p>{% endif %}
     </li>
     {%- endfor %}
   </ul>
