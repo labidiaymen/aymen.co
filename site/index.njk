@@ -38,9 +38,11 @@ layout: layouts/base.njk
         body and would only repeat it at the top of the article. #}
     {%- set featuredImage = item.data.cover or item.data.thumb %}
     {%- if featuredImage %}
-    {#- Only the first is an LCP candidate; the second waits its turn. #}
+    {#- Both sit above the fold, so both load eagerly — lazy on the second made
+        it pop in on every load. Only the first carries the LCP hint, so the
+        priority is not split between them. #}
     <img class="featured-cover-img" src="{{ featuredImage }}" alt="{{ item.data.title }}"
-         {% if loop.first %}loading="eager" decoding="sync" fetchpriority="high"{% else %}loading="lazy" decoding="async"{% endif %}>
+         loading="eager" {% if loop.first %}decoding="sync" fetchpriority="high"{% else %}decoding="async"{% endif %}>
     {%- endif %}
   </a>
   {%- endfor %}
