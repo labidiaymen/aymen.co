@@ -2,7 +2,7 @@
 title: "Joule: The Platform I Built by Rebuilding Everything I Kept Rebuilding"
 date: 2026-08-18
 categories: ["ai"]
-cover: "/images/joule-cover.png"
+thumb: "/images/joule-cover.png"
 description: "Every AI project I built started the same way: week two, and I am writing the same components again. If you keep rebuilding the same thing, at some point it should become a product."
 permalink: "/ai/joule-the-platform-i-built/"
 ---

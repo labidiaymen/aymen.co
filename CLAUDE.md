@@ -41,13 +41,17 @@ category is for.
 
 Two separate front matter keys, because they answer different questions:
 
-- `cover:` puts the image at the top of the post **and** uses it when the link is
-  shared.
-- `og:` sets the share image only — nothing is added to the page.
+- `cover:` puts the image at the top of the post, fills the featured slot on the
+  home page, **and** is used when the link is shared.
+- `thumb:` fills the home slot and the share image, but adds nothing to the post
+  itself. For a post that already carries its own visual — a video, a diagram in
+  the first screen — where a cover would only repeat it.
+- `og:` sets the share image only — nothing on the page, nothing in a list.
 
-Resolution order is `og` → `cover` → a note's generated card → `/images/social-card.jpg`.
-So a post that should look clean but still share well takes `og:` alone; that is what
-the LumenJS deep dives do.
+Resolution order is `og` → `cover` → `thumb` → a note's generated card →
+`/images/social-card.jpg`. So a post that should look clean but still share well takes
+`og:` alone; that is what the LumenJS deep dives do. The Joule post takes `thumb:`,
+because the video under the intro is already its picture.
 
 ## No emoji
 

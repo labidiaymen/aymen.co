@@ -129,8 +129,9 @@ layout: layouts/base.njk
     {%- if description %}
     "description": {{ description | dump | safe }},
     {%- endif %}
-    {%- if cover %}
-    "image": "{{ cover | absoluteUrl(site.url) }}",
+    {%- set structuredImage = cover or thumb %}
+    {%- if structuredImage %}
+    "image": "{{ structuredImage | absoluteUrl(site.url) }}",
     {%- endif %}
     "author": { "@type": "Person", "name": "{{ site.author }}", "url": "{{ site.url }}/about/" }
   }

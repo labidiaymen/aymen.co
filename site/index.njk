@@ -33,8 +33,11 @@ layout: layouts/base.njk
         {{ latest.date | readableDate }} · {{ latest.templateContent | readingTime }} min read
       </span>
     </span>
-    {%- if latest.data.cover %}
-    <img class="featured-cover-img" src="{{ latest.data.cover }}" alt="{{ latest.data.title }}" loading="eager" decoding="sync" fetchpriority="high">
+    {#- `thumb` fills this slot for a post that carries its own visual in the
+        body and would only repeat it at the top of the article. #}
+    {%- set featuredImage = latest.data.cover or latest.data.thumb %}
+    {%- if featuredImage %}
+    <img class="featured-cover-img" src="{{ featuredImage }}" alt="{{ latest.data.title }}" loading="eager" decoding="sync" fetchpriority="high">
     {%- endif %}
   </a>
   {%- set posts = collections.posts | limit(16) | skipFirst %}
