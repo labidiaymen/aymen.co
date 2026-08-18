@@ -1,9 +1,9 @@
 ---
-title: "Joule: The Platform I Built by Rebuilding Everything I Kept Rebuilding"
+title: "Joule.sh - The AI Workspace"
 date: 2026-08-18
 categories: ["ai"]
 thumb: "/images/joule-cover.png"
-description: "Every AI project I built started the same way: week two, and I am writing the same components again. If you keep rebuilding the same thing, at some point it should become a product."
+description: "Joule is an AI platform and workspace for individuals and enterprises to build, maintain and deploy AI workflows and agents."
 permalink: "/ai/joule-the-platform-i-built/"
 ---
 Every AI project I built started the same way: week two, and I am writing the same components again. Agent orchestration. Search with real context. Document generation. Workflow logic. Different projects, different codebases, same patterns.
@@ -29,7 +29,7 @@ Workspace, because it is where you actually operate day to day, not a control pa
 
 Build, maintain and deploy, because most AI tools stop at the demo stage and leave the operational reality to you.
 
-And workflows and agents together, because real systems need both: agents for judgment, workflows for structure.
+Workflows and agents together, because real systems need both: agents for judgment, workflows for structure.
 
 The distinction matters. The market is full of chatbots with plugins on one side and low-level frameworks on the other. The chatbots cap what you can build. The frameworks hand you a box of parts and a wish of good luck. Joule sits in the space between: the pieces every serious AI system needs, already built, already integrated, already running in production.
 
@@ -41,7 +41,7 @@ The backend and the core of the platform. It orchestrates agents and manages all
 
 ### The workflow engine
 
-Written in Lumen as well, it serves as the backbone of every agent workflow. Every step an agent takes runs through it. One core, one mental model, one place to look when something behaves unexpectedly.
+Written in Lumen as well, it serves as the backbone of every agent workflow. Every step an agent takes runs through it. One core, one mental model, one place to look when something breaks.
 
 ### The search engine
 
@@ -57,7 +57,7 @@ It lets you integrate Joule directly into coding agents like Claude Code and Cod
 
 ### Tasks
 
-Tasks let agents work without you in the loop. A task runs on a schedule or on a trigger, executes its workflow, and delivers the result. You do not prompt it. You define it once, and it works while you do something else.
+Tasks let agents work without a human in the loop. A task runs on a schedule or on a trigger, executes its workflow, and delivers the result. You do not prompt it. You define it once, and it works while you do something else.
 
 ### Document generation
 
@@ -69,7 +69,7 @@ Knowledge gives every agent its own grounded context through a file sync model. 
 
 ### Connectors
 
-Connectors link Joule to Atlassian, Asana, Linear and the other platforms where work already happens. The difference from every chat product: connectors in Joule are not just conversation features. They are tasks and nodes in the workflow itself.
+Connectors link Joule to Atlassian, Asana, Linear and other platforms where work already happens. The difference from every chat product: connectors in Joule are not only conversation features. They are tasks and nodes in the workflow itself.
 
 ### Discover
 
