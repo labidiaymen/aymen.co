@@ -118,6 +118,9 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
   display: flex;
   align-items: center;
   justify-content: space-between;
+  /* space-between alone lets the wordmark and the nav meet edge to edge once
+     the row is full, which on a phone reads as "Aymen.Writing". */
+  gap: 0.85rem;
   height: 3.5rem;
 }
 
@@ -417,7 +420,13 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
   border-top: 1px solid var(--hairline);
 }
 .section-gap { margin-top: 3rem; }
-.ext { font-size: 0.75em; color: var(--text-muted); }
+/* U+FE0E in the markup forces the text glyph; this is the CSS belt to that
+   braces, for engines that honour it. Without both, iOS paints a blue emoji. */
+.ext {
+  font-size: 0.75em;
+  color: var(--text-muted);
+  font-variant-emoji: text;
+}
 .project-year {
   margin-left: 0.5rem;
   font-family: var(--sans);
@@ -702,12 +711,27 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
   .theme-toggle { width: 1.5rem; height: 1.5rem; }
 }
 
+/* Phone widths: five nav items plus the toggle are wider than the row can
+   hold beside the wordmark, so the header ran off the right edge. Tighter
+   setting and less side padding buy back the space. */
+@media (max-width: 480px) {
+  .site-header .container { padding: 0 1rem; }
+  .header-inner { gap: 0.6rem; }
+  .site-nav { gap: 0.55rem; }
+  .site-nav a { font-size: 0.76rem; }
+  .brand { font-size: 1rem; gap: 0.4rem; }
+}
+
 /* Below this the name cannot fit beside the nav without shrinking the type
-   past legibility, so the avatar stands alone. */
-@media (max-width: 344px) {
+   past legibility, so the avatar stands alone. Inner pages carry "Aymen."
+   where the home page carries none, so they are what sets this threshold. */
+@media (max-width: 384px) {
   .brand-name { display: none; }
-  /* Even without the name, five nav items plus the toggle need tighter setting
-     to stay inside a 320px viewport. */
+}
+
+/* Even without the name, five nav items plus the toggle need tighter setting
+   to stay inside a 320px viewport. */
+@media (max-width: 344px) {
   .site-nav { gap: 0.5rem; }
   .site-nav a { font-size: 0.74rem; }
 }

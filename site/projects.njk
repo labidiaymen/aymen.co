@@ -14,7 +14,7 @@ permalink: /projects/
   <ul class="project-entries">
     {%- for item in building %}
     <li class="project-entry">
-      <h3><a href="{{ item.url }}" rel="noopener" target="_blank">{{ item.name }} <span class="ext" aria-hidden="true">↗</span></a></h3>
+      <h3><a href="{{ item.url }}" rel="noopener" target="_blank">{{ item.name }} <span class="ext" aria-hidden="true">↗︎</span></a></h3>
       <p>{{ item.desc }}</p>
     </li>
     {%- endfor %}
@@ -34,7 +34,7 @@ permalink: /projects/
     {%- for item in earlier %}
     <li class="project-entry">
       <h3>
-        {%- if item.url %}<a href="{{ item.url }}" rel="noopener" target="_blank">{{ item.name }} <span class="ext" aria-hidden="true">↗</span></a>
+        {%- if item.url %}<a href="{{ item.url }}" rel="noopener" target="_blank">{{ item.name }} <span class="ext" aria-hidden="true">↗︎</span></a>
         {%- else %}{{ item.name }}{% endif %}
         {%- if item.year %} <span class="project-year">{{ item.year }}</span>{% endif %}
       </h3>

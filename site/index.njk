@@ -25,7 +25,7 @@ layout: layouts/base.njk
   {%- for item in collections.posts | limit(2) %}
   <a class="featured-item" href="{{ item.data.external or item.url }}"{% if item.data.external %} rel="noopener" target="_blank"{% endif %}>
     <span class="featured-body">
-      <span class="featured-title">{{ item.data.title }}{% if item.data.external %} <span class="ext" aria-hidden="true">↗</span>{% endif %}</span>
+      <span class="featured-title">{{ item.data.title }}{% if item.data.external %} <span class="ext" aria-hidden="true">↗︎</span>{% endif %}</span>
       {%- if item.data.description %}
       <span class="featured-lede">{{ item.data.description }}</span>
       {%- endif %}
@@ -80,7 +80,7 @@ layout: layouts/base.njk
   <ul class="project-index">
     {%- for item in building %}
     <li>
-      <a href="{{ item.url }}" rel="noopener" target="_blank">{{ item.name }} <span class="ext" aria-hidden="true">↗</span></a>
+      <a href="{{ item.url }}" rel="noopener" target="_blank">{{ item.name }} <span class="ext" aria-hidden="true">↗︎</span></a>
       <span class="project-desc">{{ item.desc | truncate(90) }}</span>
     </li>
     {%- endfor %}
