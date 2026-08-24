@@ -1,14 +1,17 @@
 ---
 layout: layouts/base.njk
 ---
-<article class="container post">
+<article class="container post{% if format == 'letter' %} post-letter-format{% endif %}">
   <header class="post-header">
     <div class="post-meta">
       {%- for cat in categories %}
       <a class="chip" href="/{{ cat }}/">{{ cat | categoryLabel }}</a>
       {%- endfor %}
+      {#- A letter carries its own dateline, so the date is not repeated here. #}
+      {%- if format != "letter" %}
       <time datetime="{{ page.date | isoDate }}">{{ page.date | readableDate }}</time>
       <span class="meta-sep">·</span>
+      {%- endif %}
       <span>{{ content | readingTime }} min read</span>
     </div>
     <h1 class="post-title">{{ title }}</h1>
@@ -83,8 +86,19 @@ layout: layouts/base.njk
     });
   </script>
   {%- endif %}
-  <div class="prose" data-pagefind-body>
+  {#- `format: letter` sets a piece as correspondence rather than an article:
+      its own sheet, a narrower measure, and a signature at the foot. #}
+  <div class="prose{% if format == 'letter' %} prose-letter{% endif %}" data-pagefind-body>
+    {%- if format == "letter" %}
+    <p class="letter-dateline">{% if place %}{{ place }} · {% endif %}<time datetime="{{ page.date | isoDate }}">{{ page.date | longDate }}</time></p>
+    {%- if salutation %}
+    <p class="letter-salutation">{{ salutation }}</p>
+    {%- endif %}
+    {%- endif %}
     {{ content | safe }}
+    {%- if format == "letter" %}
+    <p class="letter-sign">{{ site.author }}</p>
+    {%- endif %}
   </div>
 
   {%- if thisSeries.next %}

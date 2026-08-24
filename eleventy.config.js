@@ -207,6 +207,16 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addFilter("isoDate", (date) => new Date(date).toISOString());
 
+  // "24 August 2026" — a letter spells its dateline out.
+  eleventyConfig.addFilter("longDate", (date) =>
+    new Date(date).toLocaleDateString("en-GB", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+      timeZone: "UTC",
+    })
+  );
+
   eleventyConfig.addFilter("year", (date) =>
     new Date(date).getUTCFullYear()
   );

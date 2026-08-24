@@ -1477,3 +1477,50 @@ which is a hard yellow that
   .video-play-icon { transition: none; }
   .video-play:hover .video-play-icon { transform: none; }
 }
+
+/* ---------- Letter ---------- */
+/* An open letter is set as one: its own sheet, a measure narrower than an
+   article, and a signature at the foot. Opt in with `format: letter`. */
+.prose-letter {
+  margin-top: 2.4rem;
+  padding: 3.2rem 3.4rem 2.6rem;
+  background: var(--bg-elevated);
+  border: 1px solid var(--hairline);
+  border-radius: 4px;
+}
+.prose-letter > p {
+  max-width: 33rem;
+}
+/* A letter announces where and when before it says anything. */
+.letter-dateline {
+  max-width: none !important;
+  margin: 0 0 2.2rem;
+  text-align: right;
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  letter-spacing: 0.03em;
+  color: var(--text-muted);
+}
+.letter-salutation {
+  margin: 0 0 1.5rem;
+  font-size: 1.1em;
+}
+/* The title is the address on the envelope, not a headline, so it sets
+   smaller here than on an article. */
+.post-letter-format .post-title {
+  font-size: clamp(1.6rem, 3.4vw, 2.05rem);
+}
+.letter-sign {
+  margin: 2.6rem 0 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--hairline);
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.2rem;
+  color: var(--text);
+}
+
+@media (max-width: 640px) {
+  .prose-letter { padding: 1.9rem 1.5rem 1.6rem; }
+  .prose-letter > p:first-child { font-size: 1.14em; }
+}
