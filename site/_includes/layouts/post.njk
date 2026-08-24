@@ -96,7 +96,7 @@ layout: layouts/base.njk
     {%- endif %}
     {{ content | safe }}
     {%- if format == "letter" %}
-    <p class="letter-sign">{{ site.author }}</p>
+    <p class="letter-sign">{{ signature or site.author }}</p>
     {%- endif %}
   </div>
 
