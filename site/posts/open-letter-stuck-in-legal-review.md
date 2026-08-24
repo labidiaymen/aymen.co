@@ -18,7 +18,7 @@ I have not written a line of code in 2026. My team ships to production every wee
 
 The companies pulling ahead did one thing differently. They put agentic workflows inside delivery, not inside a pilot. Startups got there first because they had no committee to ask. Everyone else has a choice: do the same, or watch the gap become a moat.
 
-This is not the end of software engineering. It is the most enjoyable the job has been in ten years. Engineers design, review, and decide. Agents type.
+This is not the end of software engineering. It is the best the job has been in years. Engineers design, review, and decide. Agents type.
 
 If most of your engineers are not building with agents today, you do not have a tooling problem. You have a leadership problem. Buying a license will not fix it.
 
