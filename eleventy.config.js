@@ -336,6 +336,21 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addFilter("skip", (arr, n) => (arr || []).slice(n));
 
+  // The LCP hint belongs to the first featured post that actually carries an
+  // image — the newest post may have none, and the hint must not land on air.
+  eleventyConfig.addFilter("firstImageIndex", (posts) =>
+    (posts || []).findIndex((p) => p.data.cover || p.data.thumb)
+  );
+
+  // `pinned: true` holds a post at the top of the home page regardless of date.
+  // The Writing archive stays strictly chronological, so a pinned post is not
+  // pulled out of its year there.
+  eleventyConfig.addFilter("pinnedFirst", (posts) =>
+    [...(posts || [])].sort(
+      (a, b) => (b.data.pinned ? 1 : 0) - (a.data.pinned ? 1 : 0) || b.date - a.date
+    )
+  );
+
   eleventyConfig.addFilter("groupByYear", (posts) => {
     const groups = [];
     for (const post of posts || []) {

@@ -21,8 +21,12 @@ layout: layouts/base.njk
 
 <section class="container home-section">
   <h2 class="rule-heading">Writing</h2>
-  {#- The two most recent posts lead with their picture; the rest are ledger rows. #}
-  {%- for item in collections.posts | limit(2) %}
+  {#- The three newest posts lead with their picture, with anything pinned
+      held at the top; the rest are ledger rows. #}
+  {%- set ordered = collections.posts | pinnedFirst %}
+  {%- set featured = ordered | limit(3) %}
+  {%- set lcpIndex = featured | firstImageIndex %}
+  {%- for item in featured %}
   <a class="featured-item" href="{{ item.data.external or item.url }}"{% if item.data.external %} rel="noopener" target="_blank"{% endif %}>
     <span class="featured-body">
       <span class="featured-title">{{ item.data.title }}{% if item.data.external %} <span class="ext" aria-hidden="true">↗︎</span>{% endif %}</span>
@@ -38,15 +42,15 @@ layout: layouts/base.njk
         body and would only repeat it at the top of the article. #}
     {%- set featuredImage = item.data.cover or item.data.thumb %}
     {%- if featuredImage %}
-    {#- Both sit above the fold, so both load eagerly — lazy on the second made
-        it pop in on every load. Only the first carries the LCP hint, so the
-        priority is not split between them. #}
+    {#- All of these sit above the fold, so all load eagerly — lazy made them
+        pop in on every load. The LCP hint goes to the first one that has an
+        image, so it is never split and never lands on a post without one. #}
     <img class="featured-cover-img" src="{{ featuredImage }}" alt="{{ item.data.title }}"
-         loading="eager" {% if loop.first %}decoding="sync" fetchpriority="high"{% else %}decoding="async"{% endif %}>
+         loading="eager" {% if loop.index0 == lcpIndex %}decoding="sync" fetchpriority="high"{% else %}decoding="async"{% endif %}>
     {%- endif %}
   </a>
   {%- endfor %}
-  {%- set posts = collections.posts | limit(16) | skip(2) %}
+  {%- set posts = ordered | limit(16) | skip(3) %}
   {% include "post-list.njk" %}
   <p class="index-more"><a href="/blog/">Full index, {{ collections.posts.length }} posts →</a></p>
 </section>

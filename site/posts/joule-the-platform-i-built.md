@@ -2,6 +2,7 @@
 title: "Joule.sh - The AI Workspace"
 date: 2026-08-18
 categories: ["ai"]
+pinned: true
 thumb: "/images/joule-cover.png"
 description: "Joule is an AI platform and workspace for individuals and enterprises to build, maintain and deploy AI workflows and agents."
 permalink: "/ai/joule-the-platform-i-built/"
