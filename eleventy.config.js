@@ -116,10 +116,12 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "site/css": "css" });
 
   // All posts, newest first
+  // `unlisted: true` keeps a page building at its URL but out of every list,
+  // the feed, the sitemap and search — shareable by link, findable no other way.
+  const listed = (items) => items.filter((item) => !item.data.unlisted);
+
   eleventyConfig.addCollection("posts", (api) =>
-    api
-      .getFilteredByGlob("site/posts/*.md")
-      .sort((a, b) => b.date - a.date)
+    listed(api.getFilteredByGlob("site/posts/*.md")).sort((a, b) => b.date - a.date)
   );
 
   // Map of series name -> its posts, oldest first. A series reads forwards:
@@ -127,7 +129,7 @@ module.exports = function (eleventyConfig) {
   // otherwise with seriesOrder.
   eleventyConfig.addCollection("series", (api) => {
     const groups = new Map();
-    for (const post of api.getFilteredByGlob("site/posts/*.md")) {
+    for (const post of listed(api.getFilteredByGlob("site/posts/*.md"))) {
       const name = post.data.series;
       if (!name) continue;
       if (!groups.has(name)) groups.set(name, []);
@@ -144,22 +146,21 @@ module.exports = function (eleventyConfig) {
 
   // Short notes, newest first
   eleventyConfig.addCollection("notes", (api) =>
-    api.getFilteredByGlob("site/notes/*.md").sort((a, b) => b.date - a.date)
+    listed(api.getFilteredByGlob("site/notes/*.md")).sort((a, b) => b.date - a.date)
   );
 
   // Everything published, newest first — what the feed carries. Notes are the
   // most frequent thing here, so a posts-only feed would show subscribers least
   // of what actually gets written.
   eleventyConfig.addCollection("published", (api) =>
-    api
-      .getFilteredByGlob(["site/posts/*.md", "site/notes/*.md"])
+    listed(api.getFilteredByGlob(["site/posts/*.md", "site/notes/*.md"]))
       .sort((a, b) => b.date - a.date)
   );
 
   // Map of category -> posts (newest first), used to paginate category pages
   eleventyConfig.addCollection("categoryMap", (api) => {
     const map = {};
-    for (const post of api.getFilteredByGlob("site/posts/*.md")) {
+    for (const post of listed(api.getFilteredByGlob("site/posts/*.md"))) {
       for (const cat of post.data.categories || []) {
         (map[cat] = map[cat] || []).push(post);
       }
@@ -176,7 +177,7 @@ module.exports = function (eleventyConfig) {
   // Category pages, except "projects" which has a curated page of its own
   eleventyConfig.addCollection("categoryPages", (api) => {
     const map = {};
-    for (const post of api.getFilteredByGlob("site/posts/*.md")) {
+    for (const post of listed(api.getFilteredByGlob("site/posts/*.md"))) {
       for (const cat of post.data.categories || []) {
         (map[cat] = map[cat] || []).push(post);
       }

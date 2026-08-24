@@ -90,7 +90,7 @@ layout: layouts/base.njk
   {%- endif %}
   {#- `format: letter` sets a piece as correspondence rather than an article:
       its own sheet, a narrower measure, and a signature at the foot. #}
-  <div class="prose{% if format == 'letter' %} prose-letter{% endif %}" data-pagefind-body>
+  <div class="prose{% if format == 'letter' %} prose-letter{% endif %}" {% if unlisted %}data-pagefind-ignore{% else %}data-pagefind-body{% endif %}>
     {%- if format == "letter" and salutation %}
     <p class="letter-salutation">{{ salutation }}</p>
     {%- endif %}
