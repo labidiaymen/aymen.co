@@ -2,6 +2,7 @@ const path = require("path");
 const fs = require("fs");
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const eleventyImage = require("@11ty/eleventy-img");
+const { CATEGORY_LABELS } = require("./lib/categories.cjs");
 const generateImage = eleventyImage.default; // v7 exports the queue function as default
 const { generateHTML } = eleventyImage;
 
@@ -80,29 +81,6 @@ function slugifyHeading(text) {
     .slice(0, 60);
 }
 
-const CATEGORY_LABELS = {
-  ai: "AI",
-  javascript: "JavaScript",
-  lumen: "Lumen",
-  angular: "Angular",
-  rxjs: "RxJS",
-  ionic: "Ionic",
-  nativescript: "NativeScript",
-  "c-plus-plus": "C++",
-  "node-js": "Node.js",
-  jstips: "JS Tips",
-  devops: "DevOps",
-  projects: "Projects",
-  events: "Events",
-  thoughts: "Thoughts",
-  log: "Log",
-  labs: "Labs",
-  general: "General",
-  inscription: "Trainings",
-  react: "React",
-  redux: "Redux",
-  vue: "Vue",
-};
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(syntaxHighlight);

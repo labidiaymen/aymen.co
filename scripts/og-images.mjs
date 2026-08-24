@@ -6,6 +6,7 @@ import { join, basename } from "node:path";
 import satori from "satori";
 import sharp from "sharp";
 import { plain, truncate } from "../lib/markdown-text.cjs";
+import categories from "../lib/categories.cjs";
 
 const OUT_DIR = "_site/og";
 const WIDTH = 1200;
@@ -196,6 +197,29 @@ for (const file of readDir("site/notes")) {
       footnote: monthYear(data.date),
     }),
     join(OUT_DIR, `${slug}.png`)
+  );
+  made++;
+}
+
+// A post with no picture of its own gets a card built from its title, so a
+// shared link never falls back to the site-wide card. Anything with `og`,
+// `cover` or `thumb` already has a real image and is left alone.
+const firstCategory = (raw) =>
+  (raw || "").replace(/[[\]"']/g, "").split(",")[0].trim();
+
+for (const file of readDir("site/posts")) {
+  const { data } = frontmatter(readFileSync(join("site/posts", file), "utf8"));
+  if (data.og || data.cover || data.thumb) continue;
+
+  const slug = firstCategory(data.categories);
+  const label = categories.CATEGORY_LABELS[slug] || slug;
+  await render(
+    card({
+      kicker: data.format === "letter" ? "Open letter" : label,
+      headline: data.seoTitle || data.title || "",
+      footnote: monthYear(data.date),
+    }),
+    join(OUT_DIR, `${basename(file, ".md")}.png`)
   );
   made++;
 }
