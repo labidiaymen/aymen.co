@@ -474,6 +474,11 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
+/* Names the form without competing with the category, which is a link. */
+.post-meta .post-form {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
 .post-meta .chip:hover { text-decoration: underline; }
 .meta-sep { opacity: 0.5; }
 

@@ -1,5 +1,6 @@
 ---
-title: "Open letter to the companies still stuck in legal review over an AI coding tool"
+title: "It is already in production, just not on your invoice"
+seoTitle: "Open letter to the companies still stuck in legal review over an AI coding tool"
 date: 2026-08-24
 categories: ["ai"]
 format: letter

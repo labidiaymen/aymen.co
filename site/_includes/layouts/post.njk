@@ -7,6 +7,11 @@ layout: layouts/base.njk
       {%- for cat in categories %}
       <a class="chip" href="/{{ cat }}/">{{ cat | categoryLabel }}</a>
       {%- endfor %}
+      {#- The headline carries the argument; the form is a label, the way a
+          paper runs a letter under a section head rather than in the title. #}
+      {%- if format == "letter" %}
+      <span class="post-form">Open letter</span>
+      {%- endif %}
       {#- A letter carries its own dateline, so the date is not repeated here. #}
       {%- if format != "letter" %}
       <time datetime="{{ page.date | isoDate }}">{{ page.date | readableDate }}</time>
