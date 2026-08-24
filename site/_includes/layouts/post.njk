@@ -12,11 +12,8 @@ layout: layouts/base.njk
       {%- if format == "letter" %}
       <span class="post-form">Open letter</span>
       {%- endif %}
-      {#- A letter carries its own dateline, so the date is not repeated here. #}
-      {%- if format != "letter" %}
       <time datetime="{{ page.date | isoDate }}">{{ page.date | readableDate }}</time>
       <span class="meta-sep">·</span>
-      {%- endif %}
       <span>{{ content | readingTime }} min read</span>
     </div>
     <h1 class="post-title">{{ title }}</h1>
@@ -94,11 +91,8 @@ layout: layouts/base.njk
   {#- `format: letter` sets a piece as correspondence rather than an article:
       its own sheet, a narrower measure, and a signature at the foot. #}
   <div class="prose{% if format == 'letter' %} prose-letter{% endif %}" data-pagefind-body>
-    {%- if format == "letter" %}
-    <p class="letter-dateline">{% if place %}{{ place }} · {% endif %}<time datetime="{{ page.date | isoDate }}">{{ page.date | longDate }}</time></p>
-    {%- if salutation %}
+    {%- if format == "letter" and salutation %}
     <p class="letter-salutation">{{ salutation }}</p>
-    {%- endif %}
     {%- endif %}
     {{ content | safe }}
     {%- if format == "letter" %}

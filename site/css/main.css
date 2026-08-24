@@ -1496,16 +1496,6 @@ which is a hard yellow that
 .prose-letter > p {
   max-width: 33rem;
 }
-/* A letter announces where and when before it says anything. */
-.letter-dateline {
-  max-width: none !important;
-  margin: 0 0 2.2rem;
-  text-align: right;
-  font-family: var(--sans);
-  font-size: 0.82rem;
-  letter-spacing: 0.03em;
-  color: var(--text-muted);
-}
 .letter-salutation {
   margin: 0 0 1.5rem;
   font-size: 1.1em;

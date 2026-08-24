@@ -4,7 +4,6 @@ seoTitle: "Open letter to the companies still stuck in legal review over an AI c
 date: 2026-08-24
 categories: ["ai"]
 format: letter
-place: "Tunisia"
 og: "/images/open-letter-legal-review-og.png"
 description: "The tooling debate is over. What remains is an adoption gap, and it widens every quarter."
 permalink: "/ai/open-letter-stuck-in-legal-review/"
