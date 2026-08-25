@@ -45,8 +45,11 @@ const row = (children, style = {}) => ({
 });
 const text = (value, style) => ({ type: "div", props: { style: { display: "flex", ...style }, children: value } });
 
-function card({ kicker, headline, footnote }) {
-  const size = headline.length > 180 ? 40 : headline.length > 110 ? 48 : headline.length > 60 ? 58 : 68;
+function card({ kicker, headline, footnote, sub }) {
+  // A short title alone leaves the middle of the card empty, so a post also
+  // sets its description underneath; the headline gives way a little for it.
+  const long = headline.length > 180 ? 40 : headline.length > 110 ? 48 : headline.length > 60 ? 58 : 68;
+  const size = sub ? Math.min(long, 56) : long;
   return {
     type: "div",
     props: {
@@ -73,13 +76,31 @@ function card({ kicker, headline, footnote }) {
         ]),
         row(
           [
-            text(headline, {
-              fontFamily: "Newsreader",
-              fontSize: size,
-              lineHeight: 1.22,
-              color: INK,
-              maxWidth: 1000,
-            }),
+            {
+              type: "div",
+              props: {
+                style: { display: "flex", flexDirection: "column", maxWidth: 1000 },
+                children: [
+                  text(headline, {
+                    fontFamily: "Newsreader",
+                    fontSize: size,
+                    lineHeight: 1.22,
+                    color: INK,
+                  }),
+                  ...(sub
+                    ? [
+                        text(sub, {
+                          fontFamily: "Inter",
+                          fontSize: 27,
+                          lineHeight: 1.45,
+                          color: MUTED,
+                          marginTop: 22,
+                        }),
+                      ]
+                    : []),
+                ],
+              },
+            },
           ],
           { flexGrow: 1, alignItems: "center" }
         ),
@@ -217,6 +238,7 @@ for (const file of readDir("site/posts")) {
     card({
       kicker: data.format === "letter" ? "Open letter" : label,
       headline: data.seoTitle || data.title || "",
+      sub: truncate(data.description || "", 190) || undefined,
       footnote: monthYear(data.date),
     }),
     join(OUT_DIR, `${basename(file, ".md")}.png`)
