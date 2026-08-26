@@ -1,5 +1,5 @@
 ---
-title: "Joule Code - The Agent That Keeps Working After You Leave"
+title: "Joule Code - Always-on agents"
 date: 2026-08-26
 categories: ["ai"]
 unlisted: true
