@@ -3,7 +3,7 @@ title: "Joule Code - Always-on agents"
 date: 2026-08-26
 categories: ["ai"]
 unlisted: true
-cover: "/images/joule-code-cover.png"
+thumb: "/images/joule-code-cover.png"
 description: "What happens when the task is longer than your session?"
 permalink: "/ai/joule-code-9af28346/"
 ---
@@ -67,7 +67,7 @@ Joule Code is written in Lumen, our programming language. TypeScript syntax, nat
 
 ## Early adopters
 
-We are looking for early adopters. There is a Telegram group where we discuss features, bugs and releases, and you are invited.
+We are looking for early adopters. There is a [Telegram group](https://t.me/+ZVbEIHk64UA5ZDc0) where we discuss features, bugs and releases, and you are invited.
 
 The first 20 users get free access to the coding model for three months.
 
