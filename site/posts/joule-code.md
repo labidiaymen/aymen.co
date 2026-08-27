@@ -73,4 +73,6 @@ We are looking for early adopters. There is a [Telegram group](https://t.me/+ZVb
 
 The first 20 users get free access to the coding model for three months.
 
+[joule.sh/code](https://joule.sh/code)
+
 Ask. Search. Make.
