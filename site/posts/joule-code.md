@@ -49,19 +49,19 @@ A checkpoint is a saved state of a conversation. Start a new session from it and
 
 There is a second benefit. Checkpoints make requests cacheable, so the same grounded context does not get paid for twice.
 
-## A pool of sessions
+## Session pools
 
 Real work is several features at once, in several conversations, and one of them usually depends on another.
 
-Joule Code keeps a pool of sessions. A session can sneak peek another one: its status, its tasks, where it stands. Enough to know whether the thing you depend on is done, without merging the two conversations or asking a human to relay.
+Sessions are independent by default. When they belong together, you group them into a pool: the same feature, a shared subsystem, a set of related tasks. Inside a pool, a session can sneak peek another one: its status, its tasks, where it stands. Enough to know whether the thing you depend on is done, without merging the two conversations or asking a human to relay.
 
 ## The search engine
 
 Joule Code has access to the search engine we run on Joule. When the task needs fresh data, a new API version, a changelog, a breaking change from last week, the agent goes and gets it. It does not have to guess from training data.
 
-## VS Code extension
+## Interfaces
 
-A VS Code extension is available in preview. The TUI is the primary interface, but if you prefer to work from the editor, you can.
+The daemon owns the session, so the interface is your choice. The TUI, the Console web, and a VS Code extension, now in preview, all attach to the same running session. Pick the one that fits the moment, or use several at once.
 
 ## Built with Lumen
 
