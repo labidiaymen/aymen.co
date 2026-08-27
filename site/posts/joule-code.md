@@ -2,10 +2,9 @@
 title: "Joule Code - Always-on agents"
 date: 2026-08-26
 categories: ["ai"]
-unlisted: true
 thumb: "/images/joule-code-cover.png"
 description: "What happens when the task is longer than your session?"
-permalink: "/ai/joule-code-9af28346/"
+permalink: "/ai/joule-code-always-on-agents/"
 ---
 Joule Code is an agentic coding tool built to run autonomously on servers, VMs and your own machine, connected to a Joule server for knowledge, work context and preconfigured agents.
 
