@@ -35,11 +35,13 @@ Joule Code runs its conversations behind a daemon. Quit the terminal and the ses
 
 Session state is owned by the daemon and bound to your account, not to the client that started it. Reconnect from the terminal or open the same conversation in the Console web; either way you attach to the same running session, with its full history and current state. Switching clients is not a resume. Nothing was interrupted.
 
-## Knowledge instead of markdown folders
+## Skills, plus Knowledge
 
-Every coding tool now supports skills, and so does Joule Code. The difference is what happens to context.
+Joule Code supports skills, the same way every coding tool does now. Skills stay. They are the right way to teach an agent a procedure.
 
-The usual pattern is to ship a folder of markdown files into the repository and hope the agent reads the right one. Joule Code uses the Knowledge feature of the platform instead. Nothing ships with the repo. The agent runs RAG over the knowledge attached to its Joule server, so the context lives in one place, stays current, and is shared across every session that needs it.
+What skills do not solve is context. The usual pattern is to ship a folder of markdown files into the repository and hope the agent reads the right one. It goes stale, it duplicates across repos, and it grows until nobody wants to maintain it.
+
+Joule Code adds the Knowledge feature of the platform on top of skills. You move the heavy part of that context, architecture notes, domain rules, API references, past decisions, into Knowledge and keep the repository light. The agent runs RAG over the knowledge attached to its Joule server, so that context lives in one place, stays current, and is shared across every session and every project that needs it. Skills tell the agent how to do the work. Knowledge tells it what it is working with.
 
 ## Checkpoints
 
