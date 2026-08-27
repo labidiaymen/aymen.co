@@ -33,7 +33,7 @@ Run it alone and it is a coding agent. Run it attached and it is a hand on the p
 
 Joule Code runs its conversations behind a daemon. Quit the terminal and the session does not die. Configure an agent, give it the task, close the laptop. It keeps going.
 
-When you come back, the session is where you left it. And because sessions are tied to your account, you can open the same conversation from the Console web and follow it from there. Terminal in the morning, browser in the afternoon, same agent, same state.
+Session state is owned by the daemon and bound to your account, not to the client that started it. Reconnect from the terminal or open the same conversation in the Console web; either way you attach to the same running session, with its full history and current state. Switching clients is not a resume. Nothing was interrupted.
 
 ## Knowledge instead of markdown folders
 
