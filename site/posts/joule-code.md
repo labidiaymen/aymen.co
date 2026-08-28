@@ -27,7 +27,7 @@ Joule Code is a client of the Joule platform. Link it to a Joule server and it g
 - The work already in progress on the platform: tasks, workflows, conversations.
 - Preconfigured agents you can hand a job to instead of describing it from scratch.
 
-Models come from wherever you want. Go through your Joule server, or point Joule Code straight at Anthropic, OpenAI or whatever provider you already pay for, with your own keys. Attaching a server gives you the platform; it does not decide which model answers.
+Models come from wherever you want. Go through your Joule server, or point Joule Code straight at Anthropic, OpenAI or whatever provider you already pay for, with your own keys. Attaching a server gives you the platform. It does not decide which model answers.
 
 Run it alone and it is a coding agent. Run it attached and it is a hand on the platform.
 
