@@ -3,7 +3,7 @@ title: "Joule Code - Always-on agents"
 date: 2026-08-26
 categories: ["ai"]
 pinned: true
-thumb: "/images/joule-code-web-session.png"
+thumb: "/images/joule-code-cover.png"
 description: "What happens when the task is longer than your session?"
 permalink: "/ai/joule-code-always-on-agents/"
 ---
