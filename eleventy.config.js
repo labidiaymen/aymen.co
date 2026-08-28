@@ -53,7 +53,8 @@ async function optimizeImages(content) {
 
       const html = generateHTML(metadata, {
         alt: attrs.alt || "",
-        class: attrs.class,
+        // Passing an absent class through writes a literal class="undefined".
+        ...(attrs.class ? { class: attrs.class } : {}),
         loading: attrs.loading || "lazy",
         decoding: attrs.decoding || "async",
         // An LCP candidate marks itself up front; the rest stay lazy.

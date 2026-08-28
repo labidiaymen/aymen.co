@@ -3,7 +3,7 @@ title: "Joule Code - Always-on agents"
 date: 2026-08-26
 categories: ["ai"]
 pinned: true
-thumb: "/images/joule-code-cover.png"
+thumb: "/images/joule-code-web-session.png"
 description: "What happens when the task is longer than your session?"
 permalink: "/ai/joule-code-always-on-agents/"
 ---
@@ -34,6 +34,11 @@ Run it alone and it is a coding agent. Run it attached and it is a hand on the p
 Joule Code runs its conversations behind a daemon. Quit the terminal and the session does not die. Configure an agent, give it the task, close the laptop. It keeps going.
 
 Session state is owned by the daemon and bound to your account, not to the client that started it. Reconnect from the terminal or open the same conversation in the Console web; either way you attach to the same running session, with its full history and current state. Switching clients is not a resume. Nothing was interrupted.
+
+<figure>
+  <img src="/images/joule-code-web-session.png" alt="The Joule Console web showing a live session: a subagent's server evaluation, then a task list with background servers still running and a finished task reporting exit 0." loading="lazy" decoding="async">
+  <figcaption>The Console web attached to a session started in the terminal. The background servers are still up and the finished task still reports its exit code.</figcaption>
+</figure>
 
 ## Skills, plus Knowledge
 
