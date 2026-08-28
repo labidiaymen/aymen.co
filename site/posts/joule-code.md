@@ -78,8 +78,6 @@ Joule Code is written in Lumen, our programming language. TypeScript syntax, nat
 
 We are looking for early adopters. There is a [Telegram group](https://t.me/+ZVbEIHk64UA5ZDc0) where we discuss features, bugs and releases, and you are invited.
 
-The first 20 users get free access to the coding model for three months.
-
 [joule.sh/code](https://joule.sh/code)
 
 Ask. Search. Make.
