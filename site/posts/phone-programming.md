@@ -35,7 +35,7 @@ An IDE is a machine for writing code. Autocomplete, refactoring, go to definitio
 
 But I don't produce the code anymore. I review it.
 
-Review needs different tools. A clear diff. The pipeline verdict next to it. The reasoning the agent followed. A way to say "no, try again" in one sentence. My phone does all of that. My IDE does none of it well.
+Review needs different tools. A clear diff. The pipeline verdict next to it. The reasoning the agent followed. A way to say "no, try again" in one sentence. My phone does all of that, anywhere. My IDE does most of it too, and only while I am sitting in front of it.
 
 The terminal question was never the point. Claude Code did not move programming from the IDE to the terminal. It moved programming from writing to reviewing. The terminal was just where that shift happened to appear first.
 
