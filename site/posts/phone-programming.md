@@ -33,7 +33,7 @@ I had not stopped working on the project. I had stopped typing in it.
 
 An IDE is a machine for writing code. Autocomplete, refactoring, go to definition, inline errors. Every feature exists to help a human produce text faster and with fewer mistakes.
 
-But I don't produce the text anymore. I review it.
+But I don't produce the code anymore. I review it.
 
 Review needs different tools. A clear diff. The pipeline verdict next to it. The reasoning the agent followed. A way to say "no, try again" in one sentence. My phone does all of that. My IDE does none of it well.
 
