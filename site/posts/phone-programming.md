@@ -1,10 +1,9 @@
 ---
 title: "Phone Programming"
-date: 2026-08-24
+date: 2026-09-01
 categories: ["ai"]
-unlisted: true
 description: "Claude Code did not move programming from the IDE to the terminal. It moved programming from writing to reviewing."
-permalink: "/ai/phone-programming-734f1f80/"
+permalink: "/ai/phone-programming/"
 ---
 When Claude Code launched, I asked the obvious question. Why do we need a terminal? We have an IDE.
 
