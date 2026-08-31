@@ -47,7 +47,7 @@ We do the part that was always the hard part.
 
 We decide what to build. We design the systems, the loops and the graphs. We define the environment the agent works in, and that environment is now the real codebase. We write the pipeline that decides what is acceptable. We read the diff and we say yes or no.
 
-Those are senior skills. They are the skills of an architect and a reviewer, not a typist. The engineers who struggle in this model are not the juniors. They are the people who measured their value in lines written.
+Those are senior skills. They are the skills of an architect and a reviewer, not a coder. The engineers who struggle in this model are not the juniors. They are the people who measured their value in lines written.
 
 ## The downside
 
