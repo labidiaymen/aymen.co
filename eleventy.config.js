@@ -282,10 +282,14 @@ module.exports = function (eleventyConfig) {
 
   // Every series as a list, the one with the newest part first — so the block on
   // the writing page leads with whatever is being written now.
+  // The public index counts and links published parts only, so a series still
+  // being drafted stays off it entirely.
   eleventyConfig.addFilter("seriesList", (seriesMap) =>
     [...(seriesMap || new Map()).entries()]
-      .map(([name, parts]) => ({
-        name,
+      .map(([name, all]) => listed(all))
+      .filter((parts) => parts.length)
+      .map((parts) => ({
+        name: parts[0].data.series,
         total: parts.length,
         first: parts[0],
         latest: parts[parts.length - 1],
