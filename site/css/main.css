@@ -582,8 +582,17 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
 /* The second pass over each box is what makes it read as pen, not vector. */
 .dg-box2 { opacity: 0.4; }
 .dg-human,
-.dg-back { stroke: var(--accent); }
+.dg-back,
+.dg-runtime { stroke: var(--accent); }
 .dg-back { stroke-dasharray: 5 4; }
+/* Nodes that only exist once the thing is running. */
+.dg-runtime { stroke-dasharray: 6 4; }
+.dg-ghost { opacity: 0.45; }
+.dg-divider {
+  stroke: var(--hairline);
+  stroke-width: 1;
+  stroke-dasharray: 3 6;
+}
 .dg-label,
 .dg-sub,
 .dg-edge {
