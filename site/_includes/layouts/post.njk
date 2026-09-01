@@ -24,7 +24,7 @@ layout: layouts/base.njk
   {%- if cover %}
   <img class="post-cover" src="{{ cover }}" alt="{{ title }}" loading="eager" decoding="sync" fetchpriority="high">
   {%- endif %}
-  {%- set thisSeries = collections.series | seriesInfo(series, page.url) %}
+  {%- set thisSeries = collections.series | seriesInfo(series, page.url, unlisted) %}
   {%- if thisSeries.total > 1 %}
   <aside class="post-series" aria-label="Posts in this series">
     <p class="series-kicker">{{ series }} · Part {{ thisSeries.number }} of {{ thisSeries.total }}</p>

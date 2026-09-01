@@ -106,9 +106,11 @@ module.exports = function (eleventyConfig) {
   // Map of series name -> its posts, oldest first. A series reads forwards:
   // part one was written first, so date order is part order unless a post says
   // otherwise with seriesOrder.
+  // Drafts are kept in, so a series can be read as a whole while it is still
+  // unlisted; seriesInfo hides them again from every published part.
   eleventyConfig.addCollection("series", (api) => {
     const groups = new Map();
-    for (const post of listed(api.getFilteredByGlob("site/posts/*.md"))) {
+    for (const post of api.getFilteredByGlob("site/posts/*.md")) {
       const name = post.data.series;
       if (!name) continue;
       if (!groups.has(name)) groups.set(name, []);
@@ -293,8 +295,12 @@ module.exports = function (eleventyConfig) {
 
   // Everything the template needs in one object: a Map is awkward to read from
   // Nunjucks, and `set` inside a loop would not escape the loop's scope.
-  eleventyConfig.addFilter("seriesInfo", (seriesMap, name, url) => {
-    const parts = (seriesMap && seriesMap.get(name)) || [];
+  // A draft part sees the whole series, drafts included, so the running order
+  // can be checked before anything is published. A published part only ever
+  // sees published parts, so a live page never links to an unlisted URL.
+  eleventyConfig.addFilter("seriesInfo", (seriesMap, name, url, unlisted) => {
+    const all = (seriesMap && seriesMap.get(name)) || [];
+    const parts = unlisted ? all : listed(all);
     const index = parts.findIndex((p) => p.url === url);
     return {
       parts,
