@@ -588,6 +588,11 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
 /* Nodes that only exist once the thing is running. */
 .dg-runtime { stroke-dasharray: 6 4; }
 .dg-ghost { opacity: 0.45; }
+/* The region the engineer deliberately does not draw inside. */
+.dg-zone {
+  opacity: 0.5;
+  stroke-dasharray: 2 7;
+}
 .dg-divider {
   stroke: var(--hairline);
   stroke-width: 1;
