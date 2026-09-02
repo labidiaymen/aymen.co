@@ -8,7 +8,7 @@ unlisted: true
 description: "Whoever draws the boundary now decides more about the outcome than whoever writes the code inside it."
 permalink: "/ai/graph-engineering-bf9cea68/"
 ---
-Graph engineering is the name that arrived this summer for something plenty of teams were already doing without one.
+Graph engineering is the name that arrived this summer. I had been doing it for a year without one.
 
 I am not going to argue about the word. What it points at is a shift in leverage. The person who draws the graph now decides more about the outcome than the person who writes the code inside it.
 
@@ -22,7 +22,7 @@ That is a state machine. We have had those for fifty years. What is new is that 
 
 ## The graph you already have
 
-Most teams reading this already run one. They just drew it in a CI config instead of a diagram.
+I never sat down to draw a graph. I have one anyway. It lives in a CI config instead of a diagram, which is why it took a new word to make me look at it.
 
 Mine looks like this. A ticket arrives. An agent picks it up on a VM that carries the exact environment that project needs: the runtime, the database, the credentials, the test data. Nothing shared. It works in a branch and opens a merge request. SonarQube runs. The e2e suite runs. Coverage is checked. My phone buzzes. I read the diff and I answer. Yes, no, or here is what you missed. On no, it goes back to the agent with my sentence attached.
 
