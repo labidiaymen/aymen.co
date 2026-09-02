@@ -598,6 +598,9 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
   stroke-width: 1;
   stroke-dasharray: 3 6;
 }
+/* A path that does not complete. */
+.dg-stop { stroke: var(--text-muted); stroke-width: 2; }
+.dg-muted-label { fill: var(--text-muted); }
 .dg-label,
 .dg-sub,
 .dg-edge {
