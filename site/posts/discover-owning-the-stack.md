@@ -51,8 +51,4 @@ This is what platform thinking buys you. Every component you own is not just a f
 
 There is more sitting in that combination. Discover is the first fruit. It will not be the last.
 
-## Next in the series
-
-Next article: the closing piece on why Joule runs on its own stack, and the discipline that keeps build-versus-adopt decisions honest.
-
-[joule.sh](https://joule.sh)
+[joule.sh/discover](https://joule.sh/discover)
