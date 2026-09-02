@@ -3,6 +3,7 @@
 // Runs after Eleventy; the templates point at /og/<slug>.png.
 import { readFileSync, readdirSync, mkdirSync, existsSync, writeFileSync } from "node:fs";
 import { join, basename } from "node:path";
+import { execFileSync } from "node:child_process";
 import satori from "satori";
 import sharp from "sharp";
 import { plain, truncate } from "../lib/markdown-text.cjs";
@@ -108,6 +109,83 @@ function card({ kicker, headline, footnote, sub }) {
           [
             text(footnote, { fontFamily: "Inter", fontSize: 26, color: MUTED }),
             text("aymen.co", { fontFamily: "Inter", fontSize: 26, color: ACCENT }),
+          ],
+          { justifyContent: "space-between", borderTop: `2px solid #e6e3dc`, paddingTop: 28 }
+        ),
+      ],
+    },
+  };
+}
+
+// A post can put its own diagram on its card with `ogDiagram: <generator>`,
+// naming a script in scripts/diagrams. The drawing is the article's signature,
+// and it says more at feed size than another block of set type.
+const DG_STYLE = `<style>
+ .dg-box,.dg-line{fill:none;stroke:${INK};stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+ .dg-box2{opacity:.4}
+ .dg-human,.dg-back,.dg-runtime{stroke:${ACCENT}}
+ .dg-back{stroke-dasharray:5 4} .dg-runtime{stroke-dasharray:6 4}
+ .dg-ghost{opacity:.45} .dg-zone{opacity:.5;stroke-dasharray:2 7}
+ .dg-stop{stroke:${MUTED};stroke-width:2} .dg-divider{stroke:#e6e3dc;stroke-dasharray:3 6}
+ .dg-label,.dg-sub,.dg-edge{fill:${INK};font-family:'DejaVu Sans Mono',monospace;font-size:13px;stroke:none}
+ .dg-sub,.dg-edge,.dg-muted-label{fill:${MUTED}}
+ .dg-sub,.dg-edge{font-size:11px}
+ .dg-human-text,.dg-edge-back{fill:${ACCENT}}
+</style>`;
+
+async function diagramImage(name, width) {
+  const raw = execFileSync("node", [join("scripts/diagrams", `${name}.mjs`)], { encoding: "utf8" });
+  const svg = raw
+    .replace("<svg ", '<svg xmlns="http://www.w3.org/2000/svg" ')
+    .replace("</desc>", "</desc>" + DG_STYLE);
+  const ratio = (() => {
+    const vb = svg.match(/viewBox="0 0 ([\d.]+) ([\d.]+)"/);
+    return vb ? Number(vb[2]) / Number(vb[1]) : 0.6;
+  })();
+  const height = Math.round(width * ratio);
+  const buffer = await sharp(Buffer.from(svg), { density: 300 })
+    .resize(width * 2, height * 2, { fit: "contain", background: PAPER })
+    .flatten({ background: PAPER })
+    .png()
+    .toBuffer();
+  return { src: `data:image/png;base64,${buffer.toString("base64")}`, width, height };
+}
+
+function diagramCard({ kicker, headline, footnote, diagram }) {
+  const size = headline.length > 90 ? 36 : headline.length > 52 ? 42 : 50;
+  return {
+    type: "div",
+    props: {
+      style: {
+        width: "100%", height: "100%", display: "flex", flexDirection: "column",
+        justifyContent: "space-between", backgroundColor: PAPER,
+        padding: "64px 76px", borderTop: `12px solid ${ACCENT}`, fontFamily: "Inter",
+      },
+      children: [
+        row([text(kicker, { fontSize: 26, letterSpacing: 3, textTransform: "uppercase", color: ACCENT })]),
+        row(
+          [
+            {
+              type: "div",
+              props: {
+                style: { display: "flex", width: 430, paddingRight: 34 },
+                children: [text(headline, { fontFamily: "Newsreader", fontSize: size, lineHeight: 1.2, color: INK })],
+              },
+            },
+            {
+              type: "div",
+              props: {
+                style: { display: "flex", alignItems: "center" },
+                children: [{ type: "img", props: { src: diagram.src, width: diagram.width, height: diagram.height } }],
+              },
+            },
+          ],
+          { flexGrow: 1, alignItems: "center" }
+        ),
+        row(
+          [
+            text(footnote, { fontSize: 26, color: MUTED }),
+            text("aymen.co", { fontSize: 26, color: ACCENT }),
           ],
           { justifyContent: "space-between", borderTop: `2px solid #e6e3dc`, paddingTop: 28 }
         ),
@@ -234,15 +312,22 @@ for (const file of readDir("site/posts")) {
 
   const slug = firstCategory(data.categories);
   const label = categories.CATEGORY_LABELS[slug] || slug;
-  await render(
-    card({
-      kicker: data.format === "letter" ? "Open letter" : label,
-      headline: data.seoTitle || data.title || "",
-      sub: truncate(data.description || "", 190) || undefined,
-      footnote: monthYear(data.date),
-    }),
-    join(OUT_DIR, `${basename(file, ".md")}.png`)
-  );
+  const kicker = data.format === "letter" ? "Open letter" : label;
+  const headline = data.title || "";
+  const tree = data.ogDiagram
+    ? diagramCard({
+        kicker,
+        headline,
+        footnote: monthYear(data.date),
+        diagram: await diagramImage(data.ogDiagram, 584),
+      })
+    : card({
+        kicker,
+        headline: data.seoTitle || headline,
+        sub: truncate(data.description || "", 190) || undefined,
+        footnote: monthYear(data.date),
+      });
+  await render(tree, join(OUT_DIR, `${basename(file, ".md")}.png`));
   made++;
 }
 

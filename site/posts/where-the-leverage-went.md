@@ -6,6 +6,7 @@ categories: ["ai"]
 series: "Agent-native delivery"
 unlisted: true
 description: "Whoever draws the boundary now decides more about the outcome than whoever writes the code inside it."
+ogDiagram: "ownership-boundary"
 permalink: "/ai/graph-engineering-bf9cea68/"
 ---
 Graph engineering is the name that arrived this summer. I had been doing it for a year without one.

@@ -4,6 +4,7 @@ date: 2026-09-02
 categories: ["ai"]
 unlisted: true
 description: "Our competitors can copy our feature list. They cannot copy two years of bugs we fixed in layers they have never read."
+ogDiagram: "one-stack-vs-ten"
 permalink: "/ai/own-stack-098ec9ef/"
 ---
 Building on existing frameworks is the sensible default, and I give that advice to teams regularly. I want to explain why Joule ignored it at almost every layer, what that decision actually bought, and the discipline that keeps a decision like this from becoming a disease.
