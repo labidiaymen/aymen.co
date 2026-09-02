@@ -161,12 +161,6 @@ read the theme tokens so one drawing works in light and dark:
 Use the accent for **two things at most** in one drawing, and make them the two
 the caption is about.
 
-**On the share card.** A post with a diagram sets `ogDiagram: <generator name>`
-in its front matter, and the build draws the card from that diagram instead of
-setting the title over empty space. The drawing is what makes the link
-recognisable in a feed — nobody else's card looks hand-drawn. Posts without a
-diagram keep the typographic card.
-
 **Sizing.** The text column is 44rem, so a diagram wider than about 640px in its
 viewBox gets clipped, and breaking it out of the column runs it under the fixed
 TOC. Design to fit. A two-panel comparison usually does not — split it into two

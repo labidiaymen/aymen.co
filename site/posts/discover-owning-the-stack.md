@@ -4,7 +4,6 @@ date: 2026-09-02
 categories: ["ai"]
 unlisted: true
 description: "Every component you own is a factory for features you have not imagined yet."
-ogDiagram: "owned-vs-rented"
 permalink: "/ai/discover-09f3cd4c/"
 ---
 Some features are planned on a roadmap. Others emerge because two components you already built turn out to multiply each other. Discover is the second kind, and it is my favorite proof that Joule's architecture works.
