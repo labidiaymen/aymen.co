@@ -1,6 +1,6 @@
 ---
 title: "Where the leverage went: the graph engineer"
-seoTitle: "The graph engineer: graph engineering, loop engineering, and where the leverage moved"
+seoTitle: "The graph engineer: what graph engineering is, and where the leverage moved"
 date: 2026-09-01
 categories: ["ai"]
 series: "Agent-native delivery"
@@ -8,15 +8,9 @@ unlisted: true
 description: "Whoever draws the boundary now decides more about the outcome than whoever writes the code inside it."
 permalink: "/ai/graph-engineering-bf9cea68/"
 ---
-In the second week of June the idea was loop engineering. Stop prompting your coding agent. Design the loop that prompts it for you.
+Graph engineering is the name that arrived this summer for something plenty of teams were already doing without one.
 
-It was a good idea. By 21 July the headlines read "Forget About Loop Engineering, Think About Graph Engineering."
-
-Six weeks. That is the shelf life of a name in this field right now.
-
-I am not going to argue about the word. I want to know what it is pointing at, because underneath the churn there is something real, and I hit it before it had a name.
-
-What it is pointing at is a shift in leverage. The person who draws the graph now decides more about the outcome than the person who writes the code inside it.
+I am not going to argue about the word. What it points at is a shift in leverage. The person who draws the graph now decides more about the outcome than the person who writes the code inside it.
 
 ## The ladder, written out
 
@@ -127,12 +121,8 @@ That is the trap. A graph looks like control, and control feels like engineering
 
 The honest test: could you write down the steps for this task, in order, before seeing the input? If yes, draw it. If you find yourself writing "it depends" more than twice, stop drawing and give the agent room.
 
-## The name will change again
+## Whatever it ends up being called
 
-By winter there will be another word. Someone will point out that a graph is a poor model for agents that spawn other agents at runtime, and they will be right, and there will be a fresh set of guides with 2027 in the title.
-
-Do not wait for it to settle. The teams shipping this way are not sitting out the naming cycle, and the vocabulary was never the hard part.
-
-Whatever it ends up being called, the job is the same. Decide what the model gets to decide.
+The job is the same. Decide what the model gets to decide.
 
 Draw the parts you know. Leave the rest open. Cap the retries. Put a human on the edge that matters, and make sure that human is still reading.
