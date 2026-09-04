@@ -4,6 +4,7 @@ date: 2026-09-02
 categories: ["ai"]
 unlisted: true
 description: "Optimizing for token cost while draining your own attention is optimizing the wrong variable."
+cover: "/images/micromanaging-cover.png"
 permalink: "/ai/micromanaging-agents-7c00d470/"
 ---
 I interrupt agents that are not doing anything wrong.
