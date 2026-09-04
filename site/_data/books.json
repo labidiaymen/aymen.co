@@ -1,8 +1,8 @@
 [
   {
-    "title": "Leaders Eat Last",
-    "author": "Simon Sinek",
-    "cover": "/images/book-leaders-eat-last.jpg"
+    "title": "Accomplishment",
+    "author": "Michael Barber",
+    "cover": "/images/book-accomplishment.jpg"
   },
   {
     "title": "Zero to One",
@@ -60,8 +60,8 @@
     "cover": "/images/book-the-80-20-principle.jpg"
   },
   {
-    "title": "Accomplishment",
-    "author": "Michael Barber",
-    "cover": "/images/book-accomplishment.jpg"
+    "title": "Leaders Eat Last",
+    "author": "Simon Sinek",
+    "cover": "/images/book-leaders-eat-last.jpg"
   }
 ]
