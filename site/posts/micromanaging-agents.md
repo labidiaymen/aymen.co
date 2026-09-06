@@ -3,9 +3,7 @@ title: "Micromanaging Agents Is Still Micromanaging"
 date: 2026-09-02
 categories: ["ai"]
 unlisted: true
-description: "Optimizing for token cost while draining your own attention is optimizing the wrong variable.
-
-One port ran to 24 million tokens across 156 agents. That is the cheap half of the bill. The expensive half was the handful of times I had to stop and decide something, and I would rather spend every one of those on a question the agents could not answer for themselves."
+description: "Optimizing for token cost while draining your own attention is optimizing the wrong variable."
 cover: "/images/micromanaging-cover.png"
 permalink: "/ai/micromanaging-agents-7c00d470/"
 ---
@@ -24,6 +22,8 @@ Models self-correct now. They catch their own mistakes, backtrack, retry. A wast
 My attention does not have that price tag. I get a certain number of hours of real focus in a day, and redirecting an agent mid-task burns them exactly as fast as redirecting a person does.
 
 Optimizing for token cost while draining your own attention is optimizing the wrong variable.
+
+One port ran to 24 million tokens across 156 agents. That is the cheap half of the bill.
 
 ## A manager who hovers is not managing
 
