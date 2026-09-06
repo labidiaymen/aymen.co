@@ -39,7 +39,7 @@ Giving a task and watching it happen anyway is not delegating. It is supervision
 
 ## What the checkpoints actually were
 
-That port was a backend moved from Java to TypeScript. Sixteen feature slices, each with its own spec, its own branch, and its own test suite. Nothing landed mid-flight. A branch was committed when its suite went green, and not before.
+That port was a backend moved from Java to TypeScript. Three days. Sixteen feature slices, each with its own spec, its own branch, and its own test suite. Nothing landed mid-flight. A branch was committed when its suite went green, and not before.
 
 The planning was spec-kit, applied literally: spec, clarify, plan, tasks, implement. That reads as ceremony until you see what it buys. Every behavioral decision in the research had to cite the exact source lines in the Java it matched, or deliberately broke from. Not a paraphrase of what the old code did. Line numbers. It turns "did we port this correctly" from a feeling into something checkable.
 
