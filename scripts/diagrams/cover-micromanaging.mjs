@@ -43,7 +43,7 @@ const ASK = [1, 4, 8, 11];             // the four that came back
 const LAST = ROWS - 1;
 
 let g = "";
-g += t(861, 112, "156 agents, three days", "muted", "middle");
+g += t(861, 112, "156 agents", "muted", "middle");
 
 for (let r = 0; r < ROWS; r++) {
   for (let c = 0; c < COLS; c++) {
@@ -80,8 +80,8 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" v
   ${t(76, 128, "DELEGATION", "kick")}
   ${t(76, 232, "Micromanaging agents", "head")}
   ${t(76, 282, "is still micromanaging", "head")}
-  ${t(76, 364, "Not how much they got", "sub")}
-  ${t(76, 394, "through. How little came back.", "sub")}
+  ${t(76, 364, "Not how much they got through.", "sub")}
+  ${t(76, 394, "How little came back.", "sub")}
   <path class="ln" style="stroke:#e6e3dc;stroke-width:2" d="M76,540 C400,543 800,538 1124,541"/>
   ${t(76, 580, "aymen.co", "footacc")}
   ${t(1124, 580, "September 2026", "foot", "end")}

@@ -2,7 +2,7 @@
 title: "Spec-Driven Development (SDD)"
 date: 2026-05-14
 categories: ["ai"]
-cover: "/images/spec-driven-development-sdd-cover.jpg"
+cover: "/images/spec-driven-development-sdd-cover.png"
 description: "There is a new artifact in the loop, and it sits above the code. Code used to be the only thing we wrote, the only thing we reviewed, the only thing we shipped."
 permalink: "/ai/spec-driven-development-sdd/"
 ---
