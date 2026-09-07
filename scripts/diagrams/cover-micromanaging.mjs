@@ -57,7 +57,6 @@ ASK.forEach((c, i) => g += back(X0 + c * GX + BW / 2, fieldBottom + 2, 840 + i *
 
 g += sk(815, 424, 92, 46);
 g += t(861, 454, "me", "lbl", "middle");
-g += t(861, 496, "four questions", "acc", "middle");
 
 const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
   <rect width="1200" height="630" fill="${PAPER}"/>
