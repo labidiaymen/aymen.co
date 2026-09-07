@@ -2,6 +2,7 @@
 title: "Micromanaging Agents Is Still Micromanaging"
 date: 2026-09-07
 categories: ["ai"]
+pinned: true
 description: "Tokens are the cheap half of the bill. Attention is the other half."
 cover: "/images/micromanaging-cover.png"
 permalink: "/ai/micromanaging-agents/"
