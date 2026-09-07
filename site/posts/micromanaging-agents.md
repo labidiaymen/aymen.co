@@ -1,11 +1,10 @@
 ---
 title: "Micromanaging Agents Is Still Micromanaging"
-date: 2026-09-02
+date: 2026-09-07
 categories: ["ai"]
-unlisted: true
 description: "Tokens are the cheap half of the bill. Attention is the other half."
 cover: "/images/micromanaging-cover.png"
-permalink: "/ai/micromanaging-agents-7c00d470/"
+permalink: "/ai/micromanaging-agents/"
 ---
 Four questions. That is everything 156 agents needed from me over three days.
 
@@ -65,7 +64,7 @@ So the checkpoints tell me themselves now. ntfy, one line each: a suite going gr
 
 That does not close the hole. An agent killed by the OOM reaper never gets to send anything. The runs I most need to hear about are the ones that cannot speak, so silence is not a green light. It is just silence.
 
-## The failure that does not announce itself
+## The other failure
 
 Stop interrupting and it gets easy to stop reading. An approval that is not a real read is worse than any interruption.
 
