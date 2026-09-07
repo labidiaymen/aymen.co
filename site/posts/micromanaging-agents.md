@@ -59,8 +59,8 @@ The sharpest version of that happened on the same port. A background agent retry
 
 One line from that day is worth more than the rest of it. A background command's own success message is not proof it ran to completion. I issued a shutdown straight after a prune, the prune died mid-flight, and the whole sequence looked identical to success until I checked the numbers.
 
-The failure I watch for is the other one. Once you stop interrupting, it gets easy to stop reading, and an approval that is not a real read is worse than any interruption.
+The other failure is the one to watch. Stop interrupting and it gets easy to stop reading. An approval that is not a real read is worse than any interruption.
 
-Plan well. Check in at the real blockers. Let the agent carry the heavy lifting, and do not carry it a second time by watching over its shoulder.
+Plan well. Check in at the real blockers. Let the agent carry the work. Do not carry it twice.
 
-Trust is not naive when it comes with a review at the end. It is naive without one.
+Trust is not naive if it ends in a review. Without one, it is.
