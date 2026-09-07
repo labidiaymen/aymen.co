@@ -7,13 +7,13 @@ description: "Optimizing for token cost while draining your own attention is opt
 cover: "/images/micromanaging-cover.png"
 permalink: "/ai/micromanaging-agents-7c00d470/"
 ---
-I interrupt agents that are not doing anything wrong.
+I stop agents that are not doing anything wrong.
 
-It takes a path I did not expect. It names a variable something I would not have named it. Nothing is broken. I stop it anyway.
+They take a path I did not expect. They name something differently than I would have. Nothing is broken. I stop them anyway.
 
 I tell myself I am saving tokens. Catch the drift early, avoid the wasted generation, keep things efficient.
 
-That is not the real cost. The real cost is me. Every interruption pulls my attention back into the loop. I stop thinking about the problem I was trying to solve, and start babysitting a process instead.
+That is not the real cost. The real cost is my attention. Every interruption pulls it back into the loop, and I stop thinking about the problem I was trying to solve to babysit a process instead.
 
 ## Tokens are cheap. Attention is not.
 
