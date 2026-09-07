@@ -7,7 +7,7 @@ description: "Optimizing for token cost while draining your own attention is opt
 cover: "/images/micromanaging-cover.png"
 permalink: "/ai/micromanaging-agents-7c00d470/"
 ---
-I stop agents that are not doing anything wrong.
+I stop agents that are doing fine.
 
 They take a path I did not expect. They name something differently than I would have. Nothing is broken. I stop them anyway.
 
