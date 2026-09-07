@@ -43,7 +43,7 @@ Giving a task and watching it happen anyway is not delegation. It is supervision
 
 ## What the checkpoints actually were
 
-The planning was spec-kit, run literally: spec, clarify, plan, tasks, implement. That reads as ceremony until you see what it buys.
+The planning was [spec-kit](/ai/spec-driven-development-sdd/), run literally: spec, clarify, plan, tasks, implement. That reads as ceremony until you see what it buys.
 
 Every behavioral decision in the research had to cite the exact lines in the Java it matched, or deliberately broke from. Not a paraphrase of what the old code did. Line numbers. It turns "did we port this correctly" from a feeling into something checkable.
 

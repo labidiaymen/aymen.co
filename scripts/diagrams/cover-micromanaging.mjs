@@ -1,16 +1,17 @@
-// Cover art for the micromanaging piece. Same run, twice: once interrupted at
-// every step, once reviewed at the end. Same pen as the other covers.
+// Cover art for the micromanaging piece. The run drawn at its real size --
+// 13 x 12 is exactly the 156 agents -- and the four edges that reached a human.
+// The ratio is the whole argument, so the picture is the ratio.
 // Writes public/images/micromanaging-cover.png.
 import sharp from "sharp";
 
-let seed = 3390714;
+let seed = 5514098;
 const rnd = () => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return seed / 0x7fffffff; };
 const j = (n = 2) => (rnd() - 0.5) * n * 2;
 
 const PAPER = "#fbfaf8", INK = "#1b1a18", MUTED = "#6f6b64", ACCENT = "#0d7377";
 
-function box(x, y, w, h) {
-  const o = () => j(2.6);
+function box(x, y, w, h, amt = 2.6) {
+  const o = () => j(amt);
   return [
     `M${x + o()},${y + o()}`,
     `C${x + w * 0.4 + o()},${y + o()} ${x + w * 0.7 + o()},${y + o()} ${x + w + o()},${y + o()}`,
@@ -19,41 +20,44 @@ function box(x, y, w, h) {
     `C${x + o()},${y + h * 0.6 + o()} ${x + o()},${y + h * 0.3 + o()} ${x + o()},${y - 2 + o()}`,
   ].join(" ");
 }
-const sk = (x, y, w, h, cls = "") =>
-  `<path class="bx ${cls}" d="${box(x, y, w, h)}"/><path class="bx bx2 ${cls}" d="${box(x, y, w, h)}"/>`;
+const sk = (x, y, w, h, cls = "", amt) =>
+  `<path class="bx ${cls}" d="${box(x, y, w, h, amt)}"/><path class="bx bx2 ${cls}" d="${box(x, y, w, h, amt)}"/>`;
 
-// A line from a step down into me: the direction the attention actually travels.
-function pull(x1, y1, x2, y2) {
-  const mx = (x1 + x2) / 2 + j(6), my = (y1 + y2) / 2 + j(4);
-  const a = Math.atan2(y2 - my, x2 - mx), h = 11;
+// The one edge that costs something: an agent handing a decision back.
+function back(x1, y1, x2, y2) {
+  const mx = (x1 + x2) / 2 + j(5), my = (y1 + y2) / 2 + j(4);
+  const a = Math.atan2(y2 - my, x2 - mx), h = 10;
   const p1 = [x2 - h * Math.cos(a - 0.42), y2 - h * Math.sin(a - 0.42)];
   const p2 = [x2 - h * Math.cos(a + 0.42), y2 - h * Math.sin(a + 0.42)];
-  return `<path class="ln back" d="M${x1},${y1} Q${mx},${my} ${x2},${y2}"/>` +
-         `<path class="ln back" d="M${p1[0].toFixed(1)},${p1[1].toFixed(1)} L${x2},${y2} L${p2[0].toFixed(1)},${p2[1].toFixed(1)}"/>`;
+  return `<path class="ln acs" d="M${x1},${y1} Q${mx},${my} ${x2},${y2}"/>` +
+         `<path class="ln acs" d="M${p1[0].toFixed(1)},${p1[1].toFixed(1)} L${x2},${y2} L${p2[0].toFixed(1)},${p2[1].toFixed(1)}"/>`;
 }
 const t = (x, y, s, cls = "lbl", anchor = "start") =>
   `<text class="${cls}" x="${x}" y="${y}" text-anchor="${anchor}">${s}</text>`;
 
-const SW = 82, SH = 46;                       // a step in the run
-const steps = [0, 1, 2, 3, 4].map((i) => 620 + i * 100);  // 620 .. 1102
-const ME = { x: 815, y: 0, w: 92, h: 46 };    // the only node that is scarce
+const COLS = 13, ROWS = 12;            // 156, drawn rather than claimed
+const BW = 30, BH = 14, GX = 38, GY = 19;
+const X0 = 861 - (COLS * GX - (GX - BW)) / 2; // field centred on the human below
+const Y0 = 130;
+const ASK = [1, 4, 8, 11];             // the four that came back
+const LAST = ROWS - 1;
+
 let g = "";
+g += t(861, 112, "156 agents, three days", "muted", "middle");
 
-// Every interruption is a line back to me. Five of them, and nothing is left.
-g += t(861, 152, "interrupting", "acc", "middle");
-steps.forEach((x) => g += sk(x, 170, SW, SH));
-g += sk(ME.x, 262, ME.w, ME.h, "acclbx");
-g += t(861, 292, "me", "lblacc", "middle");
-steps.forEach((x, i) => g += pull(x + SW / 2, 216, 825 + i * 18, 258));
+for (let r = 0; r < ROWS; r++) {
+  for (let c = 0; c < COLS; c++) {
+    const on = r === LAST && ASK.includes(c);
+    g += sk(X0 + c * GX, Y0 + r * GY, BW, BH, on ? "acs" : "quiet", 1.3);
+  }
+}
 
-g += `<path class="ln div" d="M624,330 C780,333 980,327 1124,331"/>`;
+const fieldBottom = Y0 + LAST * GY + BH;
+ASK.forEach((c, i) => g += back(X0 + c * GX + BW / 2, fieldBottom + 2, 840 + i * 14, 420));
 
-// One line, at the end. The rest of the attention is not in this picture.
-g += t(861, 372, "reviewing", "muted", "middle");
-steps.forEach((x) => g += sk(x, 390, SW, SH));
-g += sk(ME.x, 466, ME.w, ME.h);
-g += t(861, 496, "me", "lbl", "middle");
-g += pull(steps[4] + SW / 2, 436, 861, 462);
+g += sk(815, 424, 92, 46);
+g += t(861, 454, "me", "lbl", "middle");
+g += t(861, 496, "four questions", "acc", "middle");
 
 const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
   <rect width="1200" height="630" fill="${PAPER}"/>
@@ -61,13 +65,13 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" v
   <style>
     .bx,.ln{fill:none;stroke:${INK};stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
     .bx2{opacity:.4}
-    .back{stroke:${ACCENT};stroke-dasharray:8 6}
-    .div{stroke:#e6e3dc;stroke-width:2;stroke-dasharray:4 8}
+    .quiet{stroke-width:1.6;opacity:.55}
+    .quiet.bx2{opacity:.22}
+    .acs{stroke:${ACCENT}}
+    .ln.acs{stroke-dasharray:7 5}
     .lbl{fill:${INK};font-family:'DejaVu Sans Mono',monospace;font-size:20px}
-    .lblacc{fill:${ACCENT};font-family:'DejaVu Sans Mono',monospace;font-size:20px}
-    .acclbx{stroke:${ACCENT}}
-    .muted{fill:${MUTED};font-family:'DejaVu Sans Mono',monospace;font-size:21px}
-    .acc{fill:${ACCENT};font-family:'DejaVu Sans Mono',monospace;font-size:21px}
+    .muted{fill:${MUTED};font-family:'DejaVu Sans Mono',monospace;font-size:19px}
+    .acc{fill:${ACCENT};font-family:'DejaVu Sans Mono',monospace;font-size:20px}
     .sub{fill:${MUTED};font-family:'DejaVu Sans Mono',monospace;font-size:18px}
     .kick{fill:${ACCENT};font-family:'DejaVu Sans',sans-serif;font-size:22px;letter-spacing:3px}
     .head{fill:${INK};font-family:'DejaVu Serif',Georgia,serif;font-size:38px}
@@ -75,11 +79,11 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" v
     .footacc{fill:${ACCENT};font-family:'DejaVu Sans',sans-serif;font-size:22px}
   </style>
   ${t(76, 128, "DELEGATION", "kick")}
-  ${t(76, 224, "Micromanaging agents", "head")}
-  ${t(76, 274, "is still micromanaging", "head")}
-  ${t(76, 356, "Tokens are cheap.", "sub")}
-  ${t(76, 386, "Attention is not.", "sub")}
-  <path class="ln" style="stroke:#e6e3dc;stroke-width:2;stroke-dasharray:none" d="M76,540 C400,543 800,538 1124,541"/>
+  ${t(76, 232, "Micromanaging agents", "head")}
+  ${t(76, 282, "is still micromanaging", "head")}
+  ${t(76, 364, "Not how much they got", "sub")}
+  ${t(76, 394, "through. How little came back.", "sub")}
+  <path class="ln" style="stroke:#e6e3dc;stroke-width:2" d="M76,540 C400,543 800,538 1124,541"/>
   ${t(76, 580, "aymen.co", "footacc")}
   ${t(1124, 580, "September 2026", "foot", "end")}
   ${g}
