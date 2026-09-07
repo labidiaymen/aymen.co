@@ -25,6 +25,10 @@ Optimizing for token cost while draining your own attention is optimizing the wr
 
 One port ran to 24 million tokens across 156 agents. That is the cheap half of the bill.
 
+Four questions came back to me. Four, against 156 agents, and everything else was decided without me.
+
+That ratio is the only measure of delegation I trust. Not how much the agents got through. How little came back.
+
 ## A manager who hovers is not managing
 
 Nobody stands behind a senior engineer correcting each line as it is typed. A good manager plans with the team up front, sets the checkpoints, and shows up when there is a real blocker. Outside of that, people work, and the output gets reviewed when it is done.
