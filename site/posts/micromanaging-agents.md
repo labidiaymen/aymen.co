@@ -7,8 +7,6 @@ description: "Tokens are the cheap half of the bill. Attention is the other half
 cover: "/images/micromanaging-cover.png"
 permalink: "/ai/micromanaging-agents-7c00d470/"
 ---
-I wrote about [spec-kit](/ai/spec-driven-development-sdd/) in May. In September I pointed it at a real backend and let go.
-
 Four questions. That is everything 156 agents needed from me over three days.
 
 The rest they decided. Twenty-four million tokens, one backend moved from Java to TypeScript, and four moments where the work stopped and waited for a human.
@@ -45,7 +43,7 @@ Giving a task and watching it happen anyway is not delegation. It is supervision
 
 ## What the checkpoints actually were
 
-The planning was spec-kit, run literally: spec, clarify, plan, tasks, implement. That reads as ceremony until you see what it buys.
+The planning was [spec-kit](/ai/spec-driven-development-sdd/), run literally: spec, clarify, plan, tasks, implement. That reads as ceremony until you see what it buys.
 
 Every behavioral decision in the research had to cite the exact lines in the Java it matched, or deliberately broke from. Not a paraphrase of what the old code did. Line numbers. It turns "did we port this correctly" from a feeling into something checkable.
 
