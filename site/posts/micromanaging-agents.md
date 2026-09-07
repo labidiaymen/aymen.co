@@ -61,6 +61,10 @@ The sharpest version happened on that same port. A background agent kept retryin
 
 One line from that day is worth more than the rest of it. A background command's own success message is not proof it ran to completion. I issued a shutdown right after a prune, the prune died mid-flight, and the whole sequence looked identical to success until I read the numbers.
 
+So the checkpoints tell me themselves now. ntfy, one line each: a suite going green, a branch giving up after its retries. I do not watch, and I do not have to keep asking.
+
+That does not close the hole. An agent killed by the OOM reaper never gets to send anything. The runs I most need to hear about are the ones that cannot speak, so silence is not a green light. It is just silence.
+
 ## The failure that does not announce itself
 
 Stop interrupting and it gets easy to stop reading. An approval that is not a real read is worse than any interruption.
