@@ -40,6 +40,18 @@ Count the nodes. Agent. Three checks. One human. Count the edges. Most are fixed
 
 That is what graph engineering is. Not a framework. The recognition that this drawing exists, that you are responsible for it, and that every arrow in it is a decision.
 
+## Sequence is not dependency
+
+Look at the three checks again. SonarQube, the e2e suite, coverage. None of them reads what the others produced. There is no edge between them at all, and for a while they still ran one after another, because that is the order I typed them in.
+
+That is the cheapest thing to find in a graph. Walk it arrow by arrow and ask one question of each. Does this step use what the last one produced? Not does it come after. Does it use it. If the answer is no, the arrow is not real, and the wait it causes is time you are paying for nothing.
+
+Delete those arrows and a shape falls out. One node opens into several that know nothing about each other, and they all land on one that needs all of them. That stage costs the slowest branch instead of the sum of the branches. My pipeline is that shape. I drew it before I noticed it was.
+
+The join is the dangerous end. A node that merges three inputs cannot tell that one of them is garbage. It gets three answers, it has no way to know the third came from a run that half-failed, and it produces something confident out of two good inputs and one bad one.
+
+So whatever sits at the join has to see the branches separately. Collapse them into one summary first and the bad branch disappears into it. That is the argument for a check on each arm rather than one check at the end. The end check tells you the result is wrong. It cannot tell you which arm poisoned it.
+
 ## The only question that matters
 
 Where does the model choose, and where does the system decide for it?
