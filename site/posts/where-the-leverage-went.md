@@ -48,6 +48,33 @@ That is the cheapest thing to find in a graph. Walk it arrow by arrow and ask on
 
 Delete those arrows and a shape falls out. One node opens into several that know nothing about each other, and they all land on one that needs all of them. That stage costs the slowest branch instead of the sum of the branches. My pipeline is that shape. I drew it before I noticed it was.
 
+Written down, it is this:
+
+```yaml
+agent:
+  needs: [ticket]
+  out:   merge_request
+
+sonarqube:
+  needs: [agent]
+e2e:
+  needs: [agent]
+coverage:
+  needs: [agent]
+
+review:
+  needs: [sonarqube, e2e, coverage]
+  human: true
+  on_no: agent
+
+merge:
+  needs: [review]
+```
+
+Three nodes carry the same `needs` line and none of them names another. That is the whole statement of parallelism. There is no keyword for "run these at once" because there is nothing to say: they have no edge between them, so nothing holds them apart.
+
+Then read the file for the lines that are not `needs`. There are two. `human: true`, which is the node with hours of latency in it. And `on_no: agent`, the only edge in the graph whose destination depends on an answer. Everything else is arithmetic.
+
 The join is the dangerous end. A node that merges three inputs cannot tell that one of them is garbage. It gets three answers, it has no way to know the third came from a run that half-failed, and it produces something confident out of two good inputs and one bad one.
 
 So whatever sits at the join has to see the branches separately. Collapse them into one summary first and the bad branch disappears into it. That is the argument for a check on each arm rather than one check at the end. The end check tells you the result is wrong. It cannot tell you which arm poisoned it.
@@ -63,6 +90,26 @@ A support agent classifies before it responds. Always. That order is not a prefe
 Compare two versions of the same task. A migration that runs overnight: read the schema, plan the change, write it, run it against a copy, diff the result, report. You know every one of those steps and their order. Draw all of it. Give the model the inside of the nodes and none of the routing.
 
 Now a bug that a customer reported in prose. You do not know if it is one file or nine, whether it needs a repro first, whether the fix is in the API or the client. Draw that as a fixed sequence and you will spend a week adding branches for cases you did not think of. Give the agent a goal, a working environment, and a check that tells it when it is done.
+
+That one has a schema too. It is just much shorter:
+
+```yaml
+agent:
+  needs: [goal, environment]
+  until: check
+  cap:   3
+
+check:
+  needs: [agent]
+
+human:
+  needs: [check]
+  when:  cap reached
+```
+
+No node list, because the node list is a runtime answer. What a person wrote is the goal, the state that gets in, the check, the cap and the way out. Five lines, and they decide everything the run is allowed to attempt.
+
+The first file is longer because I knew more. That is the only difference between them.
 
 <figure class="diagram">
 <svg viewBox="0 0 620 400" role="img" aria-labelledby="dg2-title dg2-desc" preserveAspectRatio="xMidYMid meet">
