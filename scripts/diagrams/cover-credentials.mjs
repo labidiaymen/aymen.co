@@ -25,28 +25,33 @@ const sk = (x, y, w, h, cls = "") =>
 const t = (x, y, s, cls = "lbl", anchor = "start") =>
   `<text class="${cls}" x="${x}" y="${y}" text-anchor="${anchor}">${s}</text>`;
 
-// a reach that gives out before it lands
-function stub(y, len) {
-  const x0 = 622, x1 = x0 + len;
-  const dy = (258 - y) * 0.18;
-  return `<path class="ln stop" d="M${x0},${y + j(2)} C${x0 + len * 0.4},${y + dy * 0.4 + j(2)} ${x0 + len * 0.75},${y + dy * 0.8 + j(2)} ${x1},${y + dy + j(2)}"/>`;
+// a reach that leaves the agent and gives out before it lands
+const OX = 714, OY = 388;
+function stub(x1, y1) {
+  const mx = OX + (x1 - OX) * 0.55 + j(6);
+  const my = OY + (y1 - OY) * 0.35 + j(6);
+  return `<path class="ln stop" d="M${OX + j(2)},${OY + j(2)} Q${mx},${my} ${x1 + j(2)},${y1 + j(2)}"/>`;
 }
 
 let g = "";
 
-// everything that reaches directly
-[132, 178, 224, 270, 316].forEach((y, i) => g += stub(y, 232 + (i % 3) * 16));
+// every direct reach, and none of them arrive
+[[862, 144], [886, 198], [894, 250], [882, 300], [854, 342]].forEach(([x, y]) => g += stub(x, y));
 
 // the cluster
 g += sk(946, 178, 170, 118);
 g += t(1031, 244, "cluster", "lbl", "middle");
 
 // the one route that arrives
-g += sk(700, 384, 132, 56, "acs");
-g += t(766, 418, "the repo", "lblacc", "middle");
-g += `<path class="ln acs" d="M832,412 C900,414 946,404 1000,300"/>`;
-g += `<path class="ln acs" d="M990,313 L1001,298 L1010,314"/>`;
-g += t(622, 480, "the only way in", "acc");
+g += sk(596, 386, 118, 56);
+g += t(655, 420, "agent", "lbl", "middle");
+g += `<path class="ln acs" d="M714,414 C734,416 748,414 764,414"/>`;
+g += `<path class="ln acs" d="M757,410 L765,414 L757,418"/>`;
+g += sk(768, 386, 132, 56, "acs");
+g += t(834, 420, "the repo", "lblacc", "middle");
+g += `<path class="ln acs" d="M900,410 C950,406 986,378 1016,300"/>`;
+g += `<path class="ln acs" d="M1007,314 L1017,298 L1025,315"/>`;
+g += t(596, 486, "the only way in", "acc");
 
 const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
   <rect width="1200" height="630" fill="${PAPER}"/>
