@@ -5,6 +5,7 @@ date: 2026-09-09
 categories: ["ai"]
 unlisted: true
 description: "An agent that applies its own change also grades its own work."
+cover: "/images/credentials-cover.png"
 permalink: "/ai/agents-do-not-get-credentials-4d1c7e93/"
 ---
 An agent working on my code opens a merge request. It does not merge it. Nobody argues about that one. Handing an agent commit rights on the main branch is not a position anyone defends out loud.
