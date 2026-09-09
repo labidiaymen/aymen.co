@@ -64,13 +64,13 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" v
     .sub{fill:${MUTED};font-family:'DejaVu Sans Mono',monospace;font-size:18px}
     .acc{fill:${ACCENT};font-family:'DejaVu Sans Mono',monospace;font-size:18px}
     .kick{fill:${ACCENT};font-family:'DejaVu Sans',sans-serif;font-size:22px;letter-spacing:3px}
-    .head{fill:${INK};font-family:'DejaVu Serif',Georgia,serif;font-size:48px}
+    .head{fill:${INK};font-family:'DejaVu Serif',Georgia,serif;font-size:40px}
     .foot{fill:${MUTED};font-family:'DejaVu Sans',sans-serif;font-size:22px}
     .footacc{fill:${ACCENT};font-family:'DejaVu Sans',sans-serif;font-size:22px}
   </style>
-  ${t(76, 128, "INFRASTRUCTURE", "kick")}
-  ${t(76, 234, "Agents do not", "head")}
-  ${t(76, 292, "get credentials", "head")}
+  ${t(76, 128, "AI", "kick")}
+  ${t(76, 232, "Infrastructure as code", "head")}
+  ${t(76, 286, "is the permission model", "head")}
   ${t(76, 372, "An agent can write anything.", "sub")}
   ${t(76, 402, "It cannot apply anything.", "sub")}
   <path class="cl" style="stroke:#e6e3dc;stroke-width:2" d="M76,540 C400,543 800,538 1124,541"/>

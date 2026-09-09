@@ -1,5 +1,5 @@
 ---
-title: "Agents Do Not Get Credentials"
+title: "Infrastructure as Code Is the Permission Model"
 seoTitle: "Infrastructure as code with Argo: why an agent proposes a change instead of applying it"
 date: 2026-09-09
 categories: ["ai"]
