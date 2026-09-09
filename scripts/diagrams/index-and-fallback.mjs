@@ -50,26 +50,26 @@ s += label(266, 150, "ours to read", "dg-sub");
 
 // the hit
 s += arrow(346, 122, 434, 74, -10);
-s += label(392, 82, "80%", "dg-edge dg-edge-back");
+s += label(366, 78, "clears the bar", "dg-edge dg-edge-back");
 s += sketchBox(436, 48, 164, 50);
 s += label(518, 79, "answered");
 s += label(518, 118, "marginal cost near zero", "dg-sub");
 
 // the miss
 s += arrow(346, 154, 434, 208, 10);
-s += label(392, 220, "the rest", "dg-edge");
+s += label(360, 226, "scores under 0.35", "dg-edge");
 s += sketchBox(436, 184, 164, 50, "dg-runtime");
 s += label(518, 215, "a rented API", "dg-label dg-muted-label");
 
 // the miss is the growth mechanism
 s += `<path class="dg-line dg-back" d="M436,234 C360,286 300,282 266,186"/>`;
 s += `<path class="dg-line dg-back dg-head" d="M258,198 L266,186 L276,196"/>`;
-s += label(300, 300, "every miss says what to crawl next", "dg-edge dg-edge-back", "start");
+s += label(292, 300, "the miss log is what grows the frontier", "dg-edge dg-edge-back", "start");
 
 console.log(
   `<svg viewBox="0 0 624 320" role="img" aria-labelledby="dg6-title dg6-desc" preserveAspectRatio="xMidYMid meet">
   <title id="dg6-title">The 80/20 index and its fallback</title>
-  <desc id="dg6-desc">A query reaches our index. Around 80% are answered straight from it, at a marginal cost near zero. The rest fall through to a rented API, and that miss loops back into the index, because every miss says what to crawl next.</desc>
+  <desc id="dg6-desc">A query reaches our index. Anything that clears the relevance bar is answered straight from it, at a marginal cost near zero. Anything scoring under 0.35 falls through to a rented API, and that miss loops back into the index, because the miss log is what grows the frontier.</desc>
   ${s}
 </svg>`
 );
