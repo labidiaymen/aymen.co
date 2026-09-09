@@ -46,11 +46,10 @@ g += `<path class="ln" d="M876,295 L884,300 L876,305"/>`;
 
 // right panel: what is actually written down
 g += sk(900, 140, 224, 320, "acclbx");
-g += t(918, 206, "# bm25", "md acc");
-g += t(918, 240, "bm25 scores a doc", "md");
-g += t(918, 268, "against a query by", "md");
-g += t(918, 296, "term frequency and", "md");
-g += t(918, 324, "document length.", "md");
+g += t(916, 206, "# sqlite wal mode", "md acc");
+g += t(916, 240, "readers do not block", "md");
+g += t(916, 268, "writers. one writer", "md");
+g += t(916, 296, "at a time.", "md");
 
 g += t(718, 496, "what the web serves", "sub", "middle");
 g += t(1012, 496, "what we keep", "acc", "middle");
@@ -64,7 +63,7 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" v
     .cl{stroke-width:3;stroke:${MUTED}}
     .ghost{opacity:.4}
     .acclbx{stroke:${ACCENT}}
-    .md{fill:${INK};font-family:'DejaVu Sans Mono',monospace;font-size:17px}
+    .md{fill:${INK};font-family:'DejaVu Sans Mono',monospace;font-size:16px}
     .md.acc{fill:${ACCENT}}
     .sub{fill:${MUTED};font-family:'DejaVu Sans Mono',monospace;font-size:18px}
     .acc{fill:${ACCENT};font-family:'DejaVu Sans Mono',monospace;font-size:18px}
