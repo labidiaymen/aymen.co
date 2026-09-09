@@ -38,7 +38,7 @@ g += t(765, 218, "our index", "lblacc", "middle");
 g += t(765, 248, "ours to read", "sub", "middle");
 
 g += arrow(890, 200, 986, 148, -14);
-g += t(930, 160, "80%", "acc", "middle");
+g += t(905, 140, "clears 0.35", "acc", "middle");
 g += sk(988, 108, 150, 68);
 g += t(1063, 150, "answered", "lbl", "middle");
 
