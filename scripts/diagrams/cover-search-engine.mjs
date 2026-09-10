@@ -51,8 +51,8 @@ g += t(916, 240, "readers do not block", "md");
 g += t(916, 268, "writers. one writer", "md");
 g += t(916, 296, "at a time.", "md");
 
-g += t(718, 496, "what the web serves", "sub", "middle");
-g += t(1012, 496, "what we keep", "acc", "middle");
+g += t(718, 496, "served as html", "sub", "middle");
+g += t(1012, 496, "kept as markdown", "acc", "middle");
 
 const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
   <rect width="1200" height="630" fill="${PAPER}"/>
