@@ -46,10 +46,10 @@ g += `<path class="ln" d="M876,295 L884,300 L876,305"/>`;
 
 // right panel: what is actually written down
 g += sk(900, 140, 224, 320, "acclbx");
-g += t(916, 206, "# sqlite wal mode", "md acc");
-g += t(916, 240, "readers do not block", "md");
-g += t(916, 268, "writers. one writer", "md");
-g += t(916, 296, "at a time.", "md");
+g += t(916, 206, "# http 429", "md acc");
+g += t(916, 240, "the server is rate", "md");
+g += t(916, 268, "limiting. wait for", "md");
+g += t(916, 296, "retry-after.", "md");
 
 g += t(718, 496, "served as html", "sub", "middle");
 g += t(1012, 496, "kept as markdown", "acc", "middle");
