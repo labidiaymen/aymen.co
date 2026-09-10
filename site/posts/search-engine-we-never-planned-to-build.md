@@ -75,7 +75,9 @@ That property is worth more than any single engine choice. Owning a stack is not
 
 ## Why we did not go all in on vectors
 
-Vector search is the default answer now, and on its own it is worse than the thing it replaced.
+The default now is embeddings. Chunk the corpus, embed it, store the vectors, search by nearest neighbour, and treat lexical ranking as the thing you did before embeddings got cheap.
+
+We built the vector half too. We did not throw the other one away, because on its own it loses exactly the queries an agent asks most.
 
 We measured ours. Lexical ranking alone gives p@5 of 0.608. Fusing the lexical and vector rank lists gives 0.700. Reciprocal rank fusion, k=60, two orderings in and one out.
 
