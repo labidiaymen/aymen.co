@@ -1,5 +1,6 @@
 // The same run with a step that failed twice before it held. The failed attempts
-// are faint because they left nothing behind. The top row is still one span,
+// are outlined in the failure colour so they read as failures rather than as gaps.
+// The top row is still one span,
 // which is the entire point of putting these two drawings next to each other.
 let seed = 8820471;
 const rnd = () => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return seed / 0x7fffffff; };
@@ -33,12 +34,15 @@ s += span(190, 76, 60);
 s += label(LX, 125, "ask the model");
 s += span(258, 110, 82);
 
-// two attempts that left nothing, then one that held
+// two that failed, then one that held
 s += label(LX, 159, "run the suite");
-s += span(348, 144, 40, "dg-ghost");
-s += span(398, 144, 40, "dg-ghost");
+s += span(348, 144, 40, "dg-fail");
+s += span(398, 144, 40, "dg-fail");
 s += span(448, 144, 76);
-[368, 418, 486].forEach((x, i) => s += label(x, 138, String(i + 1), "dg-edge dg-edge-back", "middle"));
+s += label(368, 138, "1", "dg-edge dg-fail-text", "middle");
+s += label(418, 138, "2", "dg-edge dg-fail-text", "middle");
+s += label(486, 138, "3", "dg-edge", "middle");
+s += label(534, 159, "two retries", "dg-edge dg-fail-text", "start");
 
 s += label(LX, 193, "wait for a person");
 s += span(534, 178, 44, "dg-ghost");
@@ -48,12 +52,12 @@ s += span(586, 212, 20);
 
 s += `<path class="dg-line dg-divider" d="M180,250 C300,252 460,248 600,250"/>`;
 s += label(606, 268, "time", "dg-edge");
-s += label(182, 268, "two attempts left nothing behind", "dg-edge", "start");
+s += label(182, 268, "the failed attempts left nothing behind", "dg-edge", "start");
 
 console.log(
   `<svg viewBox="0 0 624 278" role="img" aria-labelledby="dg15-title dg15-desc" preserveAspectRatio="xMidYMid meet">
   <title id="dg15-title">The timeline of a run whose step failed twice</title>
-  <desc id="dg15-desc">The same timeline. Reading the repo and asking the model complete as before. Running the suite now shows three attempts: the first two faint because they left nothing behind, the third completing. Everything after it shifts later. The top row, the whole run, is still a single unbroken span.</desc>
+  <desc id="dg15-desc">The same timeline. Reading the repo and asking the model complete as before. Running the suite now shows three attempts: the first two outlined in red because they failed, the third completing, marked as two retries. Everything after it shifts later. The top row, the whole run, is still a single unbroken span.</desc>
   ${s}
 </svg>`
 );

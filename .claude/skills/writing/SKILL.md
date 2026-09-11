@@ -157,6 +157,7 @@ read the theme tokens so one drawing works in light and dark:
 | `dg-zone` | the region deliberately left undrawn |
 | `dg-human`, `dg-back` | accent: the human node, and the one conditional edge |
 | `dg-stop` | a path that does not complete |
+| `dg-fail` | a step that failed, in `--fail`, where absence would read as merely missing |
 
 Use the accent for **two things at most** in one drawing, and make them the two
 the caption is about.

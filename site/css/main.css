@@ -34,6 +34,7 @@
   --dots: #c9c5bc;
   --accent: #0d7377;
   --accent-strong: #0a5d61;
+  --fail: #b3402f;
   --code-bg: #f4f2ee;
   --sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --serif: "Newsreader Variable", "Iowan Old Style", Georgia, "Times New Roman", serif;
@@ -50,6 +51,7 @@
   --dots: #3a3e42;
   --accent: #4fd1c5;
   --accent-strong: #7ce3d9;
+  --fail: #f08a75;
   --code-bg: #17191b;
   color-scheme: dark;
 }
@@ -600,6 +602,8 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
 }
 /* A path that does not complete. */
 .dg-stop { stroke: var(--text-muted); stroke-width: 2; }
+/* A step that failed, where failure has to read as failure and not as absence. */
+.dg-fail { stroke: var(--fail); }
 .dg-muted-label { fill: var(--text-muted); }
 .dg-label,
 .dg-sub,
@@ -613,6 +617,7 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
 .dg-edge { fill: var(--text-muted); font-size: 11px; }
 .dg-human-text,
 .dg-edge-back { fill: var(--accent); }
+.dg-fail-text { fill: var(--fail); }
 .diagram figcaption {
   margin-top: 0.7em;
   font-size: 0.86rem;
