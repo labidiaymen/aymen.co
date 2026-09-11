@@ -5,6 +5,7 @@ date: 2026-09-11
 categories: ["ai"]
 unlisted: true
 description: "A check that a tired person performs at midnight is not a check. It is a hope with a timestamp."
+cover: "/images/agentic-engineering-cover.png"
 permalink: "/ai/agentic-engineering-5c20b7f1/"
 ---
 I wrote about four systems this month. A delivery pipeline, a search index, a cluster, and a backend moved from Java to TypeScript. Different problems, different stacks, nothing in common on the surface.
@@ -49,6 +50,18 @@ Four properties, and I have watched all four fail.
 **It is cheap enough to run every time.** A rendered diff, a dry run, a lint pass. An expensive check gets run at the end, and a check at the end is a check you will be tempted to skip when you are close.
 
 **It cannot be satisfied by looking finished.** This is the hard one. An agent optimises for the check, so a weak check teaches it to produce work that passes rather than work that is correct. The check is not a measurement sitting outside the system. It is part of the system, and the agent will find its edges.
+
+## Which is why this ends up being infrastructure
+
+A check that runs without me has to run somewhere.
+
+That sounds trivial until you try it. A test suite is only a check if it is fast, deterministic and trustworthy. A suite that fails randomly teaches everyone to re-run it, and a suite people re-run is not a gate, it is a coin they flip until it lands right. Getting from "we have tests" to "a red suite means something is broken" is most of the work, and it is work on the suite, not on the feature.
+
+Then the suite needs somewhere to run that resembles production. A real database with real data shaped like the real thing. The credentials. The services it talks to. Get that wrong and the check passes on a machine that does not exist, which is the most expensive green tick there is.
+
+So it lands on the environment. One per project, carrying the exact runtime, database, credentials and test data that project needs, and nothing shared between them. Ten agents working at once need ten of those, and they need them to come up in seconds and be thrown away without ceremony.
+
+That is not a testing problem any more. That is infrastructure, and it is why the question "how do we use agents" turns into a platform question within about a week. The bottleneck is not the model. It is how many trustworthy environments you can stand up, and how quickly a green result in one of them can be believed.
 
 ## The check you cannot write
 
