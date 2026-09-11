@@ -1,5 +1,5 @@
 ---
-title: "Temporal Turns a Crash Into a Delay"
+title: "Temporal Keeps the Run Outside the Process"
 seoTitle: "Temporal and agent workflows: durable execution, retries and recovery"
 date: 2026-09-11
 categories: ["ai"]

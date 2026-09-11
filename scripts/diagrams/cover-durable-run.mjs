@@ -66,10 +66,10 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" v
     .footacc{fill:${ACCENT};font-family:'DejaVu Sans',sans-serif;font-size:22px}
   </style>
   ${t(76, 128, "AI", "kick")}
-  ${t(76, 236, "Temporal turns a crash", "head")}
-  ${t(76, 292, "into a delay", "head")}
-  ${t(76, 372, "The steps are written down", "sub")}
-  ${t(76, 402, "outside the thing running them.", "sub")}
+  ${t(76, 236, "Temporal keeps the run", "head")}
+  ${t(76, 292, "outside the process", "head")}
+  ${t(76, 372, "A crash stops being an event.", "sub")}
+  ${t(76, 402, "It becomes a delay.", "sub")}
   <path class="ln" style="stroke:#e6e3dc;stroke-width:2;stroke-dasharray:none" d="M76,540 C400,543 800,538 1124,541"/>
   ${t(76, 580, "aymen.co", "footacc")}
   ${t(1124, 580, "September 2026", "foot", "end")}
