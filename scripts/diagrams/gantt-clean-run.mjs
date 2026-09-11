@@ -24,11 +24,11 @@ const label = (x, y, t, cls = "dg-label", anchor = "end") =>
 const LX = 162, H = 20;
 const rows = [
   [36, "the run", 182, 424, "dg-human"],
-  [76, "read the repo", 190, 60, ""],
-  [110, "ask the model", 258, 82, ""],
-  [144, "run the suite", 348, 104, ""],
-  [178, "wait for a person", 460, 96, "dg-ghost"],
-  [212, "open the request", 564, 42, ""],
+  [76, "read the invoice", 190, 62, ""],
+  [110, "look up the order", 260, 78, ""],
+  [144, "check the totals", 346, 78, ""],
+  [178, "wait for approval", 432, 124, "dg-ghost"],
+  [212, "post the payment", 564, 40, ""],
 ];
 
 let s = "";
@@ -42,7 +42,7 @@ s += label(606, 268, "time", "dg-edge");
 console.log(
   `<svg viewBox="0 0 624 278" role="img" aria-labelledby="dg14-title dg14-desc" preserveAspectRatio="xMidYMid meet">
   <title id="dg14-title">The timeline of a run that went through first time</title>
-  <desc id="dg14-desc">A timeline with one row per step. The top row is the whole run, drawn as a single unbroken span. Below it: read the repo, ask the model, run the suite, a faint span for waiting on a person, and open the request. Each one runs once and completes.</desc>
+  <desc id="dg14-desc">A timeline with one row per step. The top row is the whole run, drawn as a single unbroken span. Below it: read the invoice, look up the order, check the totals, a faint span for waiting on approval, and post the payment. Each one runs once and completes.</desc>
   ${s}
 </svg>`
 );

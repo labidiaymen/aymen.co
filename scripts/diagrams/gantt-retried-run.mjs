@@ -28,27 +28,27 @@ let s = "";
 s += label(LX, 51, "the run", "dg-label dg-human-text");
 s += span(182, 36, 424, "dg-human");
 
-s += label(LX, 91, "read the repo");
-s += span(190, 76, 60);
-
-s += label(LX, 125, "ask the model");
-s += span(258, 110, 82);
+s += label(LX, 91, "read the invoice");
+s += span(190, 76, 62);
 
 // two that failed, then one that held
-s += label(LX, 159, "run the suite");
-s += span(348, 144, 40, "dg-fail");
-s += span(398, 144, 40, "dg-fail");
-s += span(448, 144, 76);
-s += label(368, 138, "1", "dg-edge dg-fail-text", "middle");
-s += label(418, 138, "2", "dg-edge dg-fail-text", "middle");
-s += label(486, 138, "3", "dg-edge", "middle");
-s += label(534, 159, "two retries", "dg-edge dg-fail-text", "start");
+s += label(LX, 125, "look up the order");
+s += span(260, 110, 40, "dg-fail");
+s += span(310, 110, 40, "dg-fail");
+s += span(360, 110, 72);
+s += label(280, 104, "1", "dg-edge dg-fail-text", "middle");
+s += label(330, 104, "2", "dg-edge dg-fail-text", "middle");
+s += label(396, 104, "3", "dg-edge", "middle");
+s += label(444, 125, "two retries", "dg-edge dg-fail-text", "start");
 
-s += label(LX, 193, "wait for a person");
-s += span(534, 178, 44, "dg-ghost");
+s += label(LX, 159, "check the totals");
+s += span(442, 144, 74);
 
-s += label(LX, 227, "open the request");
-s += span(586, 212, 20);
+s += label(LX, 193, "wait for approval");
+s += span(524, 178, 46, "dg-ghost");
+
+s += label(LX, 227, "post the payment");
+s += span(578, 212, 28);
 
 s += `<path class="dg-line dg-divider" d="M180,250 C300,252 460,248 600,250"/>`;
 s += label(606, 268, "time", "dg-edge");
@@ -57,7 +57,7 @@ s += label(182, 268, "the failed attempts left nothing behind", "dg-edge", "star
 console.log(
   `<svg viewBox="0 0 624 278" role="img" aria-labelledby="dg15-title dg15-desc" preserveAspectRatio="xMidYMid meet">
   <title id="dg15-title">The timeline of a run whose step failed twice</title>
-  <desc id="dg15-desc">The same timeline. Reading the repo and asking the model complete as before. Running the suite now shows three attempts: the first two outlined in red because they failed, the third completing, marked as two retries. Everything after it shifts later. The top row, the whole run, is still a single unbroken span.</desc>
+  <desc id="dg15-desc">The same timeline. Reading the invoice completes as before. Looking up the order now shows three attempts: the first two outlined in red because they failed, the third completing, marked as two retries. Everything after it shifts later. The top row, the whole run, is still a single unbroken span.</desc>
   ${s}
 </svg>`
 );

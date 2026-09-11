@@ -46,8 +46,8 @@ s += label(115, 158, "replayable", "dg-sub");
 // the part that cannot be
 const acts = [
   [40, "the model call"],
-  [122, "the shell command"],
-  [204, "the http request"],
+  [122, "the order lookup"],
+  [204, "the payment"],
 ];
 for (const [y, name] of acts) {
   s += sketchBox(300, y, 210, 58, "dg-runtime");
@@ -60,7 +60,7 @@ s += label(300, 306, "each answer is written down once, not asked again", "dg-ed
 console.log(
   `<svg viewBox="0 0 624 326" role="img" aria-labelledby="dg13-title dg13-desc" preserveAspectRatio="xMidYMid meet">
   <title id="dg13-title">Where the line between workflow and activity falls</title>
-  <desc id="dg13-desc">A solid box on the left holds the workflow, which has to be replayable. Three dashed boxes on the right hold the things that cannot be replayed: the model call, the shell command and the http request. Each answer is written down once rather than asked again.</desc>
+  <desc id="dg13-desc">A solid box on the left holds the workflow, which has to be replayable. Three dashed boxes on the right hold the things that cannot be replayed: the model call, the order lookup and the payment. Each answer is written down once rather than asked again.</desc>
   ${s}
 </svg>`
 );
