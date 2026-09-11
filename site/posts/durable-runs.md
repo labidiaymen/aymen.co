@@ -1,5 +1,5 @@
 ---
-title: "The Run Has to Outlive the Process"
+title: "Temporal Turns a Crash Into a Delay"
 seoTitle: "Temporal and agent workflows: durable execution, retries and recovery"
 date: 2026-09-11
 categories: ["ai"]
@@ -14,6 +14,8 @@ The fix I reached for was better notifications. That was the wrong layer.
 
 The run had no memory outside the process. Everything it had done lived in the heap of the thing that died, so there was nothing to ask, nothing to resume, and no way to know how far it got. A run like that is not a workflow. It is a session that has not crashed yet.
 
+The name for fixing that is durable execution. Temporal is the best-known implementation of it.
+
 ## What an agent run actually is
 
 Look at what you are asking for. Read the invoice, pull the matching order out of a system you do not control, check the totals against it, put the difference in front of a person, post the payment, file the record.
@@ -24,7 +26,7 @@ The properties you need are not new either. The work has to survive the machine 
 
 ## Durable execution
 
-Temporal's answer is to stop keeping the run in memory.
+The answer is to stop keeping the run in memory.
 
 Every step a workflow takes is appended to a history that lives outside the worker. The worker is disposable. Kill it and another one picks the run up by replaying that history, which puts it back exactly where the first one was, with the same local variables and the same place in the code.
 
