@@ -1,9 +1,10 @@
-// Cover art for the roles piece, drawn as an exploded view: the cluster, one pod
-// pulled out of it, and what is inside that pod. The accent follows the zoom.
+// Cover art for the roles piece, as an exploded view three levels deep: the
+// company schedules clusters, one cluster is one project and one team, and the
+// roles inside it are pods, each carrying a count.
 // Writes public/images/one-cluster-cover.png.
 import sharp from "sharp";
 
-let seed = 5528193;
+let seed = 1147902;
 const rnd = () => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return seed / 0x7fffffff; };
 const j = (n = 2) => (rnd() - 0.5) * n * 2;
 
@@ -26,35 +27,34 @@ const t = (x, y, s, cls = "lbl", anchor = "start") =>
 
 let g = "";
 
-// the cluster: one team, and as many replicas as the work needs
-const AX = 596, AY = 150, AW = 220, AH = 192;
+// the company, holding one cluster per project
+const AX = 596, AY = 158, AW = 194, AH = 182;
 g += `<path class="bx zone" d="${box(AX, AY, AW, AH)}"/>`;
-g += t(AX, AY - 32, "one project", "note");
-g += t(AX, AY - 10, "the cluster", "gloss");
-
-g += sk(614, 174, 184, 58, "acs", 2.2);
-g += t(706, 210, "the team", "podlbl", "middle");
-
-[614, 662, 710, 758].forEach((x) => {
-  g += sk(x, 262, 40, 36, "dash", 1.6);
+g += t(AX, AY - 32, "the company", "note");
+g += t(AX, AY - 10, "many clusters", "gloss");
+[[608, 176], [700, 176], [608, 258], [700, 258]].forEach(([x, y], i) => {
+  g += sk(x, y, 80, 70, i === 3 ? "acs" : "", 2);
 });
-g += t(614, 324, "agents", "gloss");
+g += t(AX, AY + AH + 24, "one to a project", "gloss");
 
-// the team, opened up
-g += `<path class="ln lead" d="M798,178 C838,178 856,178 882,176"/>`;
-g += `<path class="ln lead" d="M798,230 C842,268 858,308 882,344"/>`;
+// one of them, opened
+g += `<path class="ln lead" d="M782,260 C818,232 842,208 868,184"/>`;
+g += `<path class="ln lead" d="M782,328 C820,336 844,344 868,352"/>`;
 
-const BX = 884, BY = 168, BW = 242, BH = 182;
+const BX = 868, BY = 172, BW = 258, BH = 186;
 g += sk(BX, BY, BW, BH, "acs");
-g += t(BX, BY - 32, "the team that ships it", "acclbl");
-g += t(BX, BY - 10, "one pod", "gloss");
-[0, 1, 2].forEach((i) => {
-  const y = BY + 22 + i * 48;
-  g += sk(BX + 22, y, 198, 34, "", 1.8);
-  g += t(BX + 36, y + 24, ["graph engineer", "check author", "reviewer"][i], "role");
+g += t(BX, BY - 32, "one project, one team", "acclbl");
+g += t(BX, BY - 10, "one cluster", "gloss");
+
+const ROLES = [["reviewer", "1"], ["check author", "1"], ["the agents", "40"]];
+ROLES.forEach(([name, n], i) => {
+  const y = BY + 22 + i * 50;
+  g += sk(BX + 20, y, 218, 38, "", 1.8);
+  g += t(BX + 34, y + 26, name, "role");
+  g += t(BX + 224, y + 26, n, "count", "end");
 });
 
-g += t(AX, 424, "one team to a project. the agents scale.", "acc");
+g += t(AX, 434, "roles are pods. the count is what changed.", "acc");
 
 const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
   <rect width="1200" height="630" fill="${PAPER}"/>
@@ -64,10 +64,9 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" v
     .bx2{opacity:.4}
     .zone{stroke:${MUTED};stroke-width:2;stroke-dasharray:3 9;opacity:.85}
     .acs{stroke:${ACCENT}}
-    .dash{stroke:${ACCENT};stroke-dasharray:6 5;opacity:.6}
-    .podlbl{fill:${ACCENT};font-family:'DejaVu Sans Mono',monospace;font-size:17px}
     .lead{stroke:${ACCENT};stroke-width:2;stroke-dasharray:7 6;opacity:.8}
     .role{fill:${INK};font-family:'DejaVu Sans Mono',monospace;font-size:16px}
+    .count{fill:${ACCENT};font-family:'DejaVu Sans Mono',monospace;font-size:16px}
     .note{fill:${MUTED};font-family:'DejaVu Sans Mono',monospace;font-size:18px}
     .gloss{fill:${MUTED};font-family:'DejaVu Sans Mono',monospace;font-size:14px;opacity:.75}
     .acclbl{fill:${ACCENT};font-family:'DejaVu Sans Mono',monospace;font-size:18px}

@@ -16,9 +16,11 @@ The roles did not get the same treatment. A pool of specialists, allocated by pe
 
 ## The unit is the role, not the person
 
-Kubernetes does not schedule containers. It schedules pods, and a pod is the set of things that have to live and die together. Put two things in one pod because they cannot function apart, not because they happen to be related.
+Kubernetes does not schedule containers. It schedules pods, and a pod is the thing that carries a replica count. You do not scale a container. You scale a pod.
 
-That is the part worth stealing. The unit of a team is not a person and it is not a discipline. It is the smallest set of roles that has to ship together, and the test is the same one: if one of them stops, does the rest of it become pointless? If yes, they are one pod. If no, you have put two things in a box for administrative convenience.
+That is the part worth stealing. A role is a pod. It holds a piece of work and whatever runs it, and how many of it there are is a separate decision from what it is. Some roles run at one because a second would only negotiate with the first. Some run at forty because the work divides cleanly and none of it needs a person.
+
+So the shape is three deep. The company schedules clusters. A cluster is one project and the team that ships it. Inside are the roles, each with a count, and the count is the part that changed.
 
 A project gets scheduled as a cluster. Not staffed. Scheduled.
 
