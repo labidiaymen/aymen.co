@@ -80,8 +80,10 @@ None of those people go away. The work they were doing does.
 
 The metaphor gets dangerous exactly where it gets satisfying.
 
-People are not replicas. They cannot be rescheduled onto another node, they do not come back identical, and treating a team as a pool of interchangeable capacity is how you get a team that behaves like one. Everything above applies to the shape of the work. None of it applies to the people doing it.
+A role is a slot. A person is not. Everything above describes slots: what each one does, what it may never do. A slot can be split, doubled, merged into another, or left empty for a week and nothing strange happens. The person standing in it can do none of those things.
 
-And a cluster with one human in its control plane has one human's worth of failure. Holidays, bad weeks, a better offer. Kubernetes answers that with more control plane nodes. A team answers it by making the spec and the checks good enough that the second person can read them and take over, which is a documentation problem wearing an availability costume.
+The failure is quiet. You draw the roles well, and then you start talking about people as though they were the roles. Two people at half a role is not one role. Someone holding three roles is not three replicas, it is one person carrying three limits in their head, and the first limit they drop is the one nobody is checking.
+
+Roles are also the part that survives a person leaving, which is the only reason to write them down. A slot with one name in it and nothing else written has one person's worth of failure in it: holidays, a bad week, a better offer. Kubernetes answers that with more control plane nodes. Here you answer it by making the spec and the checks good enough that whoever steps into the slot can read them and carry on, which is a documentation problem wearing an availability costume.
 
 Draw the boundary. Give every role a limit. Add replicas, not managers.
