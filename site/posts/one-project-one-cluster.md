@@ -5,6 +5,7 @@ date: 2026-09-12
 categories: ["ai"]
 unlisted: true
 description: "Every container declares what it needs and what it may never exceed. Roles are fluent in the first and have no words for the second."
+cover: "/images/one-cluster-cover.png"
 permalink: "/ai/one-project-one-cluster-a37f5e02/"
 ---
 Every project I run gets its own machine. It carries the exact runtime, the database, the credentials and the test data that project needs, and nothing is shared with any other project.
