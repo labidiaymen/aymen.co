@@ -67,6 +67,11 @@ emoji, and stay.
   explicitly and more than once.
 - Work on and push to `master`.
 
+## Reporting back
+
+Give full URLs, not paths. `https://aymen.co/ai/phone-programming/`, never `/ai/phone-programming/`.
+He reads these on a phone and wants to tap them.
+
 ## Before pushing
 
 `npm run build` then `node scripts/check-assets.mjs`. The guard catches broken image
