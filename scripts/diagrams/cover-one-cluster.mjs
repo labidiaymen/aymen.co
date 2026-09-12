@@ -29,7 +29,8 @@ let g = "";
 // the cluster, and the pods scheduled into it
 const AX = 596, AY = 152, AW = 210, AH = 162;
 g += `<path class="bx zone" d="${box(AX, AY, AW, AH)}"/>`;
-g += t(AX, AY - 14, "the cluster", "note");
+g += t(AX, AY - 34, "one project", "note");
+g += t(AX, AY - 12, "the cluster", "gloss");
 const pods = [[610, 170], [710, 170], [610, 246], [710, 246]];
 pods.forEach(([x, y], i) => {
   g += sk(x, y, 84, 60, i === 3 ? "acs" : "", 2);
@@ -42,14 +43,15 @@ g += `<path class="ln lead" d="M796,306 C840,320 856,330 886,346"/>`;
 // and what is inside it
 const BX = 886, BY = 172, BW = 240, BH = 178;
 g += sk(BX, BY, BW, BH, "acs");
-g += t(BX, BY - 14, "one pod", "acclbl");
+g += t(BX, BY - 34, "the team that ships it", "acclbl");
+g += t(BX, BY - 12, "one pod", "gloss");
 [[196, 34], [196, 34], [196, 34]].forEach((_, i) => {
   const y = BY + 22 + i * 48;
   g += sk(BX + 22, y, 196, 34, "", 1.8);
-  g += t(BX + 36, y + 24, ["the boundary", "the check", "the review"][i], "role");
+  g += t(BX + 36, y + 24, ["graph engineer", "check author", "reviewer"][i], "role");
 });
 
-g += t(AX, 424, "a pod is what has to ship together", "acc");
+g += t(AX, 424, "the team is what has to ship together", "acc");
 
 const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
   <rect width="1200" height="630" fill="${PAPER}"/>
@@ -62,6 +64,7 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" v
     .lead{stroke:${ACCENT};stroke-width:2;stroke-dasharray:7 6;opacity:.8}
     .role{fill:${INK};font-family:'DejaVu Sans Mono',monospace;font-size:16px}
     .note{fill:${MUTED};font-family:'DejaVu Sans Mono',monospace;font-size:18px}
+    .gloss{fill:${MUTED};font-family:'DejaVu Sans Mono',monospace;font-size:14px;opacity:.75}
     .acclbl{fill:${ACCENT};font-family:'DejaVu Sans Mono',monospace;font-size:18px}
     .acc{fill:${ACCENT};font-family:'DejaVu Sans Mono',monospace;font-size:19px}
     .sub{fill:${MUTED};font-family:'DejaVu Sans Mono',monospace;font-size:18px}
