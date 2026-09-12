@@ -48,6 +48,18 @@ The limit is the interesting half. A container with no limit will consume the no
 
 **The agents.** Do the work. As many as the job needs. *Limit: propose, never apply.* They write anything and they land nothing on their own.
 
+## Scrum wrote down the first half
+
+Naming roles is not new. Scrum has been doing it for decades, and a good part of its value was simply that the accountabilities were written down at all rather than assumed.
+
+Read those definitions and look for the other half. Almost everything in them is what a role is accountable for. There are a few boundaries, and they are real, but they mostly protect a role from interference rather than protect the system from the role. Nothing says the person who owns the backlog may not also decide the work is finished.
+
+That gap did not cost much when the output was bounded by how fast a person could type. A role without a limit still could not consume the whole node, because the person in it went home. It costs now, because the thing on the other side of the boundary produces as much as you let it, and an unbounded role sitting in front of an unbounded producer is how a project quietly turns into one person's opinion at scale.
+
+The second difference is the count. Three roles, the same three, on every project. A cluster takes the roles the work needs, and the number is a property of the job rather than of the framework. Some projects need a check author and no spec owner because the spec is a paragraph. Some need two platform owners and no reviewer worth the name yet.
+
+Keep the habit of writing roles down. Add the sentence Scrum never had to write.
+
 ## What I stopped staffing
 
 The role that translated a specification into a task list. That was a real job when the translation was slow and needed judgment. It is now a step in a plan the agents execute, and paying attention to it is paying attention to a formatting pass.
