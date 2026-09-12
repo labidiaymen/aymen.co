@@ -46,7 +46,7 @@ g += sk(BX, BY, BW, BH, "acs");
 g += t(BX, BY - 32, "one project, one team", "acclbl");
 g += t(BX, BY - 10, "one cluster", "gloss");
 
-const ROLES = [["reviewer", "1"], ["check author", "1"], ["the agents", "40"]];
+const ROLES = [["reviewer", "1"], ["check author", "1"], ["architect", "6"]];
 ROLES.forEach(([name, n], i) => {
   const y = BY + 22 + i * 50;
   g += sk(BX + 20, y, 218, 38, "", 1.8);
@@ -54,7 +54,7 @@ ROLES.forEach(([name, n], i) => {
   g += t(BX + 224, y + 26, n, "count", "end");
 });
 
-g += t(AX, 434, "roles are pods. the count is what changed.", "acc");
+g += t(AX, 434, "one role scales. it runs the agents.", "acc");
 
 const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
   <rect width="1200" height="630" fill="${PAPER}"/>

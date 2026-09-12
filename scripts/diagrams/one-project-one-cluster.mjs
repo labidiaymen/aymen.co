@@ -36,21 +36,22 @@ s += sketchBox(200, 56, 224, 62, "dg-human");
 s += label(312, 84, "the control plane", "dg-label dg-human-text");
 s += label(312, 104, "spec, checks, one human", "dg-sub");
 
-const PW = 76, GAP = 10, N = 6;
+const PW = 92, GAP = 12, N = 5;
 const X0 = 312 - (N * PW + (N - 1) * GAP) / 2;
 for (let i = 0; i < N; i++) {
   const x = X0 + i * (PW + GAP);
   s += sketchBox(x, 172, PW, 50, "dg-runtime");
-  s += label(x + PW / 2, 202, "agent", "dg-label dg-muted-label");
-  s += arrow(x + PW / 2, 170, 312 + (i - 2.5) * 14, 122, (i - 2.5) * 3);
+  s += label(x + PW / 2, 202, "architect", "dg-label dg-muted-label");
+  s += arrow(x + PW / 2, 170, 312 + (i - 2) * 16, 122, (i - 2) * 3);
 }
 
-s += label(312, 288, "add replicas. the control plane is the same size.", "dg-edge dg-edge-back");
+s += label(312, 244, "each one runs its own agents", "dg-sub");
+s += label(312, 292, "add architects. the control plane is the same size.", "dg-edge dg-edge-back");
 
 console.log(
   `<svg viewBox="0 0 624 300" role="img" aria-labelledby="dg16-title dg16-desc" preserveAspectRatio="xMidYMid meet">
   <title id="dg16-title">One project, scheduled as a cluster</title>
-  <desc id="dg16-desc">A dashed boundary holds one project. Inside it, a solid box is the control plane, holding the spec, the checks and one human. Below it six dashed agent replicas all feed into that one box. Adding replicas does not change the size of the control plane.</desc>
+  <desc id="dg16-desc">A dashed boundary holds one project. Inside it, a solid box is the control plane, holding the spec, the checks and one human. Below it five dashed architect replicas, each running its own agents, all feed into that one box. Adding replicas does not change the size of the control plane.</desc>
   ${s}
 </svg>`
 );
