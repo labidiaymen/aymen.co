@@ -4,16 +4,16 @@ seoTitle: "Re-engineering the team: roles, limits and what a Kubernetes cluster 
 date: 2026-09-12
 categories: ["ai"]
 unlisted: true
-description: "A role without a limit will take the whole node down. That is true of containers and it turned out to be true of people."
+description: "Every container declares what it needs and what it may never exceed. Roles are fluent in the first and have no words for the second."
 permalink: "/ai/one-project-one-cluster-a37f5e02/"
 ---
 Every project I run gets its own machine. It carries the exact runtime, the database, the credentials and the test data that project needs, and nothing is shared with any other project.
 
 I did that for the code long before I did it for the people.
 
-The team stayed the way teams have been for twenty years. A pool of specialists, allocated by percentage, three of them at forty per cent each on something that needed one person at full attention. Meanwhile the machines got clean isolation and a declared shape, and the humans got a spreadsheet.
+The roles did not get the same treatment. A pool of specialists, allocated by percentage, three of them at forty per cent each on something that needed one at full attention. The machines got clean isolation and a declared shape. The roles got a spreadsheet.
 
-## The unit is not the person
+## The unit is the role, not the person
 
 Kubernetes does not schedule containers. It schedules pods, and a pod is the set of things that have to live and die together. Put two things in one pod because they cannot function apart, not because they happen to be related.
 
