@@ -1658,6 +1658,17 @@ which is a hard yellow that
   text-decoration: none;
 }
 .card-primary:hover { background: var(--accent-strong); }
+.card-secondary {
+  display: block;
+  margin: 0.6rem 0 0;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+.card-secondary:hover { background: var(--accent); color: #fff; }
 .card-links {
   margin: 1.6rem 0 0;
   display: grid;
