@@ -1657,7 +1657,7 @@ which is a hard yellow that
   font-weight: 600;
   text-decoration: none;
 }
-.card-primary:hover { background: var(--accent-strong); }
+.card-primary:hover { background: var(--accent-strong); color: #fff; }
 .card-secondary {
   display: block;
   margin: 0.6rem 0 0;
