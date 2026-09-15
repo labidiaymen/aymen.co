@@ -12,7 +12,8 @@
   <meta property="og:title" content="{{ title }}">
   <meta property="og:description" content="{{ description }}">
   <meta property="og:url" content="{{ page.url | absoluteUrl(site.url) }}">
-  <meta property="og:image" content="{{ '/images/social-card.jpg' | absoluteUrl(site.url) }}">
+  <meta property="og:image" content="{{ (og or '/images/social-card.jpg') | absoluteUrl(site.url) }}">
+  <meta name="twitter:card" content="summary_large_image">
   <script>
     (function () {
       var mode = localStorage.getItem("theme");
