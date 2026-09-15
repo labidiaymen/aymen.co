@@ -7,12 +7,13 @@ og: "/images/hi-card.png"
 eleventyExcludeFromCollections: true
 sitemap: false
 ---
-<img class="card-photo" src="{{ avatar }}" alt="" width="96" height="96">
-
-<h1 class="card-name">Labidi Aymen</h1>
+<a class="card-head" href="/">
+  <img class="card-photo" src="{{ avatar }}" alt="" width="96" height="96">
+  <h1 class="card-name">Labidi Aymen</h1>
+</a>
 <p class="card-role">{{ site.role }}</p>
 
-<p class="card-line">I build platforms. A runtime, an agent workspace, a search engine.</p>
+<p class="card-line">Architecture, platforms, and the agents that run in them.</p>
 
 <a class="card-primary" href="/aymen.vcf" download>Save my contact</a>
 
@@ -23,6 +24,8 @@ sitemap: false
 </nav>
 
 <div class="card-foot">
+  <a href="/">aymen.co</a>
+  <span class="card-sep">·</span>
   <a href="mailto:{{ site.email }}">{{ site.email }}</a>
   <span class="card-sep">·</span>
   <a href="{{ site.social.github }}" rel="me noopener">GitHub</a>

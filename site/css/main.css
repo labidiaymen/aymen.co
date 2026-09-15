@@ -1616,6 +1616,11 @@ which is a hard yellow that
   max-width: 24rem;
   text-align: center;
 }
+.card-head {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
 .card-photo {
   width: 96px;
   height: 96px;
@@ -1671,6 +1676,7 @@ which is a hard yellow that
   color: var(--text);
 }
 .card-links a:hover { border-color: var(--accent); }
+.card-head:hover .card-name { color: var(--accent); }
 .card-meta {
   font-family: var(--mono);
   font-size: 0.72rem;

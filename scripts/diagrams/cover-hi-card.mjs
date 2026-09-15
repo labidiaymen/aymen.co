@@ -34,8 +34,8 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" v
   ${t(76, 266, "Architect &amp; Engineering Manager @Inetum", "role")}
   ${t(76, 300, "Founder of Nuraly", "role")}
   <path d="M76,364 C260,367 520,362 700,365" fill="none" stroke="#e6e3dc" stroke-width="2"/>
-  ${t(76, 428, "I build platforms. A runtime, an agent", "line")}
-  ${t(76, 470, "workspace, a search engine.", "line")}
+  ${t(76, 428, "Architecture, platforms, and the", "line")}
+  ${t(76, 470, "agents that run in them.", "line")}
   ${t(76, 566, "aymen.co/hi", "foot")}
 </svg>`;
 
