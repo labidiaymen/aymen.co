@@ -1,6 +1,7 @@
 // Share image for the event card at /hi/. The site default is a good card but it
 // frames the site as a blog and has no face on it. This one leads with the photo,
-// because whoever pastes this link met the person ten minutes ago.
+// because whoever pastes this link met the person ten minutes ago. The line
+// names the work, not the argument of whatever was published last.
 // Writes public/images/hi-card.png.
 import sharp from "sharp";
 
@@ -33,8 +34,8 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" v
   ${t(76, 266, "Architect &amp; Engineering Manager @Inetum", "role")}
   ${t(76, 300, "Founder of Nuraly", "role")}
   <path d="M76,364 C260,367 520,362 700,365" fill="none" stroke="#e6e3dc" stroke-width="2"/>
-  ${t(76, 428, "I build systems where agents do the", "line")}
-  ${t(76, 470, "work and the checks decide what ships.", "line")}
+  ${t(76, 428, "I build platforms. A runtime, an agent", "line")}
+  ${t(76, 470, "workspace, a search engine.", "line")}
   ${t(76, 566, "aymen.co/hi", "foot")}
 </svg>`;
 
