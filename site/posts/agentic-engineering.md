@@ -1,12 +1,11 @@
 ---
 title: "Agentic Engineering Is Building the Check"
 seoTitle: "Agentic engineering: the work moved from writing the thing to checking it"
-date: 2026-09-11
+date: 2026-09-15
 categories: ["ai"]
-unlisted: true
 description: "A check that a tired person performs at midnight is not a check. It is a hope with a timestamp."
 cover: "/images/agentic-engineering-cover.png"
-permalink: "/ai/agentic-engineering-5c20b7f1/"
+permalink: "/ai/agentic-engineering/"
 ---
 I wrote about four systems this month. A delivery pipeline, a search index, a cluster, and a backend moved from Java to TypeScript. Different problems, different stacks, nothing in common on the surface.
 
