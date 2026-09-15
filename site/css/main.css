@@ -1602,3 +1602,86 @@ which is a hard yellow that
 @media (max-width: 640px) {
   .prose-letter { padding: 1.5rem 1.3rem 1.3rem; }
 }
+
+/* The event card at /hi/. Scanned standing up, one thumb, a few seconds, so it
+   carries no nav, no footer and one obvious action. */
+.card-body {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 2rem 1.25rem 3rem;
+}
+.card {
+  width: 100%;
+  max-width: 24rem;
+  text-align: center;
+}
+.card-photo {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--hairline);
+}
+.card-name {
+  margin: 1.1rem 0 0;
+  font-family: var(--serif);
+  font-size: 2rem;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+.card-role {
+  margin: 0.35rem 0 0;
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+.card-line {
+  margin: 1.1rem 0 0;
+  font-size: 1.02rem;
+  line-height: 1.5;
+  color: var(--text);
+}
+.card-primary {
+  display: block;
+  margin: 1.6rem 0 0;
+  padding: 0.95rem 1rem;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+}
+.card-primary:hover { background: var(--accent-strong); }
+.card-links {
+  margin: 1.6rem 0 0;
+  display: grid;
+  gap: 0.5rem;
+  text-align: left;
+}
+.card-links a {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.8rem 0.95rem;
+  border: 1px solid var(--hairline);
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--text);
+}
+.card-links a:hover { border-color: var(--accent); }
+.card-meta {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-align: right;
+}
+.card-foot {
+  margin: 1.6rem 0 0;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+.card-foot a { color: var(--text-muted); }
+.card-sep { margin: 0 0.4rem; color: var(--hairline); }

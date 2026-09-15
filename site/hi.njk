@@ -1,0 +1,30 @@
+---
+layout: layouts/card.njk
+permalink: /hi/
+title: "Aymen Labidi"
+description: "Architect and engineering manager. Building Joule and Nuraly."
+eleventyExcludeFromCollections: true
+sitemap: false
+---
+<img class="card-photo" src="{{ avatar }}" alt="" width="96" height="96">
+
+<h1 class="card-name">Labidi Aymen</h1>
+<p class="card-role">{{ site.role }}</p>
+
+<p class="card-line">I build systems where agents do the work and the checks decide what ships.</p>
+
+<a class="card-primary" href="/aymen.vcf" download>Save my contact</a>
+
+<nav class="card-links" aria-label="Elsewhere">
+  <a href="/blog/"><span>Writing</span><span class="card-meta">on agents in production</span></a>
+  <a href="https://joule.sh" rel="noopener"><span>Joule</span><span class="card-meta">the platform I am building</span></a>
+  <a href="/projects/"><span>Projects</span><span class="card-meta">Lumen, and the rest</span></a>
+</nav>
+
+<div class="card-foot">
+  <a href="mailto:{{ site.email }}">{{ site.email }}</a>
+  <span class="card-sep">·</span>
+  <a href="{{ site.social.github }}" rel="me noopener">GitHub</a>
+  <span class="card-sep">·</span>
+  <a href="{{ site.social.twitter }}" rel="me noopener">X</a>
+</div>
