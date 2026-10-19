@@ -61,10 +61,16 @@ A camelCase custom event on an element that also carries a directive matches no 
 
 On an existing app, expect a list on the first build. Each line is either a real bug or a deliberate event that now has to be renamed to dash-case or left alone with the flag off. Both are worth knowing, and neither is free.
 
+## Where it earns its keep
+
+New code is the weaker case. A misspelled output is a typing slip, and templates that are generated rather than typed make fewer of them.
+
+The strong case is the app that already exists. Years of hand-typed bindings, written before anything checked event names, and nobody has read them for this. That is where a `valueChnage` can still be sitting, and where turning the flag on once will find it.
+
 ## What I would do
 
-On a new project, turn it on at the start. There is nothing to clean up and the first typo is caught the day it is typed.
-
 On an existing app, turn it on in a branch and read the list once.
+
+On a new project, turn it on anyway. There is nothing to clean up, so it costs nothing.
 
 `valueChnage` was a perfectly valid event name. That is the whole problem.
