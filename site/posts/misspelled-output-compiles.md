@@ -27,7 +27,7 @@ If it does not, Angular treats the name as a DOM event and attaches a listener. 
 
 ## The option
 
-Angular 22.2 adds `strictUnclaimedEventNames`. [Aamir Mukaram wrote it up](https://aamirmukaram.com/notes/angular-strict-unclaimed-event-names/), and the change itself is [pull request #70527](https://github.com/angular/angular/pull/70527).
+Angular 22.2 adds `strictUnclaimedEventNames`. The change is [pull request #70527](https://github.com/angular/angular/pull/70527).
 
 ```json
 {
