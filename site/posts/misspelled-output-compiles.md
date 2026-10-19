@@ -3,9 +3,8 @@ title: "A Misspelled Output Still Compiles"
 seoTitle: "Angular strictUnclaimedEventNames: catching a misspelled output binding at build time"
 date: 2026-10-19
 categories: ["javascript", "angular"]
-unlisted: true
 description: "Angular 22.2 adds a compiler option that fails the build on an event binding nobody claims. It is off by default."
-permalink: "/javascript/misspelled-output-compiles-5e8a2c17/"
+permalink: "/javascript/misspelled-output-compiles/"
 ---
 I used to have `(valueChnage)` in a template.
 
