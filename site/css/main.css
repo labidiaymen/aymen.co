@@ -636,13 +636,11 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
 }
 .prose blockquote p { margin: 0.4em 0; }
 .prose .key-point {
-  margin: 1.6em 0;
-  padding: 0.7em 1em;
-  border-left: 4px solid var(--accent);
-  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  margin: 1.4em 0;
+  padding: 0.15em 0 0.15em 0.9em;
+  border-left: 2px solid var(--accent);
   color: var(--text);
   font-weight: 600;
-  font-size: 1.12em;
 }
 .prose hr {
   border: none;
