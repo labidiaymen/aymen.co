@@ -2,6 +2,7 @@
 title: "The workflow around our coding agent"
 seoTitle: "Graph engineering in practice: the workflow around our AI coding agent"
 date: 2026-11-23
+pinned: true
 categories: ["ai"]
 series: "Agent-native delivery"
 description: "Green pipeline, wrong change. What we changed in the workflow around our coding agent after the first ticket."
