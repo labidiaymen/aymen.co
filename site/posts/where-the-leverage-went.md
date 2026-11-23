@@ -5,7 +5,7 @@ date: 2026-11-23
 categories: ["ai"]
 series: "Agent-native delivery"
 unlisted: true
-description: "Green pipeline, wrong change. A step should not check its own work, so the check must be a separate step."
+description: "Green pipeline, wrong change. What we changed in the workflow around our coding agent after the first ticket."
 cover: "/images/graph-engineer-cover.png"
 permalink: "/ai/graph-engineering-bf9cea68/"
 ---
@@ -35,8 +35,6 @@ A ticket comes in. The intake step reads the ticket and prepares the work. The p
 The build agent fixes the parts that fail, and then it reports that the pipeline is green. The verdict step does not trust this report. It checks the pipeline again with plain code, without a model.
 
 We use the same rule for visual checks. We put some mistakes in a button on purpose: a wrong colour, a typo in the label, and a wrong height. The vision models found the colour and the typo, but they all missed the height. So code measures the sizes and compares them with the values in the design. The model can point at problems, but the measurement makes the decision.
-
-A step should not check its own work. The check must be a separate step, and a model must not be able to change its result.
 
 ## Shared steps, and one small workflow per project
 
