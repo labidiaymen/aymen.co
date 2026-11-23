@@ -124,13 +124,13 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" v
     .nd.acc{fill:${ACCENT}}
     .sm{fill:${MUTED};font-family:'DejaVu Sans Mono',monospace;font-size:15px}
     .kick{fill:${ACCENT};font-family:'DejaVu Sans',sans-serif;font-size:22px;letter-spacing:3px}
-    .head{fill:${INK};font-family:'DejaVu Serif',Georgia,serif;font-size:50px}
+    .head{fill:${INK};font-family:'DejaVu Serif',Georgia,serif;font-size:44px}
     .foot{fill:${MUTED};font-family:'DejaVu Sans',sans-serif;font-size:22px}
     .footacc{fill:${ACCENT};font-family:'DejaVu Sans',sans-serif;font-size:22px}
   </style>
   ${t(76, 96, "GRAPH ENGINEERING", "kick")}
-  ${t(76, 168, "The pipeline was green,", "head")}
-  ${t(76, 228, "but the change was wrong", "head")}
+  ${t(76, 168, "Green pipeline, wrong change:", "head")}
+  ${t(76, 228, "the workflow matters more than the agent", "head")}
   <path class="ln" style="stroke:#e6e3dc;stroke-width:2" d="M76,540 C400,543 800,538 1124,541"/>
   ${t(76, 580, "aymen.co", "footacc")}
   ${t(1124, 580, "November 2026", "foot", "end")}

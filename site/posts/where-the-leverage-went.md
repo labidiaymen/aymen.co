@@ -1,5 +1,5 @@
 ---
-title: "The pipeline was green, but the change was wrong"
+title: "Green pipeline, wrong change: the workflow matters more than the agent"
 seoTitle: "Graph engineering: why the workflow around an AI agent matters more than the agent"
 date: 2026-11-23
 categories: ["ai"]
