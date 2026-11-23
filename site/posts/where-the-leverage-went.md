@@ -1,6 +1,6 @@
 ---
-title: "Green pipeline, wrong change: the workflow matters more than the agent"
-seoTitle: "Graph engineering: why the workflow around an AI agent matters more than the agent"
+title: "The workflow around our coding agent"
+seoTitle: "Graph engineering in practice: the workflow around our AI coding agent"
 date: 2026-11-23
 categories: ["ai"]
 series: "Agent-native delivery"
