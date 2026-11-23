@@ -94,7 +94,7 @@ This is a small drawing, but it controls everything that the agent may try. Bett
 
 When you write code, you decide how one step behaves. When you draw the graph, you decide what the whole system may try, what counts as done, and what happens when the work is not done. In the past, this was one job. Now it is two jobs, and the second job has more value.
 
-## Where the money went
+## A cheaper run that did the same job
 
 We ran the same ticket through the same planning step two times.
 
@@ -104,7 +104,9 @@ The problem was not the model. The graph gave the model too much information and
 
 So we added rules around the step. The ticket is already in the prompt, so the agent must not download it. The agent explores a little, and then it writes. The agent loads only the skills that the task needs. We also moved to a cheaper model.
 
-The second run cost a small part of the first run, and it found the same fix in the same files. I cannot say how much of the saving came from the rules and how much came from the model, because we changed both at the same time.
+<p class="key-point">The second run cost a small part of the first run, and it did the same job. It found the same fix, in the same files.</p>
+
+I cannot say how much of the saving came from the rules and how much came from the model, because we changed both at the same time.
 
 ## What goes from one step to the next
 
