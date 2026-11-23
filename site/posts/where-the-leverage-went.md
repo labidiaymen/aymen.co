@@ -13,7 +13,7 @@ The first ticket that our agent platform turned into a merge request looked good
 
 Then we reviewed the changes outside the platform. The agent had also changed other buttons, and nobody had asked for that. The pipeline was green, but the change was wrong.
 
-This ticket taught me where the real work is now. The agent writes the code, but the workflow around the agent decides what the agent may change, what counts as done, and who looks at the result.
+This article is about what we changed in the workflow around the agent after this ticket. The workflow decides what the agent may change, what counts as done, and who looks at the result.
 
 ## The workflow we run
 
@@ -63,7 +63,7 @@ For other work, we do not know the steps in advance. A bug report can concern on
   <figcaption>A person designs the boxes with a solid line. The area in the middle stays empty on purpose, because the model chooses what happens there.</figcaption>
 </figure>
 
-The person who draws the workflow still owns the goal, the check that says the work is done, and the way out for a run that cannot finish. This is a small drawing, but it controls everything that the agent may try.
+The person who draws the workflow still owns the goal, the check that says the work is done, and the way out for a run that cannot finish.
 
 ## A cheaper run that did the same job
 
@@ -79,9 +79,9 @@ The problem was not the model. The workflow gave the model too much information 
 
 **The retry.** When the pipeline fails, the build step tries again, but only a limited number of times. Without a limit, a flaky test and a stubborn model can run for a long time and cost a lot of money.
 
-**The exit.** We had a loop that did not stop. The work was finished, but the build started again and marked the ticket as failed. A loop needs a clear exit, and each round must start from a clean state.
+**The exit.** We had a loop that did not stop. The work was finished, but the build started again and marked the ticket as failed. We changed the loop so that it stops on the decision of the review, and each round starts from a clean state.
 
-**The escape.** Before the agent writes any code, a ticket can stop with the result "needs info", for example when no project fits. The ticket then goes to a person, and the run does not fail. If a model can only finish or fail, it learns to pretend that it finished.
+**The escape.** Before the agent writes any code, a ticket can stop with the result "needs info", for example when no project fits. The ticket then goes to a person, and the run does not fail.
 
 ## The human is a step too
 
