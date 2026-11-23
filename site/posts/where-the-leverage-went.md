@@ -5,7 +5,7 @@ date: 2026-11-23
 categories: ["ai"]
 series: "Agent-native delivery"
 unlisted: true
-description: "A step should not check its own work. The check must be a separate step."
+description: "Green pipeline, wrong change. A step should not check its own work, so the check must be a separate step."
 cover: "/images/graph-engineer-cover.png"
 permalink: "/ai/graph-engineering-bf9cea68/"
 ---
