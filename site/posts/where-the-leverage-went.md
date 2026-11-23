@@ -9,11 +9,11 @@ description: "Green pipeline, wrong change. What we changed in the workflow arou
 cover: "/images/graph-engineer-cover.png"
 permalink: "/ai/graph-engineering-bf9cea68/"
 ---
-The first ticket that our agent platform turned into a merge request looked good. The pipeline was green, and the agent had even fixed some broken tests by itself.
+The first ticket that our agent platform turned into a merge request looked good. The pipeline was green, and the agent had also fixed some broken tests by itself.
 
 Then we reviewed the changes outside the platform. The agent had also changed other buttons, and nobody had asked for that. The pipeline was green, but the change was wrong.
 
-This article is about what we changed in the workflow around the agent after this ticket. The workflow decides what the agent may change, what counts as done, and who looks at the result.
+After this ticket, we changed the workflow around the agent.
 
 ## The workflow we run
 
@@ -30,7 +30,7 @@ A ticket comes in. The intake step reads the ticket and prepares the work. The p
   <figcaption>The graph we run. The dashed arrow sends the work back to the build, but only a limited number of times. The arrow at the top sends the ticket to a person, and the run does not fail.</figcaption>
 </figure>
 
-## Do not trust the report of the agent
+## The verdict step checks the pipeline again
 
 The build agent fixes the parts that fail, and then it reports that the pipeline is green. The verdict step does not trust this report. It checks the pipeline again with plain code, without a model.
 
@@ -71,17 +71,17 @@ We ran the same ticket through the same planning step two times.
 
 The first run was expensive, and most of the cost was waste. The platform sent the whole conversation again on every call. The planner loaded skills that it did not need, and it tried to download a ticket that it already had.
 
-The problem was not the model. The workflow gave the model too much information and allowed it to do too much. So we added rules around the step: use the ticket that is already in the prompt, explore a little and then write, and load only the skills that the task needs. We also moved to a cheaper model.
+The workflow gave the model too much information and allowed it to do too much. So we added rules around the step: use the ticket that is already in the prompt, explore a little and then write, and load only the skills that the task needs. We also moved to a cheaper model.
 
 <p class="key-point">The second run cost a small part of the first run, and it did the same job. It found the same fix, in the same files.</p>
 
-## Arrows that need care
+## Retries, loops and early stops
 
-**The retry.** When the pipeline fails, the build step tries again, but only a limited number of times. Without a limit, a flaky test and a stubborn model can run for a long time and cost a lot of money.
+**The retry.** When the pipeline fails, the build step tries again, but only a limited number of times. Without a limit, a flaky test and a model that keeps trying can run for a long time and cost a lot of money.
 
-**The exit.** We had a loop that did not stop. The work was finished, but the build started again and marked the ticket as failed. We changed the loop so that it stops on the decision of the review, and each round starts from a clean state.
+**The loop.** We had a loop that did not stop. The work was finished, but the build started again and marked the ticket as failed. We changed the loop so that it stops on the decision of the review, and each round starts from a clean state.
 
-**The escape.** Before the agent writes any code, a ticket can stop with the result "needs info", for example when no project fits. The ticket then goes to a person, and the run does not fail.
+**The early stop.** Before the agent writes any code, a ticket can stop with the result "needs info", for example when no project fits. The ticket then goes to a person, and the run does not fail.
 
 ## The human is a step too
 
