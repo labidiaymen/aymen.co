@@ -4,7 +4,6 @@ seoTitle: "Graph engineering in practice: the workflow around our AI coding agen
 date: 2026-11-23
 categories: ["ai"]
 series: "Agent-native delivery"
-unlisted: true
 description: "Green pipeline, wrong change. What we changed in the workflow around our coding agent after the first ticket."
 cover: "/images/graph-engineer-cover.png"
 permalink: "/ai/graph-engineering-bf9cea68/"
