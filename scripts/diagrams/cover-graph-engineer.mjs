@@ -43,29 +43,67 @@ function arrow(x1, y1, x2, y2, bow = 0, cls = "") {
 const t = (x, y, s, cls = "lbl", anchor = "start") =>
   `<text class="${cls}" x="${x}" y="${y}" text-anchor="${anchor}">${s}</text>`;
 
-const CX = 830; // centre of the drawing half
+// The real Jira-ticket-to-merge-request graph, cut down to its shape:
+// two questions, two capped loops, a shortcut, and three ways to end.
 let g = "";
+const pill = (x, y, w, h) => {
+  const r = h / 2, o = () => j(2);
+  return `M${x + r + o()},${y + o()} L${x + w - r + o()},${y + o()} Q${x + w + 4 + o()},${y + h / 2 + o()} ${x + w - r + o()},${y + h + o()} L${x + r + o()},${y + h + o()} Q${x - 4 + o()},${y + h / 2 + o()} ${x + r + o()},${y + o()}`;
+};
+const pillBox = (x, y, w, h, cls = "") =>
+  `<path class="bx ${cls}" d="${pill(x, y, w, h)}"/><path class="bx bx2 ${cls}" d="${pill(x, y, w, h)}"/>`;
 
-// the goal
-g += sketchBox(CX - 155, 118, 310, 62);
-g += t(CX, 156, "the goal", "lbl", "middle");
-g += arrow(CX, 180, CX, 226);
-
-// the interior nobody draws
-g += `<path class="bx zone" d="${box(CX - 215, 228, 430, 190)}"/>`;
-g += t(CX, 262, "the model chooses", "acc", "middle");
-[-160, -42, 76].forEach((dx) => {
-  g += `<path class="bx runtime ghost" d="${box(CX + dx, 296, 100, 44)}"/>`;
-  g += t(CX + dx + 50, 325, "?", "sub", "middle");
+const RY = 380, RH = 60;
+const N = {
+  ticket: [76, 88], project: [190, 112], mr: [328, 112], plan: [466, 96],
+  build: [588, 96], review: [710, 104], verdict: [840, 104],
+};
+const mid = (k) => N[k][0] + N[k][1] / 2;
+const L = { ticket: "ticket", project: "project?", mr: "open MR?", plan: "plan",
+  build: "build", review: "review", verdict: "verdict" };
+const order = Object.keys(N);
+order.forEach((k, i) => {
+  const [x, w] = N[k];
+  g += sketchBox(x, RY, w, RH);
+  g += t(x + w / 2, RY + 37, L[k], "nd", "middle");
+  if (i < order.length - 1) g += arrow(x + w, RY + RH / 2, N[order[i + 1]][0] - 2, RY + RH / 2);
 });
-g += `<path class="ln back" d="M${CX - 120},372 C${CX - 50},392 ${CX + 60},392 ${CX + 130},374"/>`;
-g += `<path class="ln back" d="M${CX - 110},362 L${CX - 121},373 L${CX - 107},380"/>`;
 
-g += arrow(CX, 418, CX, 462);
+// done: a draft merge request
+g += pillBox(970, RY + 2, 154, RH - 4);
+g += t(1047, RY + 37, "draft MR", "nd", "middle");
+g += arrow(944, RY + RH / 2, 968, RY + RH / 2);
 
-// what ends it
-g += sketchBox(CX - 175, 464, 350, 62);
-g += t(CX, 502, "a check that ends it", "lbl", "middle");
+// project unclear: ask a person, who can end it
+g += sketchBox(190, 272, 112, 50, "human");
+g += t(246, 303, "ask", "acc nd", "middle");
+g += arrow(mid("project") - 20, RY, 226, 324, 0);
+g += arrow(mid("project") + 20, 324, mid("project") + 20, RY - 2, 0);
+g += pillBox(26 + 4, 272, 136, 50);
+g += t(98, 303, "needs info", "sm", "middle");
+g += arrow(190, 297, 168, 297);
+
+// shortcut: an MR already exists, resume it
+const sx = mid("mr"), ex = mid("review");
+g += `<path class="ln" d="M${sx},${RY + RH} C${sx + 60},${RY + RH + 78} ${ex - 60},${RY + RH + 78} ${ex},${RY + RH + 6}"/>`;
+g += `<path class="ln" d="M${ex - 9},${RY + RH + 17} L${ex},${RY + RH + 6} L${ex + 8},${RY + RH + 18}"/>`;
+g += t((sx + ex) / 2, RY + RH + 80, "MR exists: resume", "sm", "middle");
+
+// two capped loops, decided while running
+const loop = (k, lbl) => {
+  const c = mid(k);
+  g += `<path class="ln back" d="M${c - 26},${RY} C${c - 40},${RY - 70} ${c + 40},${RY - 70} ${c + 26},${RY - 4}"/>`;
+  g += `<path class="ln back" d="M${c + 18},${RY - 16} L${c + 26},${RY - 4} L${c + 34},${RY - 15}"/>`;
+  g += t(c, RY - 62, lbl, "acc", "middle");
+};
+loop("plan", "re-plan once");
+loop("review", "max 6");
+
+// still open: it waits for you
+const vx = mid("verdict");
+g += sketchBox(vx - 48, 470, 96, 50, "human");
+g += t(vx, 501, "you", "acc nd", "middle");
+g += arrow(vx, RY + RH, vx, 468);
 
 const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
   <rect width="1200" height="630" fill="${PAPER}"/>
@@ -73,7 +111,7 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" v
   <style>
     .bx,.ln{fill:none;stroke:${INK};stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
     .bx2{opacity:.4}
-    .runtime,.back{stroke:${ACCENT}}
+    .runtime,.back,.human{stroke:${ACCENT}}
     .back{stroke-dasharray:8 6}
     .runtime{stroke-dasharray:9 6}
     .ghost{opacity:.45}
@@ -81,19 +119,21 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" v
     .lbl{fill:${INK};font-family:'DejaVu Sans Mono',monospace;font-size:21px}
     .sub{fill:${MUTED};font-family:'DejaVu Sans Mono',monospace;font-size:17px}
     .acc{fill:${ACCENT};font-family:'DejaVu Sans Mono',monospace;font-size:17px}
+    .big{font-size:21px}
+    .nd{fill:${INK};font-family:'DejaVu Sans Mono',monospace;font-size:19px}
+    .nd.acc{fill:${ACCENT}}
+    .sm{fill:${MUTED};font-family:'DejaVu Sans Mono',monospace;font-size:15px}
     .kick{fill:${ACCENT};font-family:'DejaVu Sans',sans-serif;font-size:22px;letter-spacing:3px}
     .head{fill:${INK};font-family:'DejaVu Serif',Georgia,serif;font-size:58px}
     .foot{fill:${MUTED};font-family:'DejaVu Sans',sans-serif;font-size:22px}
     .footacc{fill:${ACCENT};font-family:'DejaVu Sans',sans-serif;font-size:22px}
   </style>
-  ${t(76, 128, "THE GRAPH ENGINEER", "kick")}
-  ${t(76, 232, "Where the", "head")}
-  ${t(76, 302, "leverage went", "head")}
-  ${t(76, 392, "You own the boundary,", "sub")}
-  ${t(76, 424, "not the interior.", "sub")}
+  ${t(76, 104, "THE GRAPH ENGINEER", "kick")}
+  ${t(76, 184, "Where the leverage went", "head")}
+  ${t(76, 232, "The agent writes the code. The drawing decides what it may touch.", "sub")}
   <path class="ln" style="stroke:#e6e3dc;stroke-width:2" d="M76,540 C400,543 800,538 1124,541"/>
   ${t(76, 580, "aymen.co", "footacc")}
-  ${t(1124, 580, "September 2026", "foot", "end")}
+  ${t(1124, 580, "November 2026", "foot", "end")}
   ${g}
 </svg>`;
 

@@ -1,83 +1,62 @@
 ---
 title: "Where the leverage went: the graph engineer"
 seoTitle: "The graph engineer: what graph engineering is, and where the leverage moved"
-date: 2026-09-01
+date: 2026-11-23
 categories: ["ai"]
 series: "Agent-native delivery"
 unlisted: true
-description: "Whoever draws the boundary now decides more about the outcome than whoever writes the code inside it."
+description: "The cheapest fix in the whole platform was not a better model. It was deciding what crosses an edge."
 cover: "/images/graph-engineer-cover.png"
 permalink: "/ai/graph-engineering-bf9cea68/"
 ---
-Graph engineering is the name that arrived this summer. I had been doing it for a year without one.
+Fifty steps. That was the ceiling on one workflow in the agent platform we build at work, and the design-system builder hit it.
 
-I am not going to argue about the word. What it points at is a shift in leverage. The person who draws the graph now decides more about the outcome than the person who writes the code inside it.
+It did not hit it because the agent inside was weak. It hit it because every rule of one project lived in the drawing: which repository it may touch, which branch it merges into, which checks run, which rubric the review uses. I wanted the same loop for a second project. I could not have it. Overriding inputs does nothing when the knowledge is in the edges.
+
+That is where the leverage went. The person who draws the graph now decides more about the outcome than the agent that runs inside it.
 
 ## The ladder, written out
 
-A prompt is the smallest unit. Context engineering decides what surrounds it. Harness engineering builds the system it runs inside. Loop engineering automates the repetition for one agent. Graph engineering connects many of those into one structure.
+A prompt is the smallest unit. Context decides what surrounds it. A harness is the system it runs inside. A loop repeats it for one agent. A graph connects many of those into one structure.
 
-In a graph, nodes do the work. A node is deterministic code, or an LLM call, or a tool, or a whole agent. Edges decide what happens next, and an edge can be fixed or conditional. State flows along the edges.
+Nodes do the work. A node is deterministic code, or an LLM call, or a tool, or a whole coding agent in a container. Edges decide what happens next, and an edge can be fixed or conditional. State crosses the edges.
 
 That is a state machine. We have had those for fifty years. What is new is that some of the nodes are non-deterministic, and you are deciding, node by node, whether they get to be.
 
-## The graph you already have
+## The graph we run
 
-I never sat down to draw a graph. I have one anyway. It lives in a CI config instead of a diagram, which is why it took a new word to make me look at it.
-
-Mine looks like this. A ticket arrives. An agent picks it up on a VM that carries the exact environment that project needs: the runtime, the database, the credentials, the test data. Nothing shared. It works in a branch and opens a merge request. SonarQube runs. The e2e suite runs. Coverage is checked. My phone buzzes. I read the diff and I answer. Yes, no, or here is what you missed. On no, it goes back to the agent with my sentence attached.
-
-Count the nodes. Agent. Three checks. One human. Count the edges. Most are fixed, because the order is not negotiable: you do not run e2e before the branch exists. One is conditional, and it is the only interesting one in the whole diagram. It is the edge out of me.
+A work item comes in. A plan step writes down what will change. A build step starts a coding agent in its own container with the repository cloned in. It works on a branch, pushes, and waits for the pipeline. A verdict step reads the pipeline. A review step reads the diff. A finish step opens a draft merge request and labels the item. Then it is mine.
 
 <figure class="diagram">
 <svg viewBox="0 0 960 380" role="img" aria-labelledby="dg-title dg-desc" preserveAspectRatio="xMidYMid meet">
-  <title id="dg-title">The delivery pipeline drawn as a graph</title>
-  <desc id="dg-desc">A ticket goes to an agent running on its own VM, which opens a merge request. Three checks run in parallel: SonarQube, the e2e suite and coverage. All three feed a human node, marked "you, on a phone". From there one edge leads to merged, and a second conditional edge loops back to the agent carrying the rejection.</desc>
-  <path class="dg-line" d="M120,194 Q138.85074851748104,193.75046336778928 160,194"/><path class="dg-line" d="M152.7,197.2 L160,194 L152.7,190.7"/><path class="dg-line" d="M298,194 Q318.7561687248555,195.74011278373195 338,194"/><path class="dg-line" d="M331.0,197.9 L338,194 L330.4,191.4"/><path class="dg-line" d="M450,188 Q469.4318490035049,140.16996449472848 492,116"/><path class="dg-line" d="M489.4,123.6 L492,116 L484.6,119.1"/><path class="dg-line" d="M450,194 Q469.3849589831126,193.85277551545425 492,194"/><path class="dg-line" d="M484.7,197.2 L492,194 L484.7,190.7"/><path class="dg-line" d="M450,202 Q472.4005937596786,250.5959062588382 492,272"/><path class="dg-line" d="M484.7,268.8 L492,272 L489.5,264.4"/><path class="dg-line" d="M618,116 Q641.8849687594385,129.3927812578123 664,176"/><path class="dg-line" d="M657.9,170.8 L664,176 L663.8,168.0"/><path class="dg-line" d="M618,194 Q641.744343938187,193.38855862728718 664,194"/><path class="dg-line" d="M656.6,197.1 L664,194 L656.8,190.5"/><path class="dg-line" d="M618,272 Q641.5603220479378,254.17950749452203 664,212"/><path class="dg-line" d="M663.4,220.0 L664,212 L657.7,216.9"/><path class="dg-line" d="M776,194 Q798.1907410040454,194.17120504526943 820,194"/><path class="dg-line" d="M812.7,197.3 L820,194 L812.7,190.8"/><path class="dg-line dg-back" d="M720,232 C680,332 339,340 229,236"/><path class="dg-line dg-back dg-head" d="M222,246 L229,236 L237,245"/><path class="dg-box " d="M15.87695884810619,167.15279960704632 C56.4077236181161,166.91709709228812 89.40833702227489,170.232395555746 121.45555687130222,169.8652965565516 C120.40895347726017,191.40896415822627 119.22340965346592,206.64562492586936 121.86162071426475,218.0090679170606 C80.10659461212651,221.40626659570555 46.5394338615888,219.8386503230029 15.307541466554413,219.73503551582576 C17.633058740586534,200.54532451804042 14.005341148565217,183.4592635642082 14.015834808543248,166.51547484510368"/><path class="dg-box dg-box2 " d="M17.444719888570123,167.01619434422636 C58.40886325985606,167.12266559671735 87.03219852476948,168.02480349653624 120.11105461237536,168.49345665112764 C119.77918510538488,192.5493679063159 118.50944938702017,202.26536231053313 118.98538370196958,220.186098958266 C77.79628868186674,219.13787651133626 46.39673118665662,221.82204704481273 16.88850670013973,219.19901542738035 C16.282748032865463,200.98225822643482 17.248400499135442,181.98681449926775 17.724722053541207,167.05090770858848"/><path class="dg-box " d="M160.69906520987817,155.5572172174031 C213.77508297011957,157.36580958541754 257.9402885454429,158.27311935642413 296.7173027043777,157.38641295609364 C296.9691614157377,187.82875843049433 298.85803635868155,206.89518909458778 298.1864787411813,230.03290882130756 C240.9854289534434,231.48837041942792 201.6754206669868,233.0332332627071 160.8742107406604,231.57903709503776 C159.7777660380014,201.85875206117458 161.2151348130848,180.7116359730771 160.16541862607255,154.4597591411135"/><path class="dg-box dg-box2 " d="M160.7342815413765,154.22050437956142 C213.31645026231018,156.6781891837149 257.44174041899004,156.62238922259883 299.90842132768984,157.17498321699676 C299.13804168865926,192.462977602269 295.60130462646543,208.393013128635 295.71531896596554,229.72140620356492 C244.80909418072977,234.01041507926323 199.87853260081192,232.17404589772877 160.95074196017848,234.19633064484051 C160.0803409587966,199.5554340364204 161.59917350001595,179.0125997555501 159.5902952203482,153.58214778969165"/><path class="dg-box " d="M337.70618724921076,170.0464101812087 C382.6021940241578,167.37442989431995 417.45399913948677,166.465718651221 448.65838007976225,169.2781291025123 C450.610483933897,192.9359401721209 448.1208263399642,204.68045020228274 451.9049634953518,220.0770833980651 C403.2283872606365,221.45605540455136 370.10559845012875,219.90010237800894 340.01169910636344,221.15794468091704 C336.43035297432465,197.47168536217495 337.05828771659094,182.5049998289463 339.29408102207543,164.72717285185456"/><path class="dg-box dg-box2 " d="M336.9493684298123,166.3262300494715 C384.59572406010506,168.3831928266134 416.1123813638987,169.23065071275022 451.724353410734,170.39341621622137 C448.1673557284136,193.15098166659055 450.6651586546866,206.61530895448072 448.08286342643333,219.27403559762706 C404.59395523154825,219.5391944894284 373.5077735920939,222.27039566257523 339.0337013260618,222.32151870947402 C338.2311134350631,201.564438631369 335.9343849183686,183.34603057007587 340.0120126744788,167.6534517304755"/><path class="dg-box " d="M491.1253870017479,95.76984729867887 C541.099222755944,96.27028842096696 579.9118801126777,96.46702995433799 615.8103939057377,95.92847113717743 C618.2212766659545,114.09662532922654 618.9717390076125,123.32905178150584 618.1976285946545,135.31429805835444 C566.1871290211506,138.31437602262682 531.80863952842,137.45579834163925 492.86329651030866,136.8040344253201 C489.7991546631787,121.22819838692816 492.3952577603959,109.26505680254895 493.520417978205,92.60673923516029"/><path class="dg-box dg-box2 " d="M490.1786471846414,95.83079824551511 C542.4988818180276,94.76276435906196 578.5700536254654,96.37290887961765 616.6290779118561,95.49725432484283 C618.5313394560159,115.27725849322847 617.5937616357551,125.32736988241196 616.2801218036004,137.58047213739738 C569.0703426379107,138.31913261633326 527.8755214693376,136.8945630565726 492.84873333128576,134.74408931785453 C492.9062514797348,120.39220504890764 491.60076828096095,108.3247856152825 491.62080001925153,93.80199508746247"/><path class="dg-box " d="M491.45538253870575,173.81523971660772 C540.667797088934,172.2621758940919 577.8616971016218,174.1802362752055 617.265419197858,174.4962472929136 C616.731900215676,190.4356471542435 619.7191855449785,203.35067520316255 617.0060462958207,213.4914955147968 C569.4554603596476,214.7776283278957 529.3439369210712,212.72157363943828 492.13397612689715,211.99495334643635 C489.85336031925556,197.44640493478926 490.6343859677363,184.47959218066165 493.8909805317833,170.31612396250299"/><path class="dg-box dg-box2 " d="M493.7208207626458,174.97469043888836 C542.3349374781991,176.11475544186064 578.619991493607,176.34423709136632 615.7793163300396,174.58398413797096 C620.3557874701711,192.87002105865162 618.8127914443671,199.8138259888691 620.3844041369783,211.73809127814047 C565.3586175263666,212.38832175768368 527.7640741826799,215.9111398716975 491.1301912314865,212.1243677141724 C494.305620147989,195.66694450381536 490.0948300661961,188.27748077133552 490.5595550541578,171.48684096400945"/><path class="dg-box " d="M492.66229877614524,253.04752750557267 C544.5847246191393,252.99116306462844 581.7558443087879,251.56117801757586 616.7460680013271,249.88227953923973 C617.5575842866476,267.8822321893099 618.988189746527,282.1042869588846 617.0692588812994,290.4105735782583 C567.9857507241824,292.273540688806 530.2514116300509,293.2662973421003 492.626730538824,290.54402713819593 C493.4078723448365,275.9843090068476 491.8219356547212,264.85214653166577 492.5959133162144,249.3016490941875"/><path class="dg-box dg-box2 " d="M490.7588802343043,253.0884809033426 C542.5373411190404,251.7226507196774 580.0835065852309,252.4867177976699 619.0582242981802,254.29422970036708 C617.4746772774843,271.39570999322257 619.9695259114585,277.67171096805095 618.0411324810428,293.8410453816136 C567.5681144725384,289.9342704774506 530.2484002603443,293.6882776279414 490.9249254232854,290.40273838080594 C491.7534915457263,277.58102073854815 492.8033580794946,265.4701595324418 490.6429241185276,250.93754553926993"/><path class="dg-box dg-human" d="M662.7080427174959,158.2986564181273 C708.4061401376529,154.0755523683855 741.6649232395296,154.9201417929121 774.961791420617,155.6613664636674 C777.1294992463335,192.331363107884 774.2521020892319,208.02866702136987 778.0790538808699,232.8147518172929 C732.8222332019462,230.42598533668834 697.9576245797601,233.5349393862928 663.7030492792386,233.14538707898248 C666.061379053286,200.7322385795099 663.4789739617514,177.58523998315692 665.7881582279634,153.37773113310232"/><path class="dg-box dg-box2 dg-human" d="M664.5329748167344,156.36039562353884 C706.5879354477803,154.80501093920554 740.3858924867519,155.46348052111617 776.454682351488,155.43257160272103 C777.8150781651098,188.49930896791597 777.9011699219706,210.41976051499122 774.4818531040484,234.11478934498263 C731.0319143305682,231.36902141653422 695.3679906845875,234.1740005037626 662.5893486027556,232.45191588534598 C664.2714807522816,200.2940660481779 664.2390666497122,177.17237892186847 666.0016347428791,154.72696895721694"/><path class="dg-box " d="M820.680756951813,165.6823202133562 C867.9679503749907,166.58890285537993 905.0276458279359,170.22653274751573 942.3979560874393,165.6643501282038 C941.0575509385474,190.27440719663838 941.9733024617533,202.89351120036724 941.1243890301904,219.11480350564923 C890.4849962238618,217.9442058087998 855.6512976655976,217.7657404900369 819.7843445311228,220.50390854017058 C819.4717613228931,200.2520896927696 818.9047569280978,181.70486068749094 821.7880456467103,168.64868717405417"/><path class="dg-box dg-box2 " d="M821.3673784273525,170.3316782019714 C869.4782447833,167.42050552452937 903.7894264231387,168.21430435302403 940.8884986892755,168.6881813063697 C941.3160865800995,189.5702613833222 937.8378152371561,203.97279176803903 942.2278359434697,219.79972152812394 C894.3091270468706,220.44370346201757 856.3344078076698,222.0055564900886 819.2576377876371,218.09387435936083 C822.0155358811912,199.07012271986812 818.6288530354523,183.75741076588508 819.3672000893239,167.5262043015222"/><text class="dg-label" x="68" y="199" text-anchor="middle">ticket</text><text class="dg-label" x="229" y="188" text-anchor="middle">agent</text><text class="dg-sub" x="229" y="208" text-anchor="middle">on its own VM</text><text class="dg-label" x="394" y="200" text-anchor="middle">merge request</text><text class="dg-label" x="555" y="121" text-anchor="middle">SonarQube</text><text class="dg-label" x="555" y="199" text-anchor="middle">e2e suite</text><text class="dg-label" x="555" y="277" text-anchor="middle">coverage</text><text class="dg-label dg-human-text" x="720" y="188" text-anchor="middle">you</text><text class="dg-sub" x="720" y="208" text-anchor="middle">on a phone</text><text class="dg-label" x="880" y="200" text-anchor="middle">merged</text><text class="dg-edge" x="798" y="172" text-anchor="middle">yes</text><text class="dg-edge dg-edge-back" x="455" y="350" text-anchor="middle">no, here is what you missed</text>
+  <title id="dg-title">The ticket-to-merge-request graph</title>
+  <desc id="dg-desc">A work item goes to a plan, then to a build step where an agent works in its own container. A verdict step made of fixed steps, with no model in it, reads the pipeline. Green goes on to review, then to a draft merge request, then to a person who merges or not. Red goes back to the build, at most three rounds. From review, a second edge marked needs info goes straight to the person without failing the run.</desc>
+  <path class="dg-line" d="M104,194 Q117.3,191.3 132,194"/><path class="dg-line" d="M124.2,195.9 L132,194 L125.4,189.5"/><path class="dg-line" d="M224,194 Q240.1,191.0 252,194"/><path class="dg-line" d="M244.1,195.4 L252,194 L245.7,189.1"/><path class="dg-line" d="M376,194 Q391.2,194.6 404,194"/><path class="dg-line" d="M396.8,197.6 L404,194 L396.6,191.1"/><path class="dg-line" d="M528,194 Q541.9,194.6 556,194"/><path class="dg-line" d="M548.8,197.6 L556,194 L548.6,191.1"/><path class="dg-line" d="M660,194 Q674.9,191.2 688,194"/><path class="dg-line" d="M680.2,195.7 L688,194 L681.5,189.3"/><path class="dg-line" d="M792,194 Q810.7,193.7 832,194"/><path class="dg-line" d="M824.6,197.1 L832,194 L824.7,190.6"/><path class="dg-line" d="M608,168 C648,72 840,56 890,152"/><path class="dg-line" d="M882,143 L890,152 L896,142"/><path class="dg-line dg-back" d="M466,232 C456,328 334,328 314,236"/><path class="dg-line dg-back dg-head" d="M307,246 L314,236 L322,245"/><path class="dg-box " d="M13.942614557381074,167.39745540702597 C47.73721752229017,168.2412099850556 77.99787273593147,166.4159093860611 104.03776393050224,167.7676872263512 C105.15645065473227,189.15978927619747 102.98932433193052,204.22087650402491 106.31257801275355,218.7037460332288 C67.30912642595781,219.78750782114804 41.269532205569334,218.77308063561705 14.014937784343463,220.48088245525997 C10.952054787311729,197.17897968309882 12.850121642672514,184.32346687462342 14.194440080874804,167.62348823711437"/><path class="dg-box dg-box2 " d="M13.82333107191293,166.7679187780097 C51.055322649262536,169.86281318863053 77.6503757493805,166.74391365104537 101.90438895239699,168.42327203882078 C104.570224763346,190.90257339566136 105.0660743729519,203.87518081752359 102.30528335604131,221.4739602583805 C66.4563486106956,220.48606891766474 41.2806604404378,219.5946519860973 11.702933693911383,221.37478046593014 C11.14240665507615,201.07342701157248 10.269098854376516,184.67272067231718 9.74418296820679,166.71147893192781"/><path class="dg-box " d="M130.4367382053457,167.64296851253275 C171.18508434518478,166.66338043262408 198.48896346301257,169.37568226036416 226.2477334997839,170.12045917721485 C222.93388614716656,192.4071916596066 226.0619455358302,202.45550861379854 221.72146258359842,220.63556736252997 C185.81640529679896,221.19416194129462 159.37053909402832,219.0133979803945 131.49126663296076,218.46019973794938 C132.13015837787194,198.54600620351079 131.34155902943647,183.35564518075233 131.46330127802833,167.87476902183832"/><path class="dg-box dg-box2 " d="M131.212643624103,167.92105350602466 C168.7662462245516,169.00045566717185 198.52342548580998,168.88846378479548 222.26240406067222,166.96134753290627 C222.0056827547055,190.8426900395391 223.8941839228823,206.55562572691386 222.6227041249269,218.05573420545818 C186.35691633296986,219.82172994717104 160.6346560494204,222.10199928493333 131.18962898328417,219.33111000141648 C130.84550972042862,200.44867286852033 132.55517463821693,183.79121132017636 131.09967842171886,165.89368629539092"/><path class="dg-box " d="M250.78976326044173,157.62699623295433 C300.5533588415726,157.73547706796577 340.1230823534183,155.87440223799757 374.5237384800444,155.44748282518586 C374.31894130740267,189.20964961117582 373.7165077210015,209.82554105065088 373.8118919373545,231.85445189580994 C325.38696842258184,230.74003467612903 289.5512095941003,234.26627235629888 252.90008125458849,234.0813449880487 C254.11331062527063,200.48740882933484 251.4570819863384,180.18504982170884 249.79526252755676,155.1357915415595"/><path class="dg-box dg-box2 " d="M253.19302883315507,153.66487712863128 C302.0631385160904,154.7812070852058 339.4196661009545,158.0613080999168 374.6077077870293,157.77425837711164 C375.1666755683565,187.84539871217933 378.1699715933623,210.1438835159614 375.64934616184297,230.82289962825502 C328.655852510713,232.05084152335806 287.2452690126585,233.76599059298914 254.14937381956233,233.9531602879768 C251.47408847896108,202.04940204753046 253.11990909740325,177.38994312332477 250.9631053454071,154.19728431799322"/><path class="dg-box " d="M405.7272602100518,154.95322609010768 C453.2702259073361,153.87554969800428 491.16131186613876,155.06458797523035 527.9577924739373,157.52450466338755 C530.3051176093077,191.9712249775283 529.283862306403,209.3035186779236 529.1445007340724,230.1412323000567 C478.7209107888494,232.7821596160448 439.09360904707273,229.7638629437256 403.60759725664167,231.09263029168017 C402.85087957440453,203.37173109248826 402.05763206503246,178.12899298748422 405.69847088050955,156.62485714169446"/><path class="dg-box dg-box2 " d="M406.18181896423073,156.1043294918278 C451.44821147930264,154.46689524690942 490.33714170546136,157.90652990541724 528.6633979811628,157.7412666340085 C526.9101997381589,191.38015823530972 527.136884308577,211.12627639971964 526.1512641909305,231.2311837680783 C477.03277378130366,230.17422518756902 442.2503630654189,231.30175933917135 402.02226409931774,229.99634566325525 C403.08815507958093,201.2770462999479 404.2960721028485,178.12711143574077 406.2663066885743,155.18937034750795"/><path class="dg-box " d="M554.3384655002218,169.82186866003175 C596.163325310202,167.60727152917872 630.6717498799188,166.72232666067887 659.3523835667187,169.66112995336817 C661.3810632723296,190.3823106772184 658.5264810566448,202.1351932049427 661.8052519639048,218.6741361623044 C618.5567481529697,219.1139205939667 587.9837783828302,222.11858978481897 557.527095033567,220.08697967645105 C556.8909683242864,198.17104339663453 556.238288880623,185.12585907165234 554.0725723268802,167.734629966521"/><path class="dg-box dg-box2 " d="M555.3220811851891,167.29896640856703 C595.7235963823849,168.31959185726922 629.2769702924774,170.08256263941647 661.3600971239433,168.21994972351004 C661.2806018846485,192.79403114495523 659.313289261662,206.05851783941432 659.4126514443255,218.55305824324165 C620.3003682633398,218.69986019185737 586.9180892477362,220.45908432139973 557.9359214802905,220.3955467237139 C554.2915733340623,198.41784911231036 553.9128900529411,182.06861758272564 556.9664778725088,167.03874206679814"/><path class="dg-box " d="M688.7244750991111,169.28656311206825 C727.5275939942932,169.10464797183155 761.0735750210814,168.2407007229704 794.3234178565086,168.33528900273856 C793.3973098772566,192.1903976455286 793.813526918466,202.379930114923 789.6569413662222,220.86808670315338 C749.2322048192993,218.4261730197939 720.3257382886139,219.95386486163076 688.6698324217787,219.45053081598624 C686.6322027211228,201.35904994223222 690.0269248983017,182.27116928150465 688.365682364798,167.0610895170649"/><path class="dg-box dg-box2 " d="M687.1692338950788,169.38392429528008 C730.2230684294473,169.81985721784636 761.4483507170567,169.212345315708 790.6318971638716,168.67437701368442 C792.2985523236443,192.18500404506224 791.8762104045023,206.22629738050807 792.7224964156386,219.51053505032814 C749.1622150426555,221.74142813875406 717.0589803696885,219.57390742393858 686.3206092837828,219.57261138054199 C685.8749460221617,197.26631197951096 686.0768858911828,185.6005604287612 689.4204647081999,165.81993827899916"/><path class="dg-box dg-human" d="M831.2508388526975,156.9416576401059 C879.7104366319768,156.68625297690102 914.3510158555355,153.99532585162453 948.6071469797786,155.39616222465233 C950.0739950200888,190.62300396097032 949.3755254763065,209.04997997388708 949.7729421635032,230.18480510738902 C903.0571631926379,232.34665985235324 868.4898574848146,233.46871185482885 832.3279006970711,232.66229705953145 C829.9380630494738,199.8918687346819 832.7048573508415,180.60853157239433 834.2383670828484,156.74590645052768"/><path class="dg-box dg-box2 dg-human" d="M830.2137912753102,154.0374562742363 C876.2158913613371,153.9883871557137 912.2926992423334,158.14770183775002 950.1347814581053,155.83231945141793 C946.8026327138779,189.88201274968776 947.6949834833364,208.00840282496455 946.8285329824446,232.08170452233483 C903.9066991827948,229.82447586070023 869.1018807909926,232.2168746960428 834.3932754538922,234.39127044900846 C831.3367874153595,199.68094940207942 829.8211686612206,176.85948686621128 831.1053362376547,155.22940693047335"/><text class="dg-label" x="58" y="199" text-anchor="middle">work item</text><text class="dg-label" x="178" y="199" text-anchor="middle">plan</text><text class="dg-label" x="314" y="188" text-anchor="middle">build</text><text class="dg-sub" x="314" y="208" text-anchor="middle">own container</text><text class="dg-label" x="466" y="188" text-anchor="middle">verdict</text><text class="dg-sub" x="466" y="208" text-anchor="middle">no model in it</text><text class="dg-label" x="608" y="199" text-anchor="middle">review</text><text class="dg-label" x="740" y="199" text-anchor="middle">draft MR</text><text class="dg-label dg-human-text" x="890" y="188" text-anchor="middle">you</text><text class="dg-sub" x="890" y="208" text-anchor="middle">merge or not</text><text class="dg-edge" x="744" y="74" text-anchor="middle">needs info</text><text class="dg-edge dg-edge-back" x="390" y="352" text-anchor="middle">red: back to the build, three rounds at most</text>
 </svg>
-  <figcaption>The same pipeline as a drawing. Five nodes, one human, and exactly one edge that is not fixed.</figcaption>
+  <figcaption>Seven nodes, one of them me. One edge goes back, and it is capped. One edge skips straight to me, and it is not a failure.</figcaption>
 </figure>
 
-That is what graph engineering is. Not a framework. The recognition that this drawing exists, that you are responsible for it, and that every arrow in it is a decision.
+The first ticket through it took 78 minutes, 109 tool calls and about thirty-five cents. The pipeline went green on the third round. The agent fixed two failing front-end tests on its own along the way.
 
-## Sequence is not dependency
+Then I read the diff. It had also turned three other buttons icon-only. Nobody asked for that. The pipeline was green, the review passed, and the change was still wrong. That run is the reason I care where the human sits.
 
-Look at the three checks again. SonarQube, the e2e suite, coverage. None of them reads what the others produced. There is no edge between them at all, and for a while they still ran one after another, because that is the order I typed them in.
+## Blocks, and one orchestrator per project
 
-That is the cheapest thing to find in a graph. Walk it arrow by arrow and ask one question of each. Does this step use what the last one produced? Not does it come after. Does it use it. If the answer is no, the arrow is not real, and the wait it causes is time you are paying for nothing.
+The limit went from fifty steps to a hundred and fifty. That was not the fix.
 
-Delete those arrows and a shape falls out. One node opens into several that know nothing about each other, and they all land on one that needs all of them. That stage costs the slowest branch instead of the sum of the branches. My pipeline is that shape. I drew it before I noticed it was.
+The fix was cutting the graph into five shared blocks: intake, build, pipeline verdict, review or skip, finish. Each project gets a thin orchestrator that calls them. Its profile sits in the orchestrator's defaults: the project, the base branch, the branch rule, the rule files, the model, the pipeline jobs, the merge policy.
 
-Written down, it is this:
+There was an easier version. Each repository could carry its own workflow file and the orchestrator would read it. I said no. A repository does not get to change the graph that decides what is done to it. The design system merges into its development branch on its own. The platform repository only ever gets a draft. That difference lives in one orchestrator, where I can see it.
 
-```yaml
-agent:
-  needs: [ticket]
-  out:   merge_request
+## The agent's claim is not an input
 
-sonarqube:
-  needs: [agent]
-e2e:
-  needs: [agent]
-coverage:
-  needs: [agent]
+The build agent waits for the pipeline and fixes what goes red. It has the clone, so it is the right node to do that. Then it reports that the pipeline is green.
 
-review:
-  needs: [sonarqube, e2e, coverage]
-  human: true
-  on_no: agent
+The verdict block does not believe it. It reads the pipeline again with fixed steps and no model. The agent's report is a claim. The verdict is the answer.
 
-merge:
-  needs: [review]
-```
+Same rule for pictures. We planted three defects in two buttons: a wrong colour, a typo in the label, a height of 40 instead of 56. Two vision models found the first two and invented nothing. Both missed the height. So sizes are measured, by a deterministic check against the design values. The model looks. The measurement decides.
 
-Three nodes carry the same `needs` line and none of them names another. That is the whole statement of parallelism. There is no keyword for "run these at once" because there is nothing to say: they have no edge between them, so nothing holds them apart.
-
-Then read the file for the lines that are not `needs`. There are two. `human: true`, which is the node with hours of latency in it. And `on_no: agent`, the only edge in the graph whose destination depends on an answer. Everything else is arithmetic.
-
-The join is the dangerous end. A node that merges three inputs cannot tell that one of them is garbage. It gets three answers, it has no way to know the third came from a run that half-failed, and it produces something confident out of two good inputs and one bad one.
-
-So whatever sits at the join has to see the branches separately. Collapse them into one summary first and the bad branch disappears into it. That is the argument for a check on each arm rather than one check at the end. The end check tells you the result is wrong. It cannot tell you which arm poisoned it.
+A node that grades its own work is a demo of honesty. Put the grader in a different node, and make it one that cannot be talked into anything.
 
 ## The only question that matters
 
@@ -85,11 +64,9 @@ Where does the model choose, and where does the system decide for it?
 
 That is the whole job. Everything else is syntax.
 
-A support agent classifies before it responds. Always. That order is not a preference, it is domain knowledge, and hardcoding it into an edge is not a limitation. It is the thing you know, written down.
+A design-system task has a known shape. The design file gives the values. A spec says which files change. Build, lint, type check, unit tests, design check, accessibility audit, review. We know every step and their order. We draw all of it and give the model the inside of the nodes and none of the routing.
 
-Compare two versions of the same task. A migration that runs overnight: read the schema, plan the change, write it, run it against a copy, diff the result, report. You know every one of those steps and their order. Draw all of it. Give the model the inside of the nodes and none of the routing.
-
-Now a bug that a customer reported in prose. You do not know if it is one file or nine, whether it needs a repro first, whether the fix is in the API or the client. Draw that as a fixed sequence and you will spend a week adding branches for cases you did not think of. Give the agent a goal, a working environment, and a check that tells it when it is done.
+A bug ticket written in prose does not. One file or nine. Needs a reproduction or not. Front or back. Draw that as a fixed sequence and we spend a week adding branches for cases nobody thought of. So that graph stays short. Read the ticket, build the context, plan, then one agent with a goal, a working copy and a check that tells it when it is done.
 
 That one has a schema too. It is just much shorter:
 
@@ -108,8 +85,6 @@ human:
 ```
 
 No node list, because the node list is a runtime answer. What a person wrote is the goal, the state that gets in, the check, the cap and the way out. Five lines, and they decide everything the run is allowed to attempt.
-
-The first file is longer because I knew more. That is the only difference between them.
 
 <figure class="diagram">
 <svg viewBox="0 0 620 400" role="img" aria-labelledby="dg2-title dg2-desc" preserveAspectRatio="xMidYMid meet">
@@ -139,50 +114,62 @@ The goal, and the state you let in. The check that ends it, strong enough that f
 
 That is a small surface. It is also the whole outcome. Everything the agent is permitted to attempt sits downstream of those three, and none of it can be repaired later by better code inside a node.
 
-This is where the leverage went. Write a function body and you decide how one step behaves. Draw the boundary and you decide what the system may try, what counts as done, and what happens when it is not. Those used to be the same job, and the first half was most of the work. They are not the same job now, and the second one is worth more.
+Write a function body and you decide how one step behaves. Draw the boundary and you decide what the system may try, what counts as done, and what happens when it is not. Those used to be the same job, and the first half was most of the work. They are not the same job now, and the second one is worth more.
 
-The skills underneath are not new. Distributed systems, pipelines, state machines, failure paths. What is new is how much rides on them. The artefact is a diagram that happens to execute, and it decides more than the code it routes between.
+## Where the money went
 
-## Three edges worth arguing about
+Same ticket, same planner, two runs.
 
-**The retry.** Every graph has one, and most have it wrong. An agent fails a check, so you route it back to try again. Fine. Now cap it. Without a cap, a flaky e2e suite and a stubborn model will burn a night's budget in a loop that looks healthy from the outside. Three attempts, then the edge goes somewhere else. A capped retry is engineering. An uncapped one is a bill.
+The first one cost $2.09 and took 9.4 minutes. 111 model calls. 1.38 million tokens in for 36 thousand out.
 
-**The failure path.** Ask what happens when a node fails for a reason nobody planned. The database is not there. The credentials expired. The model returns something that does not parse. If your answer is that the run stops and someone notices eventually, you have a demo. A graph without a recovery path is a demo that survived contact with a happy input.
+I read the run. Most of that bill was not work. The whole history went back on every call. The planner carried twelve skills and needed four. It tried to fetch a ticket it already had, with no access to fetch it.
 
-**The escape.** Somewhere in the graph, an agent should be able to say "I cannot do this" and route to a human without failing. If the only way out is failure, the model learns to fake success, because every path it has leads through appearing to be finished.
+None of that happened inside a node. It is what the graph let cross the edges, and what it let the node attempt.
+
+The fixes were rules on the boundary. The ticket is in the prompt, never fetch it. A budget for exploring, then write. Four skills, not twelve. Then a cheaper model.
+
+The second run cost $0.037 and took 7.7 minutes. 47 calls. 67 thousand tokens in. It found the same fix in the same seven files.
+
+I cannot tell you how much of that came from the model and how much from the boundary. We changed both and measured them together. I can tell you a later planner run on an expensive model cost $1.74 for the plan alone, a million tokens in. That model went off the list the same day.
 
 ## State is where people get hurt
 
-The tempting mistake is to let everything travel. The task, the full repository, every previous message, the output of every node. It works in a demo of four steps and it collapses at twelve. Costs climb, latency climbs, and the model starts answering with the wrong half of what you sent it.
+We passed the full build output and the full review output into the finish block. It failed, complaining about a value it had been given. One input too large had wiped every other input next to it.
 
-Decide, per edge, what actually needs to cross it.
-
-My review node needs the diff, the check results, and the agent's reasoning. It does not need the repository. The e2e node needs a running environment and a branch name. It does not need the ticket text. The agent that picks up my rejection needs my sentence and the diff it wrote. It does not need the other eleven merge requests open that week.
+So between blocks only short markers cross now: the result, the merge request number, the review state. Everything else stays where it was produced and is read from there.
 
 The rule I use: if I cannot say out loud why a piece of state is crossing an edge, it is not crossing.
 
+## Three edges worth arguing about
+
+**The retry.** The pipeline gets three rounds. Then the edge goes somewhere else. Without the cap, a flaky suite and a stubborn model burn a night in a loop that looks healthy from the outside. A capped retry is engineering. An uncapped one is a bill.
+
+**The exit.** We had a loop that would not stop. Build ran, review ran, finish ran, and then the build started again and marked the item failed. The work was done and the label said failed. The exit has to hang on the review verdict, and every pass has to reset its own state. A loop without a clean exit lies about its own result.
+
+**The escape.** From review, an item can end as needs-info and go to a person without failing. I have seen it take that edge on a ticket that really was missing what it needed. If the only way out is failure, the model learns to fake success, because every path it has leads through appearing to be finished.
+
 ## The human is a node
 
-This is the part people leave off the diagram, and it is the part with the worst latency in the system.
+This is the node I never drew, and it has the worst latency in the system.
 
-I am a node. My inputs are a diff and a pipeline verdict. My output is one of three tokens. My response time is however long it takes me to look at my phone, which at night is hours.
+I am a node. My inputs are a draft merge request, a pipeline verdict and a review. My output is merge or not. My response time is however long it takes me to look, which at night is hours.
 
-Once you write yourself into the graph, the design consequences are immediate. Work that blocks on me should not be work that could have run in parallel. Anything sitting behind my approval should be visible as sitting there, not silently stalled. And the moment I notice I am approving without reading, my node has become a rubber stamp and the graph has a hole in it exactly where its guarantee was supposed to be.
+The design-system loop has taken two components from ticket to accepted with no person in it, a tooltip and a card. It still stops for me in two places: approving a new visual reference after a visible change, and merging into main. Those are not tooling gaps. They are the two decisions I am not handing over.
 
-That last one is not a tooling problem. It is the reason the checks in front of me have to be real, and the reason I would rather have three that mean something than nine I have learned to scroll past.
+The review node is not me either. On one merge request the platform's reviewer gave it an A. A second review found two real weak points it had missed. The three icon-only buttons got past every node except mine.
+
+So the checks in front of me have to be real, and so do the claims about them. A fix for broken tool calls looked good after three dry runs. It was not validated. Three runs is an anecdote. A claim needs numbers from the step logs, before and after, with the sample size next to them.
 
 ## Where it goes wrong
 
-The failure mode is drawing the graph too early.
+The failure mode is drawing the graph too early, and drawing too much of it.
 
-The people building deep research learned this in public. They started with predefined workflows and moved back to letting the agent plan, delegate and manage its own context, because those parts work better when they emerge than when they are wired. The graph was the wrong tool for a task whose shape changes with every question.
-
-That is the trap. A graph looks like control, and control feels like engineering. But every edge you draw is a decision you are making on the model's behalf, forever, for every input. Draw enough of them and you have written the program you were trying not to write, in a worse language, with a model in the middle of it.
+The design-system builder was right for the design system. It was wrong the moment I wanted it anywhere else, because one project's knowledge was welded into the shape. Every edge you draw is a decision you are making on the model's behalf, forever, for every input. Draw enough of them and you have written the program you were trying not to write, in a worse language, with a model in the middle of it.
 
 The honest test: could you write down the steps for this task, in order, before seeing the input? If yes, draw it. If you find yourself writing "it depends" more than twice, stop drawing and give the agent room.
 
-## Whatever it ends up being called
+## Thirty-five cents
 
-The job is the same. Decide what the model gets to decide.
+The agent wrote the code for thirty-five cents. The drawing decided what it was allowed to touch.
 
-Draw the parts you know. Leave the rest open. Cap the retries. Put a human on the edge that matters, and make sure that human is still reading.
+I still read the diff.
