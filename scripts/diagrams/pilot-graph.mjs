@@ -62,10 +62,10 @@ s += arrow(...right(N.verdict), ...left(N.review));
 s += arrow(...right(N.review), ...left(N.finish));
 s += arrow(...right(N.finish), ...left(N.you));
 
-// the escape: review can stop and hand the item to a person without failing
-const ry = N.review.y;
+// the escape: intake can stop and hand the item to a person without failing
+const ry = N.plan.y;
 s +=
-  `<path class="dg-line" d="M${cx(N.review)},${ry} C${cx(N.review) + 40},${ry - 96} ${cx(N.you) - 50},${N.you.y - 100} ${cx(N.you)},${N.you.y - 4}"/>` +
+  `<path class="dg-line" d="M${cx(N.plan)},${ry} C${cx(N.plan) + 120},${ry - 120} ${cx(N.you) - 120},${N.you.y - 124} ${cx(N.you)},${N.you.y - 4}"/>` +
   `<path class="dg-line" d="M${cx(N.you) - 8},${N.you.y - 13} L${cx(N.you)},${N.you.y - 4} L${cx(N.you) + 6},${N.you.y - 14}"/>`;
 
 // the capped retry: a red verdict goes back to the build
@@ -84,7 +84,7 @@ s += sketchBox(N.finish.x, N.finish.y, N.finish.w, N.finish.h);
 s += sketchBox(N.you.x, N.you.y, N.you.w, N.you.h, "dg-human");
 
 s += label(cx(N.item), N.item.y + 31, "work item");
-s += label(cx(N.plan), N.plan.y + 31, "plan");
+s += label(cx(N.plan), N.plan.y + 31, "intake");
 s += label(cx(N.build), N.build.y + 32, "build");
 s += label(cx(N.build), N.build.y + 52, "own container", "dg-sub");
 s += label(cx(N.verdict), N.verdict.y + 32, "verdict");
@@ -94,13 +94,13 @@ s += label(cx(N.finish), N.finish.y + 31, "draft MR");
 s += label(cx(N.you), N.you.y + 32, "you", "dg-label dg-human-text");
 s += label(cx(N.you), N.you.y + 52, "merge or not", "dg-sub");
 
-s += label(744, 74, "needs info", "dg-edge");
+s += label(500, 60, "needs info", "dg-edge");
 s += label(cx(N.verdict) - 76, 352, "red: back to the build, three rounds at most", "dg-edge dg-edge-back");
 
 console.log(
   `<svg viewBox="0 0 960 380" role="img" aria-labelledby="dg-title dg-desc" preserveAspectRatio="xMidYMid meet">
   <title id="dg-title">The ticket-to-merge-request graph</title>
-  <desc id="dg-desc">A work item goes to a plan, then to a build step where an agent works in its own container. A verdict step made of fixed steps, with no model in it, reads the pipeline. Green goes on to review, then to a draft merge request, then to a person who merges or not. Red goes back to the build, at most three rounds. From review, a second edge marked needs info goes straight to the person without failing the run.</desc>
+  <desc id="dg-desc">A work item goes to an intake step, then to a build step where an agent works in its own container. A verdict step made of fixed steps, with no model in it, reads the pipeline. Green goes on to review, then to a draft merge request, then to a person who merges or not. Red goes back to the build, at most three rounds. From intake, a second edge marked needs info goes straight to the person without failing the run.</desc>
   ${s}
 </svg>`
 );
