@@ -99,12 +99,12 @@ s += label(cx(N.you), N.you.y + 32, "you", "dg-label dg-human-text");
 s += label(cx(N.you), N.you.y + 52, "merge or not", "dg-sub");
 
 s += label(500, 60, "needs info", "dg-edge");
-s += label(cx(N.verdict) - 76, 352, "red: back to the build, three rounds at most", "dg-edge dg-edge-back");
+s += label(cx(N.verdict) - 76, 352, "red: back to the build, with a limit", "dg-edge dg-edge-back");
 
 console.log(
   `<svg viewBox="0 0 960 380" role="img" aria-labelledby="dg-title dg-desc" preserveAspectRatio="xMidYMid meet">
   <title id="dg-title">The ticket-to-merge-request graph</title>
-  <desc id="dg-desc">A work item goes to an intake step, then to a plan, then to a build step where an agent works in its own container. A verdict step made of fixed steps, with no model in it, reads the pipeline. Green goes on to review, then to a draft merge request, then to a person who merges or not. Red goes back to the build, at most three rounds. From intake, a second edge marked needs info goes straight to the person without failing the run.</desc>
+  <desc id="dg-desc">A work item goes to an intake step, then to a plan, then to a build step where an agent works in its own container. A verdict step made of fixed steps, with no model in it, reads the pipeline. Green goes on to review, then to a draft merge request, then to a person who merges or not. Red goes back to the build, a limited number of times. From intake, a second edge marked needs info goes straight to the person without failing the run.</desc>
   ${s}
 </svg>`
 );

@@ -61,6 +61,17 @@ Only he can say a graph is a claim that you already know the shape of the work.
 about "three boxes" read as a smaller job; the argument was leverage. Check
 that the framing points the same direction as the argument.
 
+**Counting and numbers.** "Fifty steps." as an opening, and an article full of
+minutes, token counts, prices and step counts, was rejected (2026-11-23): "stop
+counting and adding number in the articles". Say what happened in words. Keep a
+number only when the point is impossible without it, and never open on one.
+
+**Phrases that need a second read.** The same draft was rejected because "the
+phrase are not easy to understand". Clever compressions ("a demo of honesty",
+"edges around one node nobody draws") lose him. Plain words, one idea per
+sentence, and explain a structure (layers, blocks, orchestrators) as if to someone
+who has never seen it.
+
 ## Openings
 
 Open on a fact, not a claim. The claim lands harder once something concrete is

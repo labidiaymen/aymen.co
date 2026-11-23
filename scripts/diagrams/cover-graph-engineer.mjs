@@ -96,8 +96,8 @@ const loop = (k, lbl) => {
   g += `<path class="ln back" d="M${c + 18},${RY - 16} L${c + 26},${RY - 4} L${c + 34},${RY - 15}"/>`;
   g += t(c, RY - 62, lbl, "acc", "middle");
 };
-loop("plan", "re-plan once");
-loop("review", "max 6");
+loop("plan", "re-plan");
+loop("review", "until done");
 
 // still open: it waits for you
 const vx = mid("verdict");
