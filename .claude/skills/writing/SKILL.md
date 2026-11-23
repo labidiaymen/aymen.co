@@ -66,6 +66,8 @@ minutes, token counts, prices and step counts, was rejected (2026-11-23): "stop
 counting and adding number in the articles". Say what happened in words. Keep a
 number only when the point is impossible without it, and never open on one.
 
+**Inverted or clipped phrasing.** Rejected the same day: "do not write inverted phrase or need to read it twice to understand it". Use normal order, subject then verb then object. No fronted clauses for effect, no punchy reversals ("The model can look. The measurement decides."), no fragments that need the previous line to make sense. This overrides the fragment advice under Voice and Rhythm for his articles.
+
 **Phrases that need a second read.** The same draft was rejected because "the
 phrase are not easy to understand". Clever compressions ("a demo of honesty",
 "edges around one node nobody draws") lose him. Plain words, one idea per
