@@ -30,7 +30,7 @@ A ticket comes in. The intake step reads the ticket and prepares the work. The p
   <figcaption>The graph we run. The dashed arrow sends the work back to the build, but only a limited number of times. The arrow at the top sends the ticket to a person, and the run does not fail.</figcaption>
 </figure>
 
-The first ticket cost less than a coffee. The pipeline became green after a few tries, and the agent fixed some broken tests by itself.
+The first ticket cost very little. The pipeline became green after a few tries, and the agent fixed some broken tests by itself.
 
 Then we reviewed the changes outside the platform, and we found a problem. The agent had also changed other buttons, and nobody had asked for that. The pipeline was green, but the change was wrong. This is why a person must review the work before it is merged.
 
