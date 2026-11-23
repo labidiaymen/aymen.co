@@ -1,6 +1,6 @@
 ---
-title: "Where the leverage went: the graph engineer"
-seoTitle: "The graph engineer: what graph engineering is, and where the leverage moved"
+title: "The pipeline was green, but the change was wrong"
+seoTitle: "Graph engineering: why the workflow around an AI agent matters more than the agent"
 date: 2026-11-23
 categories: ["ai"]
 series: "Agent-native delivery"
@@ -9,15 +9,15 @@ description: "A step should not check its own work. The check must be a separate
 cover: "/images/graph-engineer-cover.png"
 permalink: "/ai/graph-engineering-bf9cea68/"
 ---
-We had a workflow that turned a design-system ticket into a merge request. It worked well. Then I wanted to use it for a second project, and it did not work there.
+The first ticket that our agent platform turned into a merge request looked good. The pipeline was green, and the agent had even fixed some broken tests by itself.
 
-The agent inside the workflow was not the problem. The workflow itself was the problem. We had built every rule of the first project into its steps: which repository to change, which branch to merge into, which checks to run, and how to review. We would have had to build the workflow again for every new project.
+Then we reviewed the changes outside the platform. The agent had also changed other buttons, and nobody had asked for that. The pipeline was green, but the change was wrong.
 
-This showed me where the leverage is now. The person who designs the workflow has more effect on the result than the agent that works inside it.
+This ticket taught me where the real work is now. The agent writes the code, but the workflow around the agent decides what the agent may change, what counts as done, and who looks at the result.
 
-A workflow like this is a graph. Each step is a node. A node can be plain code, a call to a model, a tool, or a full coding agent. The arrows between the steps decide what happens next. Some arrows always lead to the same step. Other arrows depend on a result.
+## The workflow we run
 
-## The graph we run
+A workflow like this is a graph. Each step is a node. A node can be plain code, a call to a model, or a full coding agent. The arrows between the steps decide what happens next.
 
 A ticket comes in. The intake step reads the ticket and prepares the work. The plan step writes down what will change. The build step starts a coding agent in its own container, with a copy of the code. The agent works on a branch, pushes its changes, and waits for the pipeline. The verdict step checks the result of the pipeline. The review step reads the changes. The last step opens a draft merge request. Then I review it.
 
@@ -30,56 +30,31 @@ A ticket comes in. The intake step reads the ticket and prepares the work. The p
   <figcaption>The graph we run. The dashed arrow sends the work back to the build, but only a limited number of times. The arrow at the top sends the ticket to a person, and the run does not fail.</figcaption>
 </figure>
 
-The first ticket cost very little. The pipeline became green after a few tries, and the agent fixed some broken tests by itself.
-
-Then we reviewed the changes outside the platform, and we found a problem. The agent had also changed other buttons, and nobody had asked for that. The pipeline was green, but the change was wrong. This is why a person must review the work before it is merged.
-
-## Shared steps, and one small workflow per project
-
-We did not make the workflow bigger. We split it into two layers.
-
-The first layer contains the steps that every project needs: intake, plan, build, pipeline verdict, review, and finish. Each of these steps is now a small workflow of its own. Every project uses the same steps.
-
-The second layer is one short workflow for each project. This workflow does no work itself. It calls the shared steps in order, and it gives them the settings of the project: the repository, the branch, the checks, and whether it may merge or only open a draft.
-
-Now a new project needs only a new set of settings. It does not need a new graph.
-
-Another option was to keep the settings in a file inside each repository. I refused this option, because a repository should not be able to change the rules that apply to it. For example, the design system may merge into its development branch by itself. The platform repository only receives drafts, and a person merges them. Both rules are in one place, and I control that place.
-
 ## Do not trust the report of the agent
 
-The build agent waits for the pipeline and fixes the parts that fail. Then it reports that the pipeline is green.
-
-The verdict step does not trust this report. It checks the pipeline again with plain code, without a model. We only trust the result of this check.
+The build agent fixes the parts that fail, and then it reports that the pipeline is green. The verdict step does not trust this report. It checks the pipeline again with plain code, without a model.
 
 We use the same rule for visual checks. We put some mistakes in a button on purpose: a wrong colour, a typo in the label, and a wrong height. The vision models found the colour and the typo, but they all missed the height. So code measures the sizes and compares them with the values in the design. The model can point at problems, but the measurement makes the decision.
 
 A step should not check its own work. The check must be a separate step, and a model must not be able to change its result.
 
-## The real question
+## Shared steps, and one small workflow per project
 
-For every step, we ask one question: does the model decide here, or does the system decide?
+Our first workflow worked well for the design system. When I wanted to use it for a second project, it did not work, because we had built every rule of the first project into its steps.
 
-For some work, we know all the steps in advance. A design-system task is an example. The design gives the values, the spec lists the files that change, and the checks are always the same. We know every step and the order of the steps, so we draw all of them. The model only does the work inside each step.
+So we split the workflow into two layers. The first layer contains the steps that every project needs: intake, plan, build, pipeline verdict, review, and finish. Every project uses the same steps. The second layer is one short workflow for each project. It does no work itself. It calls the shared steps in order and gives them the settings of the project: the repository, the branch, the checks, and whether it may merge or only open a draft.
 
-For other work, we do not know the steps in advance. A bug report written by a user can concern one file or many files. The agent may need to reproduce the bug first. The bug may be in the front end or in the back end. We cannot draw every case. So we give the agent a goal, a copy of the code, and a check that tells it when the work is done. The agent chooses how to reach the goal.
+Now a new project needs only a new set of settings. It does not need a new workflow.
 
-<figure class="diagram">
-<svg viewBox="0 0 620 400" role="img" aria-labelledby="dg2-title dg2-desc" preserveAspectRatio="xMidYMid meet">
-  <title id="dg2-title">A job whose node count is decided at runtime</title>
-  <desc id="dg2-desc">A goal feeds an agent that loops on itself until it is done. The agent fans out at runtime into three steps and an unknown number more, drawn dashed, and all of them feed a check that ends the run. How many nodes there are, and which, is only answered while it runs.</desc>
-  <path class="dg-box " d="M236.0287181929819,24.602499391046585 C294.1802734382359,25.549832155159596 338.7801696782839,25.466647340667734 386.4786499041499,22.854116821873056 C386.70344848823896,39.73528747564894 385.5666749312387,52.05681305046045 383.835618591884,62.1144851686966 C325.3187547219539,61.69480457310323 279.6664408991423,63.63315906619334 232.60958042145222,63.521149000675024 C236.97421884740433,47.22928619460635 237.1789413473471,34.8054153447996 235.12389373896823,20.51460113544697"/><path class="dg-box dg-box2 " d="M233.9470201021745,26.178856088863153 C294.56868076416134,22.778711128783744 341.0583490387808,25.04864673775092 384.1555490501018,23.93329181779795 C383.7748315816628,42.86868152770618 386.5940286654951,50.48850727122673 384.4355037220919,62.63948860216862 C326.3626836317418,62.20551662473265 278.1822967055171,64.95222883380588 236.11079216166902,65.02422447364043 C232.60475273132545,46.67061437045718 232.96545591371387,35.970903826863925 236.75488739207148,20.37415924085032"/><text class="dg-label" x="310" y="49" text-anchor="middle">a goal</text><path class="dg-line " d="M310,64 Q311.76573291619576,87.4283407935539 310,112"/><path class="dg-line " d="M307.4,105.0 L310,112 L313.5,105.4"/><path class="dg-box " d="M234.76119785409477,113.94432392229527 C293.2663934710745,115.35674014266428 341.80308647351484,112.21711692838795 384.7065930853163,112.77563152367978 C385.2791173947412,135.96493663958503 384.8579061518693,145.4068174369665 386.5986944217229,162.01289501395678 C326.01818142096425,158.45338420907657 278.51978526158246,159.40996580208184 235.99591894307915,160.32711563237342 C232.8005531311969,140.00524077452963 233.97530031268266,126.99189233854035 234.95999345889314,110.47617988603943"/><path class="dg-box dg-box2 " d="M233.11359610581474,115.875289251411 C293.71978836111714,115.49094329061496 340.62468662402813,112.60834980057942 383.31396441492905,114.69482946539988 C387.1536750814662,135.93459549119444 385.0736701976851,147.17656326451177 383.76065750176116,161.2206796186141 C323.5409463886828,160.15566439747607 277.60536155700936,160.69400762091112 236.03172607581678,161.9644195576964 C234.25144653397214,139.2920745850038 236.7814698536794,128.49445953513236 234.2640853889585,111.34236602841055"/><text class="dg-label" x="310" y="142" text-anchor="middle">agent</text><path class="dg-line dg-back" d="M235,142 C182,138 178,100 240,108"/><path class="dg-line dg-back dg-head" d="M230,102 L240,108 L229,115"/><text class="dg-edge dg-edge-back" x="162" y="168" text-anchor="middle">loops until done</text><path class="dg-box dg-runtime" d="M96.98276824968995,225.43817305650478 C137.6567155850384,227.9538034459361 167.48677082233445,225.77279300790875 196.74022693826828,224.81122837123053 C195.20702533843323,241.92272281745574 195.88101368103224,251.98667087703322 194.96619587054764,261.3894983299959 C154.93298206363477,260.75591235214654 128.0835608494857,262.51367721693293 98.99748458973946,263.99811325278046 C98.81976242168795,247.87014694338205 100.84018478591004,236.289934540675 98.91578292954517,222.9738822941081"/><path class="dg-box dg-box2 dg-runtime" d="M99.6348382487124,226.80376835018572 C138.03216419361166,223.83551425944805 168.19481234755125,226.57873802323766 194.57329216095306,227.4367244738325 C194.36725273214617,240.98311424310464 194.234675217436,253.4243526480274 193.97809867923058,259.73719749457075 C154.56412480490474,263.9079510470424 128.71128387605364,262.04637603873687 99.49173431531142,260.34984893833746 C96.71715559964868,246.58925064270815 98.44063682641864,238.3155742663497 99.23453636292113,225.5365612046032"/><text class="dg-sub" x="147" y="249" text-anchor="middle">step 1</text><path class="dg-line dg-back" d="M310,160 Q227.13468766265302,184.96797123712858 147,224"/><path class="dg-line dg-back" d="M151.8,218.3 L147,224 L154.5,223.8"/><path class="dg-line dg-back" d="M147,262 Q228.61086762073023,288.3111006025277 310,306"/><path class="dg-line dg-back" d="M302.7,307.5 L310,306 L304.0,301.6"/><path class="dg-box dg-runtime" d="M223.11314540119523,225.6014549264691 C260.3105674759068,227.56321029847638 286.47315292389743,224.9912744051736 316.37249698721456,224.9970232016393 C319.30983371953937,244.3065711996083 319.32995987158733,250.5043251045534 314.63513565065114,260.9184853857935 C280.65532455651805,262.05110702628787 251.9757713339179,261.0610557562956 222.7164329547977,259.7244224548919 C219.129653293141,246.87340781766613 220.43689203347867,237.4188664450398 222.5691165942555,225.4038532272465"/><path class="dg-box dg-box2 dg-runtime" d="M222.01124000708165,223.61561775208247 C260.50763600855487,224.74886093193146 285.9809472561725,228.03433809486884 318.29341697864857,224.5826732640074 C318.581139900154,243.65201549709403 316.8401266108454,251.04697246656144 318.99121761526504,260.70104808858645 C279.66749186677276,263.51545410338576 248.37202453658546,264.13663954946054 222.56846943086407,261.8357538233678 C223.2045183203204,249.98930149301387 220.1810585029335,236.411576081259 219.3129920962793,224.74233794335385"/><text class="dg-sub" x="269" y="249" text-anchor="middle">step 2</text><path class="dg-line dg-back" d="M310,160 Q288.6407722242366,191.67458427053623 269,224"/><path class="dg-line dg-back" d="M269.9,216.6 L269,224 L275.2,219.7"/><path class="dg-line dg-back" d="M269,262 Q289.95653283733714,283.3254011877931 310,306"/><path class="dg-line dg-back" d="M303.2,302.9 L310,306 L307.8,298.8"/><path class="dg-box dg-runtime" d="M343.5114725126473,224.4086366657208 C380.4733577258295,225.83432502850627 409.8936038980696,228.23546943880407 438.8699069987377,224.272819900826 C439.55517020363135,239.95842800147756 439.384011794433,250.38604812695925 436.7882575989646,261.94784026255263 C399.5452066427773,261.6887819299888 370.7498163229552,261.2373308189387 341.1658639910472,264.02637057510503 C344.7732723255517,245.43846855174678 344.383138801429,236.18395824515446 341.2546987536618,226.1118987578954"/><path class="dg-box dg-box2 dg-runtime" d="M344.07260208291586,225.73201370338538 C379.7391304019555,224.22110075979546 409.39622621610584,226.72125330116657 439.54002609389835,224.60388717698115 C438.5428704747664,241.1667810446428 436.83804798137305,249.16434741037168 439.8342322364609,263.94310836994237 C400.0867301949704,262.3821342481217 370.8093009955293,262.63610153339624 343.31048507816644,260.10891647362564 C341.01606383343045,245.66985750220243 341.81659493503,235.57027683312552 343.0229951869803,226.64937381956233"/><text class="dg-sub" x="391" y="249" text-anchor="middle">step 3</text><path class="dg-line dg-back" d="M310,160 Q352.5345419666425,199.45217549891777 391,224"/><path class="dg-line dg-back" d="M383.6,222.9 L391,224 L386.9,217.7"/><path class="dg-line dg-back" d="M391,262 Q350.96812713284424,279.16657197646174 310,306"/><path class="dg-line dg-back" d="M314.1,299.7 L310,306 L317.4,304.8"/><path class="dg-box dg-runtime dg-ghost" d="M463.58994312332476,224.9631053454071 C487.0972843179932,227.72726021005178 503.1532260901077,225.6702259073361 518.8755496980043,226.36131186613875 C520.0645879752303,242.15779247393726 522.5245046633876,253.5051176093077 522.7712249775283,263.2838623064029 C498.7035186779236,263.14450073407244 479.94123230005675,262.3209107888494 465.7821596160448,259.89360904707274 C462.7638629437256,247.20759725664163 464.09263029168017,235.6508795744045 466.77173109248827,222.55763206503244"/><text class="dg-sub" x="493" y="250" text-anchor="middle">...</text><path class="dg-line dg-back" d="M310,160 Q397.3010343619627,207.7692405005308 486,224"/><path class="dg-line dg-back" d="M478.7,225.8 L486,224 L479.8,219.8"/><path class="dg-box " d="M207.12485714169446,310.18181896423073 C289.1043294918278,305.8482114793026 350.4668952469094,307.53714170546135 416.90652990541724,308.66339798116286 C416.7412666340085,324.91019973815895 416.1801582353097,335.136884308577 416.92627639971965,346.15126419093053 C330.2311837680783,346.6327737813037 266.17422518756905,349.05036306541894 204.30175933917135,346.02226409931774 C202.99634566325525,331.08815507958093 204.6770462999479,320.2960721028485 204.32711143574076,308.7663066885743"/><path class="dg-box dg-box2 " d="M205.68937034750795,306.3384655002218 C290.8218686600318,306.563325310202 351.6072715291787,309.87174987991887 413.72232666067885,307.35238356671874 C416.6611299533682,327.3810632723295 413.9823106772184,334.5264810566448 412.73519320494273,349.8052519639047 C329.67413616230436,348.1567481529697 267.11392059396667,348.78377838283023 207.11858978481897,349.527095033567 C205.08697967645105,332.8909683242864 203.97104339663454,320.2382888806231 206.52585907165235,304.5725723268802"/><text class="dg-label" x="310" y="333" text-anchor="middle">a check that ends it</text><text class="dg-edge dg-edge-back" x="310" y="382" text-anchor="middle">how many, and which, is a runtime answer</text>
-</svg>
-  <figcaption>In this graph, the agent decides the steps while it runs. Nobody can draw them in advance.</figcaption>
-</figure>
+Another option was to keep these settings in a file inside each repository. I refused this option, because a repository should not be able to change the rules that apply to it.
 
-The graph around this agent can still be big. Our graph finds the right project, asks a person when it is not sure, continues a merge request that already exists, reviews the plan, and repeats the work until the acceptance criteria are met. All of these steps are around the agent. Inside, the agent still chooses how to do the work.
+## What the model decides
 
-If you know the steps, draw them. If you do not know the steps, let the model choose them.
+For every step, we ask one question: does the model decide here, or does the workflow decide?
 
-## What the person who draws the graph owns
+For some work, we know all the steps in advance. A design-system task is an example. The design gives the values, and the checks are always the same. So we draw every step, and the model only does the work inside each step.
 
-When the agent chooses the steps, the person who draws the graph still owns these things. The first is the goal, and the information that the agent may see. The second is the check that says the work is done. This check must be strict, so that work that only looks finished does not pass. The third is the way out, for a run that cannot finish.
+For other work, we do not know the steps in advance. A bug report can concern one file or many files, in the front end or in the back end. So we give the agent a goal, a copy of the code, and a check that tells it when the work is done. The agent chooses how to reach the goal.
 
 <figure class="diagram">
 <svg viewBox="0 0 646 410" role="img" aria-labelledby="dg3-title dg3-desc" preserveAspectRatio="xMidYMid meet">
@@ -90,58 +65,32 @@ When the agent chooses the steps, the person who draws the graph still owns thes
   <figcaption>A person designs the boxes with a solid line. The area in the middle stays empty on purpose, because the model chooses what happens there.</figcaption>
 </figure>
 
-This is a small drawing, but it controls everything that the agent may try. Better code inside a step cannot fix a bad boundary.
-
-When you write code, you decide how one step behaves. When you draw the graph, you decide what the whole system may try, what counts as done, and what happens when the work is not done. In the past, this was one job. Now it is two jobs, and the second job has more value.
+The person who draws the workflow still owns the goal, the check that says the work is done, and the way out for a run that cannot finish. This is a small drawing, but it controls everything that the agent may try.
 
 ## A cheaper run that did the same job
 
 We ran the same ticket through the same planning step two times.
 
-The first run was expensive. I read the run, and most of the cost was waste. The platform sent the whole conversation again on every call. The planner loaded skills that it did not need. It also tried to download the ticket again, but it already had the ticket and it had no access to download it.
+The first run was expensive, and most of the cost was waste. The platform sent the whole conversation again on every call. The planner loaded skills that it did not need, and it tried to download a ticket that it already had.
 
-The problem was not the model. The graph gave the model too much information and allowed it to do too much.
-
-So we added rules around the step. The ticket is already in the prompt, so the agent must not download it. The agent explores a little, and then it writes. The agent loads only the skills that the task needs. We also moved to a cheaper model.
+The problem was not the model. The workflow gave the model too much information and allowed it to do too much. So we added rules around the step: use the ticket that is already in the prompt, explore a little and then write, and load only the skills that the task needs. We also moved to a cheaper model.
 
 <p class="key-point">The second run cost a small part of the first run, and it did the same job. It found the same fix, in the same files.</p>
 
-## What goes from one step to the next
-
-At first, we passed everything from one step to the next: the full output of the build and the full output of the review. Then the last step failed, because one large value deleted the other values.
-
-Now only short facts go from one step to the next: the result, the merge request, and the decision of the review. Everything else stays in the step that produced it. The next step reads it there if it needs it.
-
-My rule is simple: a piece of data goes to the next step only if I can say why the next step needs it.
-
 ## Arrows that need care
 
-**The retry.** When the pipeline fails, the build step tries again, but only a limited number of times. Without a limit, a flaky test and a stubborn model can continue for a long time, and from outside everything looks fine. A retry with a limit is good engineering. A retry without a limit only costs money.
+**The retry.** When the pipeline fails, the build step tries again, but only a limited number of times. Without a limit, a flaky test and a stubborn model can run for a long time and cost a lot of money.
 
-**The exit.** We had a loop that did not stop. The work was finished, but then the build started again and marked the ticket as failed. The work was done, but the label said that it failed. A loop needs a clear exit, and each round must start from a clean state.
+**The exit.** We had a loop that did not stop. The work was finished, but the build started again and marked the ticket as failed. A loop needs a clear exit, and each round must start from a clean state.
 
-**The escape.** Before the agent writes any code, a ticket can stop with the result "needs info". This happens when no project fits, or when the problem is not in this code. The ticket then goes to a person, and the run does not fail. If a model can only finish or fail, it learns to pretend that it finished.
+**The escape.** Before the agent writes any code, a ticket can stop with the result "needs info", for example when no project fits. The ticket then goes to a person, and the run does not fail. If a model can only finish or fail, it learns to pretend that it finished.
 
 ## The human is a step too
 
-I am also a step in this graph, and I am the slowest step. I receive a draft merge request, the result of the pipeline, and a review. I decide whether to merge it. This can take hours, for example at night.
+I am also a step in this workflow, and I am the slowest step. I receive a draft merge request, the result of the pipeline, and a review, and I decide whether to merge it.
 
-The design-system workflow has already taken components from the ticket to the accepted result without any person. It still stops for me in some places: when a visual change needs a new reference image, and when code goes into the main branch. We did not forget to automate these places. I keep these decisions for myself.
+The design-system workflow already takes some components from the ticket to the accepted result without any person. It still stops for me when a visual change needs a new reference image, and when code goes into the main branch. I keep these decisions for myself.
 
-The review of the platform is not enough either. On one merge request, the platform's review gave a top grade, and a second review found real problems that the first review had missed. The extra buttons from the first ticket also passed every step of the platform, and only a review outside the platform found them.
+The review of the platform is not enough either. The extra buttons from the first ticket passed every step of the platform, and only a review outside the platform found them.
 
-So the checks before my review must be real, and the claims about them must be true. Once, a fix looked good after a few test runs. That is not proof. Proof is a comparison of the logs before and after the fix, on enough runs.
-
-## Where it goes wrong
-
-The common mistake is to draw too many steps, with too many details.
-
-Our first design-system workflow was right for the design system, but we could not use it anywhere else, because we had built the rules of one project into it. Each arrow that you draw is a decision that you make for the model, and this decision applies to every input. If you draw too many arrows, you write the program yourself, in a worse language, and the agent has nothing left to decide.
-
-Here is a simple test: can you write the steps in order before you see the ticket? If you can, draw them. If you often write "it depends", stop drawing and let the agent decide.
-
-## I still read the diff
-
-The agent wrote the code, and the graph decided what the agent was allowed to change.
-
-I still read every diff.
+The agent wrote the code, and the workflow decided what the agent was allowed to change. I still read every diff.
