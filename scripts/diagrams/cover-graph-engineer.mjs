@@ -46,6 +46,11 @@ const t = (x, y, s, cls = "lbl", anchor = "start") =>
 // The real Jira-ticket-to-merge-request graph, cut down to its shape:
 // two questions, two capped loops, a shortcut, and three ways to end.
 let g = "";
+// soft marker wash under a box, drawn by hand like the strokes
+const wash = (x, y, w, h, color, r = 0) =>
+  `<path d="${r ? pill(x + 2, y + 2, w - 4, h - 4) : box(x + 3, y + 3, w - 6, h - 6)}" fill="${color}" stroke="none" opacity="0.85"/>`;
+const C = { ticket: "none", question: "none", model: "#F4E2BE", check: "none", done: "none", human: "#D9EEEA" };
+const KIND = { ticket: "ticket", project: "question", mr: "question", plan: "model", build: "model", review: "model", verdict: "check" };
 const pill = (x, y, w, h) => {
   const r = h / 2, o = () => j(2);
   return `M${x + r + o()},${y + o()} L${x + w - r + o()},${y + o()} Q${x + w + 4 + o()},${y + h / 2 + o()} ${x + w - r + o()},${y + h + o()} L${x + r + o()},${y + h + o()} Q${x - 4 + o()},${y + h / 2 + o()} ${x + r + o()},${y + o()}`;
@@ -64,21 +69,25 @@ const L = { ticket: "ticket", project: "project?", mr: "open MR?", plan: "plan",
 const order = Object.keys(N);
 order.forEach((k, i) => {
   const [x, w] = N[k];
+  g += wash(x, RY, w, RH, C[KIND[k]]);
   g += sketchBox(x, RY, w, RH);
   g += t(x + w / 2, RY + 37, L[k], "nd", "middle");
   if (i < order.length - 1) g += arrow(x + w, RY + RH / 2, N[order[i + 1]][0] - 2, RY + RH / 2);
 });
 
 // done: a draft merge request
+g += wash(970, RY + 2, 154, RH - 4, C.done, 1);
 g += pillBox(970, RY + 2, 154, RH - 4);
 g += t(1047, RY + 37, "draft MR", "nd", "middle");
 g += arrow(944, RY + RH / 2, 968, RY + RH / 2);
 
 // project unclear: ask a person, who can end it
+g += wash(190, 272, 112, 50, C.human);
 g += sketchBox(190, 272, 112, 50, "human");
 g += t(246, 303, "ask", "acc nd", "middle");
 g += arrow(mid("project") - 20, RY, 226, 324, 0);
 g += arrow(mid("project") + 20, 324, mid("project") + 20, RY - 2, 0);
+g += wash(30, 272, 136, 50, C.ticket, 1);
 g += pillBox(26 + 4, 272, 136, 50);
 g += t(98, 303, "needs info", "sm", "middle");
 g += arrow(190, 297, 168, 297);
@@ -101,6 +110,7 @@ loop("review", "until done");
 
 // still open: it waits for you
 const vx = mid("verdict");
+g += wash(vx - 48, 470, 96, 50, C.human);
 g += sketchBox(vx - 48, 470, 96, 50, "human");
 g += t(vx, 501, "you", "acc nd", "middle");
 g += arrow(vx, RY + RH, vx, 468);
