@@ -7,7 +7,7 @@ categories: ["ai"]
 series: "Agent-native delivery"
 description: "Green pipeline, wrong change. What we changed in the workflow around our coding agent after the first ticket."
 cover: "/images/graph-engineer-cover.png"
-permalink: "/ai/graph-engineering-bf9cea68/"
+permalink: "/ai/the-workflow-around-our-coding-agent/"
 ---
 The first ticket that our agent platform turned into a merge request looked good. The pipeline was green, and the agent had fixed some broken tests by itself.
 
