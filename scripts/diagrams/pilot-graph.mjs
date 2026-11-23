@@ -41,13 +41,14 @@ const label = (x, y, text, cls = "dg-label") =>
   `<text class="${cls}" x="${x}" y="${y}" text-anchor="middle">${text}</text>`;
 
 const N = {
-  item: { x: 12, y: 168, w: 92, h: 52 },
-  plan: { x: 132, y: 168, w: 92, h: 52 },
-  build: { x: 252, y: 156, w: 124, h: 76 },
-  verdict: { x: 404, y: 156, w: 124, h: 76 },
-  review: { x: 556, y: 168, w: 104, h: 52 },
-  finish: { x: 688, y: 168, w: 104, h: 52 },
-  you: { x: 832, y: 156, w: 116, h: 76 },
+  item: { x: 8, y: 168, w: 84, h: 52 },
+  intake: { x: 116, y: 168, w: 84, h: 52 },
+  plan: { x: 224, y: 168, w: 76, h: 52 },
+  build: { x: 324, y: 156, w: 116, h: 76 },
+  verdict: { x: 464, y: 156, w: 116, h: 76 },
+  review: { x: 604, y: 168, w: 92, h: 52 },
+  finish: { x: 720, y: 168, w: 96, h: 52 },
+  you: { x: 840, y: 156, w: 112, h: 76 },
 };
 const right = (n) => [n.x + n.w, n.y + n.h / 2];
 const left = (n) => [n.x, n.y + n.h / 2];
@@ -55,7 +56,8 @@ const cx = (n) => n.x + n.w / 2;
 
 let s = "";
 // edges first, so the boxes sit on top of any overshoot
-s += arrow(...right(N.item), ...left(N.plan));
+s += arrow(...right(N.item), ...left(N.intake));
+s += arrow(...right(N.intake), ...left(N.plan));
 s += arrow(...right(N.plan), ...left(N.build));
 s += arrow(...right(N.build), ...left(N.verdict));
 s += arrow(...right(N.verdict), ...left(N.review));
@@ -63,9 +65,9 @@ s += arrow(...right(N.review), ...left(N.finish));
 s += arrow(...right(N.finish), ...left(N.you));
 
 // the escape: intake can stop and hand the item to a person without failing
-const ry = N.plan.y;
+const ry = N.intake.y;
 s +=
-  `<path class="dg-line" d="M${cx(N.plan)},${ry} C${cx(N.plan) + 120},${ry - 120} ${cx(N.you) - 120},${N.you.y - 124} ${cx(N.you)},${N.you.y - 4}"/>` +
+  `<path class="dg-line" d="M${cx(N.intake)},${ry} C${cx(N.intake) + 120},${ry - 120} ${cx(N.you) - 120},${N.you.y - 124} ${cx(N.you)},${N.you.y - 4}"/>` +
   `<path class="dg-line" d="M${cx(N.you) - 8},${N.you.y - 13} L${cx(N.you)},${N.you.y - 4} L${cx(N.you) + 6},${N.you.y - 14}"/>`;
 
 // the capped retry: a red verdict goes back to the build
@@ -76,6 +78,7 @@ s +=
   `<path class="dg-line dg-back dg-head" d="M${bx - 7},${by + 14} L${bx},${by + 4} L${bx + 8},${by + 13}"/>`;
 
 s += sketchBox(N.item.x, N.item.y, N.item.w, N.item.h);
+s += sketchBox(N.intake.x, N.intake.y, N.intake.w, N.intake.h);
 s += sketchBox(N.plan.x, N.plan.y, N.plan.w, N.plan.h);
 s += sketchBox(N.build.x, N.build.y, N.build.w, N.build.h);
 s += sketchBox(N.verdict.x, N.verdict.y, N.verdict.w, N.verdict.h);
@@ -84,7 +87,8 @@ s += sketchBox(N.finish.x, N.finish.y, N.finish.w, N.finish.h);
 s += sketchBox(N.you.x, N.you.y, N.you.w, N.you.h, "dg-human");
 
 s += label(cx(N.item), N.item.y + 31, "work item");
-s += label(cx(N.plan), N.plan.y + 31, "intake");
+s += label(cx(N.intake), N.intake.y + 31, "intake");
+s += label(cx(N.plan), N.plan.y + 31, "plan");
 s += label(cx(N.build), N.build.y + 32, "build");
 s += label(cx(N.build), N.build.y + 52, "own container", "dg-sub");
 s += label(cx(N.verdict), N.verdict.y + 32, "verdict");
@@ -100,7 +104,7 @@ s += label(cx(N.verdict) - 76, 352, "red: back to the build, three rounds at mos
 console.log(
   `<svg viewBox="0 0 960 380" role="img" aria-labelledby="dg-title dg-desc" preserveAspectRatio="xMidYMid meet">
   <title id="dg-title">The ticket-to-merge-request graph</title>
-  <desc id="dg-desc">A work item goes to an intake step, then to a build step where an agent works in its own container. A verdict step made of fixed steps, with no model in it, reads the pipeline. Green goes on to review, then to a draft merge request, then to a person who merges or not. Red goes back to the build, at most three rounds. From intake, a second edge marked needs info goes straight to the person without failing the run.</desc>
+  <desc id="dg-desc">A work item goes to an intake step, then to a plan, then to a build step where an agent works in its own container. A verdict step made of fixed steps, with no model in it, reads the pipeline. Green goes on to review, then to a draft merge request, then to a person who merges or not. Red goes back to the build, at most three rounds. From intake, a second edge marked needs info goes straight to the person without failing the run.</desc>
   ${s}
 </svg>`
 );
