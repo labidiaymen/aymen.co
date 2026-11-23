@@ -9,7 +9,7 @@ description: "Green pipeline, wrong change. What we changed in the workflow arou
 cover: "/images/graph-engineer-cover.png"
 permalink: "/ai/graph-engineering-bf9cea68/"
 ---
-The first ticket that our agent platform turned into a merge request looked good. The pipeline was green, and the agent had also fixed some broken tests by itself.
+The first ticket that our agent platform turned into a merge request looked good. The pipeline was green, and the agent had fixed some broken tests by itself.
 
 Then we reviewed the changes outside the platform. The agent had also changed other buttons, and nobody had asked for that. The pipeline was green, but the change was wrong.
 
@@ -17,9 +17,9 @@ After this ticket, we changed the workflow around the agent.
 
 ## The workflow we run
 
-A workflow like this is a graph. Each step is a node. A node can be plain code, a call to a model, or a full coding agent. The arrows between the steps decide what happens next.
+A workflow like this is a graph: each step is a node, and the arrows between the steps decide what happens next. A node can be plain code, a call to a model, or a full coding agent.
 
-A ticket comes in. The intake step reads the ticket and prepares the work. The plan step writes down what will change. The build step starts a coding agent in its own container, with a copy of the code. The agent works on a branch, pushes its changes, and waits for the pipeline. The verdict step checks the result of the pipeline. The review step reads the changes. The last step opens a draft merge request. Then I review it.
+When a ticket comes in, the intake step reads it and the plan step writes down what will change. The build step then starts a coding agent in its own container, with a copy of the code. The agent works on a branch, pushes its changes and waits for the pipeline. After that, a verdict step checks the result of the pipeline, a review step reads the changes, and the last step opens a draft merge request for me to review.
 
 <figure class="diagram">
 <svg viewBox="0 0 960 380" role="img" aria-labelledby="dg-title dg-desc" preserveAspectRatio="xMidYMid meet">
@@ -32,17 +32,17 @@ A ticket comes in. The intake step reads the ticket and prepares the work. The p
 
 ## The verdict step checks the pipeline again
 
-The build agent fixes the parts that fail, and then it reports that the pipeline is green. The verdict step does not trust this report. It checks the pipeline again with plain code, without a model.
+The build agent fixes the parts that fail, and then it reports that the pipeline is green. The verdict step ignores this report and checks the pipeline again with plain code, without a model.
 
-We use the same rule for visual checks. We put some mistakes in a button on purpose: a wrong colour, a typo in the label, and a wrong height. The vision models found the colour and the typo, but they all missed the height. So code measures the sizes and compares them with the values in the design. The model can point at problems, but the measurement makes the decision.
+We use the same rule for visual checks. We put some mistakes in a button on purpose: a wrong colour, a typo in the label, and a wrong height. The vision models found the colour and the typo, but they all missed the height. So code measures the sizes and compares them with the values in the design.
 
 ## Shared steps, and one small workflow per project
 
 Our first workflow worked well for the design system. When I wanted to use it for a second project, it did not work, because we had built every rule of the first project into its steps.
 
-So we split the workflow into two layers. The first layer contains the steps that every project needs: intake, plan, build, pipeline verdict, review, and finish. Every project uses the same steps. The second layer is one short workflow for each project. It does no work itself. It calls the shared steps in order and gives them the settings of the project: the repository, the branch, the checks, and whether it may merge or only open a draft.
+So we split the workflow into two layers. The first layer contains the steps that every project needs: intake, plan, build, pipeline verdict, review, and finish. The second layer is one short workflow for each project. It does no work itself. It calls the shared steps in order and gives them the settings of the project: the repository, the branch, the checks, and whether it may merge or only open a draft.
 
-Now a new project needs only a new set of settings. It does not need a new workflow.
+Now a new project needs only a new set of settings.
 
 Another option was to keep these settings in a file inside each repository. I refused this option, because a repository should not be able to change the rules that apply to it.
 
@@ -71,7 +71,7 @@ We ran the same ticket through the same planning step two times.
 
 The first run was expensive, and most of the cost was waste. The platform sent the whole conversation again on every call. The planner loaded skills that it did not need, and it tried to download a ticket that it already had.
 
-The workflow gave the model too much information and allowed it to do too much. So we added rules around the step: use the ticket that is already in the prompt, explore a little and then write, and load only the skills that the task needs. We also moved to a cheaper model.
+So we added rules around the step: use the ticket that is already in the prompt, explore a little and then write, and load only the skills that the task needs. We also moved to a cheaper model.
 
 <p class="key-point">The second run cost a small part of the first run, and it did the same job. It found the same fix, in the same files.</p>
 
@@ -89,6 +89,6 @@ I am also a step in this workflow, and I am the slowest step. I receive a draft 
 
 The design-system workflow already takes some components from the ticket to the accepted result without any person. It still stops for me when a visual change needs a new reference image, and when code goes into the main branch. I keep these decisions for myself.
 
-The review of the platform is not enough either. The extra buttons from the first ticket passed every step of the platform, and only a review outside the platform found them.
+The extra buttons from the first ticket passed every step of the platform, and only a review outside the platform found them.
 
-The agent wrote the code, and the workflow decided what the agent was allowed to change. I still read every diff.
+I still read every diff.
