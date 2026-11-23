@@ -106,8 +106,6 @@ So we added rules around the step. The ticket is already in the prompt, so the a
 
 <p class="key-point">The second run cost a small part of the first run, and it did the same job. It found the same fix, in the same files.</p>
 
-I cannot say how much of the saving came from the rules and how much came from the model, because we changed both at the same time.
-
 ## What goes from one step to the next
 
 At first, we passed everything from one step to the next: the full output of the build and the full output of the review. Then the last step failed, because one large value deleted the other values.
